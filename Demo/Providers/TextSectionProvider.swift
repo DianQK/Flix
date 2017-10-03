@@ -1,0 +1,79 @@
+//
+//  TextSectionProvider.swift
+//  FormDemo
+//
+//  Created by wc on 01/10/2017.
+//  Copyright © 2017 DianQK. All rights reserved.
+//
+
+import UIKit
+import RxSwift
+import Flix
+
+class TextCollectionReusableView: UICollectionReusableView {
+    
+    let textLabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        textLabel.font = UIFont.systemFont(ofSize: 12)
+        textLabel.numberOfLines = 0
+        textLabel.textColor = UIColor(named: "CommentText")
+        self.addSubview(textLabel)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+        textLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+        textLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+class TextSectionProvider: AnimatableSectionCollectionViewProvider, StringIdentifiableType, Equatable {
+    
+    static func ==(lhs: TextSectionProvider, rhs: TextSectionProvider) -> Bool {
+        return true
+    }
+
+    func configureSupplementaryView(_ collectionView: UICollectionView, sectionView: TextCollectionReusableView, indexPath: IndexPath, node: TextSectionProvider) {
+        if !sectionView.hasConfigured {
+            sectionView.hasConfigured = true
+        }
+        node.text.asObservable()
+            .bind(to: sectionView.textLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        node.text.asObservable().distinctUntilChanged()
+            .subscribe(onNext: { [weak collectionView] (text) in
+                collectionView?.performBatchUpdates(nil, completion: nil)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func genteralSection() -> Observable<TextSectionProvider?> {
+        return Observable.just(self)
+    }
+
+    typealias CellType = TextCollectionReusableView
+    typealias NodeType = TextSectionProvider
+    
+    let identity: String
+    let collectionElementKindSection: UICollectionElementKindSection
+    let text: Variable<String>
+    let disposeBag = DisposeBag()
+    
+    init(identity: String, collectionElementKindSection: UICollectionElementKindSection, text: String) {
+        self.identity = identity
+        self.collectionElementKindSection = collectionElementKindSection
+        self.text = Variable(text)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: TextSectionProvider) -> CGSize? {
+        let height = NSAttributedString(string: node.text.value, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+            .boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).height
+        return CGSize(width: collectionView.bounds.width, height: height + 20)
+    }
+}
