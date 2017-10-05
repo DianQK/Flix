@@ -140,9 +140,7 @@ extension AnimatableTableViewProvider {
 
 public typealias _UniqueAnimatableTableViewProvider = AnimatableTableViewProvider & Equatable & StringIdentifiableType
 
-public protocol UniqueAnimatableTableViewProvider: _UniqueAnimatableTableViewProvider where ValueType == Self {
-    
-    typealias CellType = UITableViewCell
+public protocol UniqueAnimatableTableViewProvider: _UniqueAnimatableTableViewProvider where /* ValueType == Self, */ CellType == UITableViewCell {
     
     func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
     func onUpdate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
@@ -154,15 +152,15 @@ extension UniqueAnimatableTableViewProvider {
     public func onUpdate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
 
     }
-    
-    public func configureCell(_ tableView: UITableView, cell: CellType, indexPath: IndexPath, node: ValueType) {
+
+    public func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, node: Self) {
         if !cell.hasConfigured {
             cell.hasConfigured = true
             onCreate(tableView, cell: cell, indexPath: indexPath)
         }
         onUpdate(tableView, cell: cell, indexPath: indexPath)
     }
-    
+
     public static func ==(lhs: Self, rhs: Self) -> Bool {
         return true
     }

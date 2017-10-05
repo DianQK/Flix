@@ -145,9 +145,7 @@ extension AnimatableCollectionViewProvider {
 
 public typealias _UniqueAnimatableCollectionViewProvider = AnimatableCollectionViewProvider & Equatable & StringIdentifiableType
 
-public protocol UniqueAnimatableCollectionViewProvider: _UniqueAnimatableCollectionViewProvider where ValueType == Self {
-    
-    typealias CellType = UICollectionViewCell
+public protocol UniqueAnimatableCollectionViewProvider: _UniqueAnimatableCollectionViewProvider where /* ValueType == Self, */ CellType == UICollectionViewCell {
     
     func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
     func onUpdate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
@@ -160,7 +158,7 @@ extension UniqueAnimatableCollectionViewProvider {
         
     }
     
-    public func configureCell(_ collectionView: UICollectionView, cell: CellType, indexPath: IndexPath, node: ValueType) {
+    public func configureCell(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath, node: Self) {
         if !cell.hasConfigured {
             cell.hasConfigured = true
             onCreate(collectionView, cell: cell, indexPath: indexPath)
