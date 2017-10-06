@@ -12,10 +12,10 @@ import RxCocoa
 import RxDataSources
 
 public enum UICollectionElementKindSection: String {
-    
+
     case header = "UICollectionElementKindSectionHeader"
     case footer = "UICollectionElementKindSectionFooter"
-    
+
 }
 
 public protocol _SectionCollectionViewProvider {

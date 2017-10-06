@@ -53,7 +53,7 @@ class RadioCollectionViewCell: UICollectionViewCell {
 
 }
 
-struct RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableCollectionViewProvider { // 应当使用泛型，而不是 String
+struct RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableCollectionViewProvider {
     
     let identity: String // Hashable
     let options: [Option]

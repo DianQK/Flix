@@ -61,7 +61,7 @@ class GitHubSignupViewController: TableViewController {
         provider.sectionHeight = { return 35 }
         return provider
     }()
-    
+
     let loginProvider: UniqueButtonTableViewProvider = {
         let provider = UniqueButtonTableViewProvider(identity: "login")
         provider.textLabel.textColor = UIColor.white

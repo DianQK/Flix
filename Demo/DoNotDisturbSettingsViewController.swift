@@ -68,7 +68,7 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
             }
         }
         
-        let radioProvider = RadioProvider(identity: "radioProvider", options: [SlienceMode.always, SlienceMode.whileLocked]) // 不定数量/列表展示才复用 cell
+        let radioProvider = RadioProvider(identity: "radioProvider", options: [SlienceMode.always, SlienceMode.whileLocked])
         radioProvider.checkedOption.value = SlienceMode.always
         providers.append(radioProvider)
         

@@ -20,7 +20,6 @@
 		26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */; };
 		2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666E4001F869656006F1918 /* NestFormViewController.swift */; };
 		2666E4041F874113006F1918 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666E4031F874112006F1918 /* Operators.swift */; };
-		2666E4061F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666E4051F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift */; };
 		2666E4081F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666E4071F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift */; };
 		2670E6541F83E15C003A5BA7 /* Flix.h in Headers */ = {isa = PBXBuildFile; fileRef = 2670E6521F83E15C003A5BA7 /* Flix.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6601F83E1A0003A5BA7 /* AppDelegate.swift */; };
@@ -97,7 +96,6 @@
 		26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueButtonTableViewProvider.swift; sourceTree = "<group>"; };
 		2666E4001F869656006F1918 /* NestFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestFormViewController.swift; sourceTree = "<group>"; };
 		2666E4031F874112006F1918 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		2666E4051F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixRxTableViewSectionedAnimatedDataSource.swift; sourceTree = "<group>"; };
 		2666E4071F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomCollectionViewSectionProvider.swift; sourceTree = "<group>"; };
 		2670E64F1F83E15C003A5BA7 /* Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2670E6521F83E15C003A5BA7 /* Flix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flix.h; sourceTree = "<group>"; };
@@ -217,9 +215,6 @@
 			children = (
 				2666E4031F874112006F1918 /* Operators.swift */,
 				2617C2611F84D0FD007F8228 /* GitHubSigup */,
-				2670E6981F83EE3F003A5BA7 /* DemoListViewController.swift */,
-				2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */,
-				2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */,
 				2670E6901F83EDB7003A5BA7 /* Nodes */,
 				2670E6871F83EDB7003A5BA7 /* Providers */,
 				2670E6601F83E1A0003A5BA7 /* AppDelegate.swift */,
@@ -229,8 +224,10 @@
 				2670E6691F83E1A0003A5BA7 /* LaunchScreen.storyboard */,
 				2670E66C1F83E1A0003A5BA7 /* Info.plist */,
 				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
+				2670E6981F83EE3F003A5BA7 /* DemoListViewController.swift */,
+				2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */,
 				2666E4001F869656006F1918 /* NestFormViewController.swift */,
-				2666E4051F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift */,
+				2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -574,7 +571,6 @@
 				2617C2761F84D1BF007F8228 /* ActivityIndicator.swift in Sources */,
 				26BAF0331F8499B8009A4401 /* LoginViewController.swift in Sources */,
 				2670E6A21F83EE5E003A5BA7 /* RadioProvider.swift in Sources */,
-				2666E4061F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift in Sources */,
 				2666E4041F874113006F1918 /* Operators.swift in Sources */,
 				2670E6A41F83EE5E003A5BA7 /* UniqueSelectProvider.swift in Sources */,
 				2617C2681F84D0FD007F8228 /* GitHubSignupViewController.swift in Sources */,

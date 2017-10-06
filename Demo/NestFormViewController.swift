@@ -71,6 +71,8 @@ class ItemInputTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        selectionStyle = .none
 
         let stackView = UIStackView(arrangedSubviews: [titleLabel, textField])
         stackView.alignment = .fill
@@ -240,6 +242,9 @@ class UniqueItemInputTableViewProvider: UniqueCustomTableViewProvider {
     
     override init(identity: String) {
         super.init(identity: identity)
+        
+        selectionStyle.value = .none
+        
         let stackView = UIStackView(arrangedSubviews: [titleLabel, textField])
         stackView.alignment = .center
         stackView.distribution = .fillProportionally
