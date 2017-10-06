@@ -23,7 +23,7 @@ public protocol _SectionCollectionViewProvider {
     var identity: String { get }
     var cellType: UICollectionReusableView.Type { get }
     var collectionElementKindSection: UICollectionElementKindSection { get }
-    
+
     func _configureSupplementaryView(_ collectionView: UICollectionView, sectionView: UICollectionReusableView, indexPath: IndexPath, node: _Node)
 
     func _genteralSection() -> Observable<_Node?>
@@ -84,15 +84,9 @@ extension SectionCollectionViewProvider {
     
 }
 
-public protocol _AnimatableSectionProviderable {
-    
-    func _genteralAnimatableSection() -> Observable<IdentifiableNode?>
-    
-}
-
 public typealias _AnimatableSectionCollectionViewProvider = _AnimatableSectionProviderable & _SectionCollectionViewProvider
 
-public protocol AnimatableSectionCollectionViewProvider: SectionCollectionViewProvider, _AnimatableSectionCollectionViewProvider where ValueType: Equatable, ValueType: StringIdentifiableType {
+public protocol AnimatableSectionCollectionViewProvider: SectionCollectionViewProvider, _AnimatableSectionProviderable where ValueType: Equatable, ValueType: StringIdentifiableType {
     
     func genteralAnimatableSection() -> Observable<IdentifiableNode?>
     

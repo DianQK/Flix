@@ -11,58 +11,41 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public protocol _TableViewProvider {
+public protocol _TableViewMultiNodeProvider {
     
     var identity: String { get }
-    var cellType: UITableViewCell.Type { get }
-    
-    func _configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, node: _Node)
     
     func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node)
     
     func _genteralNodes() -> Observable<[_Node]>
     
     func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat?
-
-}
-
-extension _TableViewProvider {
     
-    public func register(_ tableView: UITableView) {
-        tableView.register(self.cellType, forCellReuseIdentifier: self.identity)
-    }
+    func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell
+
+    func register(_ tableView: UITableView)
     
 }
 
-public protocol TableViewProvider: _TableViewProvider {
+public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider {
+
+    associatedtype Value
     
-    associatedtype CellType: UITableViewCell
-    associatedtype ValueType
+    func configureCell(_ tableView: UITableView, indexPath: IndexPath, node: Value) -> UITableViewCell
+
+    func tap(_ tableView: UITableView, indexPath: IndexPath, node: Value)
     
-    func configureCell(_ tableView: UITableView, cell: CellType, indexPath: IndexPath, node: ValueType)
-    func tap(_ tableView: UITableView, indexPath: IndexPath, node: ValueType)
+    func genteralNodes() -> Observable<[Value]>
     
-    func genteralNodes() -> Observable<[ValueType]>
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: ValueType) -> CGFloat?
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: Value) -> CGFloat?
     
 }
 
-extension TableViewProvider {
+extension TableViewMultiNodeProvider {
     
-    public var cellType: UITableViewCell.Type { return CellType.self }
-    
-    public func _configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? ValueNode<ValueType> {
-            configureCell(tableView, cell: cell as! CellType, indexPath: indexPath, node: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? ValueNode<ValueType> {
-            tap(tableView, indexPath: indexPath, node: valueNode.value)
+    public func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell {
+        if let valueNode = node as? ValueNode<Value> {
+            return self.configureCell(tableView, indexPath: indexPath, node: valueNode.value)
         } else {
             fatalError()
         }
@@ -75,28 +58,60 @@ extension TableViewProvider {
     }
     
     public func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat? {
-        if let valueNode = node as? ValueNode<ValueType> {
+        if let valueNode = node as? ValueNode<Value> {
             return self.tableView(tableView, heightForRowAt: indexPath, node: valueNode.value)
         } else {
             fatalError()
         }
     }
     
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: ValueType) -> CGFloat? {
+    public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
+        if let valueNode = node as? ValueNode<Value> {
+            tap(tableView, indexPath: indexPath, node: valueNode.value)
+        } else {
+            fatalError()
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: Value) -> CGFloat? {
         return nil
     }
     
 }
 
-public typealias _AnimatableTableViewProvider = _AnimatableProviderable & _TableViewProvider
+public protocol TableViewProvider: TableViewMultiNodeProvider {
+    
+    associatedtype Cell: UITableViewCell
+    
+    func configureCell(_ tableView: UITableView, cell: Cell, indexPath: IndexPath, node: Value)
 
-public protocol AnimatableTableViewProvider: TableViewProvider, _AnimatableProviderable where ValueType: Equatable, ValueType: StringIdentifiableType {
+}
+
+extension TableViewProvider {
+    
+    public func configureCell(_ tableView: UITableView, indexPath: IndexPath, node: Value) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.identity, for: indexPath)
+        self.configureCell(tableView, cell: cell as! Cell, indexPath: indexPath, node: node)
+        return cell
+    }
+    
+    public func register(_ tableView: UITableView) {
+        tableView.register(Cell.self, forCellReuseIdentifier: self.identity)
+    }
+    
+}
+
+public typealias _AnimatableTableViewMultiNodeProvider = _AnimatableProviderable & _TableViewMultiNodeProvider
+
+public protocol AnimatableTableViewMultiNodeProvider: TableViewMultiNodeProvider, _AnimatableProviderable where Value: Equatable, Value: StringIdentifiableType {
     
     func genteralAnimatableNodes() -> Observable<[IdentifiableNode]>
     
 }
 
-extension AnimatableTableViewProvider {
+public typealias AnimatableTableViewProvider = AnimatableTableViewMultiNodeProvider & TableViewProvider
+
+extension AnimatableTableViewMultiNodeProvider {
     
     public func _genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
         return genteralAnimatableNodes()
@@ -104,26 +119,26 @@ extension AnimatableTableViewProvider {
     
 }
 
-extension AnimatableTableViewProvider {
+extension AnimatableTableViewMultiNodeProvider {
     
-    public func _configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<ValueType> {
-            configureCell(tableView, cell: cell as! CellType, indexPath: indexPath, node: valueNode.value)
+    public func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell {
+        if let valueNode = node as? IdentifiableValueNode<Value> {
+            return self.configureCell(tableView, indexPath: indexPath, node: valueNode.value)
         } else {
             fatalError()
         }
     }
     
     public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<ValueType> {
+        if let valueNode = node as? IdentifiableValueNode<Value> {
             tap(tableView, indexPath: indexPath, node: valueNode.value)
         } else {
             fatalError()
         }
     }
-    
+
     public func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat? {
-        if let valueNode = node as? IdentifiableValueNode<ValueType> {
+        if let valueNode = node as? IdentifiableValueNode<Value> {
             return self.tableView(tableView, heightForRowAt: indexPath, node: valueNode.value)
         } else {
             fatalError()
@@ -140,11 +155,11 @@ extension AnimatableTableViewProvider {
 
 public typealias _UniqueAnimatableTableViewProvider = AnimatableTableViewProvider & Equatable & StringIdentifiableType
 
-public protocol UniqueAnimatableTableViewProvider: _UniqueAnimatableTableViewProvider where /* ValueType == Self, */ CellType == UITableViewCell {
-    
+public protocol UniqueAnimatableTableViewProvider: _UniqueAnimatableTableViewProvider /* where Value == Self, Cell == UITableViewCell */ {
+
     func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
     func onUpdate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
-    
+
 }
 
 extension UniqueAnimatableTableViewProvider {
@@ -174,4 +189,3 @@ extension UniqueAnimatableTableViewProvider {
     }
     
 }
-

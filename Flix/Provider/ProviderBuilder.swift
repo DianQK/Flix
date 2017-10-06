@@ -29,10 +29,10 @@ public class SectionProviderCollectionViewBuilder {
     
     var headerProvider: _AnimatableSectionCollectionViewProvider?
     var footerProvider: _AnimatableSectionCollectionViewProvider?
-    var providers: [_AnimatableCollectionViewProvider] = []
+    var providers: [_AnimatableCollectionViewMultiNodeProvider] = []
     public var sectionProviderIdentity = ""
     
-    public init(identity: String, providers: [_AnimatableCollectionViewProvider], headerProvider: _AnimatableSectionCollectionViewProvider? = nil, footerProvider: _AnimatableSectionCollectionViewProvider? = nil) {
+    public init(identity: String, providers: [_AnimatableCollectionViewMultiNodeProvider], headerProvider: _AnimatableSectionCollectionViewProvider? = nil, footerProvider: _AnimatableSectionCollectionViewProvider? = nil) {
         self.sectionProviderIdentity = identity
         self.providers = providers
         self.headerProvider = headerProvider
@@ -62,12 +62,12 @@ public class SectionProviderTableViewBuilder {
     
     var headerProvider: _AnimatableSectionTableViewProvider?
     var footerProvider: _AnimatableSectionTableViewProvider?
-    var providers: [_AnimatableTableViewProvider] = []
+    var providers: [_AnimatableTableViewMultiNodeProvider] = []
     public var sectionProviderIdentity = ""
     
     public init(
         identity: String,
-        providers: [_AnimatableTableViewProvider],
+        providers: [_AnimatableTableViewMultiNodeProvider],
         headerProvider: _AnimatableSectionTableViewProvider? = nil,
         footerProvider: _AnimatableSectionTableViewProvider? = nil) {
         self.sectionProviderIdentity = identity

@@ -18,6 +18,8 @@ open class UniqueButtonTableViewProvider: UniqueCustomTableViewProvider {
     
     public override init(identity: String) {
         super.init(identity: identity)
+        textLabel.textAlignment = .center
+        
         backgroundView = UIView()
         selectedBackgroundView = UIView()
         contentView.addSubview(textLabel)

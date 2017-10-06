@@ -70,7 +70,7 @@ struct TextListProvider<Value>: AnimatableCollectionViewProvider {
     let items: [Model]
     let isHidden = Variable(false)
     
-    typealias CellType = TextCollectionViewCell
+    typealias Cell = TextCollectionViewCell
     typealias NodeType = Model
     
     let _tap = PublishSubject<Model>()

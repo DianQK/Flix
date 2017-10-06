@@ -80,10 +80,16 @@ extension SectionTableViewProvider {
     
 }
 
+public protocol _AnimatableSectionProviderable {
+    
+    func _genteralAnimatableSection() -> Observable<IdentifiableNode?>
+    
+}
+
 public typealias _AnimatableSectionTableViewProvider = _AnimatableSectionProviderable & _SectionTableViewProvider
 
-public protocol AnimatableSectionTableViewProvider: SectionTableViewProvider, _AnimatableSectionTableViewProvider where ValueType: Equatable, ValueType: StringIdentifiableType {
-    
+public protocol AnimatableSectionTableViewProvider: SectionTableViewProvider, _AnimatableSectionProviderable where ValueType: Equatable, ValueType: StringIdentifiableType {
+
     func genteralAnimatableSection() -> Observable<IdentifiableNode?>
     
 }

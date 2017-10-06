@@ -1,5 +1,5 @@
 //
-//  Cell+Configure.swift
+//  UIView+Configure.swift
 //  Flix
 //
 //  Created by DianQK on 03/10/2017.

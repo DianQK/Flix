@@ -60,8 +60,8 @@ struct RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColl
     let checkedOption = Variable<Option?>(nil)
     let disposeBag = DisposeBag()
     
-    typealias CellType = RadioCollectionViewCell
-    typealias ValueType = Option
+    typealias Cell = RadioCollectionViewCell
+    typealias Value = Option
     
     init(identity: String, options: [Option]) {
         self.identity = identity
@@ -76,16 +76,16 @@ struct RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColl
             .disposed(by: cell.reuseBag)
     }
     
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: ValueType) {
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: Value) {
         collectionView.deselectItem(at: indexPath, animated: true)
         checkedOption.value = node
     }
     
-    func genteralNodes() -> Observable<[ValueType]> {
+    func genteralNodes() -> Observable<[Value]> {
         return Observable.just(options)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: ValueType) -> CGSize? {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: Value) -> CGSize? {
         return CGSize(width: collectionView.bounds.width, height: 44)
     }
     

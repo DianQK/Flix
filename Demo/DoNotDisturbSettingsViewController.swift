@@ -19,7 +19,7 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
         
         title = "勿扰模式"
         
-        var providers: [_AnimatableCollectionViewProvider] = []
+        var providers: [_AnimatableCollectionViewMultiNodeProvider] = []
         
         let doNotDisturbProvider = UniqueSwitchProvider(identity: "doNotDisturbProvider")
         doNotDisturbProvider.titleLabel.text = "勿扰模式"

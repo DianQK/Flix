@@ -19,24 +19,32 @@ public class AnimatableCollectionViewService {
     let disposeBag = DisposeBag()
     let delegeteService = CollectionViewDelegateService()
     
+    public var animationConfiguration: AnimationConfiguration {
+        get {
+            return dataSource.animationConfiguration
+        }
+        set {
+            dataSource.animationConfiguration = newValue
+        }
+    }
+    
     public init(collectionView: UICollectionView, sectionProviderBuilders: [SectionProviderCollectionViewBuilder]) {
 
-        dataSource.animationConfiguration = AnimationConfiguration(
+        self.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
-            reloadAnimation: .fade,
+            reloadAnimation: .none,
             deleteAnimation: .fade
         )
 
-        let nodeProviders: [_AnimatableCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.providers }
+        let nodeProviders: [_AnimatableCollectionViewMultiNodeProvider] = sectionProviderBuilders.flatMap { $0.providers }
         let footerSectionProviders: [_AnimatableSectionCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.footerProvider }
         let headerSectionProviders: [_AnimatableSectionCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.headerProvider }
         
         dataSource.configureCell = { dataSource, collectionView, indexPath, node in
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: provider.identity, for: indexPath)
-            provider._configureCell(collectionView, cell: cell, indexPath: indexPath, node: node.node)
-            return cell
+            return provider._configureCell(collectionView, indexPath: indexPath, node: node.node)
         }
+
         dataSource.supplementaryViewFactory = { dataSource, collectionView, kind, indexPath in
             switch UICollectionElementKindSection(rawValue: kind)! {
             case .footer:
@@ -103,7 +111,7 @@ public class AnimatableCollectionViewService {
         collectionView.rx.setDelegate(self.delegeteService).disposed(by: disposeBag)
     }
     
-    public convenience init(collectionView: UICollectionView, providers: [_AnimatableCollectionViewProvider]) {
+    public convenience init(collectionView: UICollectionView, providers: [_AnimatableCollectionViewMultiNodeProvider]) {
         let sectionProviderCollectionViewBuilder = SectionProviderCollectionViewBuilder(
             identity: "Flix",
             providers: providers,

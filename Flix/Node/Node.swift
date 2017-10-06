@@ -32,7 +32,7 @@ public struct IdentifiableNode: IdentifiableType, Equatable {
     public var identity: String {
         return node.identity
     }
-    
+
     public typealias Identity = String
     
     public let node: StringIdentifiableType & _Node
@@ -55,18 +55,23 @@ struct ValueNode<V>: Node {
     
 }
 
-struct IdentifiableValueNode<V: Equatable & StringIdentifiableType>: Node, Equatable, StringIdentifiableType {
+public struct IdentifiableValueNode<V: Equatable & StringIdentifiableType>: Node, Equatable, StringIdentifiableType {
     
-    var identity: String {
+    public var identity: String {
         return value.identity
     }
     
-    static func ==(lhs: IdentifiableValueNode<V>, rhs: IdentifiableValueNode<V>) -> Bool {
+    public static func ==(lhs: IdentifiableValueNode<V>, rhs: IdentifiableValueNode<V>) -> Bool {
         return lhs.value == rhs.value
     }
     
-    let providerIdentity: String
-    let value: V
+    public let providerIdentity: String
+    public let value: V
+    
+    public init(providerIdentity: String, value: V) {
+        self.providerIdentity = providerIdentity
+        self.value = value
+    }
     
 }
 

@@ -18,6 +18,10 @@
 		26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F6F1F8537EC00E2834D /* UniqueMessageTableViewProvider.swift */; };
 		26424F721F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F711F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift */; };
 		26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */; };
+		2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666E4001F869656006F1918 /* NestFormViewController.swift */; };
+		2666E4041F874113006F1918 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666E4031F874112006F1918 /* Operators.swift */; };
+		2666E4061F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666E4051F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift */; };
+		2666E4081F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666E4071F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift */; };
 		2670E6541F83E15C003A5BA7 /* Flix.h in Headers */ = {isa = PBXBuildFile; fileRef = 2670E6521F83E15C003A5BA7 /* Flix.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6601F83E1A0003A5BA7 /* AppDelegate.swift */; };
 		2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6621F83E1A0003A5BA7 /* ViewController.swift */; };
@@ -27,7 +31,7 @@
 		2670E6741F83E2EA003A5BA7 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6731F83E2EA003A5BA7 /* Node.swift */; };
 		2670E6761F83E31F003A5BA7 /* CollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6751F83E31F003A5BA7 /* CollectionViewProvider.swift */; };
 		2670E6781F83E343003A5BA7 /* TableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6771F83E343003A5BA7 /* TableViewProvider.swift */; };
-		2670E67B1F83E559003A5BA7 /* Cell+Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67A1F83E559003A5BA7 /* Cell+Configure.swift */; };
+		2670E67B1F83E559003A5BA7 /* UIView+Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67A1F83E559003A5BA7 /* UIView+Configure.swift */; };
 		2670E67E1F83EA4A003A5BA7 /* AnimatableCollectionViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67D1F83EA4A003A5BA7 /* AnimatableCollectionViewService.swift */; };
 		2670E6801F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift */; };
 		2670E6821F83EBE2003A5BA7 /* ProviderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6811F83EBE2003A5BA7 /* ProviderBuilder.swift */; };
@@ -91,6 +95,10 @@
 		26424F6F1F8537EC00E2834D /* UniqueMessageTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueMessageTableViewProvider.swift; sourceTree = "<group>"; };
 		26424F711F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextFieldTableViewProvider.swift; sourceTree = "<group>"; };
 		26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueButtonTableViewProvider.swift; sourceTree = "<group>"; };
+		2666E4001F869656006F1918 /* NestFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestFormViewController.swift; sourceTree = "<group>"; };
+		2666E4031F874112006F1918 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		2666E4051F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixRxTableViewSectionedAnimatedDataSource.swift; sourceTree = "<group>"; };
+		2666E4071F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomCollectionViewSectionProvider.swift; sourceTree = "<group>"; };
 		2670E64F1F83E15C003A5BA7 /* Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2670E6521F83E15C003A5BA7 /* Flix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flix.h; sourceTree = "<group>"; };
 		2670E6531F83E15C003A5BA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,7 +112,7 @@
 		2670E6731F83E2EA003A5BA7 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		2670E6751F83E31F003A5BA7 /* CollectionViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewProvider.swift; sourceTree = "<group>"; };
 		2670E6771F83E343003A5BA7 /* TableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProvider.swift; sourceTree = "<group>"; };
-		2670E67A1F83E559003A5BA7 /* Cell+Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+Configure.swift"; sourceTree = "<group>"; };
+		2670E67A1F83E559003A5BA7 /* UIView+Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Configure.swift"; sourceTree = "<group>"; };
 		2670E67D1F83EA4A003A5BA7 /* AnimatableCollectionViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewService.swift; sourceTree = "<group>"; };
 		2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionProvider.swift; sourceTree = "<group>"; };
 		2670E6811F83EBE2003A5BA7 /* ProviderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderBuilder.swift; sourceTree = "<group>"; };
@@ -207,6 +215,7 @@
 		2670E65F1F83E1A0003A5BA7 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				2666E4031F874112006F1918 /* Operators.swift */,
 				2617C2611F84D0FD007F8228 /* GitHubSigup */,
 				2670E6981F83EE3F003A5BA7 /* DemoListViewController.swift */,
 				2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */,
@@ -220,6 +229,8 @@
 				2670E6691F83E1A0003A5BA7 /* LaunchScreen.storyboard */,
 				2670E66C1F83E1A0003A5BA7 /* Info.plist */,
 				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
+				2666E4001F869656006F1918 /* NestFormViewController.swift */,
+				2666E4051F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -238,8 +249,8 @@
 				2670E6751F83E31F003A5BA7 /* CollectionViewProvider.swift */,
 				2670E6771F83E343003A5BA7 /* TableViewProvider.swift */,
 				2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift */,
-				2670E6811F83EBE2003A5BA7 /* ProviderBuilder.swift */,
 				26C847061F84897000EEFEAA /* TableViewSectionProvider.swift */,
+				2670E6811F83EBE2003A5BA7 /* ProviderBuilder.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -247,7 +258,7 @@
 		2670E6791F83E546003A5BA7 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				2670E67A1F83E559003A5BA7 /* Cell+Configure.swift */,
+				2670E67A1F83E559003A5BA7 /* UIView+Configure.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -293,6 +304,7 @@
 				26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */,
 				26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */,
 				26BAF0341F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift */,
+				2666E4071F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift */,
 			);
 			path = UniqueCustomProvider;
 			sourceTree = "<group>";
@@ -533,7 +545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2670E67B1F83E559003A5BA7 /* Cell+Configure.swift in Sources */,
+				2670E67B1F83E559003A5BA7 /* UIView+Configure.swift in Sources */,
 				2670E6741F83E2EA003A5BA7 /* Node.swift in Sources */,
 				26C847071F84897000EEFEAA /* TableViewSectionProvider.swift in Sources */,
 				26C847051F84891500EEFEAA /* AnimatableTableViewService.swift in Sources */,
@@ -544,6 +556,7 @@
 				26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */,
 				26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */,
 				2670E6761F83E31F003A5BA7 /* CollectionViewProvider.swift in Sources */,
+				2666E4081F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift in Sources */,
 				2670E6801F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,6 +574,8 @@
 				2617C2761F84D1BF007F8228 /* ActivityIndicator.swift in Sources */,
 				26BAF0331F8499B8009A4401 /* LoginViewController.swift in Sources */,
 				2670E6A21F83EE5E003A5BA7 /* RadioProvider.swift in Sources */,
+				2666E4061F874B5C006F1918 /* FlixRxTableViewSectionedAnimatedDataSource.swift in Sources */,
+				2666E4041F874113006F1918 /* Operators.swift in Sources */,
 				2670E6A41F83EE5E003A5BA7 /* UniqueSelectProvider.swift in Sources */,
 				2617C2681F84D0FD007F8228 /* GitHubSignupViewController.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
@@ -573,6 +588,7 @@
 				2670E69B1F83EE40003A5BA7 /* DemoListViewController.swift in Sources */,
 				2617C2701F84D15C007F8228 /* Wireframe.swift in Sources */,
 				2670E6A31F83EE5E003A5BA7 /* TextSectionProvider.swift in Sources */,
+				2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */,
 				2617C2731F84D18B007F8228 /* String+URL.swift in Sources */,
 				2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */,
 				2670E69D1F83EE40003A5BA7 /* PhotoSettingsViewController.swift in Sources */,

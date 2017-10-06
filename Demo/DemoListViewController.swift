@@ -27,7 +27,8 @@ class DemoListViewController: CollectionViewController {
                 Model(title: "Photos", desc: "", value: PhotoSettingsViewController.self),
                 Model(title: "勿扰模式", desc: "", value: DoNotDisturbSettingsViewController.self),
                 Model(title: "登录示例", desc: "", value: LoginViewController.self),
-                Model(title: "GitHub Signup", desc: "", value: GitHubSignupViewController.self)
+                Model(title: "GitHub Signup", desc: "", value: GitHubSignupViewController.self),
+                Model(title: "嵌套表单", desc: "", value: NestFormViewController.self)
             ]
         )
         textListProvider.tapped

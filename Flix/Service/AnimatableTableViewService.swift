@@ -19,23 +19,30 @@ public class AnimatableTableViewService {
     let disposeBag = DisposeBag()
     let delegeteService = TableViewDelegateService()
     
+    public var animationConfiguration: AnimationConfiguration {
+        get {
+            return dataSource.animationConfiguration
+        }
+        set {
+            dataSource.animationConfiguration = newValue
+        }
+    }
+
     public init(tableView: UITableView, sectionProviderBuilders: [SectionProviderTableViewBuilder]) {
         
-        dataSource.animationConfiguration = AnimationConfiguration(
+        self.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
-            reloadAnimation: .fade,
+            reloadAnimation: .none,
             deleteAnimation: .fade
         )
 
-        let nodeProviders: [_AnimatableTableViewProvider] = sectionProviderBuilders.flatMap { $0.providers }
+        let nodeProviders: [_AnimatableTableViewMultiNodeProvider] = sectionProviderBuilders.flatMap { $0.providers }
         let footerSectionProviders: [_AnimatableSectionTableViewProvider] = sectionProviderBuilders.flatMap { $0.footerProvider }
         let headerSectionProviders: [_AnimatableSectionTableViewProvider] = sectionProviderBuilders.flatMap { $0.headerProvider }
         
         dataSource.configureCell = { dataSource, tableView, indexPath, node in
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!
-            let cell = tableView.dequeueReusableCell(withIdentifier: provider.identity, for: indexPath)
-            provider._configureCell(tableView, cell: cell, indexPath: indexPath, node: node.node)
-            return cell
+            return provider._configureCell(tableView, indexPath: indexPath, node: node.node)
         }
 
         tableView.rx.itemSelected
@@ -104,7 +111,7 @@ public class AnimatableTableViewService {
             .disposed(by: disposeBag)
     }
     
-    public convenience init(tableView: UITableView, providers: [_AnimatableTableViewProvider]) {
+    public convenience init(tableView: UITableView, providers: [_AnimatableTableViewMultiNodeProvider]) {
         let sectionProviderTableViewBuilder = SectionProviderTableViewBuilder(
             identity: "Flix",
             providers: providers,

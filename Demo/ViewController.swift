@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import Flix
+import RxKeyboard
 
 class CollectionViewController: UIViewController {
     
@@ -73,6 +74,13 @@ class TableViewController: UIViewController {
         tableView.estimatedRowHeight = 0
         tableView.estimatedSectionFooterHeight = 0
         tableView.estimatedSectionHeaderHeight = 0
+        
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { [unowned self] keyboardVisibleHeight in
+                self.tableView.contentInset.bottom = keyboardVisibleHeight
+                self.tableView.scrollIndicatorInsets.bottom = keyboardVisibleHeight
+            })
+            .disposed(by: disposeBag)
 
     }
 

@@ -10,7 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Flix
-import RxKeyboard
 
 class GitHubSignupViewController: TableViewController {
     
@@ -67,7 +66,6 @@ class GitHubSignupViewController: TableViewController {
         let provider = UniqueButtonTableViewProvider(identity: "login")
         provider.textLabel.textColor = UIColor.white
         provider.textLabel.text = "Sign up"
-        provider.textLabel.textAlignment = .center
         return provider
     }()
 
@@ -141,12 +139,6 @@ class GitHubSignupViewController: TableViewController {
             sectionProviderBuilders: [inputSectionProviderBuilder, loginSectionProviderBuilder]
         )
 
-        RxKeyboard.instance.visibleHeight
-            .drive(onNext: { [unowned self] keyboardVisibleHeight in
-                self.tableView.contentInset.bottom = keyboardVisibleHeight
-                self.tableView.scrollIndicatorInsets.bottom = keyboardVisibleHeight
-            })
-            .disposed(by: disposeBag)
     }
     
 }

@@ -31,15 +31,7 @@ class DefaultWireframe: Wireframe {
     static let shared = DefaultWireframe()
 
     func open(url: URL) {
-        #if os(iOS)
-            UIApplication.shared.openURL(url)
-        #elseif os(macOS)
-            #if swift(>=4.0)
-                NSWorkspace.shared.open(url)
-            #else
-                NSWorkspace.shared.open(url)
-            #endif
-        #endif
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
     #if os(iOS)
