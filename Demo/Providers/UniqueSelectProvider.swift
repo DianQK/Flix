@@ -12,7 +12,7 @@ import Flix
 
 struct UniqueSelectProvider: UniqueAnimatableCollectionViewProvider {
 
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: UniqueSelectProvider) {
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueSelectProvider) {
         
     }
     
@@ -32,7 +32,7 @@ struct UniqueSelectProvider: UniqueAnimatableCollectionViewProvider {
         cell.backgroundColor = UIColor.white
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: UniqueSelectProvider) -> CGSize? {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: UniqueSelectProvider) -> CGSize? {
         return CGSize(width: collectionView.bounds.width, height: 44)
     }
     

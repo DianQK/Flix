@@ -33,11 +33,11 @@ struct UniqueSwitchProvider: UniqueAnimatableCollectionViewProvider {
         cell.backgroundColor = UIColor.white
     }
     
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: UniqueSwitchProvider) {
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueSwitchProvider) {
         //        print(desc)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: UniqueSwitchProvider) -> CGSize? {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: UniqueSwitchProvider) -> CGSize? {
         return CGSize(width: collectionView.bounds.width, height: 44)
     }
     

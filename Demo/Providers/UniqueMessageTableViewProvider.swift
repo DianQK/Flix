@@ -39,15 +39,15 @@ open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
         self.messageLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
     }
     
-    open func tap(_ tableView: UITableView, indexPath: IndexPath, node: UniqueMessageTableViewProvider) {
+    open func tap(_ tableView: UITableView, indexPath: IndexPath, value: UniqueMessageTableViewProvider) {
         
     }
     
-    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: UniqueMessageTableViewProvider) -> CGFloat? {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: UniqueMessageTableViewProvider) -> CGFloat? {
         return 30
     }
     
-    open func genteralNodes() -> Observable<[UniqueMessageTableViewProvider]> {
+    open func genteralValues() -> Observable<[UniqueMessageTableViewProvider]> {
         return self.isHidden.asObservable()
             .distinctUntilChanged()
             .map { [weak self] isHidden in

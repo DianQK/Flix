@@ -135,8 +135,8 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
         self.identity = identity
     }
     
-    func configureCell(_ tableView: UITableView, indexPath: IndexPath, node: HardwareFormItem) -> UITableViewCell {
-        switch node.item {
+    func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: HardwareFormItem) -> UITableViewCell {
+        switch value.item {
         case let .name(name):
             let cell = tableView.dequeueReusableCell(withIdentifier: identity + "NameUITableViewCell", for: indexPath) as! ItemInputTableViewCell
             cell.titleLabel.text = "品名"
@@ -176,16 +176,16 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
         }
     }
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, node: HardwareFormItem) {
-        switch node.item {
+    func tap(_ tableView: UITableView, indexPath: IndexPath, value: HardwareFormItem) {
+        switch value.item {
         case .delete:
-            self.removeItem(id: node.id)
+            self.removeItem(id: value.id)
         default:
             break
         }
     }
     
-    func genteralNodes() -> Observable<[HardwareFormItem]> {
+    func genteralValues() -> Observable<[HardwareFormItem]> {
         let providerIdentity = self.identity
         return self.hardwareForms.asObservable()
             .map { (forms: [HardwareForm]) -> [HardwareFormItem] in
@@ -202,7 +202,7 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
 
     public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
         let providerIdentity = self.identity
-        return genteralNodes()
+        return genteralValues()
             .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }
     }
 

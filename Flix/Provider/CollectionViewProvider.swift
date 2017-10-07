@@ -31,13 +31,13 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
 
     associatedtype Value
     
-    func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: Value) -> UICollectionViewCell
+    func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) -> UICollectionViewCell
 
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: Value)
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value)
     
-    func genteralNodes() -> Observable<[Value]>
+    func genteralValues() -> Observable<[Value]>
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: Value) -> CGSize?
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: Value) -> CGSize?
 }
 
 
@@ -45,7 +45,7 @@ extension CollectionViewMultiNodeProvider {
     
     public func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell {
         if let valueNode = node as? ValueNode<Value> {
-            return self.configureCell(collectionView, indexPath: indexPath, node: valueNode.value)
+            return self.configureCell(collectionView, indexPath: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -53,7 +53,7 @@ extension CollectionViewMultiNodeProvider {
     
     public func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
         if let valueNode = node as? ValueNode<Value> {
-            tap(collectionView, indexPath: indexPath, node: valueNode.value)
+            tap(collectionView, indexPath: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -61,19 +61,19 @@ extension CollectionViewMultiNodeProvider {
     
     public func _genteralNodes() -> Observable<[_Node]> {
         let providerIdentity = self.identity
-        return genteralNodes()
+        return genteralValues()
             .map { $0.map { ValueNode(providerIdentity: providerIdentity, value: $0) } }
     }
     
     public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize? {
         if let valueNode = node as? ValueNode<Value> {
-            return self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath, node: valueNode.value)
+            return self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
     }
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: Value) -> CGSize? {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: Value) -> CGSize? {
         return nil
     }
     
@@ -83,7 +83,7 @@ public protocol CollectionViewProvider: CollectionViewMultiNodeProvider {
     
     associatedtype Cell: UICollectionViewCell
     
-    func configureCell(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath, node: Value)
+    func configureCell(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath, value: Value)
 
 }
 
@@ -93,9 +93,9 @@ extension CollectionViewProvider {
         collectionView.register(Cell.self, forCellWithReuseIdentifier: self.identity)
     }
     
-    public func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: Value) -> UICollectionViewCell {
+    public func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identity, for: indexPath)
-        self.configureCell(collectionView, cell: cell as! Cell, indexPath: indexPath, node: node)
+        self.configureCell(collectionView, cell: cell as! Cell, indexPath: indexPath, value: value)
         return cell
     }
     
@@ -129,7 +129,7 @@ extension AnimatableCollectionViewMultiNodeProvider {
     
     public func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell {
         if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.configureCell(collectionView, indexPath: indexPath, node: valueNode.value)
+            return self.configureCell(collectionView, indexPath: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -137,7 +137,7 @@ extension AnimatableCollectionViewMultiNodeProvider {
 
     public func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
         if let valueNode = node as? IdentifiableValueNode<Value> {
-            tap(collectionView, indexPath: indexPath, node: valueNode.value)
+            tap(collectionView, indexPath: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -145,7 +145,7 @@ extension AnimatableCollectionViewMultiNodeProvider {
     
     public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize? {
         if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath, node: valueNode.value)
+            return self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -153,7 +153,7 @@ extension AnimatableCollectionViewMultiNodeProvider {
     
     public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
         let providerIdentity = self.identity
-        return genteralNodes()
+        return genteralValues()
             .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }
     }
     
@@ -174,7 +174,7 @@ extension UniqueAnimatableCollectionViewProvider {
         
     }
     
-    public func configureCell(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath, node: Self) {
+    public func configureCell(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath, value: Self) {
         if !cell.hasConfigured {
             cell.hasConfigured = true
             onCreate(collectionView, cell: cell, indexPath: indexPath)
@@ -190,7 +190,7 @@ extension UniqueAnimatableCollectionViewProvider {
         return self.identity
     }
     
-    public func genteralNodes() -> Observable<[Self]> {
+    public func genteralValues() -> Observable<[Self]> {
         return Observable.just([self])
     }
 

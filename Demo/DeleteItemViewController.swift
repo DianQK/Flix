@@ -76,20 +76,20 @@ class InputTagsProvider: AnimatableTableViewProvider, TableViewDeleteable {
         self.identity = identity
     }
     
-    func configureCell(_ tableView: UITableView, cell: TagTableViewCell, indexPath: IndexPath, node: TagWarp) {
+    func configureCell(_ tableView: UITableView, cell: TagTableViewCell, indexPath: IndexPath, value: TagWarp) {
         cell.textField.placeholder = "Tag Name"
-        (cell.textField.rx.textInput <-> node.tag.name).disposed(by: cell.reuseBag)
+        (cell.textField.rx.textInput <-> value.tag.name).disposed(by: cell.reuseBag)
     }
     
     func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: TagWarp) {
         self.removeItem(id: value.tag.id)
     }
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, node: TagWarp) {
+    func tap(_ tableView: UITableView, indexPath: IndexPath, value: TagWarp) {
         
     }
     
-    func genteralNodes() -> Observable<[TagWarp]> {
+    func genteralValues() -> Observable<[TagWarp]> {
         let providerIdentity = self.identity
         return tags.asObservable()
             .map { $0.map { TagWarp(providerIdentity: providerIdentity, tag: $0) } }

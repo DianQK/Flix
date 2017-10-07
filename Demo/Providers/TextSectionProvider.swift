@@ -38,15 +38,15 @@ class TextSectionProvider: AnimatableSectionCollectionViewProvider, StringIdenti
         return true
     }
 
-    func configureSupplementaryView(_ collectionView: UICollectionView, sectionView: TextCollectionReusableView, indexPath: IndexPath, node: TextSectionProvider) {
+    func configureSupplementaryView(_ collectionView: UICollectionView, sectionView: TextCollectionReusableView, indexPath: IndexPath, value: TextSectionProvider) {
         if !sectionView.hasConfigured {
             sectionView.hasConfigured = true
         }
-        node.text.asObservable()
+        value.text.asObservable()
             .bind(to: sectionView.textLabel.rx.text)
             .disposed(by: disposeBag)
         
-        node.text.asObservable().distinctUntilChanged()
+        value.text.asObservable().distinctUntilChanged()
             .subscribe(onNext: { [weak collectionView] (text) in
                 collectionView?.performBatchUpdates(nil, completion: nil)
             })
@@ -57,7 +57,7 @@ class TextSectionProvider: AnimatableSectionCollectionViewProvider, StringIdenti
         return Observable.just(self)
     }
 
-    typealias CellType = TextCollectionReusableView
+    typealias Cell = TextCollectionReusableView
     typealias NodeType = TextSectionProvider
     
     let identity: String
@@ -71,8 +71,8 @@ class TextSectionProvider: AnimatableSectionCollectionViewProvider, StringIdenti
         self.text = Variable(text)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: TextSectionProvider) -> CGSize? {
-        let height = NSAttributedString(string: node.text.value, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: TextSectionProvider) -> CGSize? {
+        let height = NSAttributedString(string: value.text.value, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
             .boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).height
         return CGSize(width: collectionView.bounds.width, height: height + 20)
     }

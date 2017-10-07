@@ -34,36 +34,36 @@ extension _SectionTableViewProvider {
     public func register(_ tableView: UITableView) {
         tableView.register(self.cellType, forHeaderFooterViewReuseIdentifier: self.identity)
     }
-    
+
 }
 
 public protocol SectionTableViewProvider: _SectionTableViewProvider {
     
-    associatedtype CellType: UITableViewHeaderFooterView
-    associatedtype ValueType
+    associatedtype Cell: UITableViewHeaderFooterView
+    associatedtype Value
     
-    func tableView(_ tableView: UITableView, heightInSection section: Int, node: ValueType) -> CGFloat?
-    func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: ValueType)
+    func tableView(_ tableView: UITableView, heightInSection section: Int, value: Value) -> CGFloat?
+    func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, value: Value)
     
-    func genteralSection() -> Observable<ValueType?>
+    func genteralSection() -> Observable<Value?>
     
 }
 
 extension SectionTableViewProvider {
     
-    public var cellType: UITableViewHeaderFooterView.Type { return CellType.self }
+    public var cellType: UITableViewHeaderFooterView.Type { return Cell.self }
     
     public func _tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat? {
-        if let valueNode = node as? ValueNode<ValueType> {
-            return self.tableView(tableView, heightInSection: section, node: valueNode.value)
+        if let valueNode = node as? ValueNode<Value> {
+            return self.tableView(tableView, heightInSection: section, value: valueNode.value)
         } else {
             fatalError()
         }
     }
     
     public func _configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: _Node) {
-        if let valueNode = node as? ValueNode<ValueType> {
-            self.configureSection(tableView, view: view as! CellType, viewInSection: section, node: valueNode.value)
+        if let valueNode = node as? ValueNode<Value> {
+            self.configureSection(tableView, view: view as! Cell, viewInSection: section, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -88,7 +88,7 @@ public protocol _AnimatableSectionProviderable {
 
 public typealias _AnimatableSectionTableViewProvider = _AnimatableSectionProviderable & _SectionTableViewProvider
 
-public protocol AnimatableSectionTableViewProvider: SectionTableViewProvider, _AnimatableSectionProviderable where ValueType: Equatable, ValueType: StringIdentifiableType {
+public protocol AnimatableSectionTableViewProvider: SectionTableViewProvider, _AnimatableSectionProviderable where Value: Equatable, Value: StringIdentifiableType {
 
     func genteralAnimatableSection() -> Observable<IdentifiableNode?>
     
@@ -105,22 +105,22 @@ extension AnimatableSectionTableViewProvider {
 extension AnimatableSectionTableViewProvider {
     
     public func _configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<ValueType> {
-            self.configureSection(tableView, view: view as! CellType, viewInSection: section, node: valueNode.value)
+        if let valueNode = node as? IdentifiableValueNode<Value> {
+            self.configureSection(tableView, view: view as! Cell, viewInSection: section, value: valueNode.value)
         } else {
             fatalError()
         }
     }
     
     public func _tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat? {
-        if let valueNode = node as? IdentifiableValueNode<ValueType> {
-            return self.tableView(tableView, heightInSection: section, node: valueNode.value)
+        if let valueNode = node as? IdentifiableValueNode<Value> {
+            return self.tableView(tableView, heightInSection: section, value: valueNode.value)
         } else {
             fatalError()
         }
     }
     
-    public func tableView(_ tableView: UITableView, heightInSection section: Int, node: ValueType) -> CGFloat? {
+    public func tableView(_ tableView: UITableView, heightInSection section: Int, value: Value) -> CGFloat? {
         return nil
     }
     

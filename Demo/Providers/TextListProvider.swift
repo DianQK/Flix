@@ -84,22 +84,22 @@ struct TextListProvider<Value>: AnimatableCollectionViewProvider {
         self.items = items
     }
     
-    func configureCell(_ collectionView: UICollectionView, cell: TextCollectionViewCell, indexPath: IndexPath, node: NodeType) {
-        cell.titleLabel.text = node.title
-        cell.descLabel.text = node.desc
+    func configureCell(_ collectionView: UICollectionView, cell: TextCollectionViewCell, indexPath: IndexPath, value: NodeType) {
+        cell.titleLabel.text = value.title
+        cell.descLabel.text = value.desc
     }
     
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: NodeType) {
-        _tap.onNext(node)
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: NodeType) {
+        _tap.onNext(value)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
-    func genteralNodes() -> Observable<[Model]> {
+    func genteralValues() -> Observable<[Model]> {
         let items = self.items
         return isHidden.asObservable().distinctUntilChanged().map { isHidden in isHidden ? [] : items }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: NodeType) -> CGSize? {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: NodeType) -> CGSize? {
         return CGSize(width: collectionView.bounds.width, height: 44)
     }
     

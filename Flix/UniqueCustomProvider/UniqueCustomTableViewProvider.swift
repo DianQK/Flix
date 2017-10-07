@@ -63,18 +63,18 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
         self.contentView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
     }
 
-    open func tap(_ tableView: UITableView, indexPath: IndexPath, node: UniqueCustomTableViewProvider) {
+    open func tap(_ tableView: UITableView, indexPath: IndexPath, value: UniqueCustomTableViewProvider) {
         if self.isEnabled {
             _tap.onNext(())
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: UniqueCustomTableViewProvider) -> CGFloat? {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: UniqueCustomTableViewProvider) -> CGFloat? {
         return self.itemHeight?()
     }
     
-    open func genteralNodes() -> Observable<[UniqueCustomTableViewProvider]> {
+    open func genteralValues() -> Observable<[UniqueCustomTableViewProvider]> {
         return self.isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }

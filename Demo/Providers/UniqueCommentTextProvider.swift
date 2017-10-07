@@ -56,22 +56,22 @@ class UniqueCommentTextProvider: AnimatableCollectionViewProvider {
     
     let textLabel = UILabel()
     
-    func configureCell(_ collectionView: UICollectionView, cell: CommentTextCollectionCell, indexPath: IndexPath, node: CommentTextModel) {
-        cell.textLabel.text = node.text
+    func configureCell(_ collectionView: UICollectionView, cell: CommentTextCollectionCell, indexPath: IndexPath, value: CommentTextModel) {
+        cell.textLabel.text = value.text
     }
     
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: CommentTextModel) {
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: CommentTextModel) {
 //        print(desc)
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: CommentTextModel) -> CGSize? {
-        let height = NSAttributedString(string: node.text, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: CommentTextModel) -> CGSize? {
+        let height = NSAttributedString(string: value.text, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
             .boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).height
         return CGSize(width: collectionView.bounds.width, height: height + 20)
     }
 
-    public func genteralNodes() -> Observable<[CommentTextModel]> {
+    public func genteralValues() -> Observable<[CommentTextModel]> {
         let identity = self.identity
         return self.text.asObservable().map { [CommentTextModel.init(identity: identity, text: $0)] }
     }

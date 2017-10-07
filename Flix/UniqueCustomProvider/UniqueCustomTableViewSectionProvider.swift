@@ -15,8 +15,8 @@ open class UniqueCustomTableViewSectionProvider: AnimatableSectionTableViewProvi
         return true
     }
     
-    public typealias CellType = UITableViewHeaderFooterView
-    public typealias ValueType = UniqueCustomTableViewSectionProvider
+    public typealias Cell = UITableViewHeaderFooterView
+    public typealias Value = UniqueCustomTableViewSectionProvider
 
     open var identity: String
     open var tableElementKindSection: UITableElementKindSection
@@ -33,11 +33,11 @@ open class UniqueCustomTableViewSectionProvider: AnimatableSectionTableViewProvi
         self.tableElementKindSection = tableElementKindSection
     }
     
-    open func tableView(_ tableView: UITableView, heightInSection section: Int, node: UniqueCustomTableViewSectionProvider) -> CGFloat? {
+    open func tableView(_ tableView: UITableView, heightInSection section: Int, value: UniqueCustomTableViewSectionProvider) -> CGFloat? {
         return self.sectionHeight?()
     }
 
-    open func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: UniqueCustomTableViewSectionProvider) {
+    open func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, value: UniqueCustomTableViewSectionProvider) {
         if !view.hasConfigured {
             view.hasConfigured = true
             view.backgroundView = self.backgroundView

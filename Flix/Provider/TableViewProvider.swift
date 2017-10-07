@@ -31,13 +31,13 @@ public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider {
 
     associatedtype Value
     
-    func configureCell(_ tableView: UITableView, indexPath: IndexPath, node: Value) -> UITableViewCell
+    func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: Value) -> UITableViewCell
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, node: Value)
+    func tap(_ tableView: UITableView, indexPath: IndexPath, value: Value)
     
-    func genteralNodes() -> Observable<[Value]>
+    func genteralValues() -> Observable<[Value]>
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: Value) -> CGFloat?
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: Value) -> CGFloat?
     
 }
 
@@ -45,7 +45,7 @@ extension TableViewMultiNodeProvider {
     
     public func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell {
         if let valueNode = node as? ValueNode<Value> {
-            return self.configureCell(tableView, indexPath: indexPath, node: valueNode.value)
+            return self.configureCell(tableView, indexPath: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -53,13 +53,13 @@ extension TableViewMultiNodeProvider {
     
     public func _genteralNodes() -> Observable<[_Node]> {
         let providerIdentity = self.identity
-        return genteralNodes()
+        return genteralValues()
             .map { $0.map { ValueNode(providerIdentity: providerIdentity, value: $0) } }
     }
     
     public func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat? {
         if let valueNode = node as? ValueNode<Value> {
-            return self.tableView(tableView, heightForRowAt: indexPath, node: valueNode.value)
+            return self.tableView(tableView, heightForRowAt: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -67,13 +67,13 @@ extension TableViewMultiNodeProvider {
     
     public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
         if let valueNode = node as? ValueNode<Value> {
-            tap(tableView, indexPath: indexPath, node: valueNode.value)
+            tap(tableView, indexPath: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
     }
     
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: Value) -> CGFloat? {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: Value) -> CGFloat? {
         return nil
     }
     
@@ -83,15 +83,15 @@ public protocol TableViewProvider: TableViewMultiNodeProvider {
     
     associatedtype Cell: UITableViewCell
     
-    func configureCell(_ tableView: UITableView, cell: Cell, indexPath: IndexPath, node: Value)
+    func configureCell(_ tableView: UITableView, cell: Cell, indexPath: IndexPath, value: Value)
 
 }
 
 extension TableViewProvider {
     
-    public func configureCell(_ tableView: UITableView, indexPath: IndexPath, node: Value) -> UITableViewCell {
+    public func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: Value) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.identity, for: indexPath)
-        self.configureCell(tableView, cell: cell as! Cell, indexPath: indexPath, node: node)
+        self.configureCell(tableView, cell: cell as! Cell, indexPath: indexPath, value: value)
         return cell
     }
     
@@ -123,7 +123,7 @@ extension AnimatableTableViewMultiNodeProvider {
     
     public func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell {
         if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.configureCell(tableView, indexPath: indexPath, node: valueNode.value)
+            return self.configureCell(tableView, indexPath: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -131,7 +131,7 @@ extension AnimatableTableViewMultiNodeProvider {
     
     public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
         if let valueNode = node as? IdentifiableValueNode<Value> {
-            tap(tableView, indexPath: indexPath, node: valueNode.value)
+            tap(tableView, indexPath: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -139,7 +139,7 @@ extension AnimatableTableViewMultiNodeProvider {
 
     public func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat? {
         if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.tableView(tableView, heightForRowAt: indexPath, node: valueNode.value)
+            return self.tableView(tableView, heightForRowAt: indexPath, value: valueNode.value)
         } else {
             fatalError()
         }
@@ -147,7 +147,7 @@ extension AnimatableTableViewMultiNodeProvider {
     
     public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
         let providerIdentity = self.identity
-        return genteralNodes()
+        return genteralValues()
             .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }
     }
     
@@ -168,7 +168,7 @@ extension UniqueAnimatableTableViewProvider {
 
     }
 
-    public func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, node: Self) {
+    public func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: Self) {
         if !cell.hasConfigured {
             cell.hasConfigured = true
             onCreate(tableView, cell: cell, indexPath: indexPath)
@@ -184,7 +184,7 @@ extension UniqueAnimatableTableViewProvider {
         return self.identity
     }
     
-    public func genteralNodes() -> Observable<[Self]> {
+    public func genteralValues() -> Observable<[Self]> {
         return Observable.just([self])
     }
     

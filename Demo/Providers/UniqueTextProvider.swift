@@ -51,11 +51,11 @@ struct UniqueTextProvider: UniqueAnimatableCollectionViewProvider {
         cell.backgroundColor = UIColor.white
     }
     
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: UniqueTextProvider) {
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueTextProvider) {
         print(desc)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: UniqueTextProvider) -> CGSize? {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: UniqueTextProvider) -> CGSize? {
         return CGSize(width: collectionView.bounds.width, height: 44)
     }
     

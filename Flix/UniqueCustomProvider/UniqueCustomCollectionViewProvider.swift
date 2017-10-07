@@ -38,16 +38,16 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
         contentView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
     }
     
-    open func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: UniqueCustomCollectionViewProvider) {
+    open func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueCustomCollectionViewProvider) {
         _tap.onNext(())
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: UniqueCustomCollectionViewProvider) -> CGSize? {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: UniqueCustomCollectionViewProvider) -> CGSize? {
         return self.itemSize?()
     }
     
-    open func genteralNodes() -> Observable<[UniqueCustomCollectionViewProvider]> {
+    open func genteralValues() -> Observable<[UniqueCustomCollectionViewProvider]> {
         return self.isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }

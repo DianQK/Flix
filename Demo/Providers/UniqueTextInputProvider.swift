@@ -40,12 +40,12 @@ struct UniqueTextInputProvider: UniqueAnimatableCollectionViewProvider {
             .disposed(by: disposeBag)
     }
     
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: UniqueTextInputProvider) {
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueTextInputProvider) {
         //        print(desc)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: UniqueTextInputProvider) -> CGSize? {
-        let height = NSAttributedString(string: node.textView.text, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)]).boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, .usesLineFragmentOrigin], context: nil).height
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: UniqueTextInputProvider) -> CGSize? {
+        let height = NSAttributedString(string: value.textView.text, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)]).boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, .usesLineFragmentOrigin], context: nil).height
         return CGSize(width: collectionView.bounds.width, height: max(44, height + 24))
     }
 
