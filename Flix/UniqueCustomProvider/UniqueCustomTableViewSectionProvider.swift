@@ -18,14 +18,14 @@ open class UniqueCustomTableViewSectionProvider: AnimatableSectionTableViewProvi
     public typealias CellType = UITableViewHeaderFooterView
     public typealias ValueType = UniqueCustomTableViewSectionProvider
 
-    public var identity: String
-    public var tableElementKindSection: UITableElementKindSection
+    open var identity: String
+    open var tableElementKindSection: UITableElementKindSection
     
-    public var isHidden = Variable(false)
+    public let isHidden = Variable(false)
     
-    public var sectionHeight: (() -> CGFloat)?
+    open var sectionHeight: (() -> CGFloat)?
     
-    public let contentView = UIView()
+    open let contentView = UIView()
     open var backgroundView: UIView?
     
     public init(identity: String, tableElementKindSection: UITableElementKindSection) {
@@ -33,11 +33,11 @@ open class UniqueCustomTableViewSectionProvider: AnimatableSectionTableViewProvi
         self.tableElementKindSection = tableElementKindSection
     }
     
-    public func tableView(_ tableView: UITableView, heightInSection section: Int, node: UniqueCustomTableViewSectionProvider) -> CGFloat? {
+    open func tableView(_ tableView: UITableView, heightInSection section: Int, node: UniqueCustomTableViewSectionProvider) -> CGFloat? {
         return self.sectionHeight?()
     }
 
-    public func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: UniqueCustomTableViewSectionProvider) {
+    open func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: UniqueCustomTableViewSectionProvider) {
         if !view.hasConfigured {
             view.hasConfigured = true
             view.backgroundView = self.backgroundView
@@ -50,7 +50,7 @@ open class UniqueCustomTableViewSectionProvider: AnimatableSectionTableViewProvi
         }
     }
 
-    public func genteralSection() -> Observable<UniqueCustomTableViewSectionProvider?> {
+    open func genteralSection() -> Observable<UniqueCustomTableViewSectionProvider?> {
         return self.isHidden.asObservable()
             .map { [weak self] isHidden in
                 return isHidden ? nil : self

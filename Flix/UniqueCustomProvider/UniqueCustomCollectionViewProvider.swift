@@ -16,12 +16,12 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
     open var selectedBackgroundView: UIView?
     open var backgroundView: UIView?
     
-    open var tap: Observable<()> { return _tap.asObservable() }
-    open let _tap = PublishSubject<()>()
+    public var tap: Observable<()> { return _tap.asObservable() }
+    private let _tap = PublishSubject<()>()
     
     open var itemSize: (() -> CGSize?)?
     
-    open let isHidden = Variable(false)
+    public let isHidden = Variable(false)
     
     public init(identity: String) {
         self.identity = identity
@@ -42,7 +42,7 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
         _tap.onNext(())
         collectionView.deselectItem(at: indexPath, animated: true)
     }
-    
+
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: UniqueCustomCollectionViewProvider) -> CGSize? {
         return self.itemSize?()
     }

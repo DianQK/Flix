@@ -22,17 +22,17 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     open var editingAccessoryView: UIView? // if set, use custom view. ignore editingAccessoryType. tracks if enabled can calls accessory action
     open var separatorInset: UIEdgeInsets? // allows customization of the separator frame
     
-    open var selectionStyle = Variable(UITableViewCellSelectionStyle.default) // default is UITableViewCellSelectionStyleDefault.
+    public let selectionStyle = Variable(UITableViewCellSelectionStyle.default) // default is UITableViewCellSelectionStyleDefault.
     open var isEnabled = true
 
     open var tap: Observable<()> { return _tap.asObservable() }
-    open let _tap = PublishSubject<()>()
+    private let _tap = PublishSubject<()>()
     
     open var itemHeight: (() -> CGFloat?)?
     
-    open let isHidden = Variable(false)
+    public let isHidden = Variable(false)
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     public init(identity: String) {
         self.identity = identity

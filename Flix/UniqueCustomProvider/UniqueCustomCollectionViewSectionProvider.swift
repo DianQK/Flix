@@ -17,11 +17,11 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionCollectio
     public typealias CellType = UICollectionReusableView
     public typealias ValueType = UniqueCustomCollectionViewSectionProvider
 
-    open let isHidden = Variable(false)
+    public let isHidden = Variable(false)
     
     open var sectionSize: (() -> CGSize)?
     
-    public let contentView = UIView()
+    open let contentView = UIView()
     
     public init(identity: String, collectionElementKindSection: UICollectionElementKindSection) {
         self.identity = identity
