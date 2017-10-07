@@ -44,6 +44,17 @@ public class AnimatableTableViewService {
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!
             return provider._configureCell(tableView, indexPath: indexPath, node: node.node)
         }
+        
+        dataSource.canEditRowAtIndexPath = { [weak tableView] (dataSource, indexPath) in
+            guard let tableView = tableView else { return false }
+            let node = dataSource[indexPath]
+            let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!
+            if let provider = provider as? _TableViewEditable {
+                return provider._tableView(tableView, canEditRowAt: indexPath, node: node.node)
+            } else {
+                return false
+            }
+        }
 
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak tableView, unowned self] (indexPath) in
@@ -51,6 +62,15 @@ public class AnimatableTableViewService {
                 let node = self.dataSource[indexPath].node
                 let provider = nodeProviders.first(where: { $0.identity == node.providerIdentity })!
                 provider._tap(tableView, indexPath: indexPath, node: node)
+            })
+            .disposed(by: disposeBag)
+        
+        tableView.rx.itemDeleted
+            .subscribe(onNext: { [weak tableView, unowned self] (indexPath) in
+                guard let tableView = tableView else { return }
+                let node = self.dataSource[indexPath].node
+                let provider = nodeProviders.first(where: { $0.identity == node.providerIdentity })! as? _TableViewDeleteable
+                provider?._tableView(tableView, itemDeletedForRowAt: indexPath, node: node)
             })
             .disposed(by: disposeBag)
         
@@ -103,6 +123,17 @@ public class AnimatableTableViewService {
             return provider._tableView(tableView, heightInSection: section, node: footerNode)
         }
         
+        self.delegeteService.editActionsForRowAt = { [weak self] tableView, indexPath in
+            guard let node = self?.dataSource[indexPath].node else { return nil }
+            let providerIdentity = node.providerIdentity
+            let provider = nodeProviders.first(where: { $0.identity == providerIdentity })!
+            if let provider = provider as? _TableViewEditable {
+                return provider._tableView(tableView, editActionsForRowAt: indexPath, node: node)
+            } else {
+                return nil
+            }
+        }
+        
         tableView.rx.setDelegate(self.delegeteService).disposed(by: disposeBag)
         
         Observable.combineLatest(sectionProviderBuilders.map { $0.genteralSectionModel() })
@@ -124,6 +155,10 @@ public class AnimatableTableViewService {
 }
 
 class TableViewDelegateService: NSObject, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return self.editActionsForRowAt?(tableView, indexPath)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.heightForRowAt?(tableView, indexPath) ?? tableView.rowHeight
@@ -150,5 +185,6 @@ class TableViewDelegateService: NSObject, UITableViewDelegate {
     var heightForHeaderInSection: ((_ tableView: UITableView, _ section: Int) -> CGFloat?)?
     var viewForHeaderInSection: ((_ tableView: UITableView, _ section: Int) -> UIView?)?
     var viewForFooterInSection: ((_ tableView: UITableView, _ section: Int) -> UIView?)?
+    var editActionsForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> [UITableViewRowAction]?)?
     
 }

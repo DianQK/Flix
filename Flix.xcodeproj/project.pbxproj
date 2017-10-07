@@ -55,6 +55,8 @@
 		26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */; };
 		26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */; };
 		2AE6EBB8C33BDE689796FB02 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B38019D00A9061E6845419 /* Pods_Demo.framework */; };
+		569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F61F88DA6800FA1493 /* TableViewEditable.swift */; };
+		569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */; };
 		591E7B8807895C0686775378 /* Pods_Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B73648F745916751FEA7795 /* Pods_Flix.framework */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +135,8 @@
 		26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomCollectionViewProvider.swift; sourceTree = "<group>"; };
 		26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewProvider.swift; sourceTree = "<group>"; };
 		4D1DE780D16E3E8256EDE880 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
+		569294F61F88DA6800FA1493 /* TableViewEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditable.swift; sourceTree = "<group>"; };
+		569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteItemViewController.swift; sourceTree = "<group>"; };
 		6B73648F745916751FEA7795 /* Pods_Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8B9448554EFA7E64C28E322 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		AB25D886981CBE6FD66DB016 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				2666E4031F874112006F1918 /* Operators.swift */,
+				569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */,
 				2617C2611F84D0FD007F8228 /* GitHubSigup */,
 				2670E6901F83EDB7003A5BA7 /* Nodes */,
 				2670E6871F83EDB7003A5BA7 /* Providers */,
@@ -248,6 +253,7 @@
 				2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift */,
 				26C847061F84897000EEFEAA /* TableViewSectionProvider.swift */,
 				2670E6811F83EBE2003A5BA7 /* ProviderBuilder.swift */,
+				569294F61F88DA6800FA1493 /* TableViewEditable.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -546,6 +552,7 @@
 				2670E6741F83E2EA003A5BA7 /* Node.swift in Sources */,
 				26C847071F84897000EEFEAA /* TableViewSectionProvider.swift in Sources */,
 				26C847051F84891500EEFEAA /* AnimatableTableViewService.swift in Sources */,
+				569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */,
 				2670E6781F83E343003A5BA7 /* TableViewProvider.swift in Sources */,
 				2670E6821F83EBE2003A5BA7 /* ProviderBuilder.swift in Sources */,
 				26BAF0351F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift in Sources */,
@@ -576,6 +583,7 @@
 				2617C2681F84D0FD007F8228 /* GitHubSignupViewController.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
 				2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */,
+				569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */,
 				26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */,
 				2617C26B1F84D0FD007F8228 /* DefaultImplementations.swift in Sources */,
 				2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */,
