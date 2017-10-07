@@ -78,18 +78,16 @@ class ItemInputTableViewCell: UITableViewCell {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 5
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        stackView.isLayoutMarginsRelativeArrangement = true
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
         self.contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
         stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
         
     }
     
@@ -246,21 +244,19 @@ class UniqueItemInputTableViewProvider: UniqueCustomTableViewProvider {
         selectionStyle.value = .none
         
         let stackView = UIStackView(arrangedSubviews: [titleLabel, textField])
-        stackView.alignment = .center
+        stackView.alignment = .fill
         stackView.distribution = .fillProportionally
         stackView.spacing = 5
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        stackView.isLayoutMarginsRelativeArrangement = true
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
         self.contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
         stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
     }
     
 }
