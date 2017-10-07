@@ -107,20 +107,20 @@ struct RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColl
         self.options = options
     }
 
-    func configureCell(_ collectionView: UICollectionView, cell: RadioCollectionViewCell, indexPath: IndexPath, node: Option) {
-        cell.titleLabel.text = String(describing: node)
+    func configureCell(_ collectionView: UICollectionView, cell: RadioCollectionViewCell, indexPath: IndexPath, value: Option) {
+        cell.titleLabel.text = String(describing: value)
         checkedOption.asObservable()
-            .map { $0 == node }
+            .map { $0 == value }
             .bind(to: cell.isChecked)
             .disposed(by: cell.reuseBag)
     }
 
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: Value) {
+    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        checkedOption.value = node
+        checkedOption.value = value
     }
 
-    func genteralNodes() -> Observable<[Value]> {
+    func genteralValues() -> Observable<[Value]> {
         return Observable.just(options)
     }
 
