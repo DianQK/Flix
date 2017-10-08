@@ -1,5 +1,5 @@
 //
-//  CollectionViewSectionProvider.swift
+//  CollectionViewSectionPartionProvider.swift
 //  Flix
 //
 //  Created by DianQK on 03/10/2017.

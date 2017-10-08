@@ -1,5 +1,5 @@
 //
-//  ProviderBuilder.swift
+//  SectionProvider.swift
 //  Flix
 //
 //  Created by DianQK on 04/10/2017.
@@ -25,12 +25,12 @@ struct IdentifiableSectionNode: IdentifiableType {
     
 }
 
-public class SectionProviderCollectionViewBuilder {
+public class CollectionViewSectionProvider {
     
-    var headerProvider: _AnimatableSectionPartionCollectionViewProvider?
-    var footerProvider: _AnimatableSectionPartionCollectionViewProvider?
-    var providers: [_AnimatableCollectionViewMultiNodeProvider] = []
-    public var sectionProviderIdentity = ""
+    let headerProvider: _AnimatableSectionPartionCollectionViewProvider?
+    let footerProvider: _AnimatableSectionPartionCollectionViewProvider?
+    let providers: [_AnimatableCollectionViewMultiNodeProvider]
+    public let sectionProviderIdentity: String
     
     public init(identity: String, providers: [_AnimatableCollectionViewMultiNodeProvider], headerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil, footerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil) {
         self.sectionProviderIdentity = identity
@@ -58,7 +58,7 @@ public class SectionProviderCollectionViewBuilder {
 }
 
 
-public class SectionProviderTableViewBuilder {
+public class TableViewSectionProvider {
     
     var headerProvider: _AnimatableSectionPartionTableViewProvider?
     var footerProvider: _AnimatableSectionPartionTableViewProvider?

@@ -17,7 +17,7 @@ class PhotoSettingsViewController: CollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var sectionProviderBuilders: [SectionProviderCollectionViewBuilder] = []
+        var sectionProviders: [CollectionViewSectionProvider] = []
         
         do {
             let icloudUploadSwitchProvider = UniqueSwitchProvider(identity: "icloudUploadSwitch")
@@ -27,12 +27,12 @@ class PhotoSettingsViewController: CollectionViewController {
                 identity: "icloudUploadSwitchFooterProvider",
                 collectionElementKindSection: UICollectionElementKindSection.footer,
                 text: "您的整个图库将自动上传并储存至 iCloud，方便您在所有设备上访问照片和视频。")
-            let icloudUploadSwitchSectionProviderBuilder = SectionProviderCollectionViewBuilder(
-                identity: "icloudUploadSwitchSectionProviderBuilder",
+            let icloudUploadSwitchSectionProvider = CollectionViewSectionProvider(
+                identity: "icloudUploadSwitchSectionProvider",
                 providers: [icloudUploadSwitchProvider],
                 footerProvider: icloudUploadSwitchFooterProvider
             )
-            sectionProviderBuilders.append(icloudUploadSwitchSectionProviderBuilder)
+            sectionProviders.append(icloudUploadSwitchSectionProvider)
         }
         
         do {
@@ -80,20 +80,20 @@ class PhotoSettingsViewController: CollectionViewController {
                 .bind(to: selectDownloadImageTypeFooterProvider.text)
                 .disposed(by: disposeBag)
             
-            let selectDownloadImageTypeSectionProviderBuilder = SectionProviderCollectionViewBuilder(
-                identity: "selectDownloadImageTypeSectionProviderBuilder",
+            let selectDownloadImageTypeSectionProvider = CollectionViewSectionProvider(
+                identity: "selectDownloadImageTypeSectionProvider",
                 providers: [selectDownloadTypeProvider],
                 footerProvider: selectDownloadImageTypeFooterProvider
             )
-            sectionProviderBuilders.append(selectDownloadImageTypeSectionProviderBuilder)
+            sectionProviders.append(selectDownloadImageTypeSectionProvider)
         }
         
-        let collectionViewService = AnimatableCollectionViewService(
+        let collectionViewService = AnimatableCollectionViewBuilder(
             collectionView: collectionView,
-            sectionProviderBuilders: sectionProviderBuilders
+            sectionProviders: sectionProviders
         )
 
-        self.collectionViewService = collectionViewService
+        self.collectionViewBuilder = collectionViewService
     }
     
 }

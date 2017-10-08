@@ -31,9 +31,9 @@
 		2670E6761F83E31F003A5BA7 /* CollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6751F83E31F003A5BA7 /* CollectionViewProvider.swift */; };
 		2670E6781F83E343003A5BA7 /* TableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6771F83E343003A5BA7 /* TableViewProvider.swift */; };
 		2670E67B1F83E559003A5BA7 /* UIView+Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67A1F83E559003A5BA7 /* UIView+Configure.swift */; };
-		2670E67E1F83EA4A003A5BA7 /* AnimatableCollectionViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67D1F83EA4A003A5BA7 /* AnimatableCollectionViewService.swift */; };
-		2670E6801F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift */; };
-		2670E6821F83EBE2003A5BA7 /* ProviderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6811F83EBE2003A5BA7 /* ProviderBuilder.swift */; };
+		2670E67E1F83EA4A003A5BA7 /* AnimatableCollectionViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67D1F83EA4A003A5BA7 /* AnimatableCollectionViewBuilder.swift */; };
+		2670E6801F83EAA3003A5BA7 /* CollectionViewSectionPartionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionPartionProvider.swift */; };
+		2670E6821F83EBE2003A5BA7 /* SectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6811F83EBE2003A5BA7 /* SectionProvider.swift */; };
 		2670E6931F83EDF7003A5BA7 /* Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2670E64F1F83E15C003A5BA7 /* Flix.framework */; };
 		2670E6941F83EDF7003A5BA7 /* Flix.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2670E64F1F83E15C003A5BA7 /* Flix.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2670E69B1F83EE40003A5BA7 /* DemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6981F83EE3F003A5BA7 /* DemoListViewController.swift */; };
@@ -50,8 +50,8 @@
 		2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */; };
 		26BAF0331F8499B8009A4401 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BAF0321F8499B8009A4401 /* LoginViewController.swift */; };
 		26BAF0351F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BAF0341F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift */; };
-		26C847051F84891500EEFEAA /* AnimatableTableViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847041F84891500EEFEAA /* AnimatableTableViewService.swift */; };
-		26C847071F84897000EEFEAA /* TableViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847061F84897000EEFEAA /* TableViewSectionProvider.swift */; };
+		26C847051F84891500EEFEAA /* AnimatableTableViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847041F84891500EEFEAA /* AnimatableTableViewBuilder.swift */; };
+		26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */; };
 		26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */; };
 		26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */; };
 		2AE6EBB8C33BDE689796FB02 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B38019D00A9061E6845419 /* Pods_Demo.framework */; };
@@ -113,9 +113,9 @@
 		2670E6751F83E31F003A5BA7 /* CollectionViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewProvider.swift; sourceTree = "<group>"; };
 		2670E6771F83E343003A5BA7 /* TableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProvider.swift; sourceTree = "<group>"; };
 		2670E67A1F83E559003A5BA7 /* UIView+Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Configure.swift"; sourceTree = "<group>"; };
-		2670E67D1F83EA4A003A5BA7 /* AnimatableCollectionViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewService.swift; sourceTree = "<group>"; };
-		2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionProvider.swift; sourceTree = "<group>"; };
-		2670E6811F83EBE2003A5BA7 /* ProviderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderBuilder.swift; sourceTree = "<group>"; };
+		2670E67D1F83EA4A003A5BA7 /* AnimatableCollectionViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewBuilder.swift; sourceTree = "<group>"; };
+		2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionPartionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionPartionProvider.swift; sourceTree = "<group>"; };
+		2670E6811F83EBE2003A5BA7 /* SectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionProvider.swift; sourceTree = "<group>"; };
 		2670E6881F83EDB7003A5BA7 /* UniqueCommentTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCommentTextProvider.swift; sourceTree = "<group>"; };
 		2670E6891F83EDB7003A5BA7 /* TextListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextListProvider.swift; sourceTree = "<group>"; };
 		2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextProvider.swift; sourceTree = "<group>"; };
@@ -130,8 +130,8 @@
 		2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSettingsViewController.swift; sourceTree = "<group>"; };
 		26BAF0321F8499B8009A4401 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		26BAF0341F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewSectionProvider.swift; sourceTree = "<group>"; };
-		26C847041F84891500EEFEAA /* AnimatableTableViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableTableViewService.swift; sourceTree = "<group>"; };
-		26C847061F84897000EEFEAA /* TableViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionProvider.swift; sourceTree = "<group>"; };
+		26C847041F84891500EEFEAA /* AnimatableTableViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableTableViewBuilder.swift; sourceTree = "<group>"; };
+		26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionPartionProvider.swift; sourceTree = "<group>"; };
 		26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomCollectionViewProvider.swift; sourceTree = "<group>"; };
 		26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewProvider.swift; sourceTree = "<group>"; };
 		4D1DE780D16E3E8256EDE880 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,7 +171,6 @@
 				2617C2751F84D1BF007F8228 /* ActivityIndicator.swift */,
 				2617C2721F84D18B007F8228 /* String+URL.swift */,
 				2617C26F1F84D15C007F8228 /* Wireframe.swift */,
-				2617C2621F84D0FD007F8228 /* GitHubSignupViewController.swift */,
 				2617C2631F84D0FD007F8228 /* GithubSignupViewModel1.swift */,
 				2617C2641F84D0FD007F8228 /* Protocols.swift */,
 				2617C2651F84D0FD007F8228 /* DefaultImplementations.swift */,
@@ -204,7 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				26C847081F84911C00EEFEAA /* UniqueCustomProvider */,
-				2670E67C1F83EA2C003A5BA7 /* Service */,
+				2670E67C1F83EA2C003A5BA7 /* Builder */,
 				2670E6791F83E546003A5BA7 /* Cell */,
 				2670E6721F83E2CE003A5BA7 /* Provider */,
 				2670E6701F83E2C0003A5BA7 /* Node */,
@@ -217,8 +216,8 @@
 		2670E65F1F83E1A0003A5BA7 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				569848F01F89F2DD00DA1D64 /* Example */,
 				2666E4031F874112006F1918 /* Operators.swift */,
-				569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */,
 				2617C2611F84D0FD007F8228 /* GitHubSigup */,
 				2670E6901F83EDB7003A5BA7 /* Nodes */,
 				2670E6871F83EDB7003A5BA7 /* Providers */,
@@ -228,11 +227,7 @@
 				2670E6671F83E1A0003A5BA7 /* Assets.xcassets */,
 				2670E6691F83E1A0003A5BA7 /* LaunchScreen.storyboard */,
 				2670E66C1F83E1A0003A5BA7 /* Info.plist */,
-				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
 				2670E6981F83EE3F003A5BA7 /* DemoListViewController.swift */,
-				2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */,
-				2666E4001F869656006F1918 /* NestFormViewController.swift */,
-				2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -250,9 +245,9 @@
 			children = (
 				2670E6751F83E31F003A5BA7 /* CollectionViewProvider.swift */,
 				2670E6771F83E343003A5BA7 /* TableViewProvider.swift */,
-				2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift */,
-				26C847061F84897000EEFEAA /* TableViewSectionProvider.swift */,
-				2670E6811F83EBE2003A5BA7 /* ProviderBuilder.swift */,
+				2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionPartionProvider.swift */,
+				26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */,
+				2670E6811F83EBE2003A5BA7 /* SectionProvider.swift */,
 				569294F61F88DA6800FA1493 /* TableViewEditable.swift */,
 			);
 			path = Provider;
@@ -266,13 +261,13 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		2670E67C1F83EA2C003A5BA7 /* Service */ = {
+		2670E67C1F83EA2C003A5BA7 /* Builder */ = {
 			isa = PBXGroup;
 			children = (
-				2670E67D1F83EA4A003A5BA7 /* AnimatableCollectionViewService.swift */,
-				26C847041F84891500EEFEAA /* AnimatableTableViewService.swift */,
+				2670E67D1F83EA4A003A5BA7 /* AnimatableCollectionViewBuilder.swift */,
+				26C847041F84891500EEFEAA /* AnimatableTableViewBuilder.swift */,
 			);
-			path = Service;
+			path = Builder;
 			sourceTree = "<group>";
 		};
 		2670E6871F83EDB7003A5BA7 /* Providers */ = {
@@ -310,6 +305,19 @@
 				2666E4071F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift */,
 			);
 			path = UniqueCustomProvider;
+			sourceTree = "<group>";
+		};
+		569848F01F89F2DD00DA1D64 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */,
+				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
+				2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */,
+				2666E4001F869656006F1918 /* NestFormViewController.swift */,
+				2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */,
+				2617C2621F84D0FD007F8228 /* GitHubSignupViewController.swift */,
+			);
+			path = Example;
 			sourceTree = "<group>";
 		};
 		64E690AA694462C59CA1460E /* Frameworks */ = {
@@ -550,18 +558,18 @@
 			files = (
 				2670E67B1F83E559003A5BA7 /* UIView+Configure.swift in Sources */,
 				2670E6741F83E2EA003A5BA7 /* Node.swift in Sources */,
-				26C847071F84897000EEFEAA /* TableViewSectionProvider.swift in Sources */,
-				26C847051F84891500EEFEAA /* AnimatableTableViewService.swift in Sources */,
+				26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */,
+				26C847051F84891500EEFEAA /* AnimatableTableViewBuilder.swift in Sources */,
 				569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */,
 				2670E6781F83E343003A5BA7 /* TableViewProvider.swift in Sources */,
-				2670E6821F83EBE2003A5BA7 /* ProviderBuilder.swift in Sources */,
+				2670E6821F83EBE2003A5BA7 /* SectionProvider.swift in Sources */,
 				26BAF0351F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift in Sources */,
-				2670E67E1F83EA4A003A5BA7 /* AnimatableCollectionViewService.swift in Sources */,
+				2670E67E1F83EA4A003A5BA7 /* AnimatableCollectionViewBuilder.swift in Sources */,
 				26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */,
 				26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */,
 				2670E6761F83E31F003A5BA7 /* CollectionViewProvider.swift in Sources */,
 				2666E4081F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift in Sources */,
-				2670E6801F83EAA3003A5BA7 /* CollectionViewSectionProvider.swift in Sources */,
+				2670E6801F83EAA3003A5BA7 /* CollectionViewSectionPartionProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,7 +38,7 @@ class DemoListViewController: CollectionViewController {
             })
             .disposed(by: disposeBag)
         
-        self.collectionViewService = AnimatableCollectionViewService(
+        self.collectionViewBuilder = AnimatableCollectionViewBuilder(
             collectionView: collectionView,
             providers: [textListProvider]
         )

@@ -1,5 +1,5 @@
 //
-//  AnimatableTableViewService.swift
+//  AnimatableTableViewBuilder.swift
 //  Flix
 //
 //  Created by DianQK on 04/10/2017.
@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class AnimatableTableViewService {
+public class AnimatableTableViewBuilder {
     
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
     
@@ -28,7 +28,7 @@ public class AnimatableTableViewService {
         }
     }
 
-    public init(tableView: UITableView, sectionProviderBuilders: [SectionProviderTableViewBuilder]) {
+    public init(tableView: UITableView, sectionProviders: [TableViewSectionProvider]) {
         
         self.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
@@ -36,9 +36,9 @@ public class AnimatableTableViewService {
             deleteAnimation: .fade
         )
 
-        let nodeProviders: [_AnimatableTableViewMultiNodeProvider] = sectionProviderBuilders.flatMap { $0.providers }
-        let footerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviderBuilders.flatMap { $0.footerProvider }
-        let headerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviderBuilders.flatMap { $0.headerProvider }
+        let nodeProviders: [_AnimatableTableViewMultiNodeProvider] = sectionProviders.flatMap { $0.providers }
+        let footerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviders.flatMap { $0.footerProvider }
+        let headerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviders.flatMap { $0.headerProvider }
         
         dataSource.configureCell = { dataSource, tableView, indexPath, node in
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!
@@ -136,20 +136,20 @@ public class AnimatableTableViewService {
         
         tableView.rx.setDelegate(self.delegeteService).disposed(by: disposeBag)
         
-        Observable.combineLatest(sectionProviderBuilders.map { $0.genteralSectionModel() })
+        Observable.combineLatest(sectionProviders.map { $0.genteralSectionModel() })
             .map { $0.map { AnimatableSectionModel(model: $0.section, items: $0.nodes) } }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
     
     public convenience init(tableView: UITableView, providers: [_AnimatableTableViewMultiNodeProvider]) {
-        let sectionProviderTableViewBuilder = SectionProviderTableViewBuilder(
+        let sectionProviderTableViewBuilder = TableViewSectionProvider(
             identity: "Flix",
             providers: providers,
             headerProvider: nil,
             footerProvider: nil
         )
-        self.init(tableView: tableView, sectionProviderBuilders: [sectionProviderTableViewBuilder])
+        self.init(tableView: tableView, sectionProviders: [sectionProviderTableViewBuilder])
     }
     
 }

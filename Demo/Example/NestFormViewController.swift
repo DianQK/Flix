@@ -299,8 +299,8 @@ class NestFormViewController: TableViewController {
 
         hardwareFormProvider.hardwareForms.value = [HardwareForm(id: 1)]
         
-        let fillFormProviderBuilder = SectionProviderTableViewBuilder(
-            identity: "fillFormProviderBuilder",
+        let fillFormSectionProvider = TableViewSectionProvider(
+            identity: "fillFormSectionProvider",
             providers: [titleProvider, titleInputProvider, configurationTitleProvider, hardwareFormProvider]
         )
         
@@ -313,8 +313,8 @@ class NestFormViewController: TableViewController {
             return provider
         }()
         
-        let addProviderBuilder = SectionProviderTableViewBuilder(
-            identity: "addProviderBuilder",
+        let addSectionProvider = TableViewSectionProvider(
+            identity: "addSectionProvider",
             providers: [addProvider],
             headerProvider: addHeaderProvider,
             footerProvider: nil
@@ -326,9 +326,9 @@ class NestFormViewController: TableViewController {
             })
             .disposed(by: disposeBag)
         
-        self.tableViewService = AnimatableTableViewService(
+        self.tableViewBuilder = AnimatableTableViewBuilder(
             tableView: tableView,
-            sectionProviderBuilders: [fillFormProviderBuilder, addProviderBuilder]
+            sectionProviders: [fillFormSectionProvider, addSectionProvider]
         )
 
     }

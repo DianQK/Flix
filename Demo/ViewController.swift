@@ -18,7 +18,7 @@ class CollectionViewController: UIViewController {
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     let disposeBag = DisposeBag()
     
-    var collectionViewService: AnimatableCollectionViewService!
+    var collectionViewBuilder: AnimatableCollectionViewBuilder!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class TableViewController: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
     let disposeBag = DisposeBag()
     
-    var tableViewService: AnimatableTableViewService!
+    var tableViewBuilder: AnimatableTableViewBuilder!
     
     override func viewDidLoad() {
         super.viewDidLoad()

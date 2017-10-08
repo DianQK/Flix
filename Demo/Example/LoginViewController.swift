@@ -32,7 +32,7 @@ class LoginViewController: TableViewController {
         loginTextLabel.text = "登录"
         loginTextLabel.textAlignment = .center
         
-        var section: [SectionProviderTableViewBuilder] = []
+        var section: [TableViewSectionProvider] = []
 
         let usernameProvider = UniqueCustomTableViewProvider(identity: "username")
         usernameProvider.contentView.addSubview(usernameTextField)
@@ -50,18 +50,18 @@ class LoginViewController: TableViewController {
         passwordTextField.trailingAnchor.constraint(equalTo: passwordProvider.contentView.trailingAnchor, constant: -15).isActive = true
         passwordTextField.bottomAnchor.constraint(equalTo: passwordProvider.contentView.bottomAnchor).isActive = true
         
-        let inputDesSectionProvider = UniqueCustomTableViewSectionProvider(
-            identity: "inputDesSectionProvider",
+        let inputDesSectionFooterProvider = UniqueCustomTableViewSectionProvider(
+            identity: "inputDesSectionFooterProvider",
             tableElementKindSection: UITableElementKindSection.footer
         )
-        inputDesSectionProvider.sectionHeight = { return 35 }
+        inputDesSectionFooterProvider.sectionHeight = { return 35 }
         
-        let inputSectionProviderBuilder = SectionProviderTableViewBuilder(
-            identity: "inputSectionProviderBuilder",
+        let inputSectionProvider = TableViewSectionProvider(
+            identity: "inputSectionProvider",
             providers: [usernameProvider, passwordProvider],
-            footerProvider: inputDesSectionProvider
+            footerProvider: inputDesSectionFooterProvider
         )
-        section.append(inputSectionProviderBuilder)
+        section.append(inputSectionProvider)
         
         let loginProvider = UniqueCustomTableViewProvider(identity: "login")
         loginProvider.contentView.addSubview(loginTextLabel)
@@ -96,15 +96,15 @@ class LoginViewController: TableViewController {
             })
             .disposed(by: disposeBag)
         
-        let loginSectionProviderBuilder = SectionProviderTableViewBuilder(
-            identity: "loginSectionProviderBuilder",
+        let loginSectionProvider = TableViewSectionProvider(
+            identity: "loginSectionProvider",
             providers: [loginProvider]
         )
-        section.append(loginSectionProviderBuilder)
+        section.append(loginSectionProvider)
         
-        self.tableViewService = AnimatableTableViewService(
+        self.tableViewBuilder = AnimatableTableViewBuilder(
             tableView: tableView,
-            sectionProviderBuilders: section
+            sectionProviders: section
         )
         
     }

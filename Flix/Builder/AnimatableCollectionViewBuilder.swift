@@ -1,5 +1,5 @@
 //
-//  AnimatableCollectionViewService.swift
+//  AnimatableCollectionViewBuilder.swift
 //  Flix
 //
 //  Created by DianQK on 03/10/2017.
@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class AnimatableCollectionViewService {
+public class AnimatableCollectionViewBuilder {
     
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
     
@@ -28,7 +28,7 @@ public class AnimatableCollectionViewService {
         }
     }
     
-    public init(collectionView: UICollectionView, sectionProviderBuilders: [SectionProviderCollectionViewBuilder]) {
+    public init(collectionView: UICollectionView, sectionProviders: [CollectionViewSectionProvider]) {
 
         self.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
@@ -36,9 +36,9 @@ public class AnimatableCollectionViewService {
             deleteAnimation: .fade
         )
 
-        let nodeProviders: [_AnimatableCollectionViewMultiNodeProvider] = sectionProviderBuilders.flatMap { $0.providers }
-        let footerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.footerProvider }
-        let headerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.headerProvider }
+        let nodeProviders: [_AnimatableCollectionViewMultiNodeProvider] = sectionProviders.flatMap { $0.providers }
+        let footerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviders.flatMap { $0.footerProvider }
+        let headerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviders.flatMap { $0.headerProvider }
         
         dataSource.configureCell = { dataSource, collectionView, indexPath, node in
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!
@@ -82,7 +82,7 @@ public class AnimatableCollectionViewService {
             provider.register(collectionView)
         }
         
-        Observable.combineLatest(sectionProviderBuilders.map { $0.genteralSectionModel() })
+        Observable.combineLatest(sectionProviders.map { $0.genteralSectionModel() })
             .map { $0.map { AnimatableSectionModel(model: $0.section, items: $0.nodes) } }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
@@ -112,13 +112,13 @@ public class AnimatableCollectionViewService {
     }
     
     public convenience init(collectionView: UICollectionView, providers: [_AnimatableCollectionViewMultiNodeProvider]) {
-        let sectionProviderCollectionViewBuilder = SectionProviderCollectionViewBuilder(
+        let sectionProviderCollectionViewBuilder = CollectionViewSectionProvider(
             identity: "Flix",
             providers: providers,
             headerProvider: nil,
             footerProvider: nil
         )
-        self.init(collectionView: collectionView, sectionProviderBuilders: [sectionProviderCollectionViewBuilder])
+        self.init(collectionView: collectionView, sectionProviders: [sectionProviderCollectionViewBuilder])
     }
     
 }

@@ -101,7 +101,7 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
         )
         providers.append(allowCallsFromCommentProvider)
         
-        self.collectionViewService = AnimatableCollectionViewService(
+        self.collectionViewBuilder = AnimatableCollectionViewBuilder(
             collectionView: collectionView,
             providers: providers
         )
