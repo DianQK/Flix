@@ -28,7 +28,7 @@ public class AnimatableCollectionViewBuilder {
         }
     }
     
-    public init(collectionView: UICollectionView, sectionProviders: [CollectionViewSectionProvider]) {
+    public init(collectionView: UICollectionView, sectionProviders: [AnimatableCollectionViewSectionProvider]) {
 
         self.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
@@ -36,9 +36,9 @@ public class AnimatableCollectionViewBuilder {
             deleteAnimation: .fade
         )
 
-        let nodeProviders: [_AnimatableCollectionViewMultiNodeProvider] = sectionProviders.flatMap { $0.providers }
-        let footerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviders.flatMap { $0.footerProvider }
-        let headerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviders.flatMap { $0.headerProvider }
+        let nodeProviders: [_AnimatableCollectionViewMultiNodeProvider] = sectionProviders.flatMap { $0.animatableProviders }
+        let footerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviders.flatMap { $0.animatableFooterProvider }
+        let headerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviders.flatMap { $0.animatableHeaderProvider }
         
         dataSource.configureCell = { dataSource, collectionView, indexPath, node in
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!
@@ -112,7 +112,7 @@ public class AnimatableCollectionViewBuilder {
     }
     
     public convenience init(collectionView: UICollectionView, providers: [_AnimatableCollectionViewMultiNodeProvider]) {
-        let sectionProviderCollectionViewBuilder = CollectionViewSectionProvider(
+        let sectionProviderCollectionViewBuilder = AnimatableCollectionViewSectionProvider(
             identity: "Flix",
             providers: providers,
             headerProvider: nil,

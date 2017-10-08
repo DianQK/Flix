@@ -17,7 +17,7 @@ class PhotoSettingsViewController: CollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var sectionProviders: [CollectionViewSectionProvider] = []
+        var sectionProviders: [AnimatableCollectionViewSectionProvider] = []
         
         do {
             let icloudUploadSwitchProvider = UniqueSwitchProvider(identity: "icloudUploadSwitch")
@@ -27,7 +27,7 @@ class PhotoSettingsViewController: CollectionViewController {
                 identity: "icloudUploadSwitchFooterProvider",
                 collectionElementKindSection: UICollectionElementKindSection.footer,
                 text: "您的整个图库将自动上传并储存至 iCloud，方便您在所有设备上访问照片和视频。")
-            let icloudUploadSwitchSectionProvider = CollectionViewSectionProvider(
+            let icloudUploadSwitchSectionProvider = AnimatableCollectionViewSectionProvider(
                 identity: "icloudUploadSwitchSectionProvider",
                 providers: [icloudUploadSwitchProvider],
                 footerProvider: icloudUploadSwitchFooterProvider
@@ -80,7 +80,7 @@ class PhotoSettingsViewController: CollectionViewController {
                 .bind(to: selectDownloadImageTypeFooterProvider.text)
                 .disposed(by: disposeBag)
             
-            let selectDownloadImageTypeSectionProvider = CollectionViewSectionProvider(
+            let selectDownloadImageTypeSectionProvider = AnimatableCollectionViewSectionProvider(
                 identity: "selectDownloadImageTypeSectionProvider",
                 providers: [selectDownloadTypeProvider],
                 footerProvider: selectDownloadImageTypeFooterProvider

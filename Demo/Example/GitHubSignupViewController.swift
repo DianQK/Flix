@@ -119,7 +119,7 @@ class GitHubSignupViewController: TableViewController {
             .bind(to: loginProvider.activityIndicatorView.rx.isAnimating)
             .disposed(by: disposeBag)
 
-        let inputSectionProviderBuilder = TableViewSectionProvider(
+        let inputSectionProviderBuilder = AnimatableTableViewSectionProvider(
             identity: "inputSectionProviderBuilder",
             providers: [
                 usernameProvider, usernameValidationTableViewProvider,
@@ -129,7 +129,7 @@ class GitHubSignupViewController: TableViewController {
             headerProvider: logoProvider,
             footerProvider: inputDesSectionProvider
         )
-        let loginSectionProviderBuilder = TableViewSectionProvider(
+        let loginSectionProviderBuilder = AnimatableTableViewSectionProvider(
             identity: "loginSectionProviderBuilder",
             providers: [loginProvider]
         )

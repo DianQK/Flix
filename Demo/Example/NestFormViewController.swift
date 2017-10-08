@@ -299,7 +299,7 @@ class NestFormViewController: TableViewController {
 
         hardwareFormProvider.hardwareForms.value = [HardwareForm(id: 1)]
         
-        let fillFormSectionProvider = TableViewSectionProvider(
+        let fillFormSectionProvider = AnimatableTableViewSectionProvider(
             identity: "fillFormSectionProvider",
             providers: [titleProvider, titleInputProvider, configurationTitleProvider, hardwareFormProvider]
         )
@@ -313,7 +313,7 @@ class NestFormViewController: TableViewController {
             return provider
         }()
         
-        let addSectionProvider = TableViewSectionProvider(
+        let addSectionProvider = AnimatableTableViewSectionProvider(
             identity: "addSectionProvider",
             providers: [addProvider],
             headerProvider: addHeaderProvider,

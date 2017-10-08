@@ -122,6 +122,11 @@ extension AnimatableSectionPartionCollectionViewProvider {
         return nil
     }
     
+    public func _genteralSectionPartion() -> Observable<_Node?> {
+        let providerIdentity = self.identity
+        return genteralSectionPartion().map { $0.map { IdentifiableValueNode(providerIdentity: providerIdentity, value: $0) } }
+    }
+    
     public func genteralAnimatableSection() -> Observable<IdentifiableNode?> {
         let providerIdentity = self.identity
         return genteralSectionPartion()

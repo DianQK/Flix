@@ -151,6 +151,12 @@ extension AnimatableCollectionViewMultiNodeProvider {
         }
     }
     
+    public func _genteralNodes() -> Observable<[_Node]> {
+        let providerIdentity = self.identity
+        return genteralValues()
+            .map { $0.map { IdentifiableValueNode(providerIdentity: providerIdentity, value: $0) } }
+    }
+    
     public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
         let providerIdentity = self.identity
         return genteralValues()

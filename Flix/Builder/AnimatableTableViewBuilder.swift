@@ -28,7 +28,7 @@ public class AnimatableTableViewBuilder {
         }
     }
 
-    public init(tableView: UITableView, sectionProviders: [TableViewSectionProvider]) {
+    public init(tableView: UITableView, sectionProviders: [AnimatableTableViewSectionProvider]) {
         
         self.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
@@ -36,9 +36,9 @@ public class AnimatableTableViewBuilder {
             deleteAnimation: .fade
         )
 
-        let nodeProviders: [_AnimatableTableViewMultiNodeProvider] = sectionProviders.flatMap { $0.providers }
-        let footerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviders.flatMap { $0.footerProvider }
-        let headerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviders.flatMap { $0.headerProvider }
+        let nodeProviders: [_AnimatableTableViewMultiNodeProvider] = sectionProviders.flatMap { $0.animatableProviders }
+        let footerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviders.flatMap { $0.animatableFooterProvider }
+        let headerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviders.flatMap { $0.animatableHeaderProvider }
         
         dataSource.configureCell = { dataSource, tableView, indexPath, node in
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!
@@ -136,14 +136,14 @@ public class AnimatableTableViewBuilder {
         
         tableView.rx.setDelegate(self.delegeteService).disposed(by: disposeBag)
         
-        Observable.combineLatest(sectionProviders.map { $0.genteralSectionModel() })
+        Observable.combineLatest(sectionProviders.map { $0.genteralAnimatableSectionModel() })
             .map { $0.map { AnimatableSectionModel(model: $0.section, items: $0.nodes) } }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
     
     public convenience init(tableView: UITableView, providers: [_AnimatableTableViewMultiNodeProvider]) {
-        let sectionProviderTableViewBuilder = TableViewSectionProvider(
+        let sectionProviderTableViewBuilder = AnimatableTableViewSectionProvider(
             identity: "Flix",
             providers: providers,
             headerProvider: nil,

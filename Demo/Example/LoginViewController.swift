@@ -32,7 +32,7 @@ class LoginViewController: TableViewController {
         loginTextLabel.text = "登录"
         loginTextLabel.textAlignment = .center
         
-        var section: [TableViewSectionProvider] = []
+        var section: [AnimatableTableViewSectionProvider] = []
 
         let usernameProvider = UniqueCustomTableViewProvider(identity: "username")
         usernameProvider.contentView.addSubview(usernameTextField)
@@ -56,7 +56,7 @@ class LoginViewController: TableViewController {
         )
         inputDesSectionFooterProvider.sectionHeight = { return 35 }
         
-        let inputSectionProvider = TableViewSectionProvider(
+        let inputSectionProvider = AnimatableTableViewSectionProvider(
             identity: "inputSectionProvider",
             providers: [usernameProvider, passwordProvider],
             footerProvider: inputDesSectionFooterProvider
@@ -96,7 +96,7 @@ class LoginViewController: TableViewController {
             })
             .disposed(by: disposeBag)
         
-        let loginSectionProvider = TableViewSectionProvider(
+        let loginSectionProvider = AnimatableTableViewSectionProvider(
             identity: "loginSectionProvider",
             providers: [loginProvider]
         )
