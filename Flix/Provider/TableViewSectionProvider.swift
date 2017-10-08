@@ -13,9 +13,9 @@ import RxDataSources
 
 public class TableViewSectionProvider {
     
-    let headerProvider: _SectionPartionTableViewProvider?
-    let footerProvider: _SectionPartionTableViewProvider?
-    let providers: [_TableViewMultiNodeProvider]
+    public var headerProvider: _SectionPartionTableViewProvider?
+    public var footerProvider: _SectionPartionTableViewProvider?
+    public var providers: [_TableViewMultiNodeProvider]
     public let sectionProviderIdentity: String
     
     public init(
@@ -44,14 +44,14 @@ public class TableViewSectionProvider {
                 return (section: section, nodes: nodes)
         }
     }
-    
+
 }
 
 public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
     
-    let animatableHeaderProvider: _AnimatableSectionPartionTableViewProvider?
-    let animatableFooterProvider: _AnimatableSectionPartionTableViewProvider?
-    let animatableProviders: [_AnimatableTableViewMultiNodeProvider]
+    public var animatableHeaderProvider: _AnimatableSectionPartionTableViewProvider?
+    public var animatableFooterProvider: _AnimatableSectionPartionTableViewProvider?
+    public var animatableProviders: [_AnimatableTableViewMultiNodeProvider]
     
     public init(
         identity: String,

@@ -41,9 +41,9 @@ struct SectionNode {
 
 public class CollectionViewSectionProvider {
     
-    let headerProvider: _SectionPartionCollectionViewProvider?
-    let footerProvider: _SectionPartionCollectionViewProvider?
-    let providers: [_CollectionViewMultiNodeProvider]
+    public var headerProvider: _SectionPartionCollectionViewProvider?
+    public var footerProvider: _SectionPartionCollectionViewProvider?
+    public var providers: [_CollectionViewMultiNodeProvider]
     public let sectionProviderIdentity: String
     
     public init(identity: String, providers: [_CollectionViewMultiNodeProvider], headerProvider: _SectionPartionCollectionViewProvider? = nil, footerProvider: _SectionPartionCollectionViewProvider? = nil) {
@@ -74,9 +74,9 @@ public class CollectionViewSectionProvider {
 
 public class AnimatableCollectionViewSectionProvider: CollectionViewSectionProvider {
     
-    let animatableHeaderProvider: _AnimatableSectionPartionCollectionViewProvider?
-    let animatableFooterProvider: _AnimatableSectionPartionCollectionViewProvider?
-    let animatableProviders: [_AnimatableCollectionViewMultiNodeProvider]
+    public var animatableHeaderProvider: _AnimatableSectionPartionCollectionViewProvider?
+    public var animatableFooterProvider: _AnimatableSectionPartionCollectionViewProvider?
+    public var animatableProviders: [_AnimatableCollectionViewMultiNodeProvider]
     
     public init(identity: String, providers: [_AnimatableCollectionViewMultiNodeProvider], headerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil, footerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil) {
         self.animatableHeaderProvider = headerProvider

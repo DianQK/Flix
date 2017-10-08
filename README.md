@@ -13,7 +13,7 @@ Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它�
 目前提供了通过 CocoaPods 引用的方法：
 
 ```ruby
-pod 'Flix', '~> 0.7.0-alpha.2'
+pod 'Flix', '~> 0.7.0-beta.1'
 ```
 
 Flix 通过若干个 `Provider` 组合成一个列表视图。`Provider` 主要以下几种协议：
