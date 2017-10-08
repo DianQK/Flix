@@ -27,12 +27,12 @@ struct IdentifiableSectionNode: IdentifiableType {
 
 public class SectionProviderCollectionViewBuilder {
     
-    var headerProvider: _AnimatableSectionCollectionViewProvider?
-    var footerProvider: _AnimatableSectionCollectionViewProvider?
+    var headerProvider: _AnimatableSectionPartionCollectionViewProvider?
+    var footerProvider: _AnimatableSectionPartionCollectionViewProvider?
     var providers: [_AnimatableCollectionViewMultiNodeProvider] = []
     public var sectionProviderIdentity = ""
     
-    public init(identity: String, providers: [_AnimatableCollectionViewMultiNodeProvider], headerProvider: _AnimatableSectionCollectionViewProvider? = nil, footerProvider: _AnimatableSectionCollectionViewProvider? = nil) {
+    public init(identity: String, providers: [_AnimatableCollectionViewMultiNodeProvider], headerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil, footerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil) {
         self.sectionProviderIdentity = identity
         self.providers = providers
         self.headerProvider = headerProvider

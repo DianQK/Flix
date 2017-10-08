@@ -32,7 +32,7 @@ class TextCollectionReusableView: UICollectionReusableView {
     
 }
 
-class TextSectionProvider: AnimatableSectionCollectionViewProvider, StringIdentifiableType, Equatable {
+class TextSectionProvider: AnimatableSectionPartionCollectionViewProvider, StringIdentifiableType, Equatable {
     
     static func ==(lhs: TextSectionProvider, rhs: TextSectionProvider) -> Bool {
         return true
@@ -53,7 +53,7 @@ class TextSectionProvider: AnimatableSectionCollectionViewProvider, StringIdenti
             .disposed(by: disposeBag)
     }
     
-    func genteralSection() -> Observable<TextSectionProvider?> {
+    func genteralSectionPartion() -> Observable<TextSectionProvider?> {
         return Observable.just(self)
     }
 

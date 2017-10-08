@@ -25,7 +25,7 @@ public protocol _SectionPartionTableViewProvider {
     func _tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat?
     func _configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: _Node)
     
-    func _genteralSection() -> Observable<_Node?>
+    func _genteralSectionPartion() -> Observable<_Node?>
     
 }
 
@@ -69,7 +69,7 @@ extension SectionPartionTableViewProvider {
         }
     }
     
-    public func _genteralSection() -> Observable<_Node?> {
+    public func _genteralSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self.identity
         return genteralSection().map { $0.map { ValueNode(providerIdentity: providerIdentity, value: $0) } }
     }

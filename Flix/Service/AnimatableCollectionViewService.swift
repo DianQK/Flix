@@ -37,8 +37,8 @@ public class AnimatableCollectionViewService {
         )
 
         let nodeProviders: [_AnimatableCollectionViewMultiNodeProvider] = sectionProviderBuilders.flatMap { $0.providers }
-        let footerSectionProviders: [_AnimatableSectionCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.footerProvider }
-        let headerSectionProviders: [_AnimatableSectionCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.headerProvider }
+        let footerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.footerProvider }
+        let headerSectionProviders: [_AnimatableSectionPartionCollectionViewProvider] = sectionProviderBuilders.flatMap { $0.headerProvider }
         
         dataSource.configureCell = { dataSource, collectionView, indexPath, node in
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!

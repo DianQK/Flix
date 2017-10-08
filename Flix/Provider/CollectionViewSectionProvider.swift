@@ -18,7 +18,7 @@ public enum UICollectionElementKindSection: String {
 
 }
 
-public protocol _SectionCollectionViewProvider {
+public protocol _SectionPartionCollectionViewProvider {
 
     var identity: String { get }
     var cellType: UICollectionReusableView.Type { get }
@@ -26,13 +26,13 @@ public protocol _SectionCollectionViewProvider {
 
     func _configureSupplementaryView(_ collectionView: UICollectionView, sectionView: UICollectionReusableView, indexPath: IndexPath, node: _Node)
 
-    func _genteralSection() -> Observable<_Node?>
+    func _genteralSectionPartion() -> Observable<_Node?>
     
     func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: _Node) -> CGSize?
     
 }
 
-extension _SectionCollectionViewProvider {
+extension _SectionPartionCollectionViewProvider {
     
     public func register(_ collectionView: UICollectionView) {
         collectionView.register(self.cellType, forSupplementaryViewOfKind: self.collectionElementKindSection.rawValue, withReuseIdentifier: self.identity)
@@ -40,20 +40,20 @@ extension _SectionCollectionViewProvider {
     
 }
 
-public protocol SectionCollectionViewProvider: _SectionCollectionViewProvider {
+public protocol SectionPartionCollectionViewProvider: _SectionPartionCollectionViewProvider {
     
     associatedtype Cell: UICollectionReusableView
     associatedtype Value
     
     func configureSupplementaryView(_ collectionView: UICollectionView, sectionView: Cell, indexPath: IndexPath, value: Value)
     
-    func genteralSection() -> Observable<Value?>
+    func genteralSectionPartion() -> Observable<Value?>
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: Value) -> CGSize?
     
 }
 
-extension SectionCollectionViewProvider {
+extension SectionPartionCollectionViewProvider {
     
     public var cellType: UICollectionReusableView.Type { return Cell.self }
     
@@ -65,9 +65,9 @@ extension SectionCollectionViewProvider {
         }
     }
     
-    public func _genteralSection() -> Observable<_Node?> {
+    public func _genteralSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self.identity
-        return genteralSection().map { $0.map { ValueNode(providerIdentity: providerIdentity, value: $0) } }
+        return genteralSectionPartion().map { $0.map { ValueNode(providerIdentity: providerIdentity, value: $0) } }
     }
     
     public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: _Node) -> CGSize? {
@@ -84,15 +84,15 @@ extension SectionCollectionViewProvider {
     
 }
 
-public typealias _AnimatableSectionCollectionViewProvider = _AnimatableSectionPartionProviderable & _SectionCollectionViewProvider
+public typealias _AnimatableSectionPartionCollectionViewProvider = _AnimatableSectionPartionProviderable & _SectionPartionCollectionViewProvider
 
-public protocol AnimatableSectionCollectionViewProvider: SectionCollectionViewProvider, _AnimatableSectionPartionProviderable where Value: Equatable, Value: StringIdentifiableType {
+public protocol AnimatableSectionPartionCollectionViewProvider: SectionPartionCollectionViewProvider, _AnimatableSectionPartionProviderable where Value: Equatable, Value: StringIdentifiableType {
     
     func genteralAnimatableSection() -> Observable<IdentifiableNode?>
     
 }
 
-extension AnimatableSectionCollectionViewProvider {
+extension AnimatableSectionPartionCollectionViewProvider {
     
     public func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
         return genteralAnimatableSection()
@@ -100,7 +100,7 @@ extension AnimatableSectionCollectionViewProvider {
     
 }
 
-extension AnimatableSectionCollectionViewProvider {
+extension AnimatableSectionPartionCollectionViewProvider {
     
     public func _configureSupplementaryView(_ collectionView: UICollectionView, sectionView: UICollectionReusableView, indexPath: IndexPath, node: _Node) {
         if let valueNode = node as? IdentifiableValueNode<Value> {
@@ -124,7 +124,7 @@ extension AnimatableSectionCollectionViewProvider {
     
     public func genteralAnimatableSection() -> Observable<IdentifiableNode?> {
         let providerIdentity = self.identity
-        return genteralSection()
+        return genteralSectionPartion()
             .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }
     }
     

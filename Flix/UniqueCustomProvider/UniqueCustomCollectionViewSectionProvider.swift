@@ -9,8 +9,8 @@
 import UIKit
 import RxSwift
 
-open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionCollectionViewProvider, StringIdentifiableType, Equatable {
-    
+open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCollectionViewProvider, StringIdentifiableType, Equatable {
+
     open let identity: String
     open let collectionElementKindSection: UICollectionElementKindSection
     
@@ -41,7 +41,7 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionCollectio
         contentView.trailingAnchor.constraint(equalTo: sectionView.trailingAnchor).isActive = true
     }
     
-    open func genteralSection() -> Observable<Value?> {
+    open func genteralSectionPartion() -> Observable<Value?> {
         return self.isHidden.asObservable()
             .map { [weak self] isHidden in
                 return isHidden ? nil : self
