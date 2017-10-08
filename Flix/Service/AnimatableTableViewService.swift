@@ -37,8 +37,8 @@ public class AnimatableTableViewService {
         )
 
         let nodeProviders: [_AnimatableTableViewMultiNodeProvider] = sectionProviderBuilders.flatMap { $0.providers }
-        let footerSectionProviders: [_AnimatableSectionTableViewProvider] = sectionProviderBuilders.flatMap { $0.footerProvider }
-        let headerSectionProviders: [_AnimatableSectionTableViewProvider] = sectionProviderBuilders.flatMap { $0.headerProvider }
+        let footerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviderBuilders.flatMap { $0.footerProvider }
+        let headerSectionProviders: [_AnimatableSectionPartionTableViewProvider] = sectionProviderBuilders.flatMap { $0.headerProvider }
         
         dataSource.configureCell = { dataSource, tableView, indexPath, node in
             let provider = nodeProviders.first(where: { $0.identity == node.node.providerIdentity })!

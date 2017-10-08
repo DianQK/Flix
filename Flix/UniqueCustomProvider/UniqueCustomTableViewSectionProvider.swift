@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-open class UniqueCustomTableViewSectionProvider: AnimatableSectionTableViewProvider, StringIdentifiableType, Equatable {
+open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableViewProvider, StringIdentifiableType, Equatable {
 
     public static func ==(lhs: UniqueCustomTableViewSectionProvider, rhs: UniqueCustomTableViewSectionProvider) -> Bool {
         return true

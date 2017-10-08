@@ -84,9 +84,9 @@ extension SectionCollectionViewProvider {
     
 }
 
-public typealias _AnimatableSectionCollectionViewProvider = _AnimatableSectionProviderable & _SectionCollectionViewProvider
+public typealias _AnimatableSectionCollectionViewProvider = _AnimatableSectionPartionProviderable & _SectionCollectionViewProvider
 
-public protocol AnimatableSectionCollectionViewProvider: SectionCollectionViewProvider, _AnimatableSectionProviderable where Value: Equatable, Value: StringIdentifiableType {
+public protocol AnimatableSectionCollectionViewProvider: SectionCollectionViewProvider, _AnimatableSectionPartionProviderable where Value: Equatable, Value: StringIdentifiableType {
     
     func genteralAnimatableSection() -> Observable<IdentifiableNode?>
     
@@ -94,7 +94,7 @@ public protocol AnimatableSectionCollectionViewProvider: SectionCollectionViewPr
 
 extension AnimatableSectionCollectionViewProvider {
     
-    public func _genteralAnimatableSection() -> Observable<IdentifiableNode?> {
+    public func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
         return genteralAnimatableSection()
     }
     

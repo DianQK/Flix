@@ -16,7 +16,7 @@ public enum UITableElementKindSection {
     case footer
 }
 
-public protocol _SectionTableViewProvider {
+public protocol _SectionPartionTableViewProvider {
     
     var identity: String { get }
     var cellType: UITableViewHeaderFooterView.Type { get }
@@ -29,7 +29,7 @@ public protocol _SectionTableViewProvider {
     
 }
 
-extension _SectionTableViewProvider {
+extension _SectionPartionTableViewProvider {
     
     public func register(_ tableView: UITableView) {
         tableView.register(self.cellType, forHeaderFooterViewReuseIdentifier: self.identity)
@@ -37,7 +37,7 @@ extension _SectionTableViewProvider {
 
 }
 
-public protocol SectionTableViewProvider: _SectionTableViewProvider {
+public protocol SectionPartionTableViewProvider: _SectionPartionTableViewProvider {
     
     associatedtype Cell: UITableViewHeaderFooterView
     associatedtype Value
@@ -49,7 +49,7 @@ public protocol SectionTableViewProvider: _SectionTableViewProvider {
     
 }
 
-extension SectionTableViewProvider {
+extension SectionPartionTableViewProvider {
     
     public var cellType: UITableViewHeaderFooterView.Type { return Cell.self }
     
@@ -80,29 +80,29 @@ extension SectionTableViewProvider {
     
 }
 
-public protocol _AnimatableSectionProviderable {
+public protocol _AnimatableSectionPartionProviderable {
     
-    func _genteralAnimatableSection() -> Observable<IdentifiableNode?>
-    
-}
-
-public typealias _AnimatableSectionTableViewProvider = _AnimatableSectionProviderable & _SectionTableViewProvider
-
-public protocol AnimatableSectionTableViewProvider: SectionTableViewProvider, _AnimatableSectionProviderable where Value: Equatable, Value: StringIdentifiableType {
-
-    func genteralAnimatableSection() -> Observable<IdentifiableNode?>
+    func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?>
     
 }
 
-extension AnimatableSectionTableViewProvider {
+public typealias _AnimatableSectionPartionTableViewProvider = _AnimatableSectionPartionProviderable & _SectionPartionTableViewProvider
+
+public protocol AnimatablePartionSectionTableViewProvider: SectionPartionTableViewProvider, _AnimatableSectionPartionProviderable where Value: Equatable, Value: StringIdentifiableType {
+
+    func genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?>
     
-    public func _genteralAnimatableSection() -> Observable<IdentifiableNode?> {
-        return genteralAnimatableSection()
+}
+
+extension AnimatablePartionSectionTableViewProvider {
+    
+    public func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
+        return genteralAnimatableSectionPartion()
     }
     
 }
 
-extension AnimatableSectionTableViewProvider {
+extension AnimatablePartionSectionTableViewProvider {
     
     public func _configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: _Node) {
         if let valueNode = node as? IdentifiableValueNode<Value> {
@@ -124,7 +124,7 @@ extension AnimatableSectionTableViewProvider {
         return nil
     }
     
-    public func genteralAnimatableSection() -> Observable<IdentifiableNode?> {
+    public func genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
         let providerIdentity = self.identity
         return genteralSection()
             .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }

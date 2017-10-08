@@ -40,8 +40,8 @@ public class SectionProviderCollectionViewBuilder {
     }
     
     func genteralSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])> {
-        let headerSection = headerProvider?._genteralAnimatableSection() ?? Observable.just(nil)
-        let footerSection = footerProvider?._genteralAnimatableSection() ?? Observable.just(nil)
+        let headerSection = headerProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
+        let footerSection = footerProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
         let nodes = Observable.combineLatest(providers.map { $0._genteralAnimatableNodes() })
             .map { $0.flatMap { $0 } }
             .ifEmpty(default: [])
@@ -60,16 +60,16 @@ public class SectionProviderCollectionViewBuilder {
 
 public class SectionProviderTableViewBuilder {
     
-    var headerProvider: _AnimatableSectionTableViewProvider?
-    var footerProvider: _AnimatableSectionTableViewProvider?
+    var headerProvider: _AnimatableSectionPartionTableViewProvider?
+    var footerProvider: _AnimatableSectionPartionTableViewProvider?
     var providers: [_AnimatableTableViewMultiNodeProvider] = []
     public var sectionProviderIdentity = ""
     
     public init(
         identity: String,
         providers: [_AnimatableTableViewMultiNodeProvider],
-        headerProvider: _AnimatableSectionTableViewProvider? = nil,
-        footerProvider: _AnimatableSectionTableViewProvider? = nil) {
+        headerProvider: _AnimatableSectionPartionTableViewProvider? = nil,
+        footerProvider: _AnimatableSectionPartionTableViewProvider? = nil) {
         self.sectionProviderIdentity = identity
         self.providers = providers
         self.headerProvider = headerProvider
@@ -77,8 +77,8 @@ public class SectionProviderTableViewBuilder {
     }
     
     func genteralSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])> {
-        let headerSection = headerProvider?._genteralAnimatableSection() ?? Observable.just(nil)
-        let footerSection = footerProvider?._genteralAnimatableSection() ?? Observable.just(nil)
+        let headerSection = headerProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
+        let footerSection = footerProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
         let nodes = Observable.combineLatest(providers.map { $0._genteralAnimatableNodes() })
             .map { $0.flatMap { $0 } }
             .ifEmpty(default: [])
