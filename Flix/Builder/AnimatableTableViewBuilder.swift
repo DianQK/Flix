@@ -156,8 +156,14 @@ public class AnimatableTableViewBuilder {
                 self?.headerSectionProviders = sectionProviders.flatMap { $0.animatableHeaderProvider }
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
-                let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])>] = providers.map { $0.genteralAnimatableSectionModel() }
-                return Observable.combineLatest(sections).map { $0.map { AnimatableSectionModel(model: $0.section, items: $0.nodes) } }
+                let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.genteralAnimatableSectionModel() }
+                return Observable.combineLatest(sections).map { $0.flatMap { section -> AnimatableSectionModel? in
+                    if let section = section {
+                        return AnimatableSectionModel(model: section.section, items: section.nodes)
+                    } else {
+                        return nil
+                    }
+                    } }
             }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

@@ -53,6 +53,8 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
     public var animatableFooterProvider: _AnimatableSectionPartionTableViewProvider?
     public var animatableProviders: [_AnimatableTableViewMultiNodeProvider]
     
+    public let isHidden = Variable(false)
+    
     public init(
         identity: String,
         providers: [_AnimatableTableViewMultiNodeProvider],
@@ -64,19 +66,24 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
         super.init(identity: identity, providers: providers, headerProvider: headerProvider, footerProvider: footerProvider)
     }
     
-    func genteralAnimatableSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])> {
+    func genteralAnimatableSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?> {
         let headerSection = animatableHeaderProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
         let footerSection = animatableFooterProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
         let nodes = Observable.combineLatest(animatableProviders.map { $0._genteralAnimatableNodes() })
             .map { $0.flatMap { $0 } }
             .ifEmpty(default: [])
+        let isHidden = self.isHidden.asObservable()
         
         let sectionProviderIdentity = self.sectionProviderIdentity
         
         return Observable
-            .combineLatest(headerSection, footerSection, nodes) { (headerSection, footerSection, nodes) -> (section: IdentifiableSectionNode, nodes: [IdentifiableNode]) in
-                let section = IdentifiableSectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)
-                return (section: section, nodes: nodes)
+            .combineLatest(headerSection, footerSection, nodes, isHidden) { (headerSection, footerSection, nodes, isHidden) -> (section: IdentifiableSectionNode, nodes: [IdentifiableNode])? in
+                if isHidden {
+                    return nil
+                } else {
+                    let section = IdentifiableSectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)
+                    return (section: section, nodes: nodes)
+                }
         }
     }
     
