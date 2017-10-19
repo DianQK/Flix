@@ -9,6 +9,9 @@ Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它�
 - [x] 免去重用带来的烦恼
 - [x] 列表项支持重用
 - [x] 支持内嵌表单
+- [ ] 单 Provider 支持多个/种 Section 构建
+- [ ] 单 Provider 支持 Move
+- [ ] [TBD] 多 Provider 支持 Move
 
 目前提供了通过 CocoaPods 引用的方法：
 
