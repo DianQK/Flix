@@ -14,19 +14,9 @@ import RxDataSources
 public class AnimatableCollectionViewBuilder {
     
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
-    
-    let dataSource = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel>()
+
     let disposeBag = DisposeBag()
     let delegeteService = CollectionViewDelegateService()
-    
-    public var animationConfiguration: AnimationConfiguration {
-        get {
-            return dataSource.animationConfiguration
-        }
-        set {
-            dataSource.animationConfiguration = newValue
-        }
-    }
     
     public let sectionProviders: Variable<[AnimatableCollectionViewSectionProvider]>
 
@@ -59,19 +49,13 @@ public class AnimatableCollectionViewBuilder {
         self.collectionView = collectionView
         
         self.sectionProviders = Variable(sectionProviders)
-
-        self.animationConfiguration = AnimationConfiguration(
-            insertAnimation: .fade,
-            reloadAnimation: .none,
-            deleteAnimation: .fade
-        )
         
-        dataSource.configureCell = { [weak self] dataSource, collectionView, indexPath, node in
-            guard let provider = self?.nodeProviders.first(where: { $0.identity == node.node.providerIdentity }) else { return UICollectionViewCell() }
-            return provider._configureCell(collectionView, indexPath: indexPath, node: node.node)
-        }
-
-        dataSource.supplementaryViewFactory = { [weak self] dataSource, collectionView, kind, indexPath in
+        let dataSource = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel>(
+            configureCell: { [weak self] dataSource, collectionView, indexPath, node in
+                guard let provider = self?.nodeProviders.first(where: { $0.identity == node.node.providerIdentity }) else { return UICollectionViewCell() }
+                return provider._configureCell(collectionView, indexPath: indexPath, node: node.node)
+            },
+            configureSupplementaryView: { [weak self] dataSource, collectionView, kind, indexPath in
             switch UICollectionElementKindSection(rawValue: kind)! {
             case .footer:
                 guard let node = dataSource[indexPath.section].model.footerNode else { fatalError() }
@@ -86,32 +70,39 @@ public class AnimatableCollectionViewBuilder {
                 provider._configureSupplementaryView(collectionView, sectionView: reusableView, indexPath: indexPath, node: node.node)
                 return reusableView
             }
-        }
+        })
+        
+        dataSource.animationConfiguration = AnimationConfiguration(
+            insertAnimation: .fade,
+            reloadAnimation: .none,
+            deleteAnimation: .fade
+        )
+
         collectionView.rx.itemSelected
             .subscribe(onNext: { [weak collectionView, unowned self] (indexPath) in
                 guard let `collectionView` = collectionView else { return }
-                let node = self.dataSource[indexPath].node
+                let node = dataSource[indexPath].node
                 let provider = self.nodeProviders.first(where: { $0.identity == node.providerIdentity })!
                 provider._tap(collectionView, indexPath: indexPath, node: node)
             })
             .disposed(by: disposeBag)
         
         self.delegeteService.sizeForItem = { [unowned self] collectionView, flowLayout, indexPath in
-            let node = self.dataSource[indexPath].node
+            let node = dataSource[indexPath].node
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: flowLayout, sizeForItemAt: indexPath, node: node)
         }
         
         self.delegeteService.referenceSizeForFooterInSection = { [unowned self] collectionView, collectionViewLayout, section in
-            guard let footerNode = self.dataSource[section].model.footerNode?.node else { return CGSize.zero }
+            guard let footerNode = dataSource[section].model.footerNode?.node else { return CGSize.zero }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.footerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
         }
         
         self.delegeteService.referenceSizeForHeaderInSection = { [unowned self] collectionView, collectionViewLayout, section in
-            guard let footerNode = self.dataSource[section].model.headerNode?.node else { return CGSize.zero }
+            guard let footerNode = dataSource[section].model.headerNode?.node else { return CGSize.zero }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.headerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)

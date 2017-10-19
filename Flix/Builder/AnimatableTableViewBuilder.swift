@@ -15,20 +15,10 @@ public class AnimatableTableViewBuilder {
     
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
     
-    let dataSource = RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel>()
     let disposeBag = DisposeBag()
     let delegeteService = TableViewDelegateService()
     
     let tableView: UITableView
-    
-    public var animationConfiguration: AnimationConfiguration {
-        get {
-            return dataSource.animationConfiguration
-        }
-        set {
-            dataSource.animationConfiguration = newValue
-        }
-    }
     
     public let sectionProviders: Variable<[AnimatableTableViewSectionProvider]>
     
@@ -59,16 +49,16 @@ public class AnimatableTableViewBuilder {
         self.tableView = tableView
         self.sectionProviders = Variable(sectionProviders)
         
-        self.animationConfiguration = AnimationConfiguration(
+        let dataSource = RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel>(configureCell: { [weak self] dataSource, tableView, indexPath, node in
+            guard let provider = self?.nodeProviders.first(where: { $0.identity == node.node.providerIdentity }) else { return UITableViewCell() }
+            return provider._configureCell(tableView, indexPath: indexPath, node: node.node)
+        })
+        
+        dataSource.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
             reloadAnimation: .none,
             deleteAnimation: .fade
         )
-        
-        dataSource.configureCell = { [weak self] dataSource, tableView, indexPath, node in
-            guard let provider = self?.nodeProviders.first(where: { $0.identity == node.node.providerIdentity }) else { return UITableViewCell() }
-            return provider._configureCell(tableView, indexPath: indexPath, node: node.node)
-        }
         
         dataSource.canEditRowAtIndexPath = { [weak tableView, weak self] (dataSource, indexPath) in
             guard let tableView = tableView else { return false }
@@ -84,7 +74,7 @@ public class AnimatableTableViewBuilder {
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak tableView, unowned self] (indexPath) in
                 guard let tableView = tableView else { return }
-                let node = self.dataSource[indexPath].node
+                let node = dataSource[indexPath].node
                 let provider = self.nodeProviders.first(where: { $0.identity == node.providerIdentity })!
                 provider._tap(tableView, indexPath: indexPath, node: node)
             })
@@ -93,28 +83,28 @@ public class AnimatableTableViewBuilder {
         tableView.rx.itemDeleted
             .subscribe(onNext: { [weak tableView, unowned self] (indexPath) in
                 guard let tableView = tableView else { return }
-                let node = self.dataSource[indexPath].node
+                let node = dataSource[indexPath].node
                 let provider = self.nodeProviders.first(where: { $0.identity == node.providerIdentity })! as? _TableViewDeleteable
                 provider?._tableView(tableView, itemDeletedForRowAt: indexPath, node: node)
             })
             .disposed(by: disposeBag)
         
         self.delegeteService.heightForRowAt = { [unowned self] tableView, indexPath in
-            let node = self.dataSource[indexPath].node
+            let node = dataSource[indexPath].node
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
             return provider._tableView(tableView, heightForRowAt: indexPath, node: node)
         }
         
         self.delegeteService.heightForHeaderInSection = { [unowned self] tableView, section in
-            guard let headerNode = self.dataSource[section].model.headerNode?.node else { return nil }
+            guard let headerNode = dataSource[section].model.headerNode?.node else { return nil }
             let providerIdentity = headerNode.providerIdentity
             let provider = self.headerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._tableView(tableView, heightInSection: section, node: headerNode)
         }
         
         self.delegeteService.viewForHeaderInSection = { [unowned self] tableView, section in
-            guard let node = self.dataSource[section].model.headerNode else { return UIView() }
+            guard let node = dataSource[section].model.headerNode else { return UIView() }
             let provider = self.headerSectionProviders.first(where: { $0.identity == node.node.providerIdentity })!
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: provider.identity)!
             provider._configureSection(tableView, view: view, viewInSection: section, node: node.node)
@@ -122,7 +112,7 @@ public class AnimatableTableViewBuilder {
         }
 
         self.delegeteService.viewForFooterInSection = { [unowned self] tableView, section in
-            guard let node = self.dataSource[section].model.footerNode else { return UIView() }
+            guard let node = dataSource[section].model.footerNode else { return UIView() }
             let provider = self.footerSectionProviders.first(where: { $0.identity == node.node.providerIdentity })!
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: provider.identity)!
             provider._configureSection(tableView, view: view, viewInSection: section, node: node.node)
@@ -130,14 +120,14 @@ public class AnimatableTableViewBuilder {
         }
         
         self.delegeteService.heightForFooterInSection = { [unowned self] tableView, section in
-            guard let footerNode = self.dataSource[section].model.footerNode?.node else { return nil }
+            guard let footerNode = dataSource[section].model.footerNode?.node else { return nil }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.footerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._tableView(tableView, heightInSection: section, node: footerNode)
         }
         
         self.delegeteService.editActionsForRowAt = { [unowned self] tableView, indexPath in
-            let node = self.dataSource[indexPath].node
+            let node = dataSource[indexPath].node
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
             if let provider = provider as? _TableViewEditable {

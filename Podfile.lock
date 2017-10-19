@@ -1,29 +1,29 @@
 PODS:
-  - Differentiator (3.0.0-beta.1)
-  - RxCocoa (4.0.0-beta.1):
-    - RxSwift (~> 4.0.0-beta.1)
-  - RxDataSources (3.0.0-beta.1):
-    - Differentiator (~> 3.0.0-beta.1)
-    - RxCocoa (~> 4.0.0-beta.1)
-    - RxSwift (~> 4.0.0-beta.1)
+  - Differentiator (3.0.0)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.0.0):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
   - RxKeyboard (0.7.0):
     - RxCocoa (>= 4.0.0-beta.0)
     - RxSwift (>= 4.0.0-beta.0)
-  - RxSwift (4.0.0-beta.1)
+  - RxSwift (4.0.0)
 
 DEPENDENCIES:
-  - RxCocoa (>= 4.0.0-beta.1)
-  - RxDataSources (>= 3.0.0-beta.1)
+  - RxCocoa (~> 4.0)
+  - RxDataSources (~> 3.0)
   - RxKeyboard (~> 0.7)
-  - RxSwift (>= 4.0.0-beta.1)
+  - RxSwift (~> 4.0)
 
 SPEC CHECKSUMS:
-  Differentiator: de4a5c1e469020cd578d786887d5017c882574ea
-  RxCocoa: ca6cc0f4453145d90002d80df8f9c83dd8fb7338
-  RxDataSources: 73866122890f70f4b36ac613ef5dff072e28182d
+  Differentiator: 772c2e4e2093584a0501a72019a7cd19e1a72cc8
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxDataSources: 5a5ad827b6ad91730bb4b3ed87739f28a7be3d84
   RxKeyboard: d7b65fd85347c2ec214d21c95537dadc62d3b9af
-  RxSwift: 29f07e0e72cc5b40f146c64cc520ea6a6a0c73e9
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
 
-PODFILE CHECKSUM: e4eb3d8ea0941c475aa8c18ab968db5debf910e2
+PODFILE CHECKSUM: 579e986495aed5ad13bdec6a9cd5ea21f0245e1f
 
 COCOAPODS: 1.3.1
