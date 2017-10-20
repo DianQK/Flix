@@ -70,6 +70,17 @@ public class AnimatableTableViewBuilder {
                 return false
             }
         }
+        
+        dataSource.canMoveRowAtIndexPath = { [weak tableView, weak self] (dataSource, indexPath) in
+            guard let tableView = tableView else { return false }
+            let node = dataSource[indexPath]
+            guard let provider = self?.nodeProviders.first(where: { $0.identity == node.node.providerIdentity }) else { return false }
+            if let provider = provider as? _TableViewMoveable {
+                return provider._tableView(tableView, canMoveRowAt: indexPath, node: node.node)
+            } else {
+                return false
+            }
+        }
 
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak tableView, unowned self] (indexPath) in
@@ -88,7 +99,30 @@ public class AnimatableTableViewBuilder {
                 provider?._tableView(tableView, itemDeletedForRowAt: indexPath, node: node)
             })
             .disposed(by: disposeBag)
+
+        tableView.rx.itemMoved
+            .subscribe(onNext: { [weak tableView, unowned self] (itemMovedEvent) in
+                guard let tableView = tableView else { return }
+                let node = dataSource[itemMovedEvent.destinationIndex]
+                guard let provider = self.nodeProviders.first(where: { $0.identity == node.node.providerIdentity }) as? _TableViewMoveable else { return }
+                provider._tableView(
+                    tableView,
+                    moveRowAt: itemMovedEvent.sourceIndex.row - node.providerStartIndexPath.row,
+                    to: itemMovedEvent.destinationIndex.row - node.providerStartIndexPath.row,
+                    node: node.node
+                )
+            })
+            .disposed(by: disposeBag)
         
+        tableView.rx.itemInserted
+            .subscribe(onNext: { [weak tableView, unowned self] (indexPath) in
+                guard let tableView = tableView else { return }
+                let node = dataSource[indexPath].node
+                let provider = self.nodeProviders.first(where: { $0.identity == node.providerIdentity })! as? _TableViewInsertable
+                provider?._tableView(tableView, itemInsertedForRowAt: indexPath, node: node)
+            })
+            .disposed(by: disposeBag)
+
         self.delegeteService.heightForRowAt = { [unowned self] tableView, indexPath in
             let node = dataSource[indexPath].node
             let providerIdentity = node.providerIdentity
@@ -137,6 +171,45 @@ public class AnimatableTableViewBuilder {
             }
         }
         
+        self.delegeteService.targetIndexPathForMoveFromRowAt = { [unowned self] tableView, sourceIndexPath, proposedDestinationIndexPath in
+            let node = dataSource[sourceIndexPath]
+            let providerIdentity = node.node.providerIdentity
+            let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
+            if let _ = provider as? _TableViewMoveable {
+                if (proposedDestinationIndexPath <= node.providerStartIndexPath) {
+                    return node.providerStartIndexPath
+                } else if (proposedDestinationIndexPath >= node.providerEndIndexPath) {
+                    return node.providerEndIndexPath
+                } else {
+                    return proposedDestinationIndexPath
+                }
+            } else {
+                return proposedDestinationIndexPath
+            }
+        }
+        
+        self.delegeteService.titleForDeleteConfirmationButtonForRowAt = { [unowned self] tableView, indexPath in
+            let node = dataSource[indexPath].node
+            let providerIdentity = node.providerIdentity
+            let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
+            if let provider = provider as? _TableViewDeleteable {
+                return provider._tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath, node: node)
+            } else {
+                return nil
+            }
+        }
+        
+        self.delegeteService.editingStyleForRowAt = { [unowned self] tableView, indexPath in
+            let node = dataSource[indexPath].node
+            let providerIdentity = node.providerIdentity
+            let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
+            if let provider = provider as? _TableViewEditable {
+                return provider._tableView(tableView, editingStyleForRowAt: indexPath, node: node)
+            } else {
+                return UITableViewCellEditingStyle.none
+            }
+        }
+        
         tableView.rx.setDelegate(self.delegeteService).disposed(by: disposeBag)
         
         self.sectionProviders.asObservable()
@@ -147,13 +220,20 @@ public class AnimatableTableViewBuilder {
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
                 let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.genteralAnimatableSectionModel() }
-                return Observable.combineLatest(sections).map { $0.flatMap { section -> AnimatableSectionModel? in
-                    if let section = section {
-                        return AnimatableSectionModel(model: section.section, items: section.nodes)
-                    } else {
-                        return nil
+                return Observable.combineLatest(sections)
+                    .map { value -> [AnimatableSectionModel] in
+                        return value.flatMap { $0 }.enumerated()
+                            .map { (offset, section) -> AnimatableSectionModel in
+                                let items = section.nodes.map { (node) -> IdentifiableNode in
+                                    var node = node
+                                    node.providerStartIndexPath.section = offset
+                                    node.providerEndIndexPath.section = offset
+                                    return node
+                                }
+                                return AnimatableSectionModel(model: section.section, items: items)
+                            }
                     }
-                    } }
+                    .ifEmpty(default: [])
             }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
@@ -198,11 +278,26 @@ class TableViewDelegateService: NSObject, UITableViewDelegate {
         return self.viewForFooterInSection?(tableView, section)
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return self.titleForDeleteConfirmationButtonForRowAt?(tableView, indexPath) ?? "Delete"
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return self.editingStyleForRowAt?(tableView, indexPath) ?? UITableViewCellEditingStyle.delete
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        return self.targetIndexPathForMoveFromRowAt?(tableView, sourceIndexPath, proposedDestinationIndexPath) ?? proposedDestinationIndexPath
+    }
+    
     var heightForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> CGFloat?)?
     var heightForFooterInSection: ((_ tableView: UITableView, _ section: Int) -> CGFloat?)?
     var heightForHeaderInSection: ((_ tableView: UITableView, _ section: Int) -> CGFloat?)?
     var viewForHeaderInSection: ((_ tableView: UITableView, _ section: Int) -> UIView?)?
     var viewForFooterInSection: ((_ tableView: UITableView, _ section: Int) -> UIView?)?
     var editActionsForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> [UITableViewRowAction]?)?
-    
+    var targetIndexPathForMoveFromRowAt: ((_ tableView: UITableView, _ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath)?
+    var titleForDeleteConfirmationButtonForRowAt:  ((_ tableView: UITableView, _ indexPath: IndexPath) -> String?)?
+    var editingStyleForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCellEditingStyle)?
+
 }

@@ -38,6 +38,9 @@ public struct IdentifiableNode: IdentifiableType, Equatable {
     public let node: StringIdentifiableType & _Node
     public let isEqual: (StringIdentifiableType & _Node) -> (Bool)
     
+    public var providerStartIndexPath = IndexPath.init(row: 0, section: 0)
+    public var providerEndIndexPath = IndexPath.init(row: 0, section: 0)
+    
     public init<T: StringIdentifiableType & Equatable & _Node>(node: T) {
         self.node = node
         let isEqual = node.isEqual
@@ -58,7 +61,7 @@ struct ValueNode<V>: Node {
 public struct IdentifiableValueNode<V: Equatable & StringIdentifiableType>: Node, Equatable, StringIdentifiableType {
     
     public var identity: String {
-        return value.identity
+        return self.providerIdentity + value.identity
     }
     
     public static func ==(lhs: IdentifiableValueNode<V>, rhs: IdentifiableValueNode<V>) -> Bool {

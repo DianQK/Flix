@@ -70,8 +70,21 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
         let headerSection = animatableHeaderProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
         let footerSection = animatableFooterProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
         let nodes = Observable.combineLatest(animatableProviders.map { $0._genteralAnimatableNodes() })
-            .map { $0.flatMap { $0 } }
+            .map { (value) -> [IdentifiableNode] in
+                return value.reduce([IdentifiableNode]()) { acc, x in
+                    let nodeCount = x.count
+                    let accCount = acc.count
+                    let nodes = x.map { node -> IdentifiableNode in
+                        var node = node
+                        node.providerStartIndexPath.row = accCount
+                        node.providerEndIndexPath.row = accCount + nodeCount - 1
+                        return node
+                    }
+                    return acc + nodes
+                }
+            }
             .ifEmpty(default: [])
+
         let isHidden = self.isHidden.asObservable()
         
         let sectionProviderIdentity = self.sectionProviderIdentity

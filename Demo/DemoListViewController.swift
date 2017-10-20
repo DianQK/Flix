@@ -29,7 +29,8 @@ class DemoListViewController: CollectionViewController {
                 Model(title: "登录示例", desc: "", value: LoginViewController.self),
                 Model(title: "GitHub Signup", desc: "", value: GitHubSignupViewController.self),
                 Model(title: "嵌套表单", desc: "", value: NestFormViewController.self),
-                Model(title: "删除示例", desc: "", value: DeleteItemViewController.self)
+                Model(title: "删除示例", desc: "", value: DeleteItemViewController.self),
+                Model(title: "移动示例", desc: "", value: ControlCenterCustomizeViewController.self)
             ]
         )
         textListProvider.tapped

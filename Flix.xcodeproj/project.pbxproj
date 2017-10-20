@@ -55,12 +55,15 @@
 		26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */; };
 		26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */; };
 		2AE6EBB8C33BDE689796FB02 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B38019D00A9061E6845419 /* Pods_Demo.framework */; };
+		5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */; };
 		569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F61F88DA6800FA1493 /* TableViewEditable.swift */; };
 		569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */; };
 		56FFB7C71F89F4DD0066B903 /* CollectionViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FFB7C61F89F4DD0066B903 /* CollectionViewBuilder.swift */; };
 		56FFB7C91F89F7110066B903 /* TableViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FFB7C81F89F7110066B903 /* TableViewBuilder.swift */; };
 		56FFB7CB1F89FBEA0066B903 /* TableViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */; };
 		591E7B8807895C0686775378 /* Pods_Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B73648F745916751FEA7795 /* Pods_Flix.framework */; };
+		91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */; };
+		91F3F3EE1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,12 +141,15 @@
 		26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomCollectionViewProvider.swift; sourceTree = "<group>"; };
 		26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewProvider.swift; sourceTree = "<group>"; };
 		4D1DE780D16E3E8256EDE880 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
+		5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewInsertable.swift; sourceTree = "<group>"; };
 		569294F61F88DA6800FA1493 /* TableViewEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditable.swift; sourceTree = "<group>"; };
 		569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteItemViewController.swift; sourceTree = "<group>"; };
 		56FFB7C61F89F4DD0066B903 /* CollectionViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewBuilder.swift; sourceTree = "<group>"; };
 		56FFB7C81F89F7110066B903 /* TableViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewBuilder.swift; sourceTree = "<group>"; };
 		56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionProvider.swift; sourceTree = "<group>"; };
 		6B73648F745916751FEA7795 /* Pods_Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewMoveable.swift; sourceTree = "<group>"; };
+		91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterCustomizeViewController.swift; sourceTree = "<group>"; };
 		A8B9448554EFA7E64C28E322 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		AB25D886981CBE6FD66DB016 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		D2F9A63D3C7A3420C9797CB5 /* Pods-Flix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.debug.xcconfig"; sourceTree = "<group>"; };
@@ -256,6 +262,8 @@
 				26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */,
 				56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */,
 				569294F61F88DA6800FA1493 /* TableViewEditable.swift */,
+				91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */,
+				5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -325,6 +333,7 @@
 				2666E4001F869656006F1918 /* NestFormViewController.swift */,
 				2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */,
 				2617C2621F84D0FD007F8228 /* GitHubSignupViewController.swift */,
+				91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -569,6 +578,8 @@
 				2670E67B1F83E559003A5BA7 /* UIView+Configure.swift in Sources */,
 				2670E6741F83E2EA003A5BA7 /* Node.swift in Sources */,
 				26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */,
+				5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */,
+				91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */,
 				26C847051F84891500EEFEAA /* AnimatableTableViewBuilder.swift in Sources */,
 				569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */,
 				2670E6781F83E343003A5BA7 /* TableViewProvider.swift in Sources */,
@@ -610,6 +621,7 @@
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,
 				2670E6A01F83EE5E003A5BA7 /* TextListProvider.swift in Sources */,
 				2670E69B1F83EE40003A5BA7 /* DemoListViewController.swift in Sources */,
+				91F3F3EE1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift in Sources */,
 				2617C2701F84D15C007F8228 /* Wireframe.swift in Sources */,
 				2670E6A31F83EE5E003A5BA7 /* TextSectionProvider.swift in Sources */,
 				2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */,
