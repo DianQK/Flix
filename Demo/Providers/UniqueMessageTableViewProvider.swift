@@ -39,10 +39,6 @@ open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
         self.messageLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
     }
     
-    open func tap(_ tableView: UITableView, indexPath: IndexPath, value: UniqueMessageTableViewProvider) {
-        
-    }
-    
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: UniqueMessageTableViewProvider) -> CGFloat? {
         return 30
     }

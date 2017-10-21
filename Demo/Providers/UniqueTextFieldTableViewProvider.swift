@@ -30,8 +30,4 @@ open class UniqueTextFieldTableViewProvider: UniqueAnimatableTableViewProvider {
         textField.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
     }
     
-    open func tap(_ tableView: UITableView, indexPath: IndexPath, value: UniqueTextFieldTableViewProvider) {
-        
-    }
-    
 }

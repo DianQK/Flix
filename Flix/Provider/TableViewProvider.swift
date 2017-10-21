@@ -43,6 +43,10 @@ public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider {
 
 extension TableViewMultiNodeProvider {
     
+    public func tap(_ tableView: UITableView, indexPath: IndexPath, value: Value) {
+        
+    }
+    
     public func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell {
         if let valueNode = node as? ValueNode<Value> {
             return self.configureCell(tableView, indexPath: indexPath, value: valueNode.value)

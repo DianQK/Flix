@@ -38,10 +38,6 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
         cell.textLabel?.text = value
     }
     
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: String) {
-        
-    }
-    
     func tableView(_ tableView: UITableView, moveRowAt sourceIndex: Int, to destinationIndex: Int, value: String) {
         var result = values.value
         result.remove(at: sourceIndex)
@@ -87,10 +83,6 @@ class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
     
     func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: String) {
         cell.textLabel?.text = value
-    }
-    
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: String) {
-        
     }
     
     func tableView(_ tableView: UITableView, itemInsertedForRowAt indexPath: IndexPath, value: String) {

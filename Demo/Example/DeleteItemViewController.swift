@@ -84,10 +84,6 @@ class InputTagsProvider: AnimatableTableViewProvider, TableViewDeleteable {
     func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: TagWarp) {
         self.removeItem(id: value.tag.id)
     }
-
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: TagWarp) {
-        
-    }
     
     func genteralValues() -> Observable<[TagWarp]> {
         let providerIdentity = self.identity
