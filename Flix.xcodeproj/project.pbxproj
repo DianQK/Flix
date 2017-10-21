@@ -36,7 +36,7 @@
 		2670E6821F83EBE2003A5BA7 /* CollectionViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6811F83EBE2003A5BA7 /* CollectionViewSectionProvider.swift */; };
 		2670E6931F83EDF7003A5BA7 /* Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2670E64F1F83E15C003A5BA7 /* Flix.framework */; };
 		2670E6941F83EDF7003A5BA7 /* Flix.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2670E64F1F83E15C003A5BA7 /* Flix.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2670E69B1F83EE40003A5BA7 /* DemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6981F83EE3F003A5BA7 /* DemoListViewController.swift */; };
+		2670E69B1F83EE40003A5BA7 /* ExampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */; };
 		2670E69C1F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */; };
 		2670E69D1F83EE40003A5BA7 /* PhotoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */; };
 		2670E69E1F83EE5B003A5BA7 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6911F83EDB7003A5BA7 /* TextModel.swift */; };
@@ -108,7 +108,7 @@
 		2670E64F1F83E15C003A5BA7 /* Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2670E6521F83E15C003A5BA7 /* Flix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flix.h; sourceTree = "<group>"; };
 		2670E6531F83E15C003A5BA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2670E65E1F83E1A0003A5BA7 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2670E65E1F83E1A0003A5BA7 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2670E6601F83E1A0003A5BA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2670E6621F83E1A0003A5BA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2670E6651F83E1A0003A5BA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		2670E68E1F83EDB7003A5BA7 /* UniqueTextInputProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextInputProvider.swift; sourceTree = "<group>"; };
 		2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSwitchProvider.swift; sourceTree = "<group>"; };
 		2670E6911F83EDB7003A5BA7 /* TextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
-		2670E6981F83EE3F003A5BA7 /* DemoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoListViewController.swift; sourceTree = "<group>"; };
+		2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleListViewController.swift; sourceTree = "<group>"; };
 		2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoNotDisturbSettingsViewController.swift; sourceTree = "<group>"; };
 		2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSettingsViewController.swift; sourceTree = "<group>"; };
 		26BAF0321F8499B8009A4401 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				2670E64F1F83E15C003A5BA7 /* Flix.framework */,
-				2670E65E1F83E1A0003A5BA7 /* Demo.app */,
+				2670E65E1F83E1A0003A5BA7 /* Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 				2670E6671F83E1A0003A5BA7 /* Assets.xcassets */,
 				2670E6691F83E1A0003A5BA7 /* LaunchScreen.storyboard */,
 				2670E66C1F83E1A0003A5BA7 /* Info.plist */,
-				2670E6981F83EE3F003A5BA7 /* DemoListViewController.swift */,
+				2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -392,9 +392,9 @@
 			productReference = 2670E64F1F83E15C003A5BA7 /* Flix.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		2670E65D1F83E1A0003A5BA7 /* Demo */ = {
+		2670E65D1F83E1A0003A5BA7 /* Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2670E66F1F83E1A0003A5BA7 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = 2670E66F1F83E1A0003A5BA7 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
 				FD5A98F4832863E1BC0721CE /* [CP] Check Pods Manifest.lock */,
 				2670E65A1F83E1A0003A5BA7 /* Sources */,
@@ -409,9 +409,9 @@
 			dependencies = (
 				2670E6961F83EDF7003A5BA7 /* PBXTargetDependency */,
 			);
-			name = Demo;
+			name = Example;
 			productName = Demo;
-			productReference = 2670E65E1F83E1A0003A5BA7 /* Demo.app */;
+			productReference = 2670E65E1F83E1A0003A5BA7 /* Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -449,7 +449,7 @@
 			projectRoot = "";
 			targets = (
 				2670E64E1F83E15C003A5BA7 /* Flix */,
-				2670E65D1F83E1A0003A5BA7 /* Demo */,
+				2670E65D1F83E1A0003A5BA7 /* Example */,
 			);
 		};
 /* End PBXProject section */
@@ -620,7 +620,7 @@
 				2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */,
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,
 				2670E6A01F83EE5E003A5BA7 /* TextListProvider.swift in Sources */,
-				2670E69B1F83EE40003A5BA7 /* DemoListViewController.swift in Sources */,
+				2670E69B1F83EE40003A5BA7 /* ExampleListViewController.swift in Sources */,
 				91F3F3EE1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift in Sources */,
 				2617C2701F84D15C007F8228 /* Wireframe.swift in Sources */,
 				2670E6A31F83EE5E003A5BA7 /* TextSectionProvider.swift in Sources */,
@@ -837,7 +837,7 @@
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.dianqk.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = org.dianqk.FlixExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -857,7 +857,7 @@
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.dianqk.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = org.dianqk.FlixExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -886,7 +886,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2670E66F1F83E1A0003A5BA7 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		2670E66F1F83E1A0003A5BA7 /* Build configuration list for PBXNativeTarget "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2670E66D1F83E1A0003A5BA7 /* Debug */,

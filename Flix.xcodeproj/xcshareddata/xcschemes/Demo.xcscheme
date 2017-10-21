@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2670E65D1F83E1A0003A5BA7"
-               BuildableName = "Demo.app"
-               BlueprintName = "Demo"
+               BuildableName = "Example.app"
+               BlueprintName = "Example"
                ReferencedContainer = "container:Flix.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2670E65D1F83E1A0003A5BA7"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:Flix.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -58,8 +58,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2670E65D1F83E1A0003A5BA7"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:Flix.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -77,8 +77,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2670E65D1F83E1A0003A5BA7"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
+            BuildableName = "Example.app"
+            BlueprintName = "Example"
             ReferencedContainer = "container:Flix.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

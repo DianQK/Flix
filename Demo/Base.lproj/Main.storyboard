@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZMa-yV-1UJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZMa-yV-1UJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,17 +25,17 @@
             </objects>
             <point key="canvasLocation" x="-826" y="122"/>
         </scene>
-        <!--Demo-->
+        <!--Flix Example-->
         <scene sceneID="N9B-kg-YAs">
             <objects>
-                <viewController id="agV-ik-DZd" customClass="DemoListViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="agV-ik-DZd" customClass="ExampleListViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mlr-jv-Unw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="PYE-No-Hxh"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Demo" id="85V-wJ-kH0"/>
+                    <navigationItem key="navigationItem" title="Flix Example" id="85V-wJ-kH0"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vnS-Yn-KNb" sceneMemberID="firstResponder"/>
             </objects>
