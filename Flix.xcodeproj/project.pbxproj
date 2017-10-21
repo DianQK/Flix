@@ -54,7 +54,6 @@
 		26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */; };
 		26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */; };
 		26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */; };
-		2AE6EBB8C33BDE689796FB02 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B38019D00A9061E6845419 /* Pods_Demo.framework */; };
 		5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */; };
 		569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F61F88DA6800FA1493 /* TableViewEditable.swift */; };
 		569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */; };
@@ -140,6 +139,7 @@
 		26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionPartionProvider.swift; sourceTree = "<group>"; };
 		26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomCollectionViewProvider.swift; sourceTree = "<group>"; };
 		26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewProvider.swift; sourceTree = "<group>"; };
+		3623AE6EB18987F4D533683C /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		4D1DE780D16E3E8256EDE880 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
 		5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewInsertable.swift; sourceTree = "<group>"; };
 		569294F61F88DA6800FA1493 /* TableViewEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditable.swift; sourceTree = "<group>"; };
@@ -150,10 +150,8 @@
 		6B73648F745916751FEA7795 /* Pods_Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewMoveable.swift; sourceTree = "<group>"; };
 		91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterCustomizeViewController.swift; sourceTree = "<group>"; };
-		A8B9448554EFA7E64C28E322 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
-		AB25D886981CBE6FD66DB016 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		BA63D7D73F2D9CEB8F63F458 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D2F9A63D3C7A3420C9797CB5 /* Pods-Flix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.debug.xcconfig"; sourceTree = "<group>"; };
-		F3B38019D00A9061E6845419 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +168,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2670E6931F83EDF7003A5BA7 /* Flix.framework in Frameworks */,
-				2AE6EBB8C33BDE689796FB02 /* Pods_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +338,6 @@
 		64E690AA694462C59CA1460E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F3B38019D00A9061E6845419 /* Pods_Demo.framework */,
 				6B73648F745916751FEA7795 /* Pods_Flix.framework */,
 			);
 			name = Frameworks;
@@ -350,10 +346,10 @@
 		DEA53283DE1AFF3A56A6F7A9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AB25D886981CBE6FD66DB016 /* Pods-Demo.debug.xcconfig */,
-				A8B9448554EFA7E64C28E322 /* Pods-Demo.release.xcconfig */,
 				D2F9A63D3C7A3420C9797CB5 /* Pods-Flix.debug.xcconfig */,
 				4D1DE780D16E3E8256EDE880 /* Pods-Flix.release.xcconfig */,
+				BA63D7D73F2D9CEB8F63F458 /* Pods-Example.debug.xcconfig */,
+				3623AE6EB18987F4D533683C /* Pods-Example.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -481,7 +477,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -498,7 +494,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		66B8EBAF2860092D1F1DBF0D /* [CP] Copy Pods Resources */ = {
@@ -513,7 +509,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9A915100D838F9CF18BAF7E4 /* [CP] Copy Pods Resources */ = {
@@ -560,7 +556,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Demo-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Example-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -827,7 +823,7 @@
 		};
 		2670E66D1F83E1A0003A5BA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AB25D886981CBE6FD66DB016 /* Pods-Demo.debug.xcconfig */;
+			baseConfigurationReference = BA63D7D73F2D9CEB8F63F458 /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -847,7 +843,7 @@
 		};
 		2670E66E1F83E1A0003A5BA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8B9448554EFA7E64C28E322 /* Pods-Demo.release.xcconfig */;
+			baseConfigurationReference = 3623AE6EB18987F4D533683C /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

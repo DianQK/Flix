@@ -13,7 +13,7 @@ target 'Flix' do
   source
 end
 
-target 'Demo' do
+target 'Example' do
   source
   pod 'RxKeyboard', '~> 0.7'
 end
