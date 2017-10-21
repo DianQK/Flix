@@ -1,11 +1,12 @@
-# Flix
-iOS form builder in Swift
+![Flix: iOS form builder in Swift](Flix.png)
 
 [![Travis CI](https://travis-ci.org/DianQK/Flix.svg?branch=master)](https://travis-ci.org/DianQK/Flix)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/Flix.svg)](https://cocoapods.org/pods/Flix)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它构建任何(类)表单页面。(虽然足够好用，但项目仍然处于早期开发中，类名、方法名、内部实现随时都可能进行更改，导致您基于 Flix 的工程无法运行。
+Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它构建任何(类)表单页面。
+
+## 预览
 
 ![](https://raw.githubusercontent.com/DianQK/Flix/master/screenshot.png)
 
@@ -13,14 +14,13 @@ Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它�
 - [x] 免去重用带来的烦恼
 - [x] 列表项支持重用
 - [x] 支持内嵌表单
+- [x] 单 Provider 支持 Move
 - [ ] 单 Provider 支持多个/种 Section 构建
-- [ ] 单 Provider 支持 Move
-- [ ] [TBD] 多 Provider 支持 Move
 
 目前提供了通过 CocoaPods 引用的方法：
 
 ```ruby
-pod 'Flix', '~> 0.7.0-beta.1'
+pod 'Flix', '~> 0.7.0-beta.2'
 ```
 
 Flix 通过若干个 `Provider` 组合成一个列表视图。`Provider` 主要以下几种协议：

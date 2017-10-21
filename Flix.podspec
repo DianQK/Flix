@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Flix'
-  s.version          = '0.7.0-beta.1'
+  s.version          = '0.7.0-beta.2'
   s.summary          = 'iOS form builder in Swift'
   s.homepage         = 'https://github.com/DianQK/Flix'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
