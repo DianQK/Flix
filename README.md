@@ -1,6 +1,10 @@
 # Flix
 iOS form builder in Swift
 
+[![Travis CI](https://travis-ci.org/DianQK/Flix.svg?branch=master)](https://travis-ci.org/DianQK/Flix)
+[![CocoaPods compatible](https://img.shields.io/cocoapods/v/Flix.svg)](https://cocoapods.org/pods/Flix)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它构建任何(类)表单页面。(虽然足够好用，但项目仍然处于早期开发中，类名、方法名、内部实现随时都可能进行更改，导致您基于 Flix 的工程无法运行。
 
 ![](https://raw.githubusercontent.com/DianQK/Flix/master/screenshot.png)
