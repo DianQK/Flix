@@ -1,0 +1,18 @@
+language: objective-c
+
+osx_image: xcode9
+
+notifications:
+  email: false
+
+install: true
+
+env:
+  - BUILD="pod update && set -o pipefail && xcodebuild -workspace Flix.xcworkspace -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 8' build | xcpretty"
+  - BUILD="pod repo update && pod lib lint Flix.podspec --verbose"
+  - BUILD="carthage build --no-skip-current --platform iOS"
+
+script: eval "${BUILD}"
+
+after_success:
+  - sleep 5 # workaround https://github.com/travis-ci/travis-ci/issues/4725
