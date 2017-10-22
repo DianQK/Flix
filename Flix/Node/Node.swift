@@ -11,8 +11,20 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+public protocol _Node {
+    
+    var providerIdentity: String { get }
+    
+}
+
+public protocol Node: _Node {
+    
+}
+
 public protocol StringIdentifiableType {
+
     var identity: String { get }
+
 }
 
 extension Equatable {
@@ -38,8 +50,8 @@ public struct IdentifiableNode: IdentifiableType, Equatable {
     public let node: StringIdentifiableType & _Node
     public let isEqual: (StringIdentifiableType & _Node) -> (Bool)
     
-    public var providerStartIndexPath = IndexPath.init(row: 0, section: 0)
-    public var providerEndIndexPath = IndexPath.init(row: 0, section: 0)
+    public var providerStartIndexPath = IndexPath(row: 0, section: 0)
+    public var providerEndIndexPath = IndexPath(row: 0, section: 0)
     
     public init<T: StringIdentifiableType & Equatable & _Node>(node: T) {
         self.node = node
@@ -58,7 +70,7 @@ struct ValueNode<V>: Node {
     
 }
 
-public struct IdentifiableValueNode<V: Equatable & StringIdentifiableType>: Node, Equatable, StringIdentifiableType {
+struct IdentifiableValueNode<V: Equatable & StringIdentifiableType>: Node, Equatable, StringIdentifiableType {
     
     public var identity: String {
         return self.providerIdentity + value.identity
@@ -75,15 +87,5 @@ public struct IdentifiableValueNode<V: Equatable & StringIdentifiableType>: Node
         self.providerIdentity = providerIdentity
         self.value = value
     }
-    
-}
-
-public protocol _Node {
-    
-    var providerIdentity: String { get }
-    
-}
-
-public protocol Node: _Node {
     
 }
