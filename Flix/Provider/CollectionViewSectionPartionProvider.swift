@@ -58,11 +58,7 @@ extension SectionPartionCollectionViewProvider {
     public var cellType: UICollectionReusableView.Type { return Cell.self }
     
     public func _configureSupplementaryView(_ collectionView: UICollectionView, sectionView: UICollectionReusableView, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? ValueNode<Value> {
-            configureSupplementaryView(collectionView, sectionView: sectionView as! Cell, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return configureSupplementaryView(collectionView, sectionView: sectionView as! Cell, indexPath: indexPath, value: node._unwarp())
     }
     
     public func _genteralSectionPartion() -> Observable<_Node?> {
@@ -71,11 +67,7 @@ extension SectionPartionCollectionViewProvider {
     }
     
     public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: _Node) -> CGSize? {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, value: node._unwarp())
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: Value) -> CGSize? {
@@ -101,23 +93,7 @@ extension AnimatableSectionPartionCollectionViewProvider {
 }
 
 extension AnimatableSectionPartionCollectionViewProvider {
-    
-    public func _configureSupplementaryView(_ collectionView: UICollectionView, sectionView: UICollectionReusableView, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            configureSupplementaryView(collectionView, sectionView: sectionView as! Cell, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: _Node) -> CGSize? {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
+
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: Value) -> CGSize? {
         return nil
     }

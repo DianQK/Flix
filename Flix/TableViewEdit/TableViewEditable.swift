@@ -41,55 +41,15 @@ extension TableViewEditable {
 extension TableViewEditable {
     
     public func _tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, node: _Node) -> [UITableViewRowAction]? {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.tableView(tableView, editActionsForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.tableView(tableView, editActionsForRowAt: indexPath, value: node._unwarp())
     }
     
     public func _tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, node: _Node) -> Bool {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.tableView(tableView, canEditRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.tableView(tableView, canEditRowAt: indexPath, value: node._unwarp())
     }
     
     public func _tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, node: _Node) -> UITableViewCellEditingStyle {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.tableView(tableView, editingStyleForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-
-}
-
-extension TableViewEditable where Value: StringIdentifiableType, Value: Equatable {
-    
-    public func _tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, node: _Node) -> [UITableViewRowAction]? {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.tableView(tableView, editActionsForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func _tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, node: _Node) -> Bool {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.tableView(tableView, canEditRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func _tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, node: _Node) -> UITableViewCellEditingStyle {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.tableView(tableView, editingStyleForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.tableView(tableView, editingStyleForRowAt: indexPath, value: node._unwarp())
     }
 
 }

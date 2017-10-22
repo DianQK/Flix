@@ -48,11 +48,7 @@ extension TableViewMultiNodeProvider {
     }
     
     public func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.configureCell(tableView, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.configureCell(tableView, indexPath: indexPath, value: node._unwarp())
     }
     
     public func _genteralNodes() -> Observable<[_Node]> {
@@ -62,19 +58,11 @@ extension TableViewMultiNodeProvider {
     }
     
     public func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat? {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.tableView(tableView, heightForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.tableView(tableView, heightForRowAt: indexPath, value: node._unwarp())
     }
     
     public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? ValueNode<Value> {
-            tap(tableView, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        self.tap(tableView, indexPath: indexPath, value: node._unwarp())
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: Value) -> CGFloat? {
@@ -124,31 +112,7 @@ extension AnimatableTableViewMultiNodeProvider {
 }
 
 extension AnimatableTableViewMultiNodeProvider {
-    
-    public func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.configureCell(tableView, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            tap(tableView, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
 
-    public func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat? {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.tableView(tableView, heightForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
     public func _genteralNodes() -> Observable<[_Node]> {
         let providerIdentity = self.identity
         return genteralValues()

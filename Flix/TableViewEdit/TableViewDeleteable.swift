@@ -37,39 +37,11 @@ extension TableViewDeleteable {
 extension TableViewDeleteable {
     
     public func _tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? ValueNode<Value> {
-            self.tableView(tableView, itemDeletedForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        self.tableView(tableView, itemDeletedForRowAt: indexPath, value: node._unwarp())
     }
     
     public func _tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, node: _Node) -> String? {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-}
-
-extension TableViewDeleteable where Value: StringIdentifiableType, Value: Equatable {
-    
-    public func _tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            self.tableView(tableView, itemDeletedForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func _tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, node: _Node) -> String? {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath, value: node._unwarp())
     }
     
 }

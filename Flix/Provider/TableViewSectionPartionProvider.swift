@@ -54,11 +54,7 @@ extension SectionPartionTableViewProvider {
     public var cellType: UITableViewHeaderFooterView.Type { return Cell.self }
     
     public func _configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: _Node) {
-        if let valueNode = node as? ValueNode<Value> {
-            self.configureSection(tableView, view: view as! Cell, viewInSection: section, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        self.configureSection(tableView, view: view as! Cell, viewInSection: section, value: node._unwarp())
     }
     
     public func _genteralSectionPartion() -> Observable<_Node?> {
@@ -67,11 +63,7 @@ extension SectionPartionTableViewProvider {
     }
     
     public func _tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat? {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.tableView(tableView, heightInSection: section, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.tableView(tableView, heightInSection: section, value: node._unwarp())
     }
     
     public func tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat? {
@@ -103,27 +95,7 @@ extension AnimatablePartionSectionTableViewProvider {
 }
 
 extension AnimatablePartionSectionTableViewProvider {
-    
-    public func _configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            self.configureSection(tableView, view: view as! Cell, viewInSection: section, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func _tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat? {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.tableView(tableView, heightInSection: section, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func tableView(_ tableView: UITableView, heightInSection section: Int, value: Value) -> CGFloat? {
-        return nil
-    }
-    
+
     public func _genteralSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self.identity
         return genteralSection().map { $0.map { IdentifiableValueNode(providerIdentity: providerIdentity, value: $0) } }

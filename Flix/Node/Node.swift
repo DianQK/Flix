@@ -15,7 +15,7 @@ public protocol _Node {
     
     var providerIdentity: String { get }
     
-    func unwarp<Value>() -> Value
+    func _unwarp<Value>() -> Value
     
 }
 
@@ -29,7 +29,7 @@ public protocol Node: _Node {
 
 extension Node {
     
-    public func unwarp<Value>() -> Value {
+    public func _unwarp<Value>() -> Value {
         return self.value as! Value
     }
     

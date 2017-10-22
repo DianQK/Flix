@@ -33,23 +33,7 @@ extension TableViewInsertable {
 extension TableViewInsertable {
     
     public func _tableView(_ tableView: UITableView, itemInsertedForRowAt indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? ValueNode<Value> {
-            self.tableView(tableView, itemInsertedForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-}
-
-extension TableViewInsertable where Value: StringIdentifiableType, Value: Equatable {
-    
-    public func _tableView(_ tableView: UITableView, itemInsertedForRowAt indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            self.tableView(tableView, itemInsertedForRowAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        self.tableView(tableView, itemInsertedForRowAt: indexPath, value: node._unwarp())
     }
     
 }

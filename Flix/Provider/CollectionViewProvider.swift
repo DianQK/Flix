@@ -48,19 +48,11 @@ extension CollectionViewMultiNodeProvider {
     }
     
     public func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.configureCell(collectionView, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.configureCell(collectionView, indexPath: indexPath, value: node._unwarp())
     }
     
     public func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? ValueNode<Value> {
-            tap(collectionView, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        self.tap(collectionView, indexPath: indexPath, value: node._unwarp())
     }
     
     public func _genteralNodes() -> Observable<[_Node]> {
@@ -70,11 +62,7 @@ extension CollectionViewMultiNodeProvider {
     }
     
     public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize? {
-        if let valueNode = node as? ValueNode<Value> {
-            return self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
+        return self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath, value: node._unwarp())
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: Value) -> CGSize? {
@@ -130,31 +118,7 @@ extension AnimatableCollectionViewMultiNodeProvider {
 }
 
 extension AnimatableCollectionViewMultiNodeProvider {
-    
-    public func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.configureCell(collectionView, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
 
-    public func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            tap(collectionView, indexPath: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
-    public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize? {
-        if let valueNode = node as? IdentifiableValueNode<Value> {
-            return self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: indexPath, value: valueNode.value)
-        } else {
-            fatalError()
-        }
-    }
-    
     public func _genteralNodes() -> Observable<[_Node]> {
         let providerIdentity = self.identity
         return genteralValues()
