@@ -16,7 +16,7 @@ public class CollectionViewBuilder {
     typealias SectionModel = RxDataSources.SectionModel<SectionNode, _Node>
 
     let disposeBag = DisposeBag()
-    let delegeteService = CollectionViewDelegateService()
+    let delegeteProxy = CollectionViewDelegateProxy()
     
     public let sectionProviders: Variable<[CollectionViewSectionProvider]>
     
@@ -79,28 +79,28 @@ public class CollectionViewBuilder {
             })
             .disposed(by: disposeBag)
         
-        self.delegeteService.sizeForItem = { [unowned self] collectionView, flowLayout, indexPath in
+        self.delegeteProxy.sizeForItem = { [unowned self] collectionView, flowLayout, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: flowLayout, sizeForItemAt: indexPath, node: node)
         }
         
-        self.delegeteService.referenceSizeForFooterInSection = { [unowned self] collectionView, collectionViewLayout, section in
+        self.delegeteProxy.referenceSizeForFooterInSection = { [unowned self] collectionView, collectionViewLayout, section in
             guard let footerNode = dataSource[section].model.footerNode else { return CGSize.zero }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.footerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
         }
         
-        self.delegeteService.referenceSizeForHeaderInSection = { [unowned self] collectionView, collectionViewLayout, section in
+        self.delegeteProxy.referenceSizeForHeaderInSection = { [unowned self] collectionView, collectionViewLayout, section in
             guard let footerNode = dataSource[section].model.headerNode else { return CGSize.zero }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.headerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
         }
         
-        collectionView.rx.setDelegate(self.delegeteService).disposed(by: disposeBag)
+        collectionView.rx.setDelegate(self.delegeteProxy).disposed(by: disposeBag)
         
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in

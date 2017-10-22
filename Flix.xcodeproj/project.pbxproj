@@ -56,6 +56,8 @@
 		5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */; };
 		569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F61F88DA6800FA1493 /* TableViewEditable.swift */; };
 		569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */; };
+		56E06EF01F9C46310074032A /* TableViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E06EEF1F9C46310074032A /* TableViewDelegateProxy.swift */; };
+		56E06EF21F9C46710074032A /* CollectionViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E06EF11F9C46710074032A /* CollectionViewDelegateProxy.swift */; };
 		56FFB7C71F89F4DD0066B903 /* CollectionViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FFB7C61F89F4DD0066B903 /* CollectionViewBuilder.swift */; };
 		56FFB7C91F89F7110066B903 /* TableViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FFB7C81F89F7110066B903 /* TableViewBuilder.swift */; };
 		56FFB7CB1F89FBEA0066B903 /* TableViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */; };
@@ -143,6 +145,8 @@
 		5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewInsertable.swift; sourceTree = "<group>"; };
 		569294F61F88DA6800FA1493 /* TableViewEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditable.swift; sourceTree = "<group>"; };
 		569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteItemViewController.swift; sourceTree = "<group>"; };
+		56E06EEF1F9C46310074032A /* TableViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDelegateProxy.swift; sourceTree = "<group>"; };
+		56E06EF11F9C46710074032A /* CollectionViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateProxy.swift; sourceTree = "<group>"; };
 		56FFB7C61F89F4DD0066B903 /* CollectionViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewBuilder.swift; sourceTree = "<group>"; };
 		56FFB7C81F89F7110066B903 /* TableViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewBuilder.swift; sourceTree = "<group>"; };
 		56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionProvider.swift; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 				2670E6701F83E2C0003A5BA7 /* Node */,
 				26C847081F84911C00EEFEAA /* UniqueCustomProvider */,
 				264F27941F9C336A00884FF2 /* TableViewEdit */,
+				56E06EEE1F9C46110074032A /* DelegateProxy */,
 				2670E67C1F83EA2C003A5BA7 /* Builder */,
 				2670E6791F83E546003A5BA7 /* Cell */,
 				2670E6521F83E15C003A5BA7 /* Flix.h */,
@@ -333,6 +338,15 @@
 				91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		56E06EEE1F9C46110074032A /* DelegateProxy */ = {
+			isa = PBXGroup;
+			children = (
+				56E06EEF1F9C46310074032A /* TableViewDelegateProxy.swift */,
+				56E06EF11F9C46710074032A /* CollectionViewDelegateProxy.swift */,
+			);
+			path = DelegateProxy;
 			sourceTree = "<group>";
 		};
 		64E690AA694462C59CA1460E /* Frameworks */ = {
@@ -577,6 +591,7 @@
 				26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */,
 				5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */,
 				264F27961F9C33B000884FF2 /* TableViewDeleteable.swift in Sources */,
+				56E06EF21F9C46710074032A /* CollectionViewDelegateProxy.swift in Sources */,
 				91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */,
 				26C847051F84891500EEFEAA /* AnimatableTableViewBuilder.swift in Sources */,
 				569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */,
@@ -590,6 +605,7 @@
 				26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */,
 				2670E6761F83E31F003A5BA7 /* CollectionViewProvider.swift in Sources */,
 				2666E4081F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift in Sources */,
+				56E06EF01F9C46310074032A /* TableViewDelegateProxy.swift in Sources */,
 				2670E6801F83EAA3003A5BA7 /* CollectionViewSectionPartionProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

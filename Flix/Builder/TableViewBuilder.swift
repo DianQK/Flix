@@ -16,7 +16,7 @@ public class TableViewBuilder {
     typealias SectionModel = RxDataSources.SectionModel<SectionNode, _Node>
     
     let disposeBag = DisposeBag()
-    let delegeteService = TableViewDelegateService()
+    let delegeteProxy = TableViewDelegateProxy()
     
     public let sectionProviders: Variable<[TableViewSectionProvider]>
     
@@ -84,21 +84,21 @@ public class TableViewBuilder {
             })
             .disposed(by: disposeBag)
         
-        self.delegeteService.heightForRowAt = { [unowned self] tableView, indexPath in
+        self.delegeteProxy.heightForRowAt = { [unowned self] tableView, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
             return provider._tableView(tableView, heightForRowAt: indexPath, node: node)
         }
         
-        self.delegeteService.heightForHeaderInSection = { [unowned self] tableView, section in
+        self.delegeteProxy.heightForHeaderInSection = { [unowned self] tableView, section in
             guard let headerNode = dataSource[section].model.headerNode else { return nil }
             let providerIdentity = headerNode.providerIdentity
             let provider = self.headerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._tableView(tableView, heightInSection: section, node: headerNode)
         }
         
-        self.delegeteService.viewForHeaderInSection = { [unowned self] tableView, section in
+        self.delegeteProxy.viewForHeaderInSection = { [unowned self] tableView, section in
             guard let node = dataSource[section].model.headerNode else { return UIView() }
             let provider = self.headerSectionProviders.first(where: { $0.identity == node.providerIdentity })!
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: provider.identity)!
@@ -106,7 +106,7 @@ public class TableViewBuilder {
             return view
         }
         
-        self.delegeteService.viewForFooterInSection = { [unowned self] tableView, section in
+        self.delegeteProxy.viewForFooterInSection = { [unowned self] tableView, section in
             guard let node = dataSource[section].model.footerNode else { return UIView() }
             let provider = self.footerSectionProviders.first(where: { $0.identity == node.providerIdentity })!
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: provider.identity)!
@@ -114,14 +114,14 @@ public class TableViewBuilder {
             return view
         }
         
-        self.delegeteService.heightForFooterInSection = { [unowned self] tableView, section in
+        self.delegeteProxy.heightForFooterInSection = { [unowned self] tableView, section in
             guard let footerNode = dataSource[section].model.footerNode else { return nil }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.footerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._tableView(tableView, heightInSection: section, node: footerNode)
         }
         
-        self.delegeteService.editActionsForRowAt = { [unowned self] tableView, indexPath in
+        self.delegeteProxy.editActionsForRowAt = { [unowned self] tableView, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
@@ -132,7 +132,7 @@ public class TableViewBuilder {
             }
         }
         
-        tableView.rx.setDelegate(self.delegeteService).disposed(by: disposeBag)
+        tableView.rx.setDelegate(self.delegeteProxy).disposed(by: disposeBag)
         
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in

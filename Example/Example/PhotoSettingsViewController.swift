@@ -87,13 +87,11 @@ class PhotoSettingsViewController: CollectionViewController {
             )
             sectionProviders.append(selectDownloadImageTypeSectionProvider)
         }
-        
-        let collectionViewService = AnimatableCollectionViewBuilder(
+
+        self.collectionViewBuilder = AnimatableCollectionViewBuilder(
             collectionView: collectionView,
             sectionProviders: sectionProviders
         )
-
-        self.collectionViewBuilder = collectionViewService
     }
     
 }

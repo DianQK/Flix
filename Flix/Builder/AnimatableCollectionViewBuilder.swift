@@ -16,7 +16,7 @@ public class AnimatableCollectionViewBuilder {
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
 
     let disposeBag = DisposeBag()
-    let delegeteService = CollectionViewDelegateService()
+    let delegeteProxy = CollectionViewDelegateProxy()
     
     public let sectionProviders: Variable<[AnimatableCollectionViewSectionProvider]>
 
@@ -87,28 +87,28 @@ public class AnimatableCollectionViewBuilder {
             })
             .disposed(by: disposeBag)
         
-        self.delegeteService.sizeForItem = { [unowned self] collectionView, flowLayout, indexPath in
+        self.delegeteProxy.sizeForItem = { [unowned self] collectionView, flowLayout, indexPath in
             let node = dataSource[indexPath].node
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: flowLayout, sizeForItemAt: indexPath, node: node)
         }
         
-        self.delegeteService.referenceSizeForFooterInSection = { [unowned self] collectionView, collectionViewLayout, section in
+        self.delegeteProxy.referenceSizeForFooterInSection = { [unowned self] collectionView, collectionViewLayout, section in
             guard let footerNode = dataSource[section].model.footerNode?.node else { return CGSize.zero }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.footerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
         }
         
-        self.delegeteService.referenceSizeForHeaderInSection = { [unowned self] collectionView, collectionViewLayout, section in
+        self.delegeteProxy.referenceSizeForHeaderInSection = { [unowned self] collectionView, collectionViewLayout, section in
             guard let footerNode = dataSource[section].model.headerNode?.node else { return CGSize.zero }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.headerSectionProviders.first(where: { $0.identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
         }
         
-        collectionView.rx.setDelegate(self.delegeteService).disposed(by: disposeBag)
+        collectionView.rx.setDelegate(self.delegeteProxy).disposed(by: disposeBag)
         
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
@@ -133,28 +133,5 @@ public class AnimatableCollectionViewBuilder {
         )
         self.init(collectionView: collectionView, sectionProviders: [sectionProviderCollectionViewBuilder])
     }
-    
-}
-
-class CollectionViewDelegateService: NSObject, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionViewLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        return sizeForItem?(collectionView, collectionViewLayout, indexPath) ?? collectionViewLayout.itemSize
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let collectionViewLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        return referenceSizeForFooterInSection?(collectionView, collectionViewLayout, section) ?? collectionViewLayout.footerReferenceSize
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let collectionViewLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        return referenceSizeForHeaderInSection?(collectionView, collectionViewLayout, section) ?? collectionViewLayout.headerReferenceSize
-    }
-    
-    var sizeForItem: ((_ collectionView: UICollectionView, _ collectionViewLayout: UICollectionViewLayout, _ indexPath: IndexPath) -> CGSize?)?
-    var referenceSizeForFooterInSection: ((_ collectionView: UICollectionView, _ collectionViewLayout: UICollectionViewLayout, _ section: Int) -> CGSize?)?
-    var referenceSizeForHeaderInSection: ((_ collectionView: UICollectionView, _ collectionViewLayout: UICollectionViewLayout, _ section: Int) -> CGSize?)?
     
 }
