@@ -200,12 +200,6 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
         }
     }
 
-    public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
-        let providerIdentity = self.identity
-        return genteralValues()
-            .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }
-    }
-
     func register(_ tableView: UITableView) {
         tableView.register(ItemInputTableViewCell.self, forCellReuseIdentifier: identity + "NameUITableViewCell")
         tableView.register(ItemInputTableViewCell.self, forCellReuseIdentifier: identity + "CountUITableViewCell")
