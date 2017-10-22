@@ -87,12 +87,9 @@ class PhotoSettingsViewController: CollectionViewController {
             )
             sectionProviders.append(selectDownloadImageTypeSectionProvider)
         }
+        
+        self.collectionView.flix.build(sectionProviders)
 
-        self.collectionViewBuilder = AnimatableCollectionViewBuilder(
-            collectionView: collectionView,
-            sectionProviders: sectionProviders
-        )
     }
     
 }
-

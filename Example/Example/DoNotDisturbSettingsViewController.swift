@@ -101,12 +101,7 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
         )
         providers.append(allowCallsFromCommentProvider)
         
-        self.collectionViewBuilder = AnimatableCollectionViewBuilder(
-            collectionView: collectionView,
-            providers: providers
-        )
-        
+        self.collectionView.flix.animatable.build(providers)
     }
     
 }
-

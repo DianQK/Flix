@@ -134,10 +134,7 @@ class GitHubSignupViewController: TableViewController {
             providers: [loginProvider]
         )
         
-        self.tableViewBuilder = AnimatableTableViewBuilder(
-            tableView: tableView,
-            sectionProviders: [inputSectionProviderBuilder, loginSectionProviderBuilder]
-        )
+        self.tableView.flix.animatable.build([inputSectionProviderBuilder, loginSectionProviderBuilder])
 
     }
     

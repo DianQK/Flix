@@ -203,11 +203,8 @@ class ControlCenterCustomizeViewController: TableViewController {
                 includeControlProvider.insertNew(value)
             })
             .disposed(by: disposeBag)
-
-        self.tableViewBuilder = AnimatableTableViewBuilder(
-            tableView: tableView,
-            sectionProviders: [tipSectionProvider, includeControlSectionProvider, moreControlSectionProvider]
-        )
+        
+        self.tableView.flix.animatable.build([tipSectionProvider, includeControlSectionProvider, moreControlSectionProvider])
         
         self.tableView.setEditing(true, animated: false)
 

@@ -57,10 +57,7 @@ class ExampleListViewController: CollectionViewController {
             })
             .disposed(by: disposeBag)
         
-        self.collectionViewBuilder = AnimatableCollectionViewBuilder(
-            collectionView: collectionView,
-            providers: [iconProvider, textListProvider]
-        )
+        self.collectionView.flix.animatable.build([iconProvider, textListProvider])
 
     }
 

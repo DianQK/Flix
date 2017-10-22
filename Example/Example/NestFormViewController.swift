@@ -320,10 +320,7 @@ class NestFormViewController: TableViewController {
             })
             .disposed(by: disposeBag)
         
-        self.tableViewBuilder = AnimatableTableViewBuilder(
-            tableView: tableView,
-            sectionProviders: [fillFormSectionProvider, addSectionProvider]
-        )
+        self.tableView.flix.animatable.build([fillFormSectionProvider, addSectionProvider])
 
     }
     

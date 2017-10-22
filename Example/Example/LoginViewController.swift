@@ -102,10 +102,7 @@ class LoginViewController: TableViewController {
         )
         section.append(loginSectionProvider)
         
-        self.tableViewBuilder = AnimatableTableViewBuilder(
-            tableView: tableView,
-            sectionProviders: section
-        )
-        
+        self.tableView.flix.animatable.build(section)
+
     }
 }

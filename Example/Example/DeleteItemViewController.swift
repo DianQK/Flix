@@ -132,11 +132,8 @@ class DeleteItemViewController: TableViewController {
             })
             .disposed(by: disposeBag)
         
-        self.tableViewBuilder = AnimatableTableViewBuilder(
-            tableView: tableView,
-            providers: [inputTagsProvider, addNewTagProvider]
-        )
-        
+        self.tableView.flix.animatable.build([inputTagsProvider, addNewTagProvider])
+
     }
     
 }
