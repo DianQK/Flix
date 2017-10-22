@@ -46,7 +46,6 @@
 		2670E6A11F83EE5E003A5BA7 /* UniqueTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */; };
 		2670E6A21F83EE5E003A5BA7 /* RadioProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68B1F83EDB7003A5BA7 /* RadioProvider.swift */; };
 		2670E6A31F83EE5E003A5BA7 /* TextSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68C1F83EDB7003A5BA7 /* TextSectionProvider.swift */; };
-		2670E6A41F83EE5E003A5BA7 /* UniqueSelectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68D1F83EDB7003A5BA7 /* UniqueSelectProvider.swift */; };
 		2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68E1F83EDB7003A5BA7 /* UniqueTextInputProvider.swift */; };
 		2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */; };
 		26BAF0331F8499B8009A4401 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BAF0321F8499B8009A4401 /* LoginViewController.swift */; };
@@ -129,7 +128,6 @@
 		2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextProvider.swift; sourceTree = "<group>"; };
 		2670E68B1F83EDB7003A5BA7 /* RadioProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioProvider.swift; sourceTree = "<group>"; };
 		2670E68C1F83EDB7003A5BA7 /* TextSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSectionProvider.swift; sourceTree = "<group>"; };
-		2670E68D1F83EDB7003A5BA7 /* UniqueSelectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSelectProvider.swift; sourceTree = "<group>"; };
 		2670E68E1F83EDB7003A5BA7 /* UniqueTextInputProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextInputProvider.swift; sourceTree = "<group>"; };
 		2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSwitchProvider.swift; sourceTree = "<group>"; };
 		2670E6911F83EDB7003A5BA7 /* TextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
@@ -306,7 +304,6 @@
 				2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */,
 				2670E68B1F83EDB7003A5BA7 /* RadioProvider.swift */,
 				2670E68C1F83EDB7003A5BA7 /* TextSectionProvider.swift */,
-				2670E68D1F83EDB7003A5BA7 /* UniqueSelectProvider.swift */,
 				2670E68E1F83EDB7003A5BA7 /* UniqueTextInputProvider.swift */,
 				2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */,
 				26424F6F1F8537EC00E2834D /* UniqueMessageTableViewProvider.swift */,
@@ -622,7 +619,6 @@
 				26BAF0331F8499B8009A4401 /* LoginViewController.swift in Sources */,
 				2670E6A21F83EE5E003A5BA7 /* RadioProvider.swift in Sources */,
 				2666E4041F874113006F1918 /* Operators.swift in Sources */,
-				2670E6A41F83EE5E003A5BA7 /* UniqueSelectProvider.swift in Sources */,
 				2617C2681F84D0FD007F8228 /* GitHubSignupViewController.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
 				2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */,

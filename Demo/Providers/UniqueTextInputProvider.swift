@@ -12,7 +12,7 @@ import Flix
 
 struct UniqueTextInputProvider: UniqueAnimatableCollectionViewProvider {
     
-    let identity: String // Hashable
+    let identity: String
     let textView = UITextView()
     let disposeBag = DisposeBag()
     
