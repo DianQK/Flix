@@ -43,6 +43,10 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
 
 extension CollectionViewMultiNodeProvider {
     
+    public func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
+        
+    }
+    
     public func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell {
         if let valueNode = node as? ValueNode<Value> {
             return self.configureCell(collectionView, indexPath: indexPath, value: valueNode.value)

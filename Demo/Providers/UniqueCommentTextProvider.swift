@@ -59,12 +59,7 @@ class UniqueCommentTextProvider: AnimatableCollectionViewProvider {
     func configureCell(_ collectionView: UICollectionView, cell: CommentTextCollectionCell, indexPath: IndexPath, value: CommentTextModel) {
         cell.textLabel.text = value.text
     }
-    
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: CommentTextModel) {
-//        print(desc)
-        
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: CommentTextModel) -> CGSize? {
         let height = NSAttributedString(string: value.text, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
             .boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).height
@@ -75,8 +70,5 @@ class UniqueCommentTextProvider: AnimatableCollectionViewProvider {
         let identity = self.identity
         return self.text.asObservable().map { [CommentTextModel.init(identity: identity, text: $0)] }
     }
-
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: TextModel) -> CGSize? {
-//    }
 
 }

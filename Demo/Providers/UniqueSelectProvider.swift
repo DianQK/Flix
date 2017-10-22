@@ -11,10 +11,6 @@ import RxSwift
 import Flix
 
 struct UniqueSelectProvider: UniqueAnimatableCollectionViewProvider {
-
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueSelectProvider) {
-        
-    }
     
     let identity: String // Hashable
     let titleLabel = UILabel()
