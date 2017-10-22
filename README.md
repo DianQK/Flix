@@ -8,144 +8,156 @@ Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它�
 
 ## 预览
 
-![](https://raw.githubusercontent.com/DianQK/Flix/master/screenshot.png)
+![](screenshot.png)
 
-- [x] 支持 `UICollectionView` / `UITableView`
-- [x] 免去重用带来的烦恼
-- [x] 列表项支持重用
-- [x] 支持内嵌表单
-- [x] 单 Provider 支持 Move
-- [ ] 单 Provider 支持多个/种 Section 构建
+## 原理
 
-目前提供了通过 CocoaPods 引用的方法：
+![](block_diagram.png)
+
+每个 Provider 会生成若干个 Node，Flix 按照组合的 Provider 顺序依次生成全部的 Cell。
+
+## 安装
 
 ```ruby
-pod 'Flix', '~> 0.7.0-beta.2'
+pod 'Flix', '~> 0.7.0-rc.0'
 ```
 
-Flix 通过若干个 `Provider` 组合成一个列表视图。`Provider` 主要以下几种协议：
+## 开始使用
 
-- `CollectionViewMultiNodeProvider` 支持在一个 `Provider` 中生成多种 Cell 组合
-- `CollectionViewProvider` 继承 `CollectionViewMultiNodeProvider`， 生成单种 Cell 的组合
-- `AnimatableCollectionViewMultiNodeProvider` 继承 `CollectionViewMultiNodeProvider` ，可以生成支持带动画的添加删除效果
-- `AnimatableCollectionViewProvider` 等价于 `AnimatableCollectionViewMultiNodeProvider & CollectionViewProvider`
-- `UniqueAnimatableCollectionViewProvider` 继承 `AnimatableCollectionViewProvider`，可以生成全局唯一的 Cell 以避免重用
+### 构建一个登录页面
 
-- `SectionCollectionViewProvider` (alpha) 提供构建 Section Header & Footer 支持
-- `AnimatableSectionCollectionViewProvider` (alpha)
+我们可以非常轻松地使用 Flix 构建一个登录页面：
 
-- `TableViewMultiNodeProvider` 类似 `CollectionViewMultiNodeProvider`
-- `TableViewProvider` 类似 `CollectionViewProvider`
-- `AnimatableTableViewMultiNodeProvider` 类似 `AnimatableCollectionViewMultiNodeProvider`
-- `AnimatableTableViewProvider` 类似 `AnimatableCollectionViewProvider`
-- `UniqueAnimatableTableViewProvider` 类似 `UniqueAnimatableCollectionViewProvider`
+只需要四个步骤：
 
-- `SectionTableViewProvider` (alpha)
-- `AnimatableSectionTableViewProvider` (alpha)
+- 创建一个登录框
+- 创建一个输入密码框
+- 创建一个登录按钮
+- 组合三个视图组件的布局
 
-随 Flix 协议附带了以下几个类方便构建全局唯一的 Cell ：
-
-- `UniqueCustomCollectionViewProvider`
-- `UniqueCustomCollectionViewSectionProvider`
-- `UniqueCustomTableViewProvider`
-- `UniqueCustomTableViewSectionProvider`
-
-你可以在 Demo 中找到以上所有协议的使用方法，这里先以 Demo 中的几个例子展示以上 Provider 的使用及其强大。
-
-在登录示例 `LoginViewController` 中，我们直接使用了 `UniqueCustomTableViewProvider` 和 `UniqueCustomTableViewSectionProvider`。
-
-创建用户名输入项：
+创建一个登录框：
 
 ```swift
-let usernameProvider = UniqueCustomTableViewProvider(identity: "username")
+let usernameTextField = UITextField()
+usernameTextField.placeholder = "用户名"
+usernameTextField.keyboardType = .asciiCapable
+
+let usernameProvider = UniqueCustomTableViewProvider(identity: "usernameProvider")
 usernameProvider.contentView.addSubview(usernameTextField)
+// 添加你的布局方案
+// usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+// usernameTextField.leadingAnchor.constraint(equalTo: usernameProvider.contentView.leadingAnchor, constant: 15).isActive = true
+// usernameTextField.topAnchor.constraint(equalTo: usernameProvider.contentView.topAnchor).isActive = true
+// usernameTextField.trailingAnchor.constraint(equalTo: usernameProvider.contentView.trailingAnchor, constant: -15).isActive = true
+// usernameTextField.bottomAnchor.constraint(equalTo: usernameProvider.contentView.bottomAnchor).isActive = true
 ```
 
-`UniqueCustomTableViewProvider` 的 `contentView` 类似于 `UITableViewCell` 中的 `contentView`，你可以直接添加一个 `UITextField` 到 `UniqueCustomTableViewProvider` 中。
-
-密码输入项也是一样的构建方式：
+创建一个密码输入框：
 
 ```swift
-let passwordProvider = UniqueCustomTableViewProvider(identity: "password")
+let passwordTextField = UITextField()
+passwordTextField.placeholder = "密码"
+passwordTextField.isSecureTextEntry = true
+let passwordProvider = UniqueCustomTableViewProvider(identity: "passwordProvider")
 passwordProvider.contentView.addSubview(passwordTextField)
+// 添加你的布局方案
+// passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+// passwordTextField.leadingAnchor.constraint(equalTo: passwordProvider.contentView.leadingAnchor, constant: 15).isActive = true
+// passwordTextField.topAnchor.constraint(equalTo: passwordProvider.contentView.topAnchor).isActive = true
+// passwordTextField.trailingAnchor.constraint(equalTo: passwordProvider.contentView.trailingAnchor, constant: -15).isActive = true
+// passwordTextField.bottomAnchor.constraint(equalTo: passwordProvider.contentView.bottomAnchor).isActive = true
 ```
 
-添加 `usernameTextField` 和 `passwordTextField` 就像在 ViewController 中直接调用 `self.view.addSubview(usernameTextField)` 和 `self.view.addSubview(passwordTextField)` 。但同时我们还拥有了 `UITableView` 的滑动效果及其 UI 样式。
-
-为登录项添加登录验证也是如此的方便：
-
-```
-let isVerified: Observable<Bool> = Observable
-    .combineLatest(
-        self.usernameTextField.rx.text.orEmpty.map { !$0.isEmpty },
-        self.passwordTextField.rx.text.orEmpty.map { !$0.isEmpty }
-    ) { $0 && $1 }
-    .share(replay: 1, scope: .forever)
-
-isVerified
-    .subscribe(onNext: { [weak self] (isVerified) in
-        self?.loginTextLabel.textColor = isVerified ? UIColor.red : UIColor.lightGray
-        loginProvider.selectionStyle.value = isVerified ? .default : .none
-    })
-    .disposed(by: disposeBag)
-```
-
-完整的 `LoginViewController` 也仅有 100 多行的代码。
-
-`GitHubSignupViewController` 复刻了 [`GitHubSignupViewController1`](https://github.com/ReactiveX/RxSwift/blob/master/RxExample/RxExample/Examples/GitHubSignup/UsingVanillaObservables/GitHubSignupViewController1.swift) 。使用了 `GitHubSignupViewController1` 对应的 `GithubSignupViewModel1` 。UI 使用 Flix 重做后，代码量基本没有变化（除去构建 UI 部分）。
-
-在 `DoNotDisturbSettingsViewController` 中用 `AnimatableCollectionViewProvider` 创建了 `RadioProvider` ，这是一个单选项，使用 `RadioProvider` 可以创建若干个的选择项，`RadioProvider` 生成的 Cell 都会被 `UITableView` 复用，创建足够多个选择项也不会有内存不足方面的问题。
-
-`RadioProvider` 的实现和使用也非常方便，完整的实现如下：
+创建一个登录按钮：
 
 ```swift
-struct RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableCollectionViewProvider {
-
-    let identity: String // Hashable
-    let options: [Option]
-    let checkedOption = Variable<Option?>(nil)
-    let disposeBag = DisposeBag()
-
-    typealias Cell = RadioCollectionViewCell
-    typealias Value = Option
-
-    init(identity: String, options: [Option]) {
-        self.identity = identity
-        self.options = options
-    }
-
-    func configureCell(_ collectionView: UICollectionView, cell: RadioCollectionViewCell, indexPath: IndexPath, value: Option) {
-        cell.titleLabel.text = String(describing: value)
-        checkedOption.asObservable()
-            .map { $0 == value }
-            .bind(to: cell.isChecked)
-            .disposed(by: cell.reuseBag)
-    }
-
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-        checkedOption.value = value
-    }
-
-    func genteralValues() -> Observable<[Value]> {
-        return Observable.just(options)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: Value) -> CGSize? {
-        return CGSize(width: collectionView.bounds.width, height: 44)
-    }
-
-}
+let loginTextLabel = UILabel()
+loginTextLabel.text = "登录"
+loginTextLabel.textAlignment = .center
+let loginProvider = UniqueCustomTableViewProvider(identity: "login")
+loginProvider.contentView.addSubview(loginTextLabel)
+// 添加你的布局方案
+// loginTextLabel.translatesAutoresizingMaskIntoConstraints = false
+// loginTextLabel.leadingAnchor.constraint(equalTo: loginProvider.contentView.leadingAnchor).isActive = true
+// loginTextLabel.topAnchor.constraint(equalTo: loginProvider.contentView.topAnchor).isActive = true
+// loginTextLabel.trailingAnchor.constraint(equalTo: loginProvider.contentView.trailingAnchor).isActive = true
+// loginTextLabel.bottomAnchor.constraint(equalTo: loginProvider.contentView.bottomAnchor).isActive = true
+// 添加你的点击事件
+// loginProvider.tap...
 ```
 
-在使用时仅需传入对应数量的选择项：
+最后将以上三个 Provider 按顺序组装起来：
 
 ```swift
-let radioProvider = RadioProvider(identity: "radioProvider", options: [SlienceMode.always, SlienceMode.whileLocked])
-radioProvider.checkedOption.value = SlienceMode.always
-providers.append(radioProvider)
+self.tableView.flix.build([usernameProvider, passwordProvider, loginProvider])
 ```
 
-你可以在 `DoNotDisturbSettingsViewController` 和 `PhotoSettingsViewController` 中了解到更多内容。
+一个使用 `UITableView` 的登录页面就完成了。
 
-内嵌表单示例可以参见 `NestFormViewController`。
+## 优势
+
+- [x] 支持 `UICollectionView` / `UITableView`
+- [x] 可以免去重用带来的烦恼
+- [x] 列表项支持重用
+- [x] 支持内嵌表单
+- [x] 支持移动、删除、添加
+
+Flix 专注于构建 `UICollectionView` / `UITableView` 的 Cell ，不关心视图的布局、业务的逻辑。于是你可以很轻松地使用 Flix 构建定制的页面。
+
+## 使用
+
+因为 `CollectionViewProvider` 和 `TableViewProvider` 几乎一样，我们全部以 `UITableView` 的构建解释每一个 Provider 的使用方法。
+
+> 你也可以在示例中找到全部的 `CollectionViewProvider` 使用示例。
+
+注意：所有的 `AnimatableProvider` 生成的 Value (Node) 都需要服从协议 `StringIdentifiableType` 和 `Equatable`。
+`StringIdentifiableType` 用于描述一个 Value（Node）是否为同一个 Value。
+`Equatable` 用于描述同一个 Value 是否有更新。
+
+### `UniqueCustomTableViewProvider` 使用
+
+当构建一个诸如登录页面、个人页或设置页时，我们希望某些 Cell 不需要被重用（有时这个 Cell 在整个 `UITableView` 中仅存在一个），那么使用 `UniqueCustomTableViewProvider` 可以完全忽略重用的问题（通过在 `UITableView` 中注册一个全局唯一的 Cell）。
+
+创建一个 `UniqueCustomTableViewProvider` 需要提供一个全局唯一的 `identity` 确保在 Provider 管理中不会错乱。
+**事实上，每一个 Provider 的 `identity` 都需要在一个 `UITableView` 中唯一。**
+
+`UniqueCustomTableViewProvider` 中的 `contentView` 类似于 `UITableViewCell` 中的 `contentView` ，你可以直接添加对应的视图到 `contentView` 中。
+
+`itemHeight` 用于返回 Cell 的高度，`tap` 是该 `Provider` / `Cell` 的点击事件。
+
+如果你想完全定制一个唯一 Cell ，你也可以通过服从协议 `UniqueAnimatableTableViewProvider` 完成。
+
+## `AnimatableTableViewMultiNodeProvider` 和 `AnimatableTableViewProvider`
+
+两个 `Provider` 都支持局部更新 `UITableView` （即更新时不调用 `reloadData`）。
+
+在 `genteralValues() -> Observable<[Value]>` 方法中实现你的 Provider 生成 Node 的方法。
+
+## `AnimatablePartionSectionTableViewProvider` 和 `AnimatableTableViewSectionProvider`
+
+`AnimatablePartionSectionTableViewProvider` 和 `AnimatableTableViewSectionProvider` 提供了构建 Section 的支持。
+`AnimatablePartionSectionTableViewProvider` 用于构建 Section 的 Header 和 Footer，`AnimatableTableViewSectionProvider` 用于组合 `AnimatablePartionSectionTableViewProvider` 和 `AnimatableProvider`。
+
+`AnimatablePartionSectionTableViewProvider` 的使用类似于 `AnimatableTableViewProvider`，在使用时，你需要注意这个 `Provider` 是 Header 还是 Footer。
+
+比如：
+
+```swift
+let footerProvider = UniqueCustomTableViewSectionProvider(
+    identity: "footerProvider",
+    tableElementKindSection: UITableElementKindSection.header
+)
+let sectionProvider = AnimatableTableViewSectionProvider(
+    identity: "sectionProvider",
+    providers: [],
+    footerProvider: footerProvider
+)
+```
+
+就是一个错误的用法。
+
+## 构建
+
+通过调用 `tableView.flix.build(_:)` 或 `tableView.flix.animatable.build(_:)` 构建全部的 Cell。`tableView.flix.animatable.build(_:)` 中传入的 Provider 必须都是 `AnimatableProvider` 。
+
+其余详细使用方法，可以参考 Example 中的一些示例。
