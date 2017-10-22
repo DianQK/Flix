@@ -2,7 +2,7 @@
 //  CollectionViewBuilder.swift
 //  Flix
 //
-//  Created by wc on 08/10/2017.
+//  Created by DianQK on 08/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -11,30 +11,30 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class CollectionViewBuilder {
+public class CollectionViewBuilder: _CollectionViewBuilder {
     
-    typealias SectionModel = RxDataSources.SectionModel<SectionNode, _Node>
+    typealias SectionModel = RxDataSources.SectionModel<SectionNode, Node>
 
     let disposeBag = DisposeBag()
     let delegeteProxy = CollectionViewDelegateProxy()
     
     public let sectionProviders: Variable<[CollectionViewSectionProvider]>
     
-    private var nodeProviders: [_CollectionViewMultiNodeProvider] = [] {
+    var nodeProviders: [_CollectionViewMultiNodeProvider] = [] {
         didSet {
             for provider in nodeProviders {
                 provider.register(collectionView)
             }
         }
     }
-    private var footerSectionProviders: [_SectionPartionCollectionViewProvider] = [] {
+    var footerSectionProviders: [_SectionPartionCollectionViewProvider] = [] {
         didSet {
             for provider in footerSectionProviders {
                 provider.register(collectionView)
             }
         }
     }
-    private var headerSectionProviders: [_SectionPartionCollectionViewProvider] = [] {
+    var headerSectionProviders: [_SectionPartionCollectionViewProvider] = [] {
         didSet {
             for provider in headerSectionProviders {
                 provider.register(collectionView)
@@ -50,7 +50,7 @@ public class CollectionViewBuilder {
         
         self.sectionProviders = Variable(sectionProviders)
         
-        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel>.init(configureCell: { [weak self] dataSource, collectionView, indexPath, node in
+        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel>(configureCell: { [weak self] dataSource, collectionView, indexPath, node in
             guard let provider = self?.nodeProviders.first(where: { $0.identity == node.providerIdentity }) else { return UICollectionViewCell() }
             return provider._configureCell(collectionView, indexPath: indexPath, node: node)
             }, configureSupplementaryView: { [weak self] dataSource, collectionView, kind, indexPath in
@@ -70,37 +70,7 @@ public class CollectionViewBuilder {
                 }
         })
 
-        collectionView.rx.itemSelected
-            .subscribe(onNext: { [weak collectionView, unowned self] (indexPath) in
-                guard let `collectionView` = collectionView else { return }
-                let node = dataSource[indexPath]
-                let provider = self.nodeProviders.first(where: { $0.identity == node.providerIdentity })!
-                provider._tap(collectionView, indexPath: indexPath, node: node)
-            })
-            .disposed(by: disposeBag)
-        
-        self.delegeteProxy.sizeForItem = { [unowned self] collectionView, flowLayout, indexPath in
-            let node = dataSource[indexPath]
-            let providerIdentity = node.providerIdentity
-            let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
-            return provider._collectionView(collectionView, layout: flowLayout, sizeForItemAt: indexPath, node: node)
-        }
-        
-        self.delegeteProxy.referenceSizeForFooterInSection = { [unowned self] collectionView, collectionViewLayout, section in
-            guard let footerNode = dataSource[section].model.footerNode else { return CGSize.zero }
-            let providerIdentity = footerNode.providerIdentity
-            let provider = self.footerSectionProviders.first(where: { $0.identity == providerIdentity })!
-            return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
-        }
-        
-        self.delegeteProxy.referenceSizeForHeaderInSection = { [unowned self] collectionView, collectionViewLayout, section in
-            guard let footerNode = dataSource[section].model.headerNode else { return CGSize.zero }
-            let providerIdentity = footerNode.providerIdentity
-            let provider = self.headerSectionProviders.first(where: { $0.identity == providerIdentity })!
-            return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
-        }
-        
-        collectionView.rx.setDelegate(self.delegeteProxy).disposed(by: disposeBag)
+        self.build(dataSource: dataSource)
         
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in

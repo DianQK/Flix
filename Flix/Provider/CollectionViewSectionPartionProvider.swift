@@ -63,7 +63,7 @@ extension SectionPartionCollectionViewProvider {
     
     public func _genteralSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self.identity
-        return genteralSectionPartion().map { $0.map { ValueNode(providerIdentity: providerIdentity, value: $0) } }
+        return genteralSectionPartion().map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
     
     public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: _Node) -> CGSize? {
@@ -93,20 +93,15 @@ extension AnimatableSectionPartionCollectionViewProvider {
 }
 
 extension AnimatableSectionPartionCollectionViewProvider {
-
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: Value) -> CGSize? {
-        return nil
-    }
     
     public func _genteralSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self.identity
-        return genteralSectionPartion().map { $0.map { IdentifiableValueNode(providerIdentity: providerIdentity, value: $0) } }
+        return genteralSectionPartion().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
     public func genteralAnimatableSection() -> Observable<IdentifiableNode?> {
         let providerIdentity = self.identity
-        return genteralSectionPartion()
-            .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }
+        return genteralSectionPartion().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
 }

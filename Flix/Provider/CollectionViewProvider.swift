@@ -19,12 +19,12 @@ public protocol _CollectionViewMultiNodeProvider {
     
     func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
     
-    func _genteralNodes() -> Observable<[_Node]>
+    func _genteralNodes() -> Observable<[Node]>
     
     func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize?
     
     func register(_ collectionView: UICollectionView)
-    
+
 }
 
 public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvider {
@@ -55,10 +55,10 @@ extension CollectionViewMultiNodeProvider {
         self.tap(collectionView, indexPath: indexPath, value: node._unwarp())
     }
     
-    public func _genteralNodes() -> Observable<[_Node]> {
+    public func _genteralNodes() -> Observable<[Node]> {
         let providerIdentity = self.identity
         return genteralValues()
-            .map { $0.map { ValueNode(providerIdentity: providerIdentity, value: $0) } }
+            .map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
     
     public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize? {
@@ -118,17 +118,10 @@ extension AnimatableCollectionViewMultiNodeProvider {
 }
 
 extension AnimatableCollectionViewMultiNodeProvider {
-
-    public func _genteralNodes() -> Observable<[_Node]> {
-        let providerIdentity = self.identity
-        return genteralValues()
-            .map { $0.map { IdentifiableValueNode(providerIdentity: providerIdentity, value: $0) } }
-    }
     
     public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
         let providerIdentity = self.identity
-        return genteralValues()
-            .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }
+        return genteralValues().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
 }

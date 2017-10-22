@@ -2,7 +2,7 @@
 //  TableViewSectionProvider.swift
 //  Flix
 //
-//  Created by wc on 08/10/2017.
+//  Created by DianQK on 08/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -18,6 +18,8 @@ public class TableViewSectionProvider {
     public var providers: [_TableViewMultiNodeProvider]
     public let sectionProviderIdentity: String
     
+    public let isHidden = Variable(false)
+    
     public init(
         identity: String,
         providers: [_TableViewMultiNodeProvider],
@@ -29,19 +31,37 @@ public class TableViewSectionProvider {
         self.footerProvider = footerProvider
     }
     
-    func genteralSectionModel() -> Observable<(section: SectionNode, nodes: [_Node])> {
+    func genteralSectionModel() -> Observable<(section: SectionNode, nodes: [Node])?> {
         let headerSection = headerProvider?._genteralSectionPartion() ?? Observable.just(nil)
         let footerSection = footerProvider?._genteralSectionPartion() ?? Observable.just(nil)
         let nodes = Observable.combineLatest(providers.map { $0._genteralNodes() })
-            .map { $0.flatMap { $0 } }
             .ifEmpty(default: [])
+            .map { (value) -> [Node] in
+                return value.reduce([Node]()) { acc, x in
+                    let nodeCount = x.count
+                    let accCount = acc.count
+                    let nodes = x.map { node -> Node in
+                        var node = node
+                        node.providerStartIndexPath.row = accCount
+                        node.providerEndIndexPath.row = accCount + nodeCount - 1
+                        return node
+                    }
+                    return acc + nodes
+                }
+        }
         
         let sectionProviderIdentity = self.sectionProviderIdentity
         
+        let isHidden = self.isHidden.asObservable()
+        
         return Observable
-            .combineLatest(headerSection, footerSection, nodes) { (headerSection, footerSection, nodes) -> (section: SectionNode, nodes: [_Node]) in
-                let section = SectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)
-                return (section: section, nodes: nodes)
+            .combineLatest(headerSection, footerSection, nodes, isHidden) { (headerSection, footerSection, nodes, isHidden) -> (section: SectionNode, nodes: [Node])? in
+                if isHidden {
+                    return nil
+                } else {
+                    let section = SectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)
+                    return (section: section, nodes: nodes)
+                }
         }
     }
 
@@ -52,8 +72,6 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
     public var animatableHeaderProvider: _AnimatableSectionPartionTableViewProvider?
     public var animatableFooterProvider: _AnimatableSectionPartionTableViewProvider?
     public var animatableProviders: [_AnimatableTableViewMultiNodeProvider]
-    
-    public let isHidden = Variable(false)
     
     public init(
         identity: String,
@@ -70,6 +88,7 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
         let headerSection = animatableHeaderProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
         let footerSection = animatableFooterProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
         let nodes = Observable.combineLatest(animatableProviders.map { $0._genteralAnimatableNodes() })
+            .ifEmpty(default: [])
             .map { (value) -> [IdentifiableNode] in
                 return value.reduce([IdentifiableNode]()) { acc, x in
                     let nodeCount = x.count
@@ -83,7 +102,6 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
                     return acc + nodes
                 }
             }
-            .ifEmpty(default: [])
 
         let isHidden = self.isHidden.asObservable()
         

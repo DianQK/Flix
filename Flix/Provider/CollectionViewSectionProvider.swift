@@ -11,11 +11,19 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-struct IdentifiableSectionNode: IdentifiableType {
+protocol _SectionNode {
+
+    var identity: String { get }
+    var headerNode: _Node? { get }
+    var footerNode: _Node? { get }
+    
+}
+
+struct IdentifiableSectionNode: IdentifiableType, _SectionNode {
     
     let identity: String
-    let headerNode: IdentifiableNode?
-    let footerNode: IdentifiableNode?
+    let headerNode: _Node?
+    let footerNode: _Node?
     
     init(identity: String, headerNode: IdentifiableNode? = nil, footerNode: IdentifiableNode? = nil) {
         self.identity = identity
@@ -25,7 +33,7 @@ struct IdentifiableSectionNode: IdentifiableType {
     
 }
 
-struct SectionNode {
+struct SectionNode: _SectionNode {
     
     let identity: String
     let headerNode: _Node?
@@ -53,7 +61,7 @@ public class CollectionViewSectionProvider {
         self.footerProvider = footerProvider
     }
     
-    func genteralSectionModel() -> Observable<(section: SectionNode, nodes: [_Node])> {
+    func genteralSectionModel() -> Observable<(section: SectionNode, nodes: [Node])> {
         let headerSection = headerProvider?._genteralSectionPartion() ?? Observable.just(nil)
         let footerSection = footerProvider?._genteralSectionPartion() ?? Observable.just(nil)
         let nodes = Observable.combineLatest(providers.map { $0._genteralNodes() })
@@ -63,7 +71,7 @@ public class CollectionViewSectionProvider {
         let sectionProviderIdentity = self.sectionProviderIdentity
         
         return Observable
-            .combineLatest(headerSection, footerSection, nodes) { (headerSection, footerSection, nodes) -> (section: SectionNode, nodes: [_Node]) in
+            .combineLatest(headerSection, footerSection, nodes) { (headerSection, footerSection, nodes) -> (section: SectionNode, nodes: [Node]) in
                 let section = SectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)
                 return (section: section, nodes: nodes)
         }

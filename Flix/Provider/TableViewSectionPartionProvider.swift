@@ -59,7 +59,7 @@ extension SectionPartionTableViewProvider {
     
     public func _genteralSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self.identity
-        return genteralSection().map { $0.map { ValueNode(providerIdentity: providerIdentity, value: $0) } }
+        return genteralSection().map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
     
     public func _tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat? {
@@ -98,13 +98,12 @@ extension AnimatablePartionSectionTableViewProvider {
 
     public func _genteralSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self.identity
-        return genteralSection().map { $0.map { IdentifiableValueNode(providerIdentity: providerIdentity, value: $0) } }
+        return genteralSection().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
     public func genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
         let providerIdentity = self.identity
-        return genteralSection()
-            .map { $0.map { IdentifiableNode(node: IdentifiableValueNode(providerIdentity: providerIdentity, value: $0)) } }
+        return genteralSection().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
 }
