@@ -15,9 +15,23 @@ public protocol _Node {
     
     var providerIdentity: String { get }
     
+    func unwarp<Value>() -> Value
+    
 }
 
 public protocol Node: _Node {
+    
+    associatedtype Value
+    
+    var value: Value { get }
+    
+}
+
+extension Node {
+    
+    public func unwarp<Value>() -> Value {
+        return self.value as! Value
+    }
     
 }
 
