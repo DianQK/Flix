@@ -1,6 +1,6 @@
 //
 //  UniqueTextProvider.swift
-//  FormDemo
+//  Example
 //
 //  Created by DianQK on 01/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.

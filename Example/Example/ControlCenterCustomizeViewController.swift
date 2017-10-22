@@ -1,6 +1,6 @@
 //
 //  ControlCenterCustomizeViewController.swift
-//  Demo
+//  Example
 //
 //  Created by DianQK on 20/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.

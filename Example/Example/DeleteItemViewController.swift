@@ -1,6 +1,6 @@
 //
 //  DeleteItemViewController.swift
-//  Demo
+//  Example
 //
 //  Created by wc on 07/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.

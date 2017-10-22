@@ -40,7 +40,6 @@
 		2670E69B1F83EE40003A5BA7 /* ExampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */; };
 		2670E69C1F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */; };
 		2670E69D1F83EE40003A5BA7 /* PhotoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */; };
-		2670E69E1F83EE5B003A5BA7 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6911F83EDB7003A5BA7 /* TextModel.swift */; };
 		2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6881F83EDB7003A5BA7 /* UniqueCommentTextProvider.swift */; };
 		2670E6A01F83EE5E003A5BA7 /* TextListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6891F83EDB7003A5BA7 /* TextListProvider.swift */; };
 		2670E6A11F83EE5E003A5BA7 /* UniqueTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */; };
@@ -130,7 +129,6 @@
 		2670E68C1F83EDB7003A5BA7 /* TextSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSectionProvider.swift; sourceTree = "<group>"; };
 		2670E68E1F83EDB7003A5BA7 /* UniqueTextInputProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextInputProvider.swift; sourceTree = "<group>"; };
 		2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSwitchProvider.swift; sourceTree = "<group>"; };
-		2670E6911F83EDB7003A5BA7 /* TextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
 		2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleListViewController.swift; sourceTree = "<group>"; };
 		2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoNotDisturbSettingsViewController.swift; sourceTree = "<group>"; };
 		2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSettingsViewController.swift; sourceTree = "<group>"; };
@@ -206,7 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				2670E6511F83E15C003A5BA7 /* Flix */,
-				2670E65F1F83E1A0003A5BA7 /* Demo */,
+				2670E65F1F83E1A0003A5BA7 /* Example */,
 				2670E6501F83E15C003A5BA7 /* Products */,
 				DEA53283DE1AFF3A56A6F7A9 /* Pods */,
 				64E690AA694462C59CA1460E /* Frameworks */,
@@ -237,13 +235,12 @@
 			path = Flix;
 			sourceTree = "<group>";
 		};
-		2670E65F1F83E1A0003A5BA7 /* Demo */ = {
+		2670E65F1F83E1A0003A5BA7 /* Example */ = {
 			isa = PBXGroup;
 			children = (
 				569848F01F89F2DD00DA1D64 /* Example */,
 				2666E4031F874112006F1918 /* Operators.swift */,
 				2617C2611F84D0FD007F8228 /* GitHubSigup */,
-				2670E6901F83EDB7003A5BA7 /* Nodes */,
 				2670E6871F83EDB7003A5BA7 /* Providers */,
 				2670E6601F83E1A0003A5BA7 /* AppDelegate.swift */,
 				2670E6621F83E1A0003A5BA7 /* ViewController.swift */,
@@ -253,7 +250,7 @@
 				2670E66C1F83E1A0003A5BA7 /* Info.plist */,
 				2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */,
 			);
-			path = Demo;
+			path = Example;
 			sourceTree = "<group>";
 		};
 		2670E6701F83E2C0003A5BA7 /* Node */ = {
@@ -311,14 +308,6 @@
 				26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */,
 			);
 			path = Providers;
-			sourceTree = "<group>";
-		};
-		2670E6901F83EDB7003A5BA7 /* Nodes */ = {
-			isa = PBXGroup;
-			children = (
-				2670E6911F83EDB7003A5BA7 /* TextModel.swift */,
-			);
-			path = Nodes;
 			sourceTree = "<group>";
 		};
 		26C847081F84911C00EEFEAA /* UniqueCustomProvider */ = {
@@ -609,7 +598,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2670E69E1F83EE5B003A5BA7 /* TextModel.swift in Sources */,
 				26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */,
 				2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */,
 				2670E69C1F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift in Sources */,
@@ -842,7 +830,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RML58CN62D;
-				INFOPLIST_FILE = Demo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.dianqk.FlixExample;
@@ -862,7 +850,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RML58CN62D;
-				INFOPLIST_FILE = Demo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.dianqk.FlixExample;

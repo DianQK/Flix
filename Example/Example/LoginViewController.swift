@@ -1,6 +1,6 @@
 //
 //  LoginViewController.swift
-//  Demo
+//  Example
 //
 //  Created by DianQK on 04/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
