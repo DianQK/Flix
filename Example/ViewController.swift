@@ -37,9 +37,6 @@ class CollectionViewController: UIViewController {
         
         collectionView.alwaysBounceVertical = true
         
-        collectionView.contentInsetAdjustmentBehavior = .never
-        collectionView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
-        
     }
 }
 
@@ -63,9 +60,6 @@ class TableViewController: UIViewController {
         tableView.rowHeight = 44
         tableView.sectionFooterHeight = 0.1
         tableView.sectionHeaderHeight = 0.1
-        tableView.contentInsetAdjustmentBehavior = .never
-        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
-        tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         
         tableView.estimatedRowHeight = 0
         tableView.estimatedSectionFooterHeight = 0
