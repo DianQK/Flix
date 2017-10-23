@@ -124,7 +124,6 @@ extension _TableViewBuilder {
             let node = dataSource[sourceIndexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders.first(where: { $0.identity == providerIdentity })!
-            print(sourceIndexPath, proposedDestinationIndexPath, node.providerStartIndexPath, node.providerEndIndexPath)
             if let _ = provider as? _TableViewMoveable {
                 if (proposedDestinationIndexPath <= node.providerStartIndexPath) {
                     return node.providerStartIndexPath
