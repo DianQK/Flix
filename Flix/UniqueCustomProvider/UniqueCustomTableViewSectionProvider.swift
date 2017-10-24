@@ -29,7 +29,7 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     
     open var sectionHeight: (() -> CGFloat)?
     
-    open let contentView = UIView()
+    open let contentView: UIView = NeverHitSelfView()
     open var backgroundView: UIView?
     
     public init(customIdentity: String, tableElementKindSection: UITableElementKindSection) {

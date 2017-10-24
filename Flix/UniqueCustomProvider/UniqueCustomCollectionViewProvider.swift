@@ -12,7 +12,7 @@ import RxSwift
 open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewProvider, CustomIdentityType {
     
     open let customIdentity: String
-    open let contentView = UIView()
+    open let contentView: UIView = NeverHitSelfView()
     open var selectedBackgroundView: UIView?
     open var backgroundView: UIView?
     

@@ -25,7 +25,7 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
     
     open var sectionSize: (() -> CGSize)?
     
-    open let contentView = UIView()
+    open let contentView: UIView = NeverHitSelfView()
     
     public init(customIdentity: String, collectionElementKindSection: UICollectionElementKindSection) {
         self.customIdentity = customIdentity

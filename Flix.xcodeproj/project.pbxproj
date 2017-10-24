@@ -17,6 +17,7 @@
 		2617C2761F84D1BF007F8228 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2751F84D1BF007F8228 /* ActivityIndicator.swift */; };
 		262874601F9F8DD000F66907 /* ProviderDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628745F1F9F8DD000F66907 /* ProviderDescription.swift */; };
 		262874621F9F8F0F00F66907 /* CustomIdentityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262874611F9F8F0F00F66907 /* CustomIdentityType.swift */; };
+		262874641F9F9EB600F66907 /* NeverHitSelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262874631F9F9EB600F66907 /* NeverHitSelfView.swift */; };
 		26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F6F1F8537EC00E2834D /* UniqueMessageTableViewProvider.swift */; };
 		26424F721F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F711F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift */; };
 		26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */; };
@@ -111,6 +112,7 @@
 		2617C2751F84D1BF007F8228 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		2628745F1F9F8DD000F66907 /* ProviderDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDescription.swift; sourceTree = "<group>"; };
 		262874611F9F8F0F00F66907 /* CustomIdentityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIdentityType.swift; sourceTree = "<group>"; };
+		262874631F9F9EB600F66907 /* NeverHitSelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeverHitSelfView.swift; sourceTree = "<group>"; };
 		26424F6F1F8537EC00E2834D /* UniqueMessageTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueMessageTableViewProvider.swift; sourceTree = "<group>"; };
 		26424F711F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextFieldTableViewProvider.swift; sourceTree = "<group>"; };
 		26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueButtonTableViewProvider.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		26C847081F84911C00EEFEAA /* UniqueCustomProvider */ = {
 			isa = PBXGroup;
 			children = (
+				262874631F9F9EB600F66907 /* NeverHitSelfView.swift */,
 				26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */,
 				26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */,
 				26BAF0341F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift */,
@@ -628,6 +631,7 @@
 				564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */,
 				56E06EF41F9C5CD50074032A /* _TableViewBuilder.swift in Sources */,
 				5694616F1F9C73D9009F7971 /* BuilderProxy.swift in Sources */,
+				262874641F9F9EB600F66907 /* NeverHitSelfView.swift in Sources */,
 				5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */,
 				264F27961F9C33B000884FF2 /* TableViewDeleteable.swift in Sources */,
 				56E06EF21F9C46710074032A /* CollectionViewDelegateProxy.swift in Sources */,
