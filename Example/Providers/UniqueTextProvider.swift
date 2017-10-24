@@ -10,14 +10,12 @@ import UIKit
 import RxSwift
 import Flix
 
-struct UniqueTextProvider: UniqueAnimatableCollectionViewProvider {
+class UniqueTextProvider: UniqueAnimatableCollectionViewProvider {
 
-    let identity: String // Hashable
     let title: String
     let desc: String
     
-    init(identity: String, title: String, desc: String) {
-        self.identity = identity
+    init(title: String, desc: String) {
         self.title = title
         self.desc = desc
     }

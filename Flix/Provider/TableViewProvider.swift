@@ -11,9 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public protocol _TableViewMultiNodeProvider {
-    
-    var identity: String { get }
+public protocol _TableViewMultiNodeProvider: FlixCustomStringConvertible {
     
     func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node)
     
@@ -48,7 +46,7 @@ extension TableViewMultiNodeProvider {
     }
     
     public func _genteralNodes() -> Observable<[Node]> {
-        let providerIdentity = self.identity
+        let providerIdentity = self._flix_identity
         return genteralValues()
             .map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
@@ -83,13 +81,13 @@ public protocol TableViewProvider: TableViewMultiNodeProvider {
 extension TableViewProvider {
     
     public func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: Value) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.identity, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: self._flix_identity, for: indexPath)
         self.configureCell(tableView, cell: cell as! Cell, indexPath: indexPath, value: value)
         return cell
     }
     
     public func register(_ tableView: UITableView) {
-        tableView.register(Cell.self, forCellReuseIdentifier: self.identity)
+        tableView.register(Cell.self, forCellReuseIdentifier: self._flix_identity)
     }
     
 }
@@ -115,7 +113,7 @@ extension AnimatableTableViewMultiNodeProvider {
 extension AnimatableTableViewMultiNodeProvider {
     
     public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
-        let providerIdentity = self.identity
+        let providerIdentity = self._flix_identity
         return genteralValues()
             .map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
@@ -147,6 +145,10 @@ extension UniqueAnimatableTableViewProvider {
 
     public static func ==(lhs: Self, rhs: Self) -> Bool {
         return true
+    }
+    
+    public var identity: String {
+        return self._flix_identity
     }
     
     public var providerIdentity: String {

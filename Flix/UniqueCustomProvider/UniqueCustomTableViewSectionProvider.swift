@@ -10,6 +10,10 @@ import UIKit
 import RxSwift
 
 open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableViewProvider, StringIdentifiableType, Equatable {
+    
+    public var identity: String {
+        return self._flix_identity
+    }
 
     public static func ==(lhs: UniqueCustomTableViewSectionProvider, rhs: UniqueCustomTableViewSectionProvider) -> Bool {
         return true
@@ -18,8 +22,8 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     public typealias Cell = UITableViewHeaderFooterView
     public typealias Value = UniqueCustomTableViewSectionProvider
 
-    open var identity: String
-    open var tableElementKindSection: UITableElementKindSection
+    open let customIdentity: String
+    open let tableElementKindSection: UITableElementKindSection
     
     public let isHidden = Variable(false)
     
@@ -28,11 +32,16 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     open let contentView = UIView()
     open var backgroundView: UIView?
     
-    public init(identity: String, tableElementKindSection: UITableElementKindSection) {
-        self.identity = identity
+    public init(customIdentity: String, tableElementKindSection: UITableElementKindSection) {
+        self.customIdentity = customIdentity
         self.tableElementKindSection = tableElementKindSection
     }
     
+    public init(tableElementKindSection: UITableElementKindSection) {
+        self.customIdentity = ""
+        self.tableElementKindSection = tableElementKindSection
+    }
+
     open func tableView(_ tableView: UITableView, heightInSection section: Int, value: UniqueCustomTableViewSectionProvider) -> CGFloat? {
         return self.sectionHeight?()
     }

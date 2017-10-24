@@ -12,8 +12,7 @@ import RxCocoa
 import Flix
 
 open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
-    
-    open let identity: String
+
     open let messageLabel = UILabel()
     open let contentView = UIView()
     open let backgroundView = UIView()
@@ -22,8 +21,7 @@ open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
     
     let disposeBag = DisposeBag()
     
-    public init(identity: String) {
-        self.identity = identity
+    public init() {
         self.messageLabel.font = UIFont.systemFont(ofSize: 12)
         self.messageLabel.textColor = UIColor.white
     }

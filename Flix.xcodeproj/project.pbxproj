@@ -15,6 +15,8 @@
 		2617C2701F84D15C007F8228 /* Wireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C26F1F84D15C007F8228 /* Wireframe.swift */; };
 		2617C2731F84D18B007F8228 /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2721F84D18B007F8228 /* String+URL.swift */; };
 		2617C2761F84D1BF007F8228 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2751F84D1BF007F8228 /* ActivityIndicator.swift */; };
+		262874601F9F8DD000F66907 /* ProviderDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628745F1F9F8DD000F66907 /* ProviderDescription.swift */; };
+		262874621F9F8F0F00F66907 /* CustomIdentityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262874611F9F8F0F00F66907 /* CustomIdentityType.swift */; };
 		26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F6F1F8537EC00E2834D /* UniqueMessageTableViewProvider.swift */; };
 		26424F721F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F711F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift */; };
 		26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */; };
@@ -104,6 +106,8 @@
 		2617C26F1F84D15C007F8228 /* Wireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wireframe.swift; sourceTree = "<group>"; };
 		2617C2721F84D18B007F8228 /* String+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
 		2617C2751F84D1BF007F8228 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		2628745F1F9F8DD000F66907 /* ProviderDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDescription.swift; sourceTree = "<group>"; };
+		262874611F9F8F0F00F66907 /* CustomIdentityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIdentityType.swift; sourceTree = "<group>"; };
 		26424F6F1F8537EC00E2834D /* UniqueMessageTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueMessageTableViewProvider.swift; sourceTree = "<group>"; };
 		26424F711F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextFieldTableViewProvider.swift; sourceTree = "<group>"; };
 		26424F731F853B0A00E2834D /* UniqueButtonTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueButtonTableViewProvider.swift; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 				2670E6811F83EBE2003A5BA7 /* CollectionViewSectionProvider.swift */,
 				26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */,
 				56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */,
+				2628745F1F9F8DD000F66907 /* ProviderDescription.swift */,
+				262874611F9F8F0F00F66907 /* CustomIdentityType.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -615,6 +621,7 @@
 				26BAF0351F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift in Sources */,
 				2670E67E1F83EA4A003A5BA7 /* AnimatableCollectionViewBuilder.swift in Sources */,
 				5694616D1F9C710A009F7971 /* IdentifiableNode.swift in Sources */,
+				262874601F9F8DD000F66907 /* ProviderDescription.swift in Sources */,
 				26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */,
 				56FFB7C91F89F7110066B903 /* TableViewBuilder.swift in Sources */,
 				56FFB7CB1F89FBEA0066B903 /* TableViewSectionProvider.swift in Sources */,
@@ -622,6 +629,7 @@
 				2670E6761F83E31F003A5BA7 /* CollectionViewProvider.swift in Sources */,
 				2666E4081F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift in Sources */,
 				56E06EF01F9C46310074032A /* TableViewDelegateProxy.swift in Sources */,
+				262874621F9F8F0F00F66907 /* CustomIdentityType.swift in Sources */,
 				2670E6801F83EAA3003A5BA7 /* CollectionViewSectionPartionProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

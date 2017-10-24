@@ -14,7 +14,7 @@ import Flix
 class GitHubSignupViewController: TableViewController {
     
     let logoProvider: UniqueCustomTableViewSectionProvider = {
-        let provider = UniqueCustomTableViewSectionProvider(identity: "logo", tableElementKindSection: UITableElementKindSection.header)
+        let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: UITableElementKindSection.header)
         provider.backgroundView = UIView()
         provider.backgroundView?.backgroundColor = UIColor(named: "Cinder")
         provider.sectionHeight = { return 180 }
@@ -30,40 +30,37 @@ class GitHubSignupViewController: TableViewController {
     }()
     
     let usernameProvider: UniqueTextFieldTableViewProvider = {
-        let provider = UniqueTextFieldTableViewProvider(identity: "username")
+        let provider = UniqueTextFieldTableViewProvider()
         provider.textField.placeholder = "Username"
         provider.textField.keyboardType = .asciiCapable
         return provider
     }()
-    let usernameValidationTableViewProvider = UniqueMessageTableViewProvider(identity: "usernameValidation")
+    let usernameValidationTableViewProvider = UniqueMessageTableViewProvider()
     
     let passwordProvider: UniqueTextFieldTableViewProvider = {
-        let provider = UniqueTextFieldTableViewProvider(identity: "password")
+        let provider = UniqueTextFieldTableViewProvider()
         provider.textField.placeholder = "Password"
         provider.textField.isSecureTextEntry = true
         return provider
     }()
-    let passwordValidationTableViewProvider = UniqueMessageTableViewProvider(identity: "passwordValidation")
+    let passwordValidationTableViewProvider = UniqueMessageTableViewProvider()
     
     let repeatedPasswordProvider: UniqueTextFieldTableViewProvider = {
-        let provider = UniqueTextFieldTableViewProvider(identity: "repeatedPassword")
+        let provider = UniqueTextFieldTableViewProvider()
         provider.textField.placeholder = "Password Repeat"
         provider.textField.isSecureTextEntry = true
         return provider
     }()
-    let repeatedPasswordValidationTableViewProvider = UniqueMessageTableViewProvider(identity: "repeatedPasswordValidation")
+    let repeatedPasswordValidationTableViewProvider = UniqueMessageTableViewProvider()
     
     let inputDesSectionProvider: UniqueCustomTableViewSectionProvider = {
-        let provider = UniqueCustomTableViewSectionProvider(
-            identity: "inputDesSectionProvider",
-            tableElementKindSection: UITableElementKindSection.footer
-        )
+        let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
         provider.sectionHeight = { return 35 }
         return provider
     }()
 
     let loginProvider: UniqueButtonTableViewProvider = {
-        let provider = UniqueButtonTableViewProvider(identity: "login")
+        let provider = UniqueButtonTableViewProvider()
         provider.textLabel.textColor = UIColor.white
         provider.textLabel.text = "Sign up"
         return provider
@@ -120,7 +117,6 @@ class GitHubSignupViewController: TableViewController {
             .disposed(by: disposeBag)
 
         let inputSectionProviderBuilder = AnimatableTableViewSectionProvider(
-            identity: "inputSectionProviderBuilder",
             providers: [
                 usernameProvider, usernameValidationTableViewProvider,
                 passwordProvider, passwordValidationTableViewProvider,
@@ -129,10 +125,7 @@ class GitHubSignupViewController: TableViewController {
             headerProvider: logoProvider,
             footerProvider: inputDesSectionProvider
         )
-        let loginSectionProviderBuilder = AnimatableTableViewSectionProvider(
-            identity: "loginSectionProviderBuilder",
-            providers: [loginProvider]
-        )
+        let loginSectionProviderBuilder = AnimatableTableViewSectionProvider(providers: [loginProvider])
         
         self.tableView.flix.animatable.build([inputSectionProviderBuilder, loginSectionProviderBuilder])
 

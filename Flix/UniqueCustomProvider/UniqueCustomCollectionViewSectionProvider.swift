@@ -10,8 +10,12 @@ import UIKit
 import RxSwift
 
 open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCollectionViewProvider, StringIdentifiableType, Equatable {
+    
+    public var identity: String {
+        return self._flix_identity
+    }
 
-    open let identity: String
+    open let customIdentity: String
     open let collectionElementKindSection: UICollectionElementKindSection
     
     public typealias Cell = UICollectionReusableView
@@ -23,8 +27,13 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
     
     open let contentView = UIView()
     
-    public init(identity: String, collectionElementKindSection: UICollectionElementKindSection) {
-        self.identity = identity
+    public init(customIdentity: String, collectionElementKindSection: UICollectionElementKindSection) {
+        self.customIdentity = customIdentity
+        self.collectionElementKindSection = collectionElementKindSection
+    }
+    
+    public init(collectionElementKindSection: UICollectionElementKindSection) {
+        self.customIdentity = ""
         self.collectionElementKindSection = collectionElementKindSection
     }
     

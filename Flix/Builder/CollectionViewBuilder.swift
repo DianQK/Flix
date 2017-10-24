@@ -51,20 +51,20 @@ public class CollectionViewBuilder: _CollectionViewBuilder {
         self.sectionProviders = Variable(sectionProviders)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel>(configureCell: { [weak self] dataSource, collectionView, indexPath, node in
-            guard let provider = self?.nodeProviders.first(where: { $0.identity == node.providerIdentity }) else { return UICollectionViewCell() }
+            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UICollectionViewCell() }
             return provider._configureCell(collectionView, indexPath: indexPath, node: node)
             }, configureSupplementaryView: { [weak self] dataSource, collectionView, kind, indexPath in
                 switch UICollectionElementKindSection(rawValue: kind)! {
                 case .footer:
                     guard let node = dataSource[indexPath.section].model.footerNode else { fatalError() }
-                    guard let provider = self?.footerSectionProviders.first(where: { $0.identity == node.providerIdentity }) else { return UICollectionReusableView() }
-                    let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: provider.identity, for: indexPath)
+                    guard let provider = self?.footerSectionProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UICollectionReusableView() }
+                    let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: provider._flix_identity, for: indexPath)
                     provider._configureSupplementaryView(collectionView, sectionView: reusableView, indexPath: indexPath, node: node)
                     return reusableView
                 case .header:
                     guard let node = dataSource[indexPath.section].model.headerNode else { fatalError() }
-                    guard let provider = self?.headerSectionProviders.first(where: { $0.identity == node.providerIdentity }) else { return UICollectionReusableView() }
-                    let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: provider.identity, for: indexPath)
+                    guard let provider = self?.headerSectionProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UICollectionReusableView() }
+                    let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: provider._flix_identity, for: indexPath)
                     provider._configureSupplementaryView(collectionView, sectionView: reusableView, indexPath: indexPath, node: node)
                     return reusableView
                 }
@@ -87,12 +87,7 @@ public class CollectionViewBuilder: _CollectionViewBuilder {
     }
     
     public convenience init(collectionView: UICollectionView, providers: [_CollectionViewMultiNodeProvider]) {
-        let sectionProviderCollectionViewBuilder = CollectionViewSectionProvider(
-            identity: "Flix",
-            providers: providers,
-            headerProvider: nil,
-            footerProvider: nil
-        )
+        let sectionProviderCollectionViewBuilder = CollectionViewSectionProvider(providers: providers)
         self.init(collectionView: collectionView, sectionProviders: [sectionProviderCollectionViewBuilder])
     }
     

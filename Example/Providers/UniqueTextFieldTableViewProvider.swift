@@ -12,13 +12,8 @@ import RxCocoa
 import Flix
 
 open class UniqueTextFieldTableViewProvider: UniqueAnimatableTableViewProvider {
-    
-    open let identity: String
+
     open let textField = UITextField()
-    
-    public init(identity: String) {
-        self.identity = identity
-    }
     
     open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         cell.selectionStyle = .none

@@ -16,8 +16,8 @@ open class UniqueButtonTableViewProvider: UniqueCustomTableViewProvider {
     let textLabel = UILabel()
     let activityIndicatorView = UIActivityIndicatorView()
     
-    public override init(identity: String) {
-        super.init(identity: identity)
+    public override init() {
+        super.init()
         textLabel.textAlignment = .center
         
         backgroundView = UIView()

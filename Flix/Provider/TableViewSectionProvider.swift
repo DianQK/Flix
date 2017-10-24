@@ -11,21 +11,18 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class TableViewSectionProvider {
+public class TableViewSectionProvider: FlixCustomStringConvertible {
     
     public var headerProvider: _SectionPartionTableViewProvider?
     public var footerProvider: _SectionPartionTableViewProvider?
     public var providers: [_TableViewMultiNodeProvider]
-    public let sectionProviderIdentity: String
     
     public let isHidden = Variable(false)
     
     public init(
-        identity: String,
         providers: [_TableViewMultiNodeProvider],
         headerProvider: _SectionPartionTableViewProvider? = nil,
         footerProvider: _SectionPartionTableViewProvider? = nil) {
-        self.sectionProviderIdentity = identity
         self.providers = providers
         self.headerProvider = headerProvider
         self.footerProvider = footerProvider
@@ -50,7 +47,7 @@ public class TableViewSectionProvider {
                 }
         }
         
-        let sectionProviderIdentity = self.sectionProviderIdentity
+        let sectionProviderIdentity = self._flix_identity
         
         let isHidden = self.isHidden.asObservable()
         
@@ -74,14 +71,13 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
     public var animatableProviders: [_AnimatableTableViewMultiNodeProvider]
     
     public init(
-        identity: String,
         providers: [_AnimatableTableViewMultiNodeProvider],
         headerProvider: _AnimatableSectionPartionTableViewProvider? = nil,
         footerProvider: _AnimatableSectionPartionTableViewProvider? = nil) {
         self.animatableProviders = providers
         self.animatableHeaderProvider = headerProvider
         self.animatableFooterProvider = footerProvider
-        super.init(identity: identity, providers: providers, headerProvider: headerProvider, footerProvider: footerProvider)
+        super.init(providers: providers, headerProvider: headerProvider, footerProvider: footerProvider)
     }
     
     func genteralAnimatableSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?> {
@@ -105,7 +101,7 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
 
         let isHidden = self.isHidden.asObservable()
         
-        let sectionProviderIdentity = self.sectionProviderIdentity
+        let sectionProviderIdentity = self._flix_identity
         
         return Observable
             .combineLatest(headerSection, footerSection, nodes, isHidden) { (headerSection, footerSection, nodes, isHidden) -> (section: IdentifiableSectionNode, nodes: [IdentifiableNode])? in

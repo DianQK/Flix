@@ -21,22 +21,20 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
         
         var providers: [_AnimatableCollectionViewMultiNodeProvider] = []
         
-        let doNotDisturbProvider = UniqueSwitchProvider(identity: "doNotDisturbProvider")
+        let doNotDisturbProvider = UniqueSwitchProvider()
         doNotDisturbProvider.titleLabel.text = "勿扰模式"
         providers.append(doNotDisturbProvider)
         
         let doNotDisturbCommnetProvider = UniqueCommentTextProvider(
-            identity:"doNotDisturbCommnetProvider",
             text: "“勿扰模式启用后，屏幕锁定时的来电和提醒将被设为静音，而状态栏中将出现月亮图标。”"
         )
         providers.append(doNotDisturbCommnetProvider)
         
-        let scheduledProvider = UniqueSwitchProvider(identity: "scheduledProvider")
+        let scheduledProvider = UniqueSwitchProvider()
         scheduledProvider.titleLabel.text = "设定时间"
         providers.append(scheduledProvider)
         
         let slienceTitleProvider = UniqueCommentTextProvider(
-            identity:"slienceTitleProvider",
             text: "静音模式："
         )
         providers.append(slienceTitleProvider)
@@ -68,12 +66,11 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
             }
         }
         
-        let radioProvider = RadioProvider(identity: "radioProvider", options: [SlienceMode.always, SlienceMode.whileLocked])
+        let radioProvider = RadioProvider(options: [SlienceMode.always, SlienceMode.whileLocked])
         radioProvider.checkedOption.value = SlienceMode.always
         providers.append(radioProvider)
         
         let slienceCommentProvider = UniqueCommentTextProvider(
-            identity:"slienceCommentProvider",
             text: ""
         )
         radioProvider.checkedOption.asObservable()
@@ -85,18 +82,15 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
         providers.append(slienceCommentProvider)
         
         let allowCallsFromTitleProvider = UniqueCommentTextProvider(
-            identity: "allowCallsFromTitleProvider",
             text: "电话"
         )
         providers.append(allowCallsFromTitleProvider)
         let allowCallsFromProvider = UniqueTextProvider(
-            identity: "allowCallsFromProvider",
             title: "允许以下来电",
             desc: "所有联系人"
         )
         providers.append(allowCallsFromProvider)
         let allowCallsFromCommentProvider = UniqueCommentTextProvider(
-            identity: "allowCallsFromCommentProvider",
             text: "处于”勿扰模式”时，允许联系人来电。"
         )
         providers.append(allowCallsFromCommentProvider)

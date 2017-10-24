@@ -16,9 +16,8 @@ public enum UITableElementKindSection {
     case footer
 }
 
-public protocol _SectionPartionTableViewProvider {
-    
-    var identity: String { get }
+public protocol _SectionPartionTableViewProvider: FlixCustomStringConvertible {
+
     var cellType: UITableViewHeaderFooterView.Type { get }
     var tableElementKindSection: UITableElementKindSection { get }
     
@@ -32,7 +31,7 @@ public protocol _SectionPartionTableViewProvider {
 extension _SectionPartionTableViewProvider {
     
     public func register(_ tableView: UITableView) {
-        tableView.register(self.cellType, forHeaderFooterViewReuseIdentifier: self.identity)
+        tableView.register(self.cellType, forHeaderFooterViewReuseIdentifier: self._flix_identity)
     }
 
 }
@@ -58,7 +57,7 @@ extension SectionPartionTableViewProvider {
     }
     
     public func _genteralSectionPartion() -> Observable<_Node?> {
-        let providerIdentity = self.identity
+        let providerIdentity = self._flix_identity
         return genteralSection().map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
     
@@ -91,18 +90,17 @@ extension AnimatablePartionSectionTableViewProvider {
     public func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
         return genteralAnimatableSectionPartion()
     }
+
+    public var identity: String {
+        return self._flix_identity
+    }
     
 }
 
 extension AnimatablePartionSectionTableViewProvider {
-
-    public func _genteralSectionPartion() -> Observable<_Node?> {
-        let providerIdentity = self.identity
-        return genteralSection().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
-    }
     
     public func genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
-        let providerIdentity = self.identity
+        let providerIdentity = self._flix_identity
         return genteralSection().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     

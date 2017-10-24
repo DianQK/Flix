@@ -19,7 +19,7 @@ class ExampleListViewController: CollectionViewController {
         
         typealias Model = TextListProviderModel<UIViewController.Type>
         
-        let iconProvider = UniqueCustomCollectionViewProvider(identity: "iconProvider")
+        let iconProvider = UniqueCustomCollectionViewProvider()
         let iconImageView = UIImageView(image: #imageLiteral(resourceName: "Flix Icon"))
         iconProvider.backgroundView = UIView()
         iconProvider.backgroundView?.backgroundColor = UIColor.white
@@ -40,7 +40,6 @@ class ExampleListViewController: CollectionViewController {
             .disposed(by: disposeBag)
         
         let textListProvider = TextListProvider(
-            identity: "textListProvider",
             items: [
                 Model(title: "Photos", desc: "", value: PhotoSettingsViewController.self),
                 Model(title: "勿扰模式", desc: "", value: DoNotDisturbSettingsViewController.self),

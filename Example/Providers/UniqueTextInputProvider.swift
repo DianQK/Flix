@@ -10,15 +10,10 @@ import UIKit
 import RxSwift
 import Flix
 
-struct UniqueTextInputProvider: UniqueAnimatableCollectionViewProvider {
-    
-    let identity: String
+class UniqueTextInputProvider: UniqueAnimatableCollectionViewProvider {
+
     let textView = UITextView()
     let disposeBag = DisposeBag()
-    
-    init(identity: String) {
-        self.identity = identity
-    }
     
     func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         cell.contentView.addSubview(textView)

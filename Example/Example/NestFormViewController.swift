@@ -42,23 +42,21 @@ struct HardwareFormItem: Equatable, StringIdentifiableType {
     var identity: String {
         switch self.item {
         case .count:
-            return providerIdentity + "count" + String(id)
+            return "count" + String(id)
         case .name:
-            return providerIdentity + "name" + String(id)
+            return "name" + String(id)
         case .unitPrice:
-            return providerIdentity + "unitPrice" + String(id)
+            return "unitPrice" + String(id)
         case .delete:
-            return providerIdentity + "delete" + String(id)
+            return "delete" + String(id)
         }
     }
     
     let id: Int
-    let providerIdentity: String
     let item: _HardwareFormItem
     
-    init(id: Int, providerIdentity: String, item: _HardwareFormItem) {
+    init(id: Int, item: _HardwareFormItem) {
         self.id = id
-        self.providerIdentity = providerIdentity
         self.item = item
     }
     
@@ -129,34 +127,28 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
     
     let hardwareForms = Variable([HardwareForm]())
     
-    let identity: String
-    
-    init(identity: String) {
-        self.identity = identity
-    }
-    
     func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: HardwareFormItem) -> UITableViewCell {
         switch value.item {
         case let .name(name):
-            let cell = tableView.dequeueReusableCell(withIdentifier: identity + "NameUITableViewCell", for: indexPath) as! ItemInputTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: _flix_identity + "NameUITableViewCell", for: indexPath) as! ItemInputTableViewCell
             cell.titleLabel.text = "品名"
             cell.textField.keyboardType = .default
             (cell.textField.rx.textInput <-> name).disposed(by: cell.reuseBag)
             return cell
         case let .count(count):
-            let cell = tableView.dequeueReusableCell(withIdentifier: identity + "CountUITableViewCell", for: indexPath) as! ItemInputTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: _flix_identity + "CountUITableViewCell", for: indexPath) as! ItemInputTableViewCell
             cell.titleLabel.text = "数量"
             cell.textField.keyboardType = .numberPad
             (cell.textField.rx.textInput <-> count).disposed(by: cell.reuseBag)
             return cell
         case let .unitPrice(unitPrice):
-            let cell = tableView.dequeueReusableCell(withIdentifier: identity + "UnitPriceUITableViewCell", for: indexPath) as! ItemInputTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: _flix_identity + "UnitPriceUITableViewCell", for: indexPath) as! ItemInputTableViewCell
             cell.titleLabel.text = "单价"
             cell.textField.keyboardType = .numberPad
             (cell.textField.rx.textInput <-> unitPrice).disposed(by: cell.reuseBag)
             return cell
         case .delete:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identity + "DeleteUITableViewCell", for: indexPath) as! TextTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: _flix_identity + "DeleteUITableViewCell", for: indexPath) as! TextTableViewCell
             cell.contentLabel.textColor = UIColor.white
             cell.backgroundColor = UIColor.red
             cell.selectionStyle = .none
@@ -186,35 +178,34 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
     }
     
     func genteralValues() -> Observable<[HardwareFormItem]> {
-        let providerIdentity = self.identity
         return self.hardwareForms.asObservable()
             .map { (forms: [HardwareForm]) -> [HardwareFormItem] in
                 forms.flatMap({ (form: HardwareForm) -> [HardwareFormItem] in
                     return [
-                        HardwareFormItem(id: form.id, providerIdentity: providerIdentity, item: .name(form.name)),
-                        HardwareFormItem(id: form.id, providerIdentity: providerIdentity, item: .count(form.count)),
-                        HardwareFormItem(id: form.id, providerIdentity: providerIdentity, item: .unitPrice(form.unitPrice)),
-                        HardwareFormItem(id: form.id, providerIdentity: providerIdentity, item: .delete)
+                        HardwareFormItem(id: form.id, item: .name(form.name)),
+                        HardwareFormItem(id: form.id, item: .count(form.count)),
+                        HardwareFormItem(id: form.id, item: .unitPrice(form.unitPrice)),
+                        HardwareFormItem(id: form.id, item: .delete)
                     ]
                 })
         }
     }
 
     func register(_ tableView: UITableView) {
-        tableView.register(ItemInputTableViewCell.self, forCellReuseIdentifier: identity + "NameUITableViewCell")
-        tableView.register(ItemInputTableViewCell.self, forCellReuseIdentifier: identity + "CountUITableViewCell")
-        tableView.register(ItemInputTableViewCell.self, forCellReuseIdentifier: identity + "UnitPriceUITableViewCell")
-        tableView.register(TextTableViewCell.self, forCellReuseIdentifier: identity + "DeleteUITableViewCell")
+        tableView.register(ItemInputTableViewCell.self, forCellReuseIdentifier: _flix_identity + "NameUITableViewCell")
+        tableView.register(ItemInputTableViewCell.self, forCellReuseIdentifier: _flix_identity + "CountUITableViewCell")
+        tableView.register(ItemInputTableViewCell.self, forCellReuseIdentifier: _flix_identity + "UnitPriceUITableViewCell")
+        tableView.register(TextTableViewCell.self, forCellReuseIdentifier: _flix_identity + "DeleteUITableViewCell")
     }
-    
+
 }
 
 class UniqueTitleTableViewProvider: UniqueCustomTableViewProvider {
     
     let titleLabel = UILabel()
     
-    override init(identity: String) {
-        super.init(identity: identity)
+    override init() {
+        super.init()
         self.itemHeight = { return 60 }
         self.selectionStyle.value = .none
         titleLabel.font = UIFont.boldSystemFont(ofSize: 23)
@@ -232,8 +223,8 @@ class UniqueItemInputTableViewProvider: UniqueCustomTableViewProvider {
     let titleLabel = UILabel()
     let textField = UITextField()
     
-    override init(identity: String) {
-        super.init(identity: identity)
+    override init() {
+        super.init()
         
         selectionStyle.value = .none
         
@@ -258,25 +249,25 @@ class UniqueItemInputTableViewProvider: UniqueCustomTableViewProvider {
 class NestFormViewController: TableViewController {
     
     let titleProvider: UniqueTitleTableViewProvider = {
-        let provider = UniqueTitleTableViewProvider(identity: "titleProvider")
+        let provider = UniqueTitleTableViewProvider()
         provider.titleLabel.text = "基本信息"
         return provider
     }()
     
     let titleInputProvider: UniqueItemInputTableViewProvider = {
-        let provider = UniqueItemInputTableViewProvider(identity: "titleInputProvider")
+        let provider = UniqueItemInputTableViewProvider()
         provider.titleLabel.text = "标题"
         return provider
     }()
     
     let configurationTitleProvider: UniqueTitleTableViewProvider = {
-        let provider = UniqueTitleTableViewProvider(identity: "configurationTitleProvider")
+        let provider = UniqueTitleTableViewProvider()
         provider.titleLabel.text = "配置"
         return provider
     }()
     
     let addProvider: UniqueButtonTableViewProvider = {
-        let provider = UniqueButtonTableViewProvider(identity: "addProvider")
+        let provider = UniqueButtonTableViewProvider()
         provider.textLabel.textColor = UIColor.white
         provider.textLabel.text = "添加"
         provider.backgroundView?.backgroundColor = UIColor(named: "Ufo Green")!
@@ -284,7 +275,7 @@ class NestFormViewController: TableViewController {
         return provider
     }()
     
-    let hardwareFormProvider = HardwareFormProvider(identity: "HardwareFormProvider")
+    let hardwareFormProvider = HardwareFormProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -294,24 +285,18 @@ class NestFormViewController: TableViewController {
         hardwareFormProvider.hardwareForms.value = [HardwareForm(id: 1)]
         
         let fillFormSectionProvider = AnimatableTableViewSectionProvider(
-            identity: "fillFormSectionProvider",
             providers: [titleProvider, titleInputProvider, configurationTitleProvider, hardwareFormProvider]
         )
         
         let addHeaderProvider: UniqueCustomTableViewSectionProvider = {
-            let provider = UniqueCustomTableViewSectionProvider(
-                identity: "addHeaderProvider",
-                tableElementKindSection: UITableElementKindSection.header
-            )
+            let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
             provider.sectionHeight = { return 20 }
             return provider
         }()
         
         let addSectionProvider = AnimatableTableViewSectionProvider(
-            identity: "addSectionProvider",
             providers: [addProvider],
-            headerProvider: addHeaderProvider,
-            footerProvider: nil
+            headerProvider: addHeaderProvider
         )
         
         addProvider.tap.asObservable()

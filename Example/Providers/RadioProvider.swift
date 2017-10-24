@@ -53,9 +53,8 @@ class RadioCollectionViewCell: UICollectionViewCell {
 
 }
 
-struct RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableCollectionViewProvider {
-    
-    let identity: String // Hashable
+class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableCollectionViewProvider {
+
     let options: [Option]
     let checkedOption = Variable<Option?>(nil)
     let disposeBag = DisposeBag()
@@ -63,8 +62,7 @@ struct RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColl
     typealias Cell = RadioCollectionViewCell
     typealias Value = Option
     
-    init(identity: String, options: [Option]) {
-        self.identity = identity
+    init(options: [Option]) {
         self.options = options
     }
     

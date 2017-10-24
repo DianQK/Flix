@@ -20,8 +20,6 @@ extension String: StringIdentifiableType {
 }
 
 class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, TableViewDeleteable {
-
-    let identity: String
     
     typealias Cell = UITableViewCell
     typealias Value = String
@@ -29,11 +27,7 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
     let values = Variable(["手电筒", "计时器", "计算器", "低电量模式", "屏幕录制", "备忘录", "闹钟", "相机"])
     
     let itemDeleted = PublishSubject<String>()
-    
-    init(identity: String) {
-        self.identity = identity
-    }
-    
+
     func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: String) {
         cell.textLabel?.text = value
     }
@@ -68,18 +62,12 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
 
 class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
     
-    let identity: String
-    
     typealias Cell = UITableViewCell
     typealias Value = String
     
     let values = Variable(["放大器", "辅助功能快捷键", "驾驶勿扰", "秒表", "文字大小", "引导式访问", "语音备忘录", "Apple TV Remote 遥控器", "Wallet"])
     
     let itemInserted = PublishSubject<String>()
-    
-    init(identity: String) {
-        self.identity = identity
-    }
     
     func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: String) {
         cell.textLabel?.text = value
@@ -106,8 +94,8 @@ class TitleTableViewSectionProvider: UniqueCustomTableViewSectionProvider {
     
     let titleLabel = UILabel()
     
-    override init(identity: String, tableElementKindSection: UITableElementKindSection) {
-        super.init(identity: identity, tableElementKindSection: tableElementKindSection)
+    override init(tableElementKindSection: UITableElementKindSection) {
+        super.init(tableElementKindSection: tableElementKindSection)
         titleLabel.font = UIFont.systemFont(ofSize: 13)
         titleLabel.textColor = UIColor(named: "CommentText")
         titleLabel.numberOfLines = 0
@@ -140,10 +128,7 @@ class ControlCenterCustomizeViewController: TableViewController {
         
         title = "自定"
         
-        let tipHeaderSectionProvider = UniqueCustomTableViewSectionProvider(
-            identity: "tipHeaderSectionProvider",
-            tableElementKindSection: UITableElementKindSection.header
-        )
+        let tipHeaderSectionProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
         tipHeaderSectionProvider.sectionHeight = { return 110 }
         let tipLabel = UILabel()
         tipLabel.text = "添加和整理显示在“控制中心”中的附加控制。"
@@ -156,40 +141,32 @@ class ControlCenterCustomizeViewController: TableViewController {
         tipLabel.leadingAnchor.constraint(equalTo: tipHeaderSectionProvider.contentView.leadingAnchor, constant: 35).isActive = true
         tipLabel.trailingAnchor.constraint(equalTo: tipHeaderSectionProvider.contentView.trailingAnchor, constant: -35).isActive = true
         let tipSectionProvider = AnimatableTableViewSectionProvider(
-            identity: "tipSectionProvider",
             providers: [],
-            headerProvider: tipHeaderSectionProvider,
-            footerProvider: nil
+            headerProvider: tipHeaderSectionProvider
         )
         
-        let includeControlProvider = IncludeControlProvider(identity: "includeControlProvider")
+        let includeControlProvider = IncludeControlProvider()
         
-        let includeControlTitleHeaderSectionProvider = TitleTableViewSectionProvider(identity: "includeControlTitleHeaderSectionProvider", tableElementKindSection: .header)
+        let includeControlTitleHeaderSectionProvider = TitleTableViewSectionProvider(tableElementKindSection: .header)
         includeControlTitleHeaderSectionProvider.titleLabel.text = "包括"
         
-        let includeControlFooterSectionProvider = UniqueCustomTableViewSectionProvider(
-            identity: "includeControlFooterSectionProvider",
-            tableElementKindSection: .footer
-        )
+        let includeControlFooterSectionProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
         includeControlFooterSectionProvider.sectionHeight = { return 30 }
 
         let includeControlSectionProvider = AnimatableTableViewSectionProvider(
-            identity: "includeControlSectionProvider",
             providers: [includeControlProvider],
             headerProvider: includeControlTitleHeaderSectionProvider,
             footerProvider: includeControlFooterSectionProvider
         )
 
-        let moreControlProvider = MoreControlProvider(identity: "moreControlProvider")
+        let moreControlProvider = MoreControlProvider()
         
-        let moreControlTitleHeaderSectionProvider = TitleTableViewSectionProvider(identity: "moreControlTitleHeaderSectionProvider", tableElementKindSection: .header)
+        let moreControlTitleHeaderSectionProvider = TitleTableViewSectionProvider(tableElementKindSection: .header)
         moreControlTitleHeaderSectionProvider.titleLabel.text = "更多控制"
 
         let moreControlSectionProvider = AnimatableTableViewSectionProvider(
-            identity: "moreControlSectionProvider",
             providers: [moreControlProvider],
-            headerProvider: moreControlTitleHeaderSectionProvider,
-            footerProvider: nil
+            headerProvider: moreControlTitleHeaderSectionProvider
         )
         
         includeControlProvider.itemDeleted

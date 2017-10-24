@@ -9,9 +9,9 @@
 import UIKit
 import RxSwift
 
-open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewProvider {
-
-    open let identity: String
+open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewProvider, CustomIdentityType {
+    
+    open let customIdentity: String
     open let contentView = UIView()
     open var selectedBackgroundView: UIView?
     open var backgroundView: UIView?
@@ -23,8 +23,12 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
     
     public let isHidden = Variable(false)
     
-    public init(identity: String) {
-        self.identity = identity
+    public init(customIdentity: String) {
+        self.customIdentity = customIdentity
+    }
+    
+    public init() {
+        self.customIdentity = ""
     }
 
     open func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {

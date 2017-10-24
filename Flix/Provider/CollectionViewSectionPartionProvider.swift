@@ -18,9 +18,8 @@ public enum UICollectionElementKindSection: String {
 
 }
 
-public protocol _SectionPartionCollectionViewProvider {
+public protocol _SectionPartionCollectionViewProvider: FlixCustomStringConvertible {
 
-    var identity: String { get }
     var cellType: UICollectionReusableView.Type { get }
     var collectionElementKindSection: UICollectionElementKindSection { get }
 
@@ -35,7 +34,7 @@ public protocol _SectionPartionCollectionViewProvider {
 extension _SectionPartionCollectionViewProvider {
     
     public func register(_ collectionView: UICollectionView) {
-        collectionView.register(self.cellType, forSupplementaryViewOfKind: self.collectionElementKindSection.rawValue, withReuseIdentifier: self.identity)
+        collectionView.register(self.cellType, forSupplementaryViewOfKind: self.collectionElementKindSection.rawValue, withReuseIdentifier: self._flix_identity)
     }
     
 }
@@ -62,7 +61,7 @@ extension SectionPartionCollectionViewProvider {
     }
     
     public func _genteralSectionPartion() -> Observable<_Node?> {
-        let providerIdentity = self.identity
+        let providerIdentity = self._flix_identity
         return genteralSectionPartion().map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
     
@@ -89,18 +88,17 @@ extension AnimatableSectionPartionCollectionViewProvider {
     public func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
         return genteralAnimatableSection()
     }
+
+    public var identity: String {
+        return self._flix_identity
+    }
     
 }
 
 extension AnimatableSectionPartionCollectionViewProvider {
     
-    public func _genteralSectionPartion() -> Observable<_Node?> {
-        let providerIdentity = self.identity
-        return genteralSectionPartion().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
-    }
-    
     public func genteralAnimatableSection() -> Observable<IdentifiableNode?> {
-        let providerIdentity = self.identity
+        let providerIdentity = self._flix_identity
         return genteralSectionPartion().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     

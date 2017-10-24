@@ -50,7 +50,7 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
         self.sectionProviders = Variable(sectionProviders)
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel>(configureCell: { [weak self] dataSource, tableView, indexPath, node in
-            guard let provider = self?.nodeProviders.first(where: { $0.identity == node.providerIdentity }) else { return UITableViewCell() }
+            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UITableViewCell() }
             return provider._configureCell(tableView, indexPath: indexPath, node: node)
         })
         
@@ -92,7 +92,6 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
     
     public convenience init(tableView: UITableView, providers: [_AnimatableTableViewMultiNodeProvider]) {
         let sectionProviderTableViewBuilder = AnimatableTableViewSectionProvider(
-            identity: "Flix",
             providers: providers,
             headerProvider: nil,
             footerProvider: nil

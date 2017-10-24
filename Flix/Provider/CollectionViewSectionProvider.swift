@@ -47,15 +47,13 @@ struct SectionNode: _SectionNode {
     
 }
 
-public class CollectionViewSectionProvider {
+public class CollectionViewSectionProvider: FlixCustomStringConvertible {
     
     public var headerProvider: _SectionPartionCollectionViewProvider?
     public var footerProvider: _SectionPartionCollectionViewProvider?
     public var providers: [_CollectionViewMultiNodeProvider]
-    public let sectionProviderIdentity: String
     
-    public init(identity: String, providers: [_CollectionViewMultiNodeProvider], headerProvider: _SectionPartionCollectionViewProvider? = nil, footerProvider: _SectionPartionCollectionViewProvider? = nil) {
-        self.sectionProviderIdentity = identity
+    public init(providers: [_CollectionViewMultiNodeProvider], headerProvider: _SectionPartionCollectionViewProvider? = nil, footerProvider: _SectionPartionCollectionViewProvider? = nil) {
         self.providers = providers
         self.headerProvider = headerProvider
         self.footerProvider = footerProvider
@@ -68,7 +66,7 @@ public class CollectionViewSectionProvider {
             .map { $0.flatMap { $0 } }
             .ifEmpty(default: [])
         
-        let sectionProviderIdentity = self.sectionProviderIdentity
+        let sectionProviderIdentity = self._flix_identity
         
         return Observable
             .combineLatest(headerSection, footerSection, nodes) { (headerSection, footerSection, nodes) -> (section: SectionNode, nodes: [Node]) in
@@ -86,11 +84,11 @@ public class AnimatableCollectionViewSectionProvider: CollectionViewSectionProvi
     public var animatableFooterProvider: _AnimatableSectionPartionCollectionViewProvider?
     public var animatableProviders: [_AnimatableCollectionViewMultiNodeProvider]
     
-    public init(identity: String, providers: [_AnimatableCollectionViewMultiNodeProvider], headerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil, footerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil) {
+    public init(providers: [_AnimatableCollectionViewMultiNodeProvider], headerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil, footerProvider: _AnimatableSectionPartionCollectionViewProvider? = nil) {
         self.animatableHeaderProvider = headerProvider
         self.animatableFooterProvider = footerProvider
         self.animatableProviders = providers
-        super.init(identity: identity, providers: providers, headerProvider: headerProvider, footerProvider: footerProvider)
+        super.init(providers: providers, headerProvider: headerProvider, footerProvider: footerProvider)
     }
     
     func genteralSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])> {
@@ -100,7 +98,7 @@ public class AnimatableCollectionViewSectionProvider: CollectionViewSectionProvi
             .map { $0.flatMap { $0 } }
             .ifEmpty(default: [])
         
-        let sectionProviderIdentity = self.sectionProviderIdentity
+        let sectionProviderIdentity = self._flix_identity
         
         return Observable
             .combineLatest(headerSection, footerSection, nodes) { (headerSection, footerSection, nodes) -> (section: IdentifiableSectionNode, nodes: [IdentifiableNode]) in

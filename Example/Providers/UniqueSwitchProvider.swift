@@ -10,16 +10,11 @@ import UIKit
 import RxSwift
 import Flix
 
-struct UniqueSwitchProvider: UniqueAnimatableCollectionViewProvider {
+class UniqueSwitchProvider: UniqueAnimatableCollectionViewProvider {
 
-    let identity: String // Hashable
     let uiSwitch = UISwitch()
     let titleLabel = UILabel()
 
-    init(identity: String) {
-        self.identity = identity
-    }
-    
     func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         cell.contentView.addSubview(uiSwitch)
         uiSwitch.translatesAutoresizingMaskIntoConstraints = false

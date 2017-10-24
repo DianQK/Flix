@@ -51,7 +51,7 @@ public class TableViewBuilder: _TableViewBuilder {
         self.sectionProviders = Variable(sectionProviders)
         
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(configureCell: { [weak self] dataSource, tableView, indexPath, node in
-            guard let provider = self?.nodeProviders.first(where: { $0.identity == node.providerIdentity }) else { return UITableViewCell() }
+            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UITableViewCell() }
             return provider._configureCell(tableView, indexPath: indexPath, node: node)
         })
 
@@ -87,7 +87,6 @@ public class TableViewBuilder: _TableViewBuilder {
     
     public convenience init(tableView: UITableView, providers: [_TableViewMultiNodeProvider]) {
         let sectionProviderTableViewBuilder = TableViewSectionProvider(
-            identity: "Flix",
             providers: providers,
             headerProvider: nil,
             footerProvider: nil

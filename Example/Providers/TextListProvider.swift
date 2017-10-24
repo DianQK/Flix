@@ -62,11 +62,10 @@ struct TextListProviderModel<Value>: Equatable, StringIdentifiableType {
     }
 }
 
-struct TextListProvider<Value>: AnimatableCollectionViewProvider {
+class TextListProvider<Value>: AnimatableCollectionViewProvider {
     
     typealias Model = TextListProviderModel<Value>
-    
-    let identity: String // Hashable
+
     let items: [Model]
     let isHidden = Variable(false)
     
@@ -79,8 +78,7 @@ struct TextListProvider<Value>: AnimatableCollectionViewProvider {
         return _tap.asObservable()
     }
     
-    init(identity: String, items: [Model]) {
-        self.identity = identity
+    init(items: [Model]) {
         self.items = items
     }
     

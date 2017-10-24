@@ -11,10 +11,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public protocol _CollectionViewMultiNodeProvider {
+public protocol _CollectionViewMultiNodeProvider: FlixCustomStringConvertible {
 
-    var identity: String { get }
-    
     func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell
     
     func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
@@ -40,7 +38,6 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: Value) -> CGSize?
 }
 
-
 extension CollectionViewMultiNodeProvider {
     
     public func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
@@ -56,7 +53,7 @@ extension CollectionViewMultiNodeProvider {
     }
     
     public func _genteralNodes() -> Observable<[Node]> {
-        let providerIdentity = self.identity
+        let providerIdentity = self._flix_identity
         return genteralValues()
             .map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
@@ -82,11 +79,11 @@ public protocol CollectionViewProvider: CollectionViewMultiNodeProvider {
 extension CollectionViewProvider {
     
     public func register(_ collectionView: UICollectionView) {
-        collectionView.register(Cell.self, forCellWithReuseIdentifier: self.identity)
+        collectionView.register(Cell.self, forCellWithReuseIdentifier: self._flix_identity)
     }
     
     public func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identity, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self._flix_identity, for: indexPath)
         self.configureCell(collectionView, cell: cell as! Cell, indexPath: indexPath, value: value)
         return cell
     }
@@ -120,7 +117,7 @@ extension AnimatableCollectionViewMultiNodeProvider {
 extension AnimatableCollectionViewMultiNodeProvider {
     
     public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
-        let providerIdentity = self.identity
+        let providerIdentity = self._flix_identity
         return genteralValues().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
@@ -155,6 +152,10 @@ extension UniqueAnimatableCollectionViewProvider {
     
     public var providerIdentity: String {
         return self.identity
+    }
+    
+    public var identity: String {
+        return self._flix_identity
     }
     
     public func genteralValues() -> Observable<[Self]> {

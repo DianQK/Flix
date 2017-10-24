@@ -59,14 +59,12 @@ class TextSectionProvider: AnimatableSectionPartionCollectionViewProvider, Strin
 
     typealias Cell = TextCollectionReusableView
     typealias NodeType = TextSectionProvider
-    
-    let identity: String
+
     let collectionElementKindSection: UICollectionElementKindSection
     let text: Variable<String>
     let disposeBag = DisposeBag()
     
-    init(identity: String, collectionElementKindSection: UICollectionElementKindSection, text: String) {
-        self.identity = identity
+    init(collectionElementKindSection: UICollectionElementKindSection, text: String) {
         self.collectionElementKindSection = collectionElementKindSection
         self.text = Variable(text)
     }

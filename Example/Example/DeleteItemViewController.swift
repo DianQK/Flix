@@ -11,25 +11,19 @@ import RxSwift
 import RxCocoa
 import Flix
 
-struct Tag {
+struct Tag: StringIdentifiableType, Equatable {
+
     let id: Int
     let name = Variable("")
-}
 
-struct TagWarp: StringIdentifiableType, Equatable {
+    var identity: String {
+        return "\(id)"
+    }
 
-    static func ==(lhs: TagWarp, rhs: TagWarp) -> Bool {
-        return lhs.identity == rhs.identity
+    static func ==(lfs: Tag, rhs: Tag) -> Bool {
+        return lfs.id == rhs.id && lfs.name === rhs.name
     }
-    
-    let identity: String
-    let tag: Tag
-    
-    init(providerIdentity: String, tag: Tag) {
-        self.identity = providerIdentity + "\(tag.id)"
-        self.tag = tag
-    }
-    
+
 }
 
 class TagTableViewCell: UITableViewCell {
@@ -67,28 +61,21 @@ class TagTableViewCell: UITableViewCell {
 class InputTagsProvider: AnimatableTableViewProvider, TableViewDeleteable {
 
     typealias Cell = TagTableViewCell
-    typealias Value = TagWarp
+    typealias Value = Tag
     
-    let identity: String
     let tags = Variable<[Tag]>([])
-    
-    init(identity: String) {
-        self.identity = identity
-    }
-    
-    func configureCell(_ tableView: UITableView, cell: TagTableViewCell, indexPath: IndexPath, value: TagWarp) {
+
+    func configureCell(_ tableView: UITableView, cell: TagTableViewCell, indexPath: IndexPath, value: Tag) {
         cell.textField.placeholder = "Tag Name"
-        (cell.textField.rx.textInput <-> value.tag.name).disposed(by: cell.reuseBag)
+        (cell.textField.rx.textInput <-> value.name).disposed(by: cell.reuseBag)
     }
     
-    func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: TagWarp) {
-        self.removeItem(id: value.tag.id)
+    func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: Tag) {
+        self.removeItem(id: value.id)
     }
     
-    func genteralValues() -> Observable<[TagWarp]> {
-        let providerIdentity = self.identity
+    func genteralValues() -> Observable<[Tag]> {
         return tags.asObservable()
-            .map { $0.map { TagWarp(providerIdentity: providerIdentity, tag: $0) } }
     }
     
     func addItem() {
@@ -109,10 +96,10 @@ class DeleteItemViewController: TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let inputTagsProvider = InputTagsProvider(identity: "inputTagsProvider")
+        let inputTagsProvider = InputTagsProvider()
         inputTagsProvider.tags.value = [Tag(id: 1)]
         
-        let addNewTagProvider = UniqueCustomTableViewProvider(identity: "addNewTagProvider")
+        let addNewTagProvider = UniqueCustomTableViewProvider()
         let addNewTagImageView = UIImageView(image: #imageLiteral(resourceName: "Control Add"))
         addNewTagProvider.contentView.addSubview(addNewTagImageView)
         addNewTagImageView.translatesAutoresizingMaskIntoConstraints = false

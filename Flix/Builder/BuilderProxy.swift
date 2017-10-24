@@ -111,7 +111,7 @@ extension FlixProxy where Base: UITableView {
     
     public func build(_ providers: [_TableViewMultiNodeProvider]) {
         if let builder = base.builder {
-            builder.sectionProviders.value = [TableViewSectionProvider(identity: "Flix", providers: providers)]
+            builder.sectionProviders.value = [TableViewSectionProvider(providers: providers)]
         } else {
             self.base.builder = TableViewBuilder(tableView: self.base, providers: providers)
         }
@@ -131,7 +131,7 @@ extension FlixAnimatableProxy where Base: UITableView {
     
     public func build(_ providers: [_AnimatableTableViewMultiNodeProvider]) {
         if let builder = base.animatableBuilder {
-            builder.sectionProviders.value = [AnimatableTableViewSectionProvider(identity: "Flix", providers: providers)]
+            builder.sectionProviders.value = [AnimatableTableViewSectionProvider(providers: providers)]
         } else {
             self.base.animatableBuilder = AnimatableTableViewBuilder(tableView: self.base, providers: providers)
         }
@@ -151,7 +151,7 @@ extension FlixProxy where Base: UICollectionView {
     
     public func build(_ providers: [_CollectionViewMultiNodeProvider]) {
         if let builder = base.builder {
-            builder.sectionProviders.value = [CollectionViewSectionProvider(identity: "Flix", providers: providers)]
+            builder.sectionProviders.value = [CollectionViewSectionProvider(providers: providers)]
         } else {
             self.base.builder = CollectionViewBuilder(collectionView: self.base, providers: providers)
         }
@@ -171,7 +171,7 @@ extension FlixAnimatableProxy where Base: UICollectionView {
     
     public func build(_ providers: [_AnimatableCollectionViewMultiNodeProvider]) {
         if let builder = base.animatableBuilder {
-            builder.sectionProviders.value = [AnimatableCollectionViewSectionProvider(identity: "Flix", providers: providers)]
+            builder.sectionProviders.value = [AnimatableCollectionViewSectionProvider(providers: providers)]
         } else {
             self.base.animatableBuilder = AnimatableCollectionViewBuilder(collectionView: self.base, providers: providers)
         }

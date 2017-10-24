@@ -34,7 +34,7 @@ class LoginViewController: TableViewController {
         
         var section: [AnimatableTableViewSectionProvider] = []
 
-        let usernameProvider = UniqueCustomTableViewProvider(identity: "username")
+        let usernameProvider = UniqueCustomTableViewProvider()
         usernameProvider.contentView.addSubview(usernameTextField)
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         usernameTextField.leadingAnchor.constraint(equalTo: usernameProvider.contentView.leadingAnchor, constant: 15).isActive = true
@@ -42,7 +42,7 @@ class LoginViewController: TableViewController {
         usernameTextField.trailingAnchor.constraint(equalTo: usernameProvider.contentView.trailingAnchor, constant: -15).isActive = true
         usernameTextField.bottomAnchor.constraint(equalTo: usernameProvider.contentView.bottomAnchor).isActive = true
         
-        let passwordProvider = UniqueCustomTableViewProvider(identity: "password")
+        let passwordProvider = UniqueCustomTableViewProvider()
         passwordProvider.contentView.addSubview(passwordTextField)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.leadingAnchor.constraint(equalTo: passwordProvider.contentView.leadingAnchor, constant: 15).isActive = true
@@ -50,20 +50,16 @@ class LoginViewController: TableViewController {
         passwordTextField.trailingAnchor.constraint(equalTo: passwordProvider.contentView.trailingAnchor, constant: -15).isActive = true
         passwordTextField.bottomAnchor.constraint(equalTo: passwordProvider.contentView.bottomAnchor).isActive = true
         
-        let inputDesSectionFooterProvider = UniqueCustomTableViewSectionProvider(
-            identity: "inputDesSectionFooterProvider",
-            tableElementKindSection: UITableElementKindSection.footer
-        )
+        let inputDesSectionFooterProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
         inputDesSectionFooterProvider.sectionHeight = { return 35 }
         
         let inputSectionProvider = AnimatableTableViewSectionProvider(
-            identity: "inputSectionProvider",
             providers: [usernameProvider, passwordProvider],
             footerProvider: inputDesSectionFooterProvider
         )
         section.append(inputSectionProvider)
         
-        let loginProvider = UniqueCustomTableViewProvider(identity: "login")
+        let loginProvider = UniqueCustomTableViewProvider()
         loginProvider.contentView.addSubview(loginTextLabel)
         loginTextLabel.translatesAutoresizingMaskIntoConstraints = false
         loginTextLabel.leadingAnchor.constraint(equalTo: loginProvider.contentView.leadingAnchor).isActive = true
@@ -96,10 +92,7 @@ class LoginViewController: TableViewController {
             })
             .disposed(by: disposeBag)
         
-        let loginSectionProvider = AnimatableTableViewSectionProvider(
-            identity: "loginSectionProvider",
-            providers: [loginProvider]
-        )
+        let loginSectionProvider = AnimatableTableViewSectionProvider(providers: [loginProvider])
         section.append(loginSectionProvider)
         
         self.tableView.flix.animatable.build(section)

@@ -11,7 +11,7 @@ import RxSwift
 
 open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
-    open let identity: String
+    open let customIdentity: String
     open let contentView = UIView()
     open var selectedBackgroundView: UIView?
     open var backgroundView: UIView?
@@ -34,8 +34,12 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
     private let disposeBag = DisposeBag()
     
-    public init(identity: String) {
-        self.identity = identity
+    public init(customIdentity: String) {
+        self.customIdentity = customIdentity
+    }
+    
+    public init() {
+        self.customIdentity = ""
     }
     
     open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
