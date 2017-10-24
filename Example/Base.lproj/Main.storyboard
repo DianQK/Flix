@@ -28,7 +28,7 @@
         <!--Flix Example-->
         <scene sceneID="N9B-kg-YAs">
             <objects>
-                <viewController id="agV-ik-DZd" customClass="ExampleListViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="agV-ik-DZd" customClass="ExampleListViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mlr-jv-Unw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,5 +41,97 @@
             </objects>
             <point key="canvasLocation" x="-58" y="122"/>
         </scene>
+        <!--Storyboard-->
+        <scene sceneID="vIg-dQ-wLM">
+            <objects>
+                <viewController storyboardIdentifier="StoryboardViewController" id="zub-yB-tRm" customClass="StoryboardViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DGG-I5-GtT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dl8-Fu-HT0" userLabel="FlixStackView" customClass="FlixStackView" customModule="Flix">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37D-Fk-yGX" customClass="FlixStackItemProvider" customModule="Flix">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        <subviews>
+                                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="Flix Icon" translatesAutoresizingMaskIntoConstraints="NO" id="QNU-my-HoV">
+                                                <rect key="frame" x="127" y="20" width="120" height="120"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flix" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od4-iC-ep7">
+                                                <rect key="frame" x="170" y="155" width="35" height="27.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Od4-iC-ep7" firstAttribute="centerX" secondItem="37D-Fk-yGX" secondAttribute="centerX" id="1pb-42-K1J"/>
+                                            <constraint firstItem="QNU-my-HoV" firstAttribute="top" secondItem="37D-Fk-yGX" secondAttribute="top" constant="20" id="WIM-Lo-bej"/>
+                                            <constraint firstItem="Od4-iC-ep7" firstAttribute="top" secondItem="QNU-my-HoV" secondAttribute="bottom" constant="15" id="YtE-GC-dvk"/>
+                                            <constraint firstAttribute="height" constant="200" id="guz-s9-x60"/>
+                                            <constraint firstItem="QNU-my-HoV" firstAttribute="centerX" secondItem="37D-Fk-yGX" secondAttribute="centerX" id="w1g-Ov-5wg"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="flixLogoClicked:" destination="zub-yB-tRm" eventType="touchUpInside" id="G8Q-b2-fRj"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPm-YH-83F" customClass="FlixStackItemProvider" customModule="Flix">
+                                        <rect key="frame" x="0.0" y="200" width="375" height="80"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS form builder in Swift." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFO-pi-g3l">
+                                                <rect key="frame" x="15" y="30" width="190" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQw-Uc-589">
+                                                <rect key="frame" x="311" y="24.5" width="51" height="31"/>
+                                                <color key="onTintColor" red="0.9882352941176471" green="0.29019607843137252" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="contentSwitchChanged:" destination="zub-yB-tRm" eventType="valueChanged" id="sBI-Dm-AzM"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yFO-pi-g3l" secondAttribute="trailing" constant="20" symbolic="YES" id="1TN-an-FyN"/>
+                                            <constraint firstItem="yFO-pi-g3l" firstAttribute="centerY" secondItem="PPm-YH-83F" secondAttribute="centerY" id="4rw-uC-LM5"/>
+                                            <constraint firstItem="yFO-pi-g3l" firstAttribute="leading" secondItem="PPm-YH-83F" secondAttribute="leading" constant="15" id="JFG-Fu-ddq"/>
+                                            <constraint firstItem="HQw-Uc-589" firstAttribute="centerY" secondItem="PPm-YH-83F" secondAttribute="centerY" id="Ppx-7i-cNo"/>
+                                            <constraint firstAttribute="trailing" secondItem="HQw-Uc-589" secondAttribute="trailing" constant="15" id="Rb6-iQ-q12"/>
+                                            <constraint firstAttribute="height" constant="80" id="faK-GM-cnV"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="flixContentClicked:" destination="zub-yB-tRm" eventType="touchUpInside" id="in5-E7-g2P"/>
+                                        </connections>
+                                    </view>
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5H-ce-s9W">
+                                        <rect key="frame" x="0.0" y="280" width="375" height="323"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ngx-7L-RME" firstAttribute="bottom" secondItem="Dl8-Fu-HT0" secondAttribute="bottom" id="0eJ-vS-jIV"/>
+                            <constraint firstItem="Dl8-Fu-HT0" firstAttribute="top" secondItem="Ngx-7L-RME" secondAttribute="top" id="P17-1F-h1k"/>
+                            <constraint firstItem="Ngx-7L-RME" firstAttribute="trailing" secondItem="Dl8-Fu-HT0" secondAttribute="trailing" id="WPr-b9-tS9"/>
+                            <constraint firstItem="Dl8-Fu-HT0" firstAttribute="leading" secondItem="Ngx-7L-RME" secondAttribute="leading" id="bct-VK-AsO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ngx-7L-RME"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Storyboard" id="pxV-YL-ma3"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="logoProvider" destination="37D-Fk-yGX" id="gWJ-NT-dy5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KbF-jH-aAa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="802" y="122"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="Flix Icon" width="120" height="120"/>
+    </resources>
 </document>

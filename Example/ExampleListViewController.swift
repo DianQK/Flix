@@ -17,7 +17,8 @@ class ExampleListViewController: CollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        typealias Model = TextListProviderModel<UIViewController.Type>
+        typealias UIViewControllerCreater = () -> UIViewController
+        typealias Model = TextListProviderModel<UIViewControllerCreater>
         
         let iconProvider = UniqueCustomCollectionViewProvider()
         let iconImageView = UIImageView(image: #imageLiteral(resourceName: "Flix Icon"))
@@ -41,18 +42,19 @@ class ExampleListViewController: CollectionViewController {
         
         let textListProvider = TextListProvider(
             items: [
-                Model(title: "Photos", desc: "", value: PhotoSettingsViewController.self),
-                Model(title: "勿扰模式", desc: "", value: DoNotDisturbSettingsViewController.self),
-                Model(title: "登录示例", desc: "", value: LoginViewController.self),
-                Model(title: "GitHub Signup", desc: "", value: GitHubSignupViewController.self),
-                Model(title: "嵌套表单", desc: "", value: NestFormViewController.self),
-                Model(title: "删除示例", desc: "", value: DeleteItemViewController.self),
-                Model(title: "控制中心", desc: "", value: ControlCenterCustomizeViewController.self)
+                Model(title: "Photos", desc: "", value: { return PhotoSettingsViewController() }),
+                Model(title: "勿扰模式", desc: "", value: { return DoNotDisturbSettingsViewController() }),
+                Model(title: "登录示例", desc: "", value: { return LoginViewController() }),
+                Model(title: "GitHub Signup", desc: "", value: { return GitHubSignupViewController() }),
+                Model(title: "嵌套表单", desc: "", value: { return NestFormViewController() }),
+                Model(title: "删除示例", desc: "", value: { return DeleteItemViewController() }),
+                Model(title: "控制中心", desc: "", value: { return ControlCenterCustomizeViewController() }),
+                Model(title: "Storyboard", desc: "", value: { return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StoryboardViewController") })
             ]
         )
         textListProvider.tapped
             .subscribe(onNext: { [unowned self] (model) in
-                self.show(model.value.init(), sender: nil)
+                self.show(model.value(), sender: nil)
             })
             .disposed(by: disposeBag)
         
