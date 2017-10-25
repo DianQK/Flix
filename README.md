@@ -42,7 +42,7 @@ let usernameTextField = UITextField()
 usernameTextField.placeholder = "用户名"
 usernameTextField.keyboardType = .asciiCapable
 
-let usernameProvider = UniqueCustomTableViewProvider(identity: "usernameProvider")
+let usernameProvider = UniqueCustomTableViewProvider()
 usernameProvider.contentView.addSubview(usernameTextField)
 // 添加你的布局方案
 // usernameTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +58,7 @@ usernameProvider.contentView.addSubview(usernameTextField)
 let passwordTextField = UITextField()
 passwordTextField.placeholder = "密码"
 passwordTextField.isSecureTextEntry = true
-let passwordProvider = UniqueCustomTableViewProvider(identity: "passwordProvider")
+let passwordProvider = UniqueCustomTableViewProvider()
 passwordProvider.contentView.addSubview(passwordTextField)
 // 添加你的布局方案
 // passwordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ passwordProvider.contentView.addSubview(passwordTextField)
 let loginTextLabel = UILabel()
 loginTextLabel.text = "登录"
 loginTextLabel.textAlignment = .center
-let loginProvider = UniqueCustomTableViewProvider(identity: "login")
+let loginProvider = UniqueCustomTableViewProvider()
 loginProvider.contentView.addSubview(loginTextLabel)
 // 添加你的布局方案
 // loginTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -143,10 +143,7 @@ Flix 专注于构建 `UICollectionView` / `UITableView` 的 Cell ，不关心视
 比如：
 
 ```swift
-let footerProvider = UniqueCustomTableViewSectionProvider(
-    identity: "footerProvider",
-    tableElementKindSection: UITableElementKindSection.header
-)
+let footerProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
 let sectionProvider = AnimatableTableViewSectionProvider(
     identity: "sectionProvider",
     providers: [],
@@ -159,5 +156,7 @@ let sectionProvider = AnimatableTableViewSectionProvider(
 ## 构建
 
 通过调用 `tableView.flix.build(_:)` 或 `tableView.flix.animatable.build(_:)` 构建全部的 Cell。`tableView.flix.animatable.build(_:)` 中传入的 Provider 必须都是 `AnimatableProvider` 。
+
+当你需要调换 provider 的是顺序时，可以直接再次调用 `build` 方法，
 
 其余详细使用方法，可以参考 Example 中的一些示例。
