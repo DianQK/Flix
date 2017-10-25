@@ -105,7 +105,7 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
         
         return Observable
             .combineLatest(headerSection, footerSection, nodes, isHidden) { (headerSection, footerSection, nodes, isHidden) -> (section: IdentifiableSectionNode, nodes: [IdentifiableNode])? in
-                if isHidden {
+                if isHidden || (headerSection == nil && footerSection == nil && nodes.isEmpty) {
                     return nil
                 } else {
                     let section = IdentifiableSectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)

@@ -56,6 +56,12 @@
 		26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */; };
 		26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */; };
 		26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */; };
+		5622F6E31FA0DCFC00326201 /* MKLocalSearch+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5622F6E21FA0DCFC00326201 /* MKLocalSearch+Rx.swift */; };
+		5622F6E51FA0E16000326201 /* LocalSearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5622F6E41FA0E16000326201 /* LocalSearchProvider.swift */; };
+		562594521FA0CC9800BF5756 /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594511FA0CC9800BF5756 /* GeolocationService.swift */; };
+		562594551FA0CCA800BF5756 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594531FA0CCA800BF5756 /* CLLocationManager+Rx.swift */; };
+		562594561FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594541FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift */; };
+		562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */; };
 		564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */; };
 		564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */; };
 		565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */; };
@@ -155,6 +161,12 @@
 		26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewProvider.swift; sourceTree = "<group>"; };
 		3623AE6EB18987F4D533683C /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		4D1DE780D16E3E8256EDE880 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
+		5622F6E21FA0DCFC00326201 /* MKLocalSearch+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKLocalSearch+Rx.swift"; sourceTree = "<group>"; };
+		5622F6E41FA0E16000326201 /* LocalSearchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchProvider.swift; sourceTree = "<group>"; };
+		562594511FA0CC9800BF5756 /* GeolocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationService.swift; sourceTree = "<group>"; };
+		562594531FA0CCA800BF5756 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
+		562594541FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
+		562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackView.swift; sourceTree = "<group>"; };
 		564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackItemProvider.swift; sourceTree = "<group>"; };
 		565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +366,19 @@
 			path = UniqueCustomProvider;
 			sourceTree = "<group>";
 		};
+		562594501FA0CC8300BF5756 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				562594531FA0CCA800BF5756 /* CLLocationManager+Rx.swift */,
+				562594541FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift */,
+				562594511FA0CC9800BF5756 /* GeolocationService.swift */,
+				562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */,
+				5622F6E21FA0DCFC00326201 /* MKLocalSearch+Rx.swift */,
+				5622F6E41FA0E16000326201 /* LocalSearchProvider.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		564639F91F9E4D7B00EE1498 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +391,7 @@
 		569848F01F89F2DD00DA1D64 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				562594501FA0CC8300BF5756 /* Location */,
 				569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */,
 				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
 				2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */,
@@ -661,16 +687,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				562594521FA0CC9800BF5756 /* GeolocationService.swift in Sources */,
 				26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */,
 				2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */,
 				2670E69C1F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift in Sources */,
 				26424F721F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift in Sources */,
+				5622F6E51FA0E16000326201 /* LocalSearchProvider.swift in Sources */,
 				2617C26A1F84D0FD007F8228 /* Protocols.swift in Sources */,
 				2617C2761F84D1BF007F8228 /* ActivityIndicator.swift in Sources */,
 				26BAF0331F8499B8009A4401 /* LoginViewController.swift in Sources */,
 				2670E6A21F83EE5E003A5BA7 /* RadioProvider.swift in Sources */,
 				2666E4041F874113006F1918 /* Operators.swift in Sources */,
 				2617C2681F84D0FD007F8228 /* GitHubSignupViewController.swift in Sources */,
+				562594561FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
 				2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */,
 				569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */,
@@ -687,7 +716,10 @@
 				2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */,
 				2617C2731F84D18B007F8228 /* String+URL.swift in Sources */,
 				2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */,
+				562594551FA0CCA800BF5756 /* CLLocationManager+Rx.swift in Sources */,
+				562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */,
 				2670E69D1F83EE40003A5BA7 /* PhotoSettingsViewController.swift in Sources */,
+				5622F6E31FA0DCFC00326201 /* MKLocalSearch+Rx.swift in Sources */,
 				2670E6A11F83EE5E003A5BA7 /* UniqueTextProvider.swift in Sources */,
 				2617C2691F84D0FD007F8228 /* GithubSignupViewModel1.swift in Sources */,
 			);

@@ -49,7 +49,8 @@ class ExampleListViewController: CollectionViewController {
                 Model(title: "嵌套表单", desc: "", value: { return NestFormViewController() }),
                 Model(title: "删除示例", desc: "", value: { return DeleteItemViewController() }),
                 Model(title: "控制中心", desc: "", value: { return ControlCenterCustomizeViewController() }),
-                Model(title: "Storyboard", desc: "", value: { return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StoryboardViewController") })
+                Model(title: "Storyboard", desc: "", value: { return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StoryboardViewController") }),
+                Model(title: "Location", desc: "", value: { return SelectLocationViewController() }),
             ]
         )
         textListProvider.tapped
