@@ -119,9 +119,6 @@ Flix 专注于构建 `UICollectionView` / `UITableView` 的 Cell ，不关心视
 
 当构建一个诸如登录页面、个人页或设置页时，我们希望某些 Cell 不需要被重用（有时这个 Cell 在整个 `UITableView` 中仅存在一个），那么使用 `UniqueCustomTableViewProvider` 可以完全忽略重用的问题（通过在 `UITableView` 中注册一个全局唯一的 Cell）。
 
-创建一个 `UniqueCustomTableViewProvider` 需要提供一个全局唯一的 `identity` 确保在 Provider 管理中不会错乱。
-**事实上，每一个 Provider 的 `identity` 都需要在一个 `UITableView` 中唯一。**
-
 `UniqueCustomTableViewProvider` 中的 `contentView` 类似于 `UITableViewCell` 中的 `contentView` ，你可以直接添加对应的视图到 `contentView` 中。
 
 `itemHeight` 用于返回 Cell 的高度，`tap` 是该 `Provider` / `Cell` 的点击事件。
@@ -146,7 +143,6 @@ Flix 专注于构建 `UICollectionView` / `UITableView` 的 Cell ，不关心视
 ```swift
 let footerProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
 let sectionProvider = AnimatableTableViewSectionProvider(
-    identity: "sectionProvider",
     providers: [],
     footerProvider: footerProvider
 )
