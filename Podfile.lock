@@ -2,7 +2,7 @@ PODS:
   - Differentiator (3.0.0)
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
-  - RxDataSources (3.0.0):
+  - RxDataSources (3.0.1):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
@@ -20,7 +20,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Differentiator: 772c2e4e2093584a0501a72019a7cd19e1a72cc8
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
-  RxDataSources: 5a5ad827b6ad91730bb4b3ed87739f28a7be3d84
+  RxDataSources: 098b7e62b6316313b14d6bf594e3f4f4f62a238a
   RxKeyboard: d7b65fd85347c2ec214d21c95537dadc62d3b9af
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
 

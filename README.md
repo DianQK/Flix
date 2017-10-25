@@ -19,7 +19,7 @@ Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它�
 ## 安装
 
 ```ruby
-pod 'Flix', '~> 0.7.0-rc.0'
+pod 'Flix', '~> 0.7.0'
 ```
 
 ## 开始使用
@@ -101,6 +101,7 @@ self.tableView.flix.build([usernameProvider, passwordProvider, loginProvider])
 - [x] 列表项支持重用
 - [x] 支持内嵌表单
 - [x] 支持移动、删除、添加
+- [x] 支持 Storyboard
 
 Flix 专注于构建 `UICollectionView` / `UITableView` 的 Cell ，不关心视图的布局、业务的逻辑。于是你可以很轻松地使用 Flix 构建定制的页面。
 
