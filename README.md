@@ -4,27 +4,56 @@
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/Flix.svg)](https://cocoapods.org/pods/Flix)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Flix 为 iOS 动态表单提供了足够优雅的解决方案。你可以用它构建任何(类)表单页面。
+Flix is flexible iOS framework to create dynamic forms with `UITableView` or `UICollectionView`.
 
-## 预览
+## Features
+
+- [x] Support no reused when you need.
+- [x] Support reused for list when you need.
+- [x] Support nest form.
+- [x] Support add, delete and insert
+- [x] Support Storyboard
+- [x] Example app
+- [x] Works with `UITableView` and `UICollectionView`
+
+Flix focus on combining cells of `UICollectionView` or `UITableView`, it don't care about the view layout, business logic. So you can easily build custom form using Flix.
+
+## Preview
 
 ![](screenshot.png)
 
-## 原理
+## Requirements
+
+- Xcode 9.0+
+- Swift 4.0+
+- RxSwift 4.0+
+- RxDataSources 3.0+
+
+## Installation
+
+### CocoaPods
+
+```ruby
+pod 'Flix', '~> 0.7'
+```
+
+### Carthage
+
+```
+github "DianQK/Flix" ~> 0.7
+```
+
+## Principle
 
 ![](block_diagram.png)
 
-每个 Provider 会生成若干个 Node，Flix 按照组合的 Provider 顺序依次生成全部的 Cell。
+Each provider will generate a number of nodes (cells), then combine those providers according to the sequence.
 
-## 安装
+## Tutorial
 
-```ruby
-pod 'Flix', '~> 0.7.0'
-```
+### A Simple Settings Pages
 
-## 开始使用
-
-### 构建一个登录页面
+创建一个设置页时，我们希望每一个 Cell 都不会被复用，就好像在使用 Static `UITableView`。
 
 我们可以非常轻松地使用 Flix 构建一个登录页面：
 
@@ -94,17 +123,6 @@ self.tableView.flix.build([usernameProvider, passwordProvider, loginProvider])
 
 一个使用 `UITableView` 的登录页面就完成了。
 
-## 优势
-
-- [x] 支持 `UICollectionView` / `UITableView`
-- [x] 可以免去重用带来的烦恼
-- [x] 列表项支持重用
-- [x] 支持内嵌表单
-- [x] 支持移动、删除、添加
-- [x] 支持 Storyboard
-
-Flix 专注于构建 `UICollectionView` / `UITableView` 的 Cell ，不关心视图的布局、业务的逻辑。于是你可以很轻松地使用 Flix 构建定制的页面。
-
 ## 使用
 
 因为 `CollectionViewProvider` 和 `TableViewProvider` 几乎一样，我们全部以 `UITableView` 的构建解释每一个 Provider 的使用方法。
@@ -157,3 +175,20 @@ let sectionProvider = AnimatableTableViewSectionProvider(
 当你需要调换 provider 的是顺序时，可以直接再次调用 `build` 方法，
 
 其余详细使用方法，可以参考 Example 中的一些示例。
+
+## Contributing
+
+1. Please fork this project
+2. Implement new methods or changes。
+3. Write appropriate docs and comments in the README.md
+4. Submit a pull request.
+
+## Contact
+
+Raise an [Issue](https://github.com/DianQK/Flix/issues) or hit me up on Twitter [@Songxut](https://twitter.com/Songxut).
+
+You can also join Telegram Group https://t.me/Flix_iOS.
+
+## License ##
+
+Flix is released under an MIT license. See LICENSE for more information.
