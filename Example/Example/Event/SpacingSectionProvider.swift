@@ -6,4 +6,23 @@
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxSwift
+import RxCocoa
+import Flix
+
+class SpacingSectionProvider: AnimatableTableViewSectionProvider {
+
+    convenience init(providers: [_AnimatableTableViewMultiNodeProvider], headerHeight: CGFloat, footerHeight: CGFloat) {
+        let headerProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
+        headerProvider.sectionHeight = { return headerHeight }
+        let footerProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
+        footerProvider.sectionHeight = { return footerHeight }
+        self.init(
+            providers: providers,
+            headerProvider: headerProvider,
+            footerProvider: footerProvider
+        )
+    }
+
+}

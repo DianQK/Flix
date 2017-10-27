@@ -52,6 +52,10 @@ class SelectLocationViewController: UIViewController {
     let disposeBag = DisposeBag()
     
     let geocoder = CLGeocoder()
+
+    let cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: nil, action: nil)
+
+    let didSelectLocation = PublishSubject<EventLocation>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +68,12 @@ class SelectLocationViewController: UIViewController {
 
         self.view.backgroundColor = UIColor.white
 
+        self.navigationItem.rightBarButtonItem = cancelBarButtonItem
+
         self.tableView.sectionHeaderHeight = CGFloat.leastNonzeroMagnitude
         self.tableView.sectionFooterHeight = CGFloat.leastNonzeroMagnitude
         self.tableView.keyboardDismissMode = .onDrag
+        self.tableView.rowHeight = 44
         self.tableView.backgroundColor = UIColor(named: "Background")
         self.tableView.separatorColor = UIColor(named: "Background")
         
@@ -98,7 +105,7 @@ class SelectLocationViewController: UIViewController {
         locationImageView.leadingAnchor.constraint(equalTo: customLocalProvider.contentView.leadingAnchor, constant: 15).isActive = true
         locationImageView.centerYAnchor.constraint(equalTo: customLocalProvider.contentView.centerYAnchor).isActive = true
 
-        searchBar.rx.text.orEmpty.changed.bind(to: customLocalLabel.rx.text).disposed(by: disposeBag)
+        searchBar.rx.text.orEmpty.bind(to: customLocalLabel.rx.text).disposed(by: disposeBag)
 
         let currentLocationProvider = UniqueCustomTableViewProvider()
         currentLocationProvider.separatorInset = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)
@@ -129,6 +136,9 @@ class SelectLocationViewController: UIViewController {
         GeolocationService.instance.authorized.asObservable()
             .map { !$0 }
             .bind(to: currentLocationProvider.isHidden).disposed(by: disposeBag)
+
+//        currentPlacemark.startWith(nil).map { $0 == nil }.bind(to: currentLocationProvider.isHidden).disposed(by: disposeBag)
+
         currentPlacemark.map { $0?.name ?? "" }.map { "Current Location " + $0 }
             .bind(to: currentLocalLabel.rx.text)
             .disposed(by: disposeBag)
@@ -162,7 +172,7 @@ class SelectLocationViewController: UIViewController {
             .bind(to: recentSelectedPlacemarksSectionProvider.isHidden)
             .disposed(by: disposeBag)
 
-        let localSearchProvider = LocalSearchProvider(naturalLanguageQuery: searchBar.rx.text.orEmpty.changed.asObservable())
+        let localSearchProvider = LocalSearchProvider(naturalLanguageQuery: searchBar.rx.text.orEmpty.asObservable())
         let localSearchSectionProvider = AnimatableTableViewSectionProvider(
             providers: [localSearchProvider],
             headerProvider: PlainTitleTableViewHeaderSectionProvider(text: "Locations")
@@ -184,6 +194,18 @@ class SelectLocationViewController: UIViewController {
             .bind(to: localSearchSectionProvider.isHidden)
             .disposed(by: disposeBag)
 
+        Observable<EventLocation>
+            .merge(
+                [
+                    customLocalProvider.tap.withLatestFrom(searchBar.rx.text.orEmpty).map { EventLocation.custom($0) },
+                    currentLocationProvider.tap.withLatestFrom(currentPlacemark.filter { $0 != nil }.map { EventLocation.placemark($0!) }),
+                    recentSelectedPlacemarksProvider.placemarkSelected.asObservable().map { EventLocation.placemark($0) },
+                    localSearchProvider.placemarkSelected.asObservable().map { EventLocation.placemark($0) }
+                ]
+            )
+            .bind(to: didSelectLocation)
+            .disposed(by: disposeBag)
+
         self.tableView.flix.animatable
             .build([
                 customLocalSectionProvider,
@@ -191,5 +213,72 @@ class SelectLocationViewController: UIViewController {
                 localSearchSectionProvider
                 ])
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        _ = self.searchBar.becomeFirstResponder()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        _ = self.searchBar.resignFirstResponder()
+    }
+
+}
+
+func dismissViewController(_ viewController: UIViewController, animated: Bool) {
+    if viewController.isBeingDismissed || viewController.isBeingPresented {
+        DispatchQueue.main.async {
+            dismissViewController(viewController, animated: animated)
+        }
+
+        return
+    }
+
+    if viewController.presentingViewController != nil {
+        viewController.dismiss(animated: animated, completion: nil)
+    }
+}
+
+extension Reactive where Base: SelectLocationViewController {
+
+    var didCancel: ControlEvent<()> {
+        return self.base.cancelBarButtonItem.rx.tap
+    }
+
+    static func createWithParent(_ parent: UIViewController?, configure: @escaping (SelectLocationViewController) throws -> () = { x in }) -> Observable<SelectLocationViewController> {
+        return Observable.create { [weak parent] observer in
+            let selectLocation = SelectLocationViewController()
+            let dismissDisposable = selectLocation.rx
+                .didCancel
+                .subscribe(onNext: { [weak selectLocation] _ in
+                    guard let selectLocation = selectLocation else {
+                        return
+                    }
+                    dismissViewController(selectLocation, animated: true)
+                })
+
+            do {
+                try configure(selectLocation)
+            }
+            catch let error {
+                observer.on(.error(error))
+                return Disposables.create()
+            }
+
+            guard let parent = parent else {
+                observer.on(.completed)
+                return Disposables.create()
+            }
+
+            let nav = UINavigationController(rootViewController: selectLocation)
+            nav.navigationBar.tintColor = UIColor(named: "Deep Carmine Pink")
+            parent.present(nav, animated: true, completion: nil)
+            observer.on(.next(selectLocation))
+
+            return Disposables.create(dismissDisposable, Disposables.create {
+                dismissViewController(selectLocation, animated: true)
+            })
+        }
+    }
 }

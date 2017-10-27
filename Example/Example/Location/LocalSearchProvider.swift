@@ -61,6 +61,17 @@ extension CLPlacemark: StringIdentifiableType {
 
 }
 
+extension CLPlacemark {
+
+    var addressDetail: String? {
+        guard let postalAddress = postalAddress else {
+            return nil
+        }
+        return postalAddress.country + postalAddress.city + postalAddress.subLocality + postalAddress.street
+    }
+
+}
+
 class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
 
     func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: CLPlacemark) {
@@ -73,11 +84,7 @@ class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
 
     func configureCell(_ tableView: UITableView, cell: PlacemarkTableViewCell, indexPath: IndexPath, value: CLPlacemark) {
         cell.nameLabel.text = value.name
-        if let postalAddress = value.postalAddress {
-            cell.addressLabel.text = postalAddress.country + postalAddress.city + postalAddress.subLocality + postalAddress.street
-        } else {
-            cell.addressLabel.text = nil
-        }
+        cell.addressLabel.text = value.addressDetail
     }
 
     func genteralValues() -> Observable<[CLPlacemark]> {

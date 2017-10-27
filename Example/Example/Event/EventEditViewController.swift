@@ -6,4 +6,26 @@
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxSwift
+import RxCocoa
+import Flix
+
+class EventEditViewController: TableViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "New Event"
+
+        let titleProvider = TextFieldProvider()
+        titleProvider.tintColor = UIColor(named: "Deep Carmine Pink")
+        titleProvider.placeholder = "Title"
+
+        let selectedLocationProvider = SelectedLocationProvider(viewController: self)
+
+        let baseInfoSectionProvider = SpacingSectionProvider(providers: [titleProvider, selectedLocationProvider], headerHeight: 18, footerHeight: 18)
+
+        self.tableView.flix.animatable.build([baseInfoSectionProvider])
+    }
+
+}

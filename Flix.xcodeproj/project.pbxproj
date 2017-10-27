@@ -66,6 +66,11 @@
 		564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */; };
 		565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */; };
 		5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */; };
+		5687446D1FA3745200B5193C /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687446C1FA3745100B5193C /* EventListViewController.swift */; };
+		5687446F1FA374E800B5193C /* EventEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687446E1FA374E800B5193C /* EventEditViewController.swift */; };
+		568744711FA3766700B5193C /* TextFieldProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568744701FA3766700B5193C /* TextFieldProvider.swift */; };
+		568744731FA3792F00B5193C /* SpacingSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568744721FA3792F00B5193C /* SpacingSectionProvider.swift */; };
+		568744751FA381DA00B5193C /* SelectedLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568744741FA381DA00B5193C /* SelectedLocationProvider.swift */; };
 		569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F61F88DA6800FA1493 /* TableViewEditable.swift */; };
 		569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */; };
 		5694616B1F9C67B4009F7971 /* _CollectionViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5694616A1F9C67B4009F7971 /* _CollectionViewBuilder.swift */; };
@@ -171,6 +176,11 @@
 		564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackItemProvider.swift; sourceTree = "<group>"; };
 		565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardViewController.swift; sourceTree = "<group>"; };
 		5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewInsertable.swift; sourceTree = "<group>"; };
+		5687446C1FA3745100B5193C /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		5687446E1FA374E800B5193C /* EventEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditViewController.swift; sourceTree = "<group>"; };
+		568744701FA3766700B5193C /* TextFieldProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProvider.swift; sourceTree = "<group>"; };
+		568744721FA3792F00B5193C /* SpacingSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacingSectionProvider.swift; sourceTree = "<group>"; };
+		568744741FA381DA00B5193C /* SelectedLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationProvider.swift; sourceTree = "<group>"; };
 		569294F61F88DA6800FA1493 /* TableViewEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditable.swift; sourceTree = "<group>"; };
 		569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteItemViewController.swift; sourceTree = "<group>"; };
 		5694616A1F9C67B4009F7971 /* _CollectionViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _CollectionViewBuilder.swift; sourceTree = "<group>"; };
@@ -388,9 +398,22 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		568744691FA3742800B5193C /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				5687446C1FA3745100B5193C /* EventListViewController.swift */,
+				5687446E1FA374E800B5193C /* EventEditViewController.swift */,
+				568744701FA3766700B5193C /* TextFieldProvider.swift */,
+				568744721FA3792F00B5193C /* SpacingSectionProvider.swift */,
+				568744741FA381DA00B5193C /* SelectedLocationProvider.swift */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
 		569848F01F89F2DD00DA1D64 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				568744691FA3742800B5193C /* Event */,
 				562594501FA0CC8300BF5756 /* Location */,
 				569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */,
 				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
@@ -700,21 +723,26 @@
 				2666E4041F874113006F1918 /* Operators.swift in Sources */,
 				2617C2681F84D0FD007F8228 /* GitHubSignupViewController.swift in Sources */,
 				562594561FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
+				5687446D1FA3745200B5193C /* EventListViewController.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
 				2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */,
+				568744711FA3766700B5193C /* TextFieldProvider.swift in Sources */,
 				569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */,
 				26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */,
 				2617C26B1F84D0FD007F8228 /* DefaultImplementations.swift in Sources */,
 				565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */,
 				2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */,
+				568744751FA381DA00B5193C /* SelectedLocationProvider.swift in Sources */,
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,
 				2670E6A01F83EE5E003A5BA7 /* TextListProvider.swift in Sources */,
 				2670E69B1F83EE40003A5BA7 /* ExampleListViewController.swift in Sources */,
 				91F3F3EE1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift in Sources */,
 				2617C2701F84D15C007F8228 /* Wireframe.swift in Sources */,
 				2670E6A31F83EE5E003A5BA7 /* TextSectionProvider.swift in Sources */,
+				5687446F1FA374E800B5193C /* EventEditViewController.swift in Sources */,
 				2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */,
 				2617C2731F84D18B007F8228 /* String+URL.swift in Sources */,
+				568744731FA3792F00B5193C /* SpacingSectionProvider.swift in Sources */,
 				2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */,
 				562594551FA0CCA800BF5756 /* CLLocationManager+Rx.swift in Sources */,
 				562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */,

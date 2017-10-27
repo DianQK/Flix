@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class TableViewSectionProvider: FlixCustomStringConvertible {
+open class TableViewSectionProvider: FlixCustomStringConvertible {
     
     public var headerProvider: _SectionPartionTableViewProvider?
     public var footerProvider: _SectionPartionTableViewProvider?
@@ -64,7 +64,7 @@ public class TableViewSectionProvider: FlixCustomStringConvertible {
 
 }
 
-public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
+open class AnimatableTableViewSectionProvider: TableViewSectionProvider {
     
     public var animatableHeaderProvider: _AnimatableSectionPartionTableViewProvider?
     public var animatableFooterProvider: _AnimatableSectionPartionTableViewProvider?
