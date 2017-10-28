@@ -11,15 +11,13 @@ import RxSwift
 import RxCocoa
 import Flix
 
-class DateSelectCell: UITableViewCell {
+class SelectedDateDisplayProvider: UniqueCustomTableViewProvider {
 
     let titleLabel = UILabel()
     let dateLabel = UILabel()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        titleLabel.text = "Starts"
+    override init() {
+        super.init()
 
         self.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -30,45 +28,37 @@ class DateSelectCell: UITableViewCell {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20).isActive = true
         dateLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
 }
 
-class DatePickerCell: UITableViewCell {
+class DatePickerProvider: UniqueCustomTableViewProvider {
 
-//    let datePicker = UIDatePicker()
+    let datePicker = UIDatePicker()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init() {
+        super.init()
 
-//        self.contentView.addSubview(datePicker)
-//        datePicker.translatesAutoresizingMaskIntoConstraints = false
-//        datePicker.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-//        datePicker.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+        self.itemHeight = { return 216 }
 
-        self.selectionStyle = .none
-    }
+        self.contentView.addSubview(datePicker)
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        datePicker.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.selectionStyle.value = .none
+
     }
 
 }
 
-class TimeZoneCell: UITableViewCell {
+class TitleDescProvider: UniqueCustomTableViewProvider {
 
     let titleLabel = UILabel()
     let descLabel = UILabel()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        titleLabel.text = "Time Zone"
+    override init() {
+        super.init()
 
         self.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -76,94 +66,89 @@ class TimeZoneCell: UITableViewCell {
         titleLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
 
         self.accessoryType = .disclosureIndicator
-    }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.contentView.addSubview(descLabel)
+        descLabel.translatesAutoresizingMaskIntoConstraints = false
+        descLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5).isActive = true
+        descLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+    }
+}
+
+extension Reactive where Base: UILabel {
+
+    public var textColor: Binder<UIColor> {
+        return Binder(self.base, binding: { (label, textColor) in
+            label.textColor = textColor
+        })
     }
 
 }
 
-enum DateSelectType: String, StringIdentifiableType {
+class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
 
-    case date
-    case picker
-    case timeZone
-
-    var identity: String {
-        return self.rawValue
+    // ugly
+    func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: String) -> UITableViewCell {
+        return UITableViewCell()
     }
 
-}
+    func genteralValues() -> Observable<[String]> {
+        return Observable.just([])
+    }
 
-class DateSelectProvider: AnimatableTableViewMultiNodeProvider { //TODO: Use Group Provider
+    typealias Value = String
+     // ugly
+
+    let dateProvider = SelectedDateDisplayProvider()
+    let pickerProvider = DatePickerProvider()
+    let timeZoneProvider = TitleDescProvider()
+
+    var providers: [_AnimatableTableViewMultiNodeProvider] {
+        return [dateProvider, pickerProvider, timeZoneProvider]
+    }
 
     let isActive = Variable(false)
-
-    let datePicker = UIDatePicker()
-
     let disposeBag = DisposeBag()
+    let tapActiveChanged = PublishSubject<Bool>()
 
-    func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: DateSelectType) -> UITableViewCell {
-        switch value {
-        case .date:
-            let cell = tableView.dequeueReusableCell(withIdentifier: self._flix_identity + DateSelectType.date.rawValue, for: indexPath) as! DateSelectCell
-            if !cell.hasConfigured {
-                cell.hasConfigured = true
-                datePicker.rx.date.map { $0.description }
-                    .bind(to: cell.dateLabel.rx.text)
-                    .disposed(by: disposeBag)
-                isActive.asObservable()
-                    .map { $0 ? UIColor(named: "Deep Carmine Pink")! : UIColor.darkText }
-                    .subscribe(onNext: { [weak cell] (color) in
-                        cell?.dateLabel.textColor = color
-                    })
-                    .disposed(by: disposeBag)
+    let dateIsAvailable = Variable(true)
+
+    init() {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "MM/dd/yy  h:mm:ss a z"
+
+        self.dateProvider.tap.asObservable()
+            .withLatestFrom(self.isActive.asObservable()).map { !$0 }
+            .do(onNext: { [weak self] (isActive) in
+                self?.tapActiveChanged.onNext(isActive)
+            })
+            .bind(to: self.isActive)
+            .disposed(by: disposeBag)
+
+        Observable.combineLatest(
+            pickerProvider.datePicker.rx.date.map { dateformatter.string(from: $0) }.debug(),
+            dateIsAvailable.asObservable(),
+            isActive.asObservable().distinctUntilChanged().map { $0 ? UIColor(named: "Deep Carmine Pink")! : UIColor.darkText }
+            )
+            .map { (date, isAvailable, textColor) -> NSAttributedString in
+                return NSAttributedString(
+                    string: date,
+                    attributes: [
+                        NSAttributedStringKey.strikethroughStyle: (isAvailable ? NSUnderlineStyle.styleNone : NSUnderlineStyle.styleSingle).rawValue,
+                        NSAttributedStringKey.foregroundColor: textColor
+                    ]
+                )
             }
-            return cell
-        case .picker:
-            let cell = tableView.dequeueReusableCell(withIdentifier: self._flix_identity + DateSelectType.picker.rawValue, for: indexPath) as! DatePickerCell
-            if !cell.hasConfigured {
-                cell.hasConfigured = true
-                cell.contentView.addSubview(datePicker)
-                datePicker.translatesAutoresizingMaskIntoConstraints = false
-                datePicker.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
-                datePicker.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
-            }
-            return cell
-        case .timeZone:
-            let cell = tableView.dequeueReusableCell(withIdentifier: self._flix_identity + DateSelectType.timeZone.rawValue, for: indexPath) as! TimeZoneCell
-            return cell
-        }
+            .bind(to: dateProvider.dateLabel.rx.attributedText)
+            .disposed(by: disposeBag)
+
     }
 
-    func genteralValues() -> Observable<[DateSelectType]> {
+    func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
         return self.isActive.asObservable().distinctUntilChanged()
-            .map { $0 ? [DateSelectType.date, DateSelectType.picker, DateSelectType.timeZone] : [DateSelectType.date] }
+            .map { [weak self] (isActive) -> [_AnimatableTableViewMultiNodeProvider] in
+                guard let `self` = self else { return [] }
+                return isActive ? [self.dateProvider, self.pickerProvider, self.timeZoneProvider] : [self.dateProvider]
+            }
     }
-
-    func register(_ tableView: UITableView) {
-        tableView.register(DateSelectCell.self, forCellReuseIdentifier: self._flix_identity + DateSelectType.date.rawValue)
-        tableView.register(DatePickerCell.self, forCellReuseIdentifier: self._flix_identity + DateSelectType.picker.rawValue)
-        tableView.register(TimeZoneCell.self, forCellReuseIdentifier: self._flix_identity + DateSelectType.timeZone.rawValue)
-    }
-
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: DateSelectType) {
-        if (value == .date) {
-            self.isActive.value = !self.isActive.value
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: DateSelectType) -> CGFloat? {
-        switch value {
-        case .date, .timeZone:
-            return 44
-        case .picker:
-            return 216
-        }
-    }
-
-    typealias Value = DateSelectType
 
 }

@@ -64,7 +64,7 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
         
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
-                self?.nodeProviders = sectionProviders.flatMap { $0.animatableProviders }
+                self?.nodeProviders = sectionProviders.flatMap { $0.animatableProviders.flatMap { $0._providers } }
                 self?.footerSectionProviders = sectionProviders.flatMap { $0.animatableFooterProvider }
                 self?.headerSectionProviders = sectionProviders.flatMap { $0.animatableHeaderProvider }
             })
