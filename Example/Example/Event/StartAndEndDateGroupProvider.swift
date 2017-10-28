@@ -22,7 +22,7 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
 
     let disposeBag = DisposeBag()
 
-    init() {
+    init(viewController: UIViewController) {
         startProvider.dateProvider.titleLabel.text = "Starts"
         endProvider.dateProvider.titleLabel.text = "Ends"
 
@@ -44,6 +44,12 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
                 return endDate > startDate
             }
             .bind(to: endProvider.dateIsAvailable)
+            .disposed(by: disposeBag)
+
+        Observable.merge([self.startProvider.timeZoneProvider.tap, self.endProvider.timeZoneProvider.tap])
+            .subscribe(onNext: { [weak viewController] in
+                viewController?.show(SelectTimeZoneViewController(), sender: nil)
+            })
             .disposed(by: disposeBag)
 
     }

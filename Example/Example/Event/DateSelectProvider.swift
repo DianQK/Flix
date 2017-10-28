@@ -125,7 +125,7 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
             .disposed(by: disposeBag)
 
         Observable.combineLatest(
-            pickerProvider.datePicker.rx.date.map { dateformatter.string(from: $0) }.debug(),
+            pickerProvider.datePicker.rx.date.map { dateformatter.string(from: $0) },
             dateIsAvailable.asObservable(),
             isActive.asObservable().distinctUntilChanged().map { $0 ? UIColor(named: "Deep Carmine Pink")! : UIColor.darkText }
             )

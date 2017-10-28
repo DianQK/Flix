@@ -24,10 +24,17 @@ class EventEditViewController: TableViewController {
         let selectedLocationProvider = SelectedLocationProvider(viewController: self)
 
         let baseInfoSectionProvider = SpacingSectionProvider(providers: [titleProvider, selectedLocationProvider], headerHeight: 18, footerHeight: 18)
+        let dateSectionProvider = SpacingSectionProvider(providers: [StartAndEndDateGroupProvider(viewController: self)], headerHeight: 18, footerHeight: 18)
 
-        let dateSectionProvider = SpacingSectionProvider(providers: [StartAndEndDateGroupProvider()], headerHeight: 18, footerHeight: 18)
+        let reminderSectionProvider = SpacingSectionProvider(
+            providers: [
+                AlertGroupProvider(viewController: self),
+                ShowAsOption.createProvider(viewController: self, selected: ShowAsOption.busy)
+            ],
+            headerHeight: 18, footerHeight: 18
+        )
 
-        self.tableView.flix.animatable.build([baseInfoSectionProvider, dateSectionProvider])
+        self.tableView.flix.animatable.build([baseInfoSectionProvider, dateSectionProvider, reminderSectionProvider])
     }
 
 }
