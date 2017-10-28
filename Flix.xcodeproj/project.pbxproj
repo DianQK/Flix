@@ -56,6 +56,7 @@
 		26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */; };
 		26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */; };
 		26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */; };
+		562075581FA40B10001D8896 /* DateSelectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562075571FA40B10001D8896 /* DateSelectProvider.swift */; };
 		5622F6E31FA0DCFC00326201 /* MKLocalSearch+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5622F6E21FA0DCFC00326201 /* MKLocalSearch+Rx.swift */; };
 		5622F6E51FA0E16000326201 /* LocalSearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5622F6E41FA0E16000326201 /* LocalSearchProvider.swift */; };
 		562594521FA0CC9800BF5756 /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594511FA0CC9800BF5756 /* GeolocationService.swift */; };
@@ -166,6 +167,7 @@
 		26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewProvider.swift; sourceTree = "<group>"; };
 		3623AE6EB18987F4D533683C /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		4D1DE780D16E3E8256EDE880 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
+		562075571FA40B10001D8896 /* DateSelectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectProvider.swift; sourceTree = "<group>"; };
 		5622F6E21FA0DCFC00326201 /* MKLocalSearch+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKLocalSearch+Rx.swift"; sourceTree = "<group>"; };
 		5622F6E41FA0E16000326201 /* LocalSearchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchProvider.swift; sourceTree = "<group>"; };
 		562594511FA0CC9800BF5756 /* GeolocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationService.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				568744701FA3766700B5193C /* TextFieldProvider.swift */,
 				568744721FA3792F00B5193C /* SpacingSectionProvider.swift */,
 				568744741FA381DA00B5193C /* SelectedLocationProvider.swift */,
+				562075571FA40B10001D8896 /* DateSelectProvider.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */,
 				2617C26B1F84D0FD007F8228 /* DefaultImplementations.swift in Sources */,
 				565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */,
+				562075581FA40B10001D8896 /* DateSelectProvider.swift in Sources */,
 				2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */,
 				568744751FA381DA00B5193C /* SelectedLocationProvider.swift in Sources */,
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,

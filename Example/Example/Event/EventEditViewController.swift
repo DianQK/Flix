@@ -25,7 +25,10 @@ class EventEditViewController: TableViewController {
 
         let baseInfoSectionProvider = SpacingSectionProvider(providers: [titleProvider, selectedLocationProvider], headerHeight: 18, footerHeight: 18)
 
-        self.tableView.flix.animatable.build([baseInfoSectionProvider])
+        let dateSectionProvider = SpacingSectionProvider(providers: [DateSelectProvider()], headerHeight: 18, footerHeight: 18)
+
+
+        self.tableView.flix.animatable.build([baseInfoSectionProvider, dateSectionProvider])
     }
 
 }
