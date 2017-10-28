@@ -17,6 +17,8 @@ class EventEditViewController: TableViewController {
         super.viewDidLoad()
         title = "New Event"
 
+        self.tableView.keyboardDismissMode = .onDrag
+
         let titleProvider = TextFieldProvider()
         titleProvider.tintColor = UIColor(named: "Deep Carmine Pink")
         titleProvider.placeholder = "Title"
@@ -26,6 +28,8 @@ class EventEditViewController: TableViewController {
         let baseInfoSectionProvider = SpacingSectionProvider(providers: [titleProvider, selectedLocationProvider], headerHeight: 18, footerHeight: 18)
         let dateSectionProvider = SpacingSectionProvider(providers: [StartAndEndDateGroupProvider(viewController: self)], headerHeight: 18, footerHeight: 18)
 
+        let calendarSectionProvider = SpacingSectionProvider(providers: [CalendarOption.createProvider(viewController: self, selected: CalendarOption(name: "Home"))], headerHeight: 18, footerHeight: 18)
+
         let reminderSectionProvider = SpacingSectionProvider(
             providers: [
                 AlertGroupProvider(viewController: self),
@@ -34,7 +38,14 @@ class EventEditViewController: TableViewController {
             headerHeight: 18, footerHeight: 18
         )
 
-        self.tableView.flix.animatable.build([baseInfoSectionProvider, dateSectionProvider, reminderSectionProvider])
+        let urlProvider = TextFieldProvider()
+        urlProvider.tintColor = UIColor(named: "Deep Carmine Pink")
+        urlProvider.placeholder = "URL"
+        urlProvider.keyboardType = .URL
+
+        let commentSectionProvider = SpacingSectionProvider(providers: [urlProvider], headerHeight: 18, footerHeight: 18)
+
+        self.tableView.flix.animatable.build([baseInfoSectionProvider, dateSectionProvider, calendarSectionProvider, reminderSectionProvider, commentSectionProvider])
     }
 
 }

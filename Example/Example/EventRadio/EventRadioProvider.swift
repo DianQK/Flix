@@ -147,6 +147,32 @@ enum AlertOption: EventRadioType {
 
 }
 
+struct CalendarOption: EventRadioType {
+
+    static var allOptions: [[CalendarOption]] {
+        return [[CalendarOption(name: "Home"), CalendarOption(name: "Work"), CalendarOption(name: "Personal")]]
+    }
+
+    static var title: String {
+        return "Calendar"
+    }
+
+    var identity: String {
+        return self.name
+    }
+
+    static func ==(lhs: CalendarOption, rhs: CalendarOption) -> Bool {
+        return lhs.name == rhs.name
+    }
+
+    static func createProvider(viewController: UIViewController, selected: CalendarOption) -> EventRadioProvider<CalendarOption> {
+        return EventRadioProvider<CalendarOption>(viewController: viewController, selectedOption: selected)
+    }
+
+    let name: String
+
+}
+
 class AlertGroupProvider: AnimatableTableViewGroupProvider {
 
     let firstAlertProvider: EventRadioProvider<AlertOption>
