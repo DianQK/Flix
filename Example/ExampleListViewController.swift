@@ -42,9 +42,7 @@ class ExampleListViewController: CollectionViewController {
         
         let textListProvider = TextListProvider(
             items: [
-//                Model(title: "Location", desc: "", value: { return SelectLocationViewController() }),
-                Model(title: "Event List", desc: "", value: { return EventListViewController() }),
-//                Model(title: "Event Edit", desc: "", value: { return EventEditViewController() }),
+                Model(title: "All Events", desc: "", value: { return EventListViewController() }),
                 Model(title: "Photos", desc: "", value: { return PhotoSettingsViewController() }),
                 Model(title: "勿扰模式", desc: "", value: { return DoNotDisturbSettingsViewController() }),
                 Model(title: "登录示例", desc: "", value: { return LoginViewController() }),
