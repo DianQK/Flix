@@ -43,6 +43,10 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
         return [allDaySwitchProvider] + [startProvider, endProvider].flatMap { $0.providers }
     }
 
+    var endDate: Observable<Date> {
+        return self.endProvider.pickerProvider.datePicker.rx.date.asObservable()
+    }
+
     let timeZone = Variable(TimeZone.current)
     let disposeBag = DisposeBag()
 

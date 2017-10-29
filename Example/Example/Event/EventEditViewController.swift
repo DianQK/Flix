@@ -26,7 +26,10 @@ class EventEditViewController: TableViewController {
         let selectedLocationProvider = SelectedLocationProvider(viewController: self)
 
         let baseInfoSectionProvider = SpacingSectionProvider(providers: [titleProvider, selectedLocationProvider], headerHeight: 18, footerHeight: 18)
-        let dateSectionProvider = SpacingSectionProvider(providers: [StartAndEndDateGroupProvider(viewController: self)], headerHeight: 18, footerHeight: 18)
+
+        let startAndEndDateGroupProvider = StartAndEndDateGroupProvider(viewController: self)
+        let repeatGroupProvider = RepeatGroupProvider(viewController: self, minEndDate: startAndEndDateGroupProvider.endDate)
+        let dateSectionProvider = SpacingSectionProvider(providers: [startAndEndDateGroupProvider, repeatGroupProvider], headerHeight: 18, footerHeight: 18)
 
         let calendarSectionProvider = SpacingSectionProvider(providers: [CalendarOption.createProvider(viewController: self, selected: CalendarOption(name: "Home"))], headerHeight: 18, footerHeight: 18)
 

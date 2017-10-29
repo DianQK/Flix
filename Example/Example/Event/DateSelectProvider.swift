@@ -127,14 +127,14 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
             .bind(to: self.isActive)
             .disposed(by: disposeBag)
 
-        let dateformatter = timeZone.map { (timeZone) -> DateFormatter in
+        let dateformatter = Observable.combineLatest(isAllDay.asObservable(), timeZone).map { (isAllDay, timeZone) -> DateFormatter in
             let dateformatter = DateFormatter()
-            dateformatter.dateFormat = "MM/dd/yy  h:mm:ss a z"
+            dateformatter.dateFormat = isAllDay ? "EEE, MMM d, y" : "MM/dd/yy  h:mm:ss a z"
             dateformatter.timeZone = timeZone
             return dateformatter
         }
 
-        let date: Observable<String> = Observable.combineLatest(pickerProvider.datePicker.rx.date, dateformatter) { $1.string(from: $0) }
+        let date: Observable<String> = Observable.combineLatest(pickerProvider.datePicker.rx.date, dateformatter) { $1.string(from: $0) }.debug()
 
         Observable.combineLatest(
             date,
@@ -157,6 +157,13 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
 
         timeZone.map { $0.identifier }
             .bind(to: self.timeZoneProvider.descLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        isAllDay.asObservable()
+            .subscribe(onNext: { [weak self] (isAllDay) in
+                guard let `self` = self else { return }
+                self.pickerProvider.datePicker.datePickerMode = isAllDay ? .date : .dateAndTime
+            })
             .disposed(by: disposeBag)
     }
 
