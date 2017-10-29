@@ -1,5 +1,5 @@
 //
-//  EventRadioProvider.swift
+//  EventOptionProvider.swift
 //  Example
 //
 //  Created by wc on 29/10/2017.
@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Flix
 
-public protocol EventRadioType: StringIdentifiableType, Equatable {
+public protocol EventOptionType: StringIdentifiableType, Equatable {
 
     var name: String { get }
 
@@ -21,7 +21,7 @@ public protocol EventRadioType: StringIdentifiableType, Equatable {
 
 }
 
-enum ShowAsOption: String, EventRadioType {
+enum ShowAsOption: String, EventOptionType {
 
     case busy
     case free
@@ -43,8 +43,8 @@ enum ShowAsOption: String, EventRadioType {
         return self.rawValue
     }
 
-    static func createProvider(viewController: UIViewController, selected: ShowAsOption) -> EventRadioProvider<ShowAsOption> {
-        return EventRadioProvider<ShowAsOption>(viewController: viewController, selectedOption: selected)
+    static func createProvider(viewController: UIViewController, selected: ShowAsOption) -> EventOptionProvider<ShowAsOption> {
+        return EventOptionProvider<ShowAsOption>(viewController: viewController, selectedOption: selected)
     }
 
     static var title: String {
@@ -53,7 +53,7 @@ enum ShowAsOption: String, EventRadioType {
 
 }
 
-class EventRadioProvider<T>: TitleDescProvider where T: EventRadioType {
+class EventOptionProvider<T>: TitleDescProvider where T: EventOptionType {
 
     let selectedOption: Variable<T>
 
@@ -84,7 +84,7 @@ class EventRadioProvider<T>: TitleDescProvider where T: EventRadioType {
 
 }
 
-enum AlertOption: EventRadioType {
+enum AlertOption: EventOptionType {
 
     case none
     case atTimeOfEvent
@@ -135,8 +135,8 @@ enum AlertOption: EventRadioType {
         return self.name
     }
 
-    static func createProvider(viewController: UIViewController, selected: AlertOption, customTitle: String) -> EventRadioProvider<AlertOption> {
-        return EventRadioProvider<AlertOption>(viewController: viewController, selectedOption: selected, customTitle: customTitle)
+    static func createProvider(viewController: UIViewController, selected: AlertOption, customTitle: String) -> EventOptionProvider<AlertOption> {
+        return EventOptionProvider<AlertOption>(viewController: viewController, selectedOption: selected, customTitle: customTitle)
     }
 
     static var title: String {
@@ -145,7 +145,7 @@ enum AlertOption: EventRadioType {
 
 }
 
-struct CalendarOption: EventRadioType {
+struct CalendarOption: EventOptionType {
 
     static var allOptions: [[CalendarOption]] {
         return [[CalendarOption(name: "Home"), CalendarOption(name: "Work"), CalendarOption(name: "Personal")]]
@@ -163,8 +163,8 @@ struct CalendarOption: EventRadioType {
         return lhs.name == rhs.name
     }
 
-    static func createProvider(viewController: UIViewController, selected: CalendarOption) -> EventRadioProvider<CalendarOption> {
-        return EventRadioProvider<CalendarOption>(viewController: viewController, selectedOption: selected)
+    static func createProvider(viewController: UIViewController, selected: CalendarOption) -> EventOptionProvider<CalendarOption> {
+        return EventOptionProvider<CalendarOption>(viewController: viewController, selectedOption: selected)
     }
 
     let name: String
@@ -173,8 +173,8 @@ struct CalendarOption: EventRadioType {
 
 class AlertGroupProvider: AnimatableTableViewGroupProvider {
 
-    let firstAlertProvider: EventRadioProvider<AlertOption>
-    let secondAlertProvider: EventRadioProvider<AlertOption>
+    let firstAlertProvider: EventOptionProvider<AlertOption>
+    let secondAlertProvider: EventOptionProvider<AlertOption>
 
     var providers: [_AnimatableTableViewMultiNodeProvider] {
         return [firstAlertProvider, secondAlertProvider]

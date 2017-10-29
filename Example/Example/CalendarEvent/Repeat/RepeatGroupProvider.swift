@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Flix
 
-enum RepeatOption: String, EventRadioType {
+enum RepeatOption: String, EventOptionType {
 
     static var allOptions: [[RepeatOption]] {
         return [[.never, .everyDay, .everyWeek, .every2Weeks, .everyMonth, .everyYear]]
@@ -36,8 +36,8 @@ enum RepeatOption: String, EventRadioType {
         return self.rawValue
     }
 
-    static func createProvider(viewController: UIViewController, selected: RepeatOption) -> EventRadioProvider<RepeatOption> {
-        return EventRadioProvider<RepeatOption>(viewController: viewController, selectedOption: selected)
+    static func createProvider(viewController: UIViewController, selected: RepeatOption) -> EventOptionProvider<RepeatOption> {
+        return EventOptionProvider<RepeatOption>(viewController: viewController, selectedOption: selected)
     }
 
 }
@@ -48,7 +48,7 @@ class RepeatGroupProvider: AnimatableTableViewGroupProvider {
         return [self.repeatProvider, self.endRepeatProvider]
     }
 
-    let repeatProvider: EventRadioProvider<RepeatOption>
+    let repeatProvider: EventOptionProvider<RepeatOption>
     let endRepeatProvider: EndRepeatProvider
 
     init(viewController: UIViewController, minEndDate: Observable<Date>, selectedRepeat: RepeatOption?, endRepeatDate: Date?) {

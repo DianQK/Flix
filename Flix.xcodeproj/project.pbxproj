@@ -63,7 +63,7 @@
 		562594551FA0CCA800BF5756 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594531FA0CCA800BF5756 /* CLLocationManager+Rx.swift */; };
 		562594561FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594541FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift */; };
 		562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */; };
-		5626992D1FA51EE600290A70 /* EventRadioProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992C1FA51EE600290A70 /* EventRadioProvider.swift */; };
+		5626992D1FA51EE600290A70 /* EventOptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992C1FA51EE600290A70 /* EventOptionProvider.swift */; };
 		5626992F1FA5215900290A70 /* EventOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992E1FA5215900290A70 /* EventOptionsViewController.swift */; };
 		564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */; };
 		564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */; };
@@ -184,7 +184,7 @@
 		562594531FA0CCA800BF5756 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		562594541FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
 		562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
-		5626992C1FA51EE600290A70 /* EventRadioProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRadioProvider.swift; sourceTree = "<group>"; };
+		5626992C1FA51EE600290A70 /* EventOptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOptionProvider.swift; sourceTree = "<group>"; };
 		5626992E1FA5215900290A70 /* EventOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOptionsViewController.swift; sourceTree = "<group>"; };
 		564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackView.swift; sourceTree = "<group>"; };
 		564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackItemProvider.swift; sourceTree = "<group>"; };
@@ -411,13 +411,13 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
-		562699291FA51E8800290A70 /* EventRadio */ = {
+		562699291FA51E8800290A70 /* Options */ = {
 			isa = PBXGroup;
 			children = (
-				5626992C1FA51EE600290A70 /* EventRadioProvider.swift */,
+				5626992C1FA51EE600290A70 /* EventOptionProvider.swift */,
 				5626992E1FA5215900290A70 /* EventOptionsViewController.swift */,
 			);
-			path = EventRadio;
+			path = Options;
 			sourceTree = "<group>";
 		};
 		564639F91F9E4D7B00EE1498 /* Storyboard */ = {
@@ -437,14 +437,14 @@
 			path = TimeZone;
 			sourceTree = "<group>";
 		};
-		5665F1EB1FA5AA62009225F7 /* EventRepeat */ = {
+		5665F1EB1FA5AA62009225F7 /* Repeat */ = {
 			isa = PBXGroup;
 			children = (
 				5665F1EC1FA5AA8F009225F7 /* EndRepeatProvider.swift */,
 				5665F1EE1FA5AAA8009225F7 /* RepeatGroupProvider.swift */,
 				5665F1F01FA5AEF3009225F7 /* EndRepeatSelectViewController.swift */,
 			);
-			path = EventRepeat;
+			path = Repeat;
 			sourceTree = "<group>";
 		};
 		5665F1F21FA5B636009225F7 /* CalendarEvent */ = {
@@ -453,8 +453,8 @@
 				562594501FA0CC8300BF5756 /* Location */,
 				568744691FA3742800B5193C /* Event */,
 				566300BF1FA4F79800A35CFA /* TimeZone */,
-				562699291FA51E8800290A70 /* EventRadio */,
-				5665F1EB1FA5AA62009225F7 /* EventRepeat */,
+				562699291FA51E8800290A70 /* Options */,
+				5665F1EB1FA5AA62009225F7 /* Repeat */,
 			);
 			path = CalendarEvent;
 			sourceTree = "<group>";
@@ -804,7 +804,7 @@
 				562075581FA40B10001D8896 /* DateSelectProvider.swift in Sources */,
 				2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */,
 				568744751FA381DA00B5193C /* SelectedLocationProvider.swift in Sources */,
-				5626992D1FA51EE600290A70 /* EventRadioProvider.swift in Sources */,
+				5626992D1FA51EE600290A70 /* EventOptionProvider.swift in Sources */,
 				5665F1EF1FA5AAA8009225F7 /* RepeatGroupProvider.swift in Sources */,
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,
 				5665F1F61FA5CF73009225F7 /* CalendarEventObject.swift in Sources */,

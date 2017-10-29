@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Flix
 
-class EventOptionsProvider<T: EventRadioType>: AnimatableTableViewProvider {
+class EventOptionsProvider<T: EventOptionType>: AnimatableTableViewProvider {
 
     func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: T) {
         if !cell.hasConfigured {
@@ -50,7 +50,7 @@ class EventOptionsProvider<T: EventRadioType>: AnimatableTableViewProvider {
 
 }
 
-class EventOptionsViewController<T: EventRadioType>: TableViewController {
+class EventOptionsViewController<T: EventOptionType>: TableViewController {
 
     let selectedOption: T?
     let optionSelected = PublishSubject<T>()
