@@ -11,9 +11,7 @@ import RxSwift
 import RxCocoa
 import Flix
 
-//NSTimeZone
-
-private class TimeZoneTableViewCell: UITableViewCell {
+class TitleTableViewCell: UITableViewCell {
 
     let titleLabel = UILabel()
 
@@ -35,7 +33,7 @@ private class TimeZoneTableViewCell: UITableViewCell {
 
 private class TimeZonesProvider: AnimatableTableViewProvider {
 
-    func configureCell(_ tableView: UITableView, cell: TimeZoneTableViewCell, indexPath: IndexPath, value: String) {
+    func configureCell(_ tableView: UITableView, cell: TitleTableViewCell, indexPath: IndexPath, value: String) {
         cell.titleLabel.text = value
     }
 
@@ -52,7 +50,7 @@ private class TimeZonesProvider: AnimatableTableViewProvider {
     }
 
     typealias Value = String
-    typealias Cell = TimeZoneTableViewCell
+    typealias Cell = TitleTableViewCell
 
     func tap(_ tableView: UITableView, indexPath: IndexPath, value: String) {
         timeZoneSelected.onNext(TimeZone(identifier: value)!)

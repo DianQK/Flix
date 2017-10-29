@@ -75,6 +75,7 @@
 		5665F1EF1FA5AAA8009225F7 /* RepeatGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1EE1FA5AAA8009225F7 /* RepeatGroupProvider.swift */; };
 		5665F1F11FA5AEF3009225F7 /* EndRepeatSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1F01FA5AEF3009225F7 /* EndRepeatSelectViewController.swift */; };
 		5665F1F41FA5CB5F009225F7 /* TextViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1F31FA5CB5F009225F7 /* TextViewProvider.swift */; };
+		5665F1F61FA5CF73009225F7 /* CalendarEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1F51FA5CF73009225F7 /* CalendarEventObject.swift */; };
 		5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */; };
 		5687446D1FA3745200B5193C /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687446C1FA3745100B5193C /* EventListViewController.swift */; };
 		5687446F1FA374E800B5193C /* EventEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687446E1FA374E800B5193C /* EventEditViewController.swift */; };
@@ -195,6 +196,7 @@
 		5665F1EE1FA5AAA8009225F7 /* RepeatGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatGroupProvider.swift; sourceTree = "<group>"; };
 		5665F1F01FA5AEF3009225F7 /* EndRepeatSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndRepeatSelectViewController.swift; sourceTree = "<group>"; };
 		5665F1F31FA5CB5F009225F7 /* TextViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewProvider.swift; sourceTree = "<group>"; };
+		5665F1F51FA5CF73009225F7 /* CalendarEventObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventObject.swift; sourceTree = "<group>"; };
 		5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewInsertable.swift; sourceTree = "<group>"; };
 		5687446C1FA3745100B5193C /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		5687446E1FA374E800B5193C /* EventEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditViewController.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				566300BB1FA4D7AA00A35CFA /* AnimatableTableViewGroupProvider.swift */,
 				566300BD1FA4E41B00A35CFA /* StartAndEndDateGroupProvider.swift */,
 				5665F1F31FA5CB5F009225F7 /* TextViewProvider.swift */,
+				5665F1F51FA5CF73009225F7 /* CalendarEventObject.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				5626992D1FA51EE600290A70 /* EventRadioProvider.swift in Sources */,
 				5665F1EF1FA5AAA8009225F7 /* RepeatGroupProvider.swift in Sources */,
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,
+				5665F1F61FA5CF73009225F7 /* CalendarEventObject.swift in Sources */,
 				2670E6A01F83EE5E003A5BA7 /* TextListProvider.swift in Sources */,
 				2670E69B1F83EE40003A5BA7 /* ExampleListViewController.swift in Sources */,
 				5626992F1FA5215900290A70 /* EventOptionsViewController.swift in Sources */,

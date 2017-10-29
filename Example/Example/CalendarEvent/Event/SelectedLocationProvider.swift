@@ -12,7 +12,18 @@ import RxCocoa
 import Flix
 import CoreLocation
 
-enum EventLocation {
+enum EventLocation: Equatable {
+
+    static func ==(lhs: EventLocation, rhs: EventLocation) -> Bool {
+        switch (lhs, rhs) {
+        case (let .custom(l), let .custom(r)):
+            return l == r
+        case (let .placemark(l), let .placemark(r)):
+            return l.addressDetail == r.addressDetail
+        default:
+            return false
+        }
+    }
 
     case custom(String)
     case placemark(CLPlacemark)
