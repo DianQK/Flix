@@ -112,9 +112,8 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
 
     let dateIsAvailable = Variable(true)
 
-    init() {
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "MM/dd/yy  h:mm:ss a z"
+    init(timeZone: Observable<TimeZone>) {
+        let timeZone = timeZone.share(replay: 1, scope: .forever)
 
         self.dateProvider.tap.asObservable()
             .withLatestFrom(self.isActive.asObservable()).map { !$0 }
@@ -124,8 +123,17 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
             .bind(to: self.isActive)
             .disposed(by: disposeBag)
 
+        let dateformatter = timeZone.map { (timeZone) -> DateFormatter in
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "MM/dd/yy  h:mm:ss a z"
+            dateformatter.timeZone = timeZone
+            return dateformatter
+        }
+
+        let date: Observable<String> = Observable.combineLatest(pickerProvider.datePicker.rx.date, dateformatter) { $1.string(from: $0) }
+
         Observable.combineLatest(
-            pickerProvider.datePicker.rx.date.map { dateformatter.string(from: $0) },
+            date,
             dateIsAvailable.asObservable(),
             isActive.asObservable().distinctUntilChanged().map { $0 ? UIColor(named: "Deep Carmine Pink")! : UIColor.darkText }
             )
@@ -141,6 +149,11 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
             .bind(to: dateProvider.dateLabel.rx.attributedText)
             .disposed(by: disposeBag)
 
+        timeZoneProvider.titleLabel.text = "Time Zone"
+
+        timeZone.map { $0.identifier }
+            .bind(to: self.timeZoneProvider.descLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 
     func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {

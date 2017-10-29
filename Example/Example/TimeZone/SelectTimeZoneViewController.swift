@@ -45,6 +45,7 @@ private class TimeZonesProvider: AnimatableTableViewProvider {
     }
 
     let query: Observable<String>
+    let timeZoneSelected = PublishSubject<TimeZone>()
 
     init(query: Observable<String>) {
         self.query = query
@@ -52,6 +53,10 @@ private class TimeZonesProvider: AnimatableTableViewProvider {
 
     typealias Value = String
     typealias Cell = TimeZoneTableViewCell
+
+    func tap(_ tableView: UITableView, indexPath: IndexPath, value: String) {
+        timeZoneSelected.onNext(TimeZone(identifier: value)!)
+    }
 
 }
 
@@ -61,6 +66,17 @@ class SelectTimeZoneViewController: UIViewController {
     let tableView = UITableView(frame: .zero, style: .plain)
 
     let disposeBag = DisposeBag()
+
+    let timeZoneSelected = PublishSubject<TimeZone>()
+
+    init(currentTimeZone: TimeZone) {
+        super.init(nibName: nil, bundle: nil)
+        self.searchBar.text = currentTimeZone.identifier
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,8 +111,22 @@ class SelectTimeZoneViewController: UIViewController {
 
         let timeZonesProvider = TimeZonesProvider(query: self.searchBar.rx.text.orEmpty.asObservable())
 
+        timeZonesProvider.timeZoneSelected.asObservable()
+            .subscribe(onNext: { [weak self] (timeZone) in
+                guard let `self` = self else { return }
+                self.timeZoneSelected.onNext(timeZone)
+                self.timeZoneSelected.onCompleted()
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+
         self.tableView.flix.build([timeZonesProvider])
 
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.timeZoneSelected.onCompleted()
     }
 
 }

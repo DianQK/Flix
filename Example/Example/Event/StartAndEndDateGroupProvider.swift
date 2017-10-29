@@ -13,16 +13,21 @@ import Flix
 
 class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
 
-    let startProvider = DateSelectGroupProvider()
-    let endProvider = DateSelectGroupProvider()
+    let startProvider: DateSelectGroupProvider
+    let endProvider: DateSelectGroupProvider
 
     var providers: [_AnimatableTableViewMultiNodeProvider] {
         return [startProvider, endProvider].flatMap { $0.providers }
     }
 
+    let timeZone = Variable(TimeZone.current)
     let disposeBag = DisposeBag()
 
     init(viewController: UIViewController) {
+
+        self.startProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable())
+        self.endProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable())
+
         startProvider.dateProvider.titleLabel.text = "Starts"
         endProvider.dateProvider.titleLabel.text = "Ends"
 
@@ -47,9 +52,14 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
             .disposed(by: disposeBag)
 
         Observable.merge([self.startProvider.timeZoneProvider.tap, self.endProvider.timeZoneProvider.tap])
-            .subscribe(onNext: { [weak viewController] in
-                viewController?.show(SelectTimeZoneViewController(), sender: nil)
+            .withLatestFrom(timeZone.asObservable())
+            .flatMapLatest({ [weak viewController] (timeZone) -> Observable<TimeZone> in
+                guard let `viewController` = viewController else { return Observable.empty() }
+                let selectTimeZoneViewController = SelectTimeZoneViewController(currentTimeZone: timeZone)
+                viewController.show(selectTimeZoneViewController, sender: nil)
+                return selectTimeZoneViewController.timeZoneSelected.asObservable()
             })
+            .bind(to: self.timeZone)
             .disposed(by: disposeBag)
 
     }
