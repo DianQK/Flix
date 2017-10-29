@@ -14,6 +14,7 @@ class EventListViewController: TableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "All Events"
 
         let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem = addBarButtonItem

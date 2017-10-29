@@ -37,8 +37,6 @@ class EndRepeatSelectViewController: TableViewController {
         neverProvider.titleLabel.text = "Never"
         onDateProvider.titleLabel.text = "On Date"
 
-        self.view.tintColor = UIColor(named: "Deep Carmine Pink")
-
         minEndDate
             .subscribe(onNext: { [weak self] (date) in
                 self?.datePickerProvider.datePicker.minimumDate = date

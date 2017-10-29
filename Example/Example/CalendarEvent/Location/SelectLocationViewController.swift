@@ -272,7 +272,6 @@ extension Reactive where Base: SelectLocationViewController {
             }
 
             let nav = UINavigationController(rootViewController: selectLocation)
-            nav.navigationBar.tintColor = UIColor(named: "Deep Carmine Pink")
             parent.present(nav, animated: true, completion: nil)
             observer.on(.next(selectLocation))
 
