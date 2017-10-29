@@ -64,16 +64,4 @@ class RepeatGroupProvider: AnimatableTableViewGroupProvider {
         }
     }
 
-    // ugly
-    func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: String) -> UITableViewCell {
-        return UITableViewCell()
-    }
-
-    func genteralValues() -> Observable<[String]> {
-        return Observable.just([])
-    }
-
-    typealias Value = String
-    // ugly
-    
 }

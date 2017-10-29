@@ -180,18 +180,6 @@ class AlertGroupProvider: AnimatableTableViewGroupProvider {
         return [firstAlertProvider, secondAlertProvider]
     }
 
-    // ugly
-    func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: String) -> UITableViewCell {
-        return UITableViewCell()
-    }
-
-    func genteralValues() -> Observable<[String]> {
-        return Observable.just([])
-    }
-
-    typealias Value = String
-    // ugly
-
     let disposeBag = DisposeBag()
 
     init(viewController: UIViewController, first: AlertOption?, second: AlertOption?) {
