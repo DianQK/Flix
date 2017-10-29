@@ -11,13 +11,36 @@ import RxSwift
 import RxCocoa
 import Flix
 
+class SwitchProvider: UniqueCustomTableViewProvider {
+
+    let uiSwitch = UISwitch()
+    let titleLabel = UILabel()
+
+    override init() {
+        super.init()
+        self.contentView.addSubview(uiSwitch)
+        uiSwitch.translatesAutoresizingMaskIntoConstraints = false
+        uiSwitch.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20).isActive = true
+        uiSwitch.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor, constant: 0).isActive = true
+
+        self.contentView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor, constant: 0).isActive = true
+
+        self.selectionStyle.value = .none
+    }
+
+}
+
 class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
 
+    let allDaySwitchProvider = SwitchProvider()
     let startProvider: DateSelectGroupProvider
     let endProvider: DateSelectGroupProvider
 
     var providers: [_AnimatableTableViewMultiNodeProvider] {
-        return [startProvider, endProvider].flatMap { $0.providers }
+        return [allDaySwitchProvider] + [startProvider, endProvider].flatMap { $0.providers }
     }
 
     let timeZone = Variable(TimeZone.current)
@@ -25,8 +48,11 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
 
     init(viewController: UIViewController) {
 
-        self.startProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable())
-        self.endProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable())
+        allDaySwitchProvider.titleLabel.text = "All-day"
+
+        let isAllDay = allDaySwitchProvider.uiSwitch.rx.isOn
+        self.startProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable(), isAllDay: isAllDay)
+        self.endProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable(), isAllDay: isAllDay)
 
         startProvider.dateProvider.titleLabel.text = "Starts"
         endProvider.dateProvider.titleLabel.text = "Ends"
@@ -77,7 +103,7 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
     // ugly
 
     func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
-        return Observable.just([startProvider, endProvider])
+        return Observable.just([allDaySwitchProvider, startProvider, endProvider])
     }
 
 }

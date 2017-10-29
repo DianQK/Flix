@@ -201,10 +201,8 @@ class AlertGroupProvider: AnimatableTableViewGroupProvider {
         self.secondAlertProvider = AlertOption.createProvider(viewController: viewController, selected: AlertOption.none, customTitle: "Second Alert")
 
         self.firstAlertProvider.selectedOption.asObservable().filter { $0 == .none }
-            .flatMap { [unowned self] _ in self.secondAlertProvider.selectedOption.asObservable().take(1).debug("secondAlertProvider").filter { $0 != .none } }
-            .debug()
+            .flatMap { [unowned self] _ in self.secondAlertProvider.selectedOption.asObservable().take(1).filter { $0 != .none } }
             .observeOn(MainScheduler.asyncInstance)
-            .debug()
             .subscribe(onNext: { [weak self] (option) in
                 guard let `self` = self else { return }
                 self.firstAlertProvider.selectedOption.value = option

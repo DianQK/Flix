@@ -44,7 +44,8 @@ class DatePickerProvider: UniqueCustomTableViewProvider {
         self.contentView.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        datePicker.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+        datePicker.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+        datePicker.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
 
         self.selectionStyle.value = .none
 
@@ -112,8 +113,11 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
 
     let dateIsAvailable = Variable(true)
 
-    init(timeZone: Observable<TimeZone>) {
+    let isAllDay: ControlProperty<Bool>
+
+    init(timeZone: Observable<TimeZone>, isAllDay: ControlProperty<Bool>) {
         let timeZone = timeZone.share(replay: 1, scope: .forever)
+        self.isAllDay = isAllDay
 
         self.dateProvider.tap.asObservable()
             .withLatestFrom(self.isActive.asObservable()).map { !$0 }
@@ -157,10 +161,20 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
     }
 
     func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
-        return self.isActive.asObservable().distinctUntilChanged()
-            .map { [weak self] (isActive) -> [_AnimatableTableViewMultiNodeProvider] in
+        return Observable
+            .combineLatest(self.isActive.asObservable(), self.isAllDay.asObservable()) { [weak self] (isActive, isAllDay) -> [_AnimatableTableViewMultiNodeProvider] in
                 guard let `self` = self else { return [] }
-                return isActive ? [self.dateProvider, self.pickerProvider, self.timeZoneProvider] : [self.dateProvider]
+                switch (isActive, isAllDay) {
+                case (true, true):
+                    return [self.dateProvider, self.pickerProvider]
+                case (true, false):
+                    return [self.dateProvider, self.pickerProvider, self.timeZoneProvider]
+                case (false, _):
+                    return [self.dateProvider]
+                }
+            }
+            .distinctUntilChanged { (lhs, rhs) -> Bool in
+                return lhs.count == rhs.count
             }
     }
 
