@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class TableViewSectionProvider: FlixCustomStringConvertible {
+open class TableViewSectionProvider: FlixCustomStringConvertible {
     
     public var headerProvider: _SectionPartionTableViewProvider?
     public var footerProvider: _SectionPartionTableViewProvider?
@@ -64,7 +64,7 @@ public class TableViewSectionProvider: FlixCustomStringConvertible {
 
 }
 
-public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
+open class AnimatableTableViewSectionProvider: TableViewSectionProvider {
     
     public var animatableHeaderProvider: _AnimatableSectionPartionTableViewProvider?
     public var animatableFooterProvider: _AnimatableSectionPartionTableViewProvider?
@@ -105,7 +105,7 @@ public class AnimatableTableViewSectionProvider: TableViewSectionProvider {
         
         return Observable
             .combineLatest(headerSection, footerSection, nodes, isHidden) { (headerSection, footerSection, nodes, isHidden) -> (section: IdentifiableSectionNode, nodes: [IdentifiableNode])? in
-                if isHidden {
+                if isHidden || (headerSection == nil && footerSection == nil && nodes.isEmpty) {
                     return nil
                 } else {
                     let section = IdentifiableSectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)

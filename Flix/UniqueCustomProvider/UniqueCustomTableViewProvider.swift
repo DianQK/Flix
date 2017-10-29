@@ -16,7 +16,11 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     open var selectedBackgroundView: UIView?
     open var backgroundView: UIView?
     
-    open var accessoryType: UITableViewCellAccessoryType = .none // default is UITableViewCellAccessoryNone. use to set standard type
+    open var accessoryType: UITableViewCellAccessoryType = .none {// default is UITableViewCellAccessoryNone. use to set standard type
+        didSet {
+            _cell?.accessoryType = accessoryType
+        }
+    }
     open var accessoryView: UIView? // if set, use custom view. ignore accessoryType. tracks if enabled can calls accessory action
     open var editingAccessoryType: UITableViewCellAccessoryType = .none // default is UITableViewCellAccessoryNone. use to set standard type
     open var editingAccessoryView: UIView? // if set, use custom view. ignore editingAccessoryType. tracks if enabled can calls accessory action
@@ -33,6 +37,8 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     public let isHidden = Variable(false)
     
     private let disposeBag = DisposeBag()
+
+    private weak var _cell: UITableViewCell?
     
     public init(customIdentity: String) {
         self.customIdentity = customIdentity
@@ -43,6 +49,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     }
     
     open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+        _cell = cell
         cell.selectedBackgroundView = self.selectedBackgroundView
         cell.backgroundView = backgroundView
         cell.accessoryType = self.accessoryType

@@ -42,6 +42,7 @@ class ExampleListViewController: CollectionViewController {
         
         let textListProvider = TextListProvider(
             items: [
+                Model(title: "All Events", desc: "", value: { return EventListViewController() }),
                 Model(title: "Photos", desc: "", value: { return PhotoSettingsViewController() }),
                 Model(title: "勿扰模式", desc: "", value: { return DoNotDisturbSettingsViewController() }),
                 Model(title: "登录示例", desc: "", value: { return LoginViewController() }),

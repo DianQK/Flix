@@ -56,10 +56,32 @@
 		26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847061F84897000EEFEAA /* TableViewSectionPartionProvider.swift */; };
 		26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C847091F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift */; };
 		26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */; };
+		562075581FA40B10001D8896 /* DateSelectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562075571FA40B10001D8896 /* DateSelectProvider.swift */; };
+		5622648E1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5622648D1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift */; };
+		5622F6E31FA0DCFC00326201 /* MKLocalSearch+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5622F6E21FA0DCFC00326201 /* MKLocalSearch+Rx.swift */; };
+		5622F6E51FA0E16000326201 /* LocalSearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5622F6E41FA0E16000326201 /* LocalSearchProvider.swift */; };
+		562594521FA0CC9800BF5756 /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594511FA0CC9800BF5756 /* GeolocationService.swift */; };
+		562594551FA0CCA800BF5756 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594531FA0CCA800BF5756 /* CLLocationManager+Rx.swift */; };
+		562594561FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594541FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift */; };
+		562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */; };
+		5626992D1FA51EE600290A70 /* EventOptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992C1FA51EE600290A70 /* EventOptionProvider.swift */; };
+		5626992F1FA5215900290A70 /* EventOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992E1FA5215900290A70 /* EventOptionsViewController.swift */; };
 		564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */; };
 		564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */; };
 		565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */; };
+		566300BE1FA4E41B00A35CFA /* StartAndEndDateGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566300BD1FA4E41B00A35CFA /* StartAndEndDateGroupProvider.swift */; };
+		566300C11FA4F7B000A35CFA /* SelectTimeZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566300C01FA4F7B000A35CFA /* SelectTimeZoneViewController.swift */; };
+		5665F1ED1FA5AA8F009225F7 /* EndRepeatProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1EC1FA5AA8F009225F7 /* EndRepeatProvider.swift */; };
+		5665F1EF1FA5AAA8009225F7 /* RepeatGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1EE1FA5AAA8009225F7 /* RepeatGroupProvider.swift */; };
+		5665F1F11FA5AEF3009225F7 /* EndRepeatSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1F01FA5AEF3009225F7 /* EndRepeatSelectViewController.swift */; };
+		5665F1F41FA5CB5F009225F7 /* TextViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1F31FA5CB5F009225F7 /* TextViewProvider.swift */; };
+		5665F1F61FA5CF73009225F7 /* CalendarEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665F1F51FA5CF73009225F7 /* CalendarEventObject.swift */; };
 		5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */; };
+		5687446D1FA3745200B5193C /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687446C1FA3745100B5193C /* EventListViewController.swift */; };
+		5687446F1FA374E800B5193C /* EventEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687446E1FA374E800B5193C /* EventEditViewController.swift */; };
+		568744711FA3766700B5193C /* TextFieldProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568744701FA3766700B5193C /* TextFieldProvider.swift */; };
+		568744731FA3792F00B5193C /* SpacingSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568744721FA3792F00B5193C /* SpacingSectionProvider.swift */; };
+		568744751FA381DA00B5193C /* SelectedLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568744741FA381DA00B5193C /* SelectedLocationProvider.swift */; };
 		569294F71F88DA6800FA1493 /* TableViewEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F61F88DA6800FA1493 /* TableViewEditable.swift */; };
 		569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */; };
 		5694616B1F9C67B4009F7971 /* _CollectionViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5694616A1F9C67B4009F7971 /* _CollectionViewBuilder.swift */; };
@@ -155,10 +177,32 @@
 		26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewProvider.swift; sourceTree = "<group>"; };
 		3623AE6EB18987F4D533683C /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		4D1DE780D16E3E8256EDE880 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
+		562075571FA40B10001D8896 /* DateSelectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectProvider.swift; sourceTree = "<group>"; };
+		5622648D1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableTableViewGroupProvider.swift; sourceTree = "<group>"; };
+		5622F6E21FA0DCFC00326201 /* MKLocalSearch+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKLocalSearch+Rx.swift"; sourceTree = "<group>"; };
+		5622F6E41FA0E16000326201 /* LocalSearchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchProvider.swift; sourceTree = "<group>"; };
+		562594511FA0CC9800BF5756 /* GeolocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationService.swift; sourceTree = "<group>"; };
+		562594531FA0CCA800BF5756 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
+		562594541FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
+		562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
+		5626992C1FA51EE600290A70 /* EventOptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOptionProvider.swift; sourceTree = "<group>"; };
+		5626992E1FA5215900290A70 /* EventOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOptionsViewController.swift; sourceTree = "<group>"; };
 		564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackView.swift; sourceTree = "<group>"; };
 		564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackItemProvider.swift; sourceTree = "<group>"; };
 		565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardViewController.swift; sourceTree = "<group>"; };
+		566300BD1FA4E41B00A35CFA /* StartAndEndDateGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAndEndDateGroupProvider.swift; sourceTree = "<group>"; };
+		566300C01FA4F7B000A35CFA /* SelectTimeZoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeZoneViewController.swift; sourceTree = "<group>"; };
+		5665F1EC1FA5AA8F009225F7 /* EndRepeatProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndRepeatProvider.swift; sourceTree = "<group>"; };
+		5665F1EE1FA5AAA8009225F7 /* RepeatGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatGroupProvider.swift; sourceTree = "<group>"; };
+		5665F1F01FA5AEF3009225F7 /* EndRepeatSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndRepeatSelectViewController.swift; sourceTree = "<group>"; };
+		5665F1F31FA5CB5F009225F7 /* TextViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewProvider.swift; sourceTree = "<group>"; };
+		5665F1F51FA5CF73009225F7 /* CalendarEventObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventObject.swift; sourceTree = "<group>"; };
 		5677E7A01F9AF3A7004D002B /* TableViewInsertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewInsertable.swift; sourceTree = "<group>"; };
+		5687446C1FA3745100B5193C /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		5687446E1FA374E800B5193C /* EventEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditViewController.swift; sourceTree = "<group>"; };
+		568744701FA3766700B5193C /* TextFieldProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProvider.swift; sourceTree = "<group>"; };
+		568744721FA3792F00B5193C /* SpacingSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacingSectionProvider.swift; sourceTree = "<group>"; };
+		568744741FA381DA00B5193C /* SelectedLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationProvider.swift; sourceTree = "<group>"; };
 		569294F61F88DA6800FA1493 /* TableViewEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEditable.swift; sourceTree = "<group>"; };
 		569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteItemViewController.swift; sourceTree = "<group>"; };
 		5694616A1F9C67B4009F7971 /* _CollectionViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _CollectionViewBuilder.swift; sourceTree = "<group>"; };
@@ -299,6 +343,7 @@
 				56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */,
 				2628745F1F9F8DD000F66907 /* ProviderDescription.swift */,
 				262874611F9F8F0F00F66907 /* CustomIdentityType.swift */,
+				5622648D1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -354,6 +399,28 @@
 			path = UniqueCustomProvider;
 			sourceTree = "<group>";
 		};
+		562594501FA0CC8300BF5756 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				562594531FA0CCA800BF5756 /* CLLocationManager+Rx.swift */,
+				562594541FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift */,
+				562594511FA0CC9800BF5756 /* GeolocationService.swift */,
+				562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */,
+				5622F6E21FA0DCFC00326201 /* MKLocalSearch+Rx.swift */,
+				5622F6E41FA0E16000326201 /* LocalSearchProvider.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		562699291FA51E8800290A70 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				5626992C1FA51EE600290A70 /* EventOptionProvider.swift */,
+				5626992E1FA5215900290A70 /* EventOptionsViewController.swift */,
+			);
+			path = Options;
+			sourceTree = "<group>";
+		};
 		564639F91F9E4D7B00EE1498 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,9 +430,56 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		566300BF1FA4F79800A35CFA /* TimeZone */ = {
+			isa = PBXGroup;
+			children = (
+				566300C01FA4F7B000A35CFA /* SelectTimeZoneViewController.swift */,
+			);
+			path = TimeZone;
+			sourceTree = "<group>";
+		};
+		5665F1EB1FA5AA62009225F7 /* Repeat */ = {
+			isa = PBXGroup;
+			children = (
+				5665F1EC1FA5AA8F009225F7 /* EndRepeatProvider.swift */,
+				5665F1EE1FA5AAA8009225F7 /* RepeatGroupProvider.swift */,
+				5665F1F01FA5AEF3009225F7 /* EndRepeatSelectViewController.swift */,
+			);
+			path = Repeat;
+			sourceTree = "<group>";
+		};
+		5665F1F21FA5B636009225F7 /* CalendarEvent */ = {
+			isa = PBXGroup;
+			children = (
+				562594501FA0CC8300BF5756 /* Location */,
+				568744691FA3742800B5193C /* Event */,
+				566300BF1FA4F79800A35CFA /* TimeZone */,
+				562699291FA51E8800290A70 /* Options */,
+				5665F1EB1FA5AA62009225F7 /* Repeat */,
+			);
+			path = CalendarEvent;
+			sourceTree = "<group>";
+		};
+		568744691FA3742800B5193C /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				5687446C1FA3745100B5193C /* EventListViewController.swift */,
+				5687446E1FA374E800B5193C /* EventEditViewController.swift */,
+				568744701FA3766700B5193C /* TextFieldProvider.swift */,
+				568744721FA3792F00B5193C /* SpacingSectionProvider.swift */,
+				568744741FA381DA00B5193C /* SelectedLocationProvider.swift */,
+				562075571FA40B10001D8896 /* DateSelectProvider.swift */,
+				566300BD1FA4E41B00A35CFA /* StartAndEndDateGroupProvider.swift */,
+				5665F1F31FA5CB5F009225F7 /* TextViewProvider.swift */,
+				5665F1F51FA5CF73009225F7 /* CalendarEventObject.swift */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
 		569848F01F89F2DD00DA1D64 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				5665F1F21FA5B636009225F7 /* CalendarEvent */,
 				569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */,
 				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
 				2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */,
@@ -633,6 +747,7 @@
 				5694616F1F9C73D9009F7971 /* BuilderProxy.swift in Sources */,
 				262874641F9F9EB600F66907 /* NeverHitSelfView.swift in Sources */,
 				5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */,
+				5622648E1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift in Sources */,
 				264F27961F9C33B000884FF2 /* TableViewDeleteable.swift in Sources */,
 				56E06EF21F9C46710074032A /* CollectionViewDelegateProxy.swift in Sources */,
 				91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */,
@@ -661,33 +776,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				562594521FA0CC9800BF5756 /* GeolocationService.swift in Sources */,
 				26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */,
 				2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */,
+				566300BE1FA4E41B00A35CFA /* StartAndEndDateGroupProvider.swift in Sources */,
 				2670E69C1F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift in Sources */,
 				26424F721F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift in Sources */,
+				5622F6E51FA0E16000326201 /* LocalSearchProvider.swift in Sources */,
 				2617C26A1F84D0FD007F8228 /* Protocols.swift in Sources */,
 				2617C2761F84D1BF007F8228 /* ActivityIndicator.swift in Sources */,
 				26BAF0331F8499B8009A4401 /* LoginViewController.swift in Sources */,
 				2670E6A21F83EE5E003A5BA7 /* RadioProvider.swift in Sources */,
 				2666E4041F874113006F1918 /* Operators.swift in Sources */,
 				2617C2681F84D0FD007F8228 /* GitHubSignupViewController.swift in Sources */,
+				562594561FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
+				5687446D1FA3745200B5193C /* EventListViewController.swift in Sources */,
+				566300C11FA4F7B000A35CFA /* SelectTimeZoneViewController.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
 				2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */,
+				568744711FA3766700B5193C /* TextFieldProvider.swift in Sources */,
 				569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */,
 				26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */,
+				5665F1F11FA5AEF3009225F7 /* EndRepeatSelectViewController.swift in Sources */,
 				2617C26B1F84D0FD007F8228 /* DefaultImplementations.swift in Sources */,
 				565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */,
+				5665F1ED1FA5AA8F009225F7 /* EndRepeatProvider.swift in Sources */,
+				562075581FA40B10001D8896 /* DateSelectProvider.swift in Sources */,
 				2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */,
+				568744751FA381DA00B5193C /* SelectedLocationProvider.swift in Sources */,
+				5626992D1FA51EE600290A70 /* EventOptionProvider.swift in Sources */,
+				5665F1EF1FA5AAA8009225F7 /* RepeatGroupProvider.swift in Sources */,
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,
+				5665F1F61FA5CF73009225F7 /* CalendarEventObject.swift in Sources */,
 				2670E6A01F83EE5E003A5BA7 /* TextListProvider.swift in Sources */,
 				2670E69B1F83EE40003A5BA7 /* ExampleListViewController.swift in Sources */,
+				5626992F1FA5215900290A70 /* EventOptionsViewController.swift in Sources */,
 				91F3F3EE1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift in Sources */,
 				2617C2701F84D15C007F8228 /* Wireframe.swift in Sources */,
 				2670E6A31F83EE5E003A5BA7 /* TextSectionProvider.swift in Sources */,
+				5687446F1FA374E800B5193C /* EventEditViewController.swift in Sources */,
 				2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */,
 				2617C2731F84D18B007F8228 /* String+URL.swift in Sources */,
+				568744731FA3792F00B5193C /* SpacingSectionProvider.swift in Sources */,
+				5665F1F41FA5CB5F009225F7 /* TextViewProvider.swift in Sources */,
 				2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */,
+				562594551FA0CCA800BF5756 /* CLLocationManager+Rx.swift in Sources */,
+				562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */,
 				2670E69D1F83EE40003A5BA7 /* PhotoSettingsViewController.swift in Sources */,
+				5622F6E31FA0DCFC00326201 /* MKLocalSearch+Rx.swift in Sources */,
 				2670E6A11F83EE5E003A5BA7 /* UniqueTextProvider.swift in Sources */,
 				2617C2691F84D0FD007F8228 /* GithubSignupViewModel1.swift in Sources */,
 			);
