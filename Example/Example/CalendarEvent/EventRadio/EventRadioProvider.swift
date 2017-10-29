@@ -194,9 +194,9 @@ class AlertGroupProvider: AnimatableTableViewGroupProvider {
 
     let disposeBag = DisposeBag()
 
-    init(viewController: UIViewController) {
-        self.firstAlertProvider = AlertOption.createProvider(viewController: viewController, selected: AlertOption.none, customTitle: "Alert")
-        self.secondAlertProvider = AlertOption.createProvider(viewController: viewController, selected: AlertOption.none, customTitle: "Second Alert")
+    init(viewController: UIViewController, first: AlertOption?, second: AlertOption?) {
+        self.firstAlertProvider = AlertOption.createProvider(viewController: viewController, selected: first ?? AlertOption.none, customTitle: "Alert")
+        self.secondAlertProvider = AlertOption.createProvider(viewController: viewController, selected: second ?? AlertOption.none, customTitle: "Second Alert")
 
         self.firstAlertProvider.selectedOption.asObservable().filter { $0 == .none }
             .flatMap { [unowned self] _ in self.secondAlertProvider.selectedOption.asObservable().take(1).filter { $0 != .none } }

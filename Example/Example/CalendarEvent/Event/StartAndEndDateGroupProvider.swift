@@ -50,13 +50,14 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
     let timeZone = Variable(TimeZone.current)
     let disposeBag = DisposeBag()
 
-    init(viewController: UIViewController) {
+    init(viewController: UIViewController, isAllDay: Bool?, start: Date?, end: Date?) {
 
         allDaySwitchProvider.titleLabel.text = "All-day"
 
+        allDaySwitchProvider.uiSwitch.isOn = isAllDay ?? false
         let isAllDay = allDaySwitchProvider.uiSwitch.rx.isOn
-        self.startProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable(), isAllDay: isAllDay)
-        self.endProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable(), isAllDay: isAllDay)
+        self.startProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable(), isAllDay: isAllDay, date: start)
+        self.endProvider = DateSelectGroupProvider(timeZone: self.timeZone.asObservable(), isAllDay: isAllDay, date: end)
 
         startProvider.dateProvider.titleLabel.text = "Starts"
         endProvider.dateProvider.titleLabel.text = "Ends"

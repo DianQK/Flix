@@ -18,11 +18,12 @@ class EndRepeatSelectViewController: TableViewController {
 
     let neverProvider = TitleDescProvider()
     let onDateProvider = TitleDescProvider()
-    let datePickerProvider = DatePickerProvider()
+    let datePickerProvider: DatePickerProvider
 
     init(endRepeatDate: Variable<Date?>, minEndDate: Observable<Date>) {
         self.endRepeatDate = endRepeatDate
         self.minEndDate = minEndDate
+        self.datePickerProvider = DatePickerProvider(date: endRepeatDate.value)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -42,10 +43,6 @@ class EndRepeatSelectViewController: TableViewController {
                 self?.datePickerProvider.datePicker.minimumDate = date
             })
             .disposed(by: disposeBag)
-
-        if let endRepeatDate = endRepeatDate.value {
-            self.datePickerProvider.datePicker.date = endRepeatDate
-        }
 
         self.datePickerProvider.datePicker.rx.date.changed
             .bind(to: self.endRepeatDate)

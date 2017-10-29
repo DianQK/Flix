@@ -36,8 +36,12 @@ class DatePickerProvider: UniqueCustomTableViewProvider {
 
     let datePicker = UIDatePicker()
 
-    override init() {
+    init(date: Date?) {
         super.init()
+
+        if let date = date {
+            self.datePicker.date = date
+        }
 
         self.itemHeight = { return 216 }
 
@@ -102,7 +106,7 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
      // ugly
 
     let dateProvider = SelectedDateDisplayProvider()
-    let pickerProvider = DatePickerProvider()
+    let pickerProvider: DatePickerProvider
     let timeZoneProvider = TitleDescProvider()
 
     var providers: [_AnimatableTableViewMultiNodeProvider] {
@@ -117,7 +121,9 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
 
     let isAllDay: ControlProperty<Bool>
 
-    init(timeZone: Observable<TimeZone>, isAllDay: ControlProperty<Bool>) {
+    init(timeZone: Observable<TimeZone>, isAllDay: ControlProperty<Bool>, date: Date?) {
+        self.pickerProvider = DatePickerProvider(date: date)
+
         let timeZone = timeZone.share(replay: 1, scope: .forever)
         self.isAllDay = isAllDay
 

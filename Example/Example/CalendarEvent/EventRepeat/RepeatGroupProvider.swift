@@ -51,9 +51,9 @@ class RepeatGroupProvider: AnimatableTableViewGroupProvider {
     let repeatProvider: EventRadioProvider<RepeatOption>
     let endRepeatProvider: EndRepeatProvider
 
-    init(viewController: UIViewController, minEndDate: Observable<Date>) {
-        self.repeatProvider = RepeatOption.createProvider(viewController: viewController, selected: RepeatOption.never)
-        self.endRepeatProvider = EndRepeatProvider(viewController: viewController, minEndDate: minEndDate)
+    init(viewController: UIViewController, minEndDate: Observable<Date>, selectedRepeat: RepeatOption?, endRepeatDate: Date?) {
+        self.repeatProvider = RepeatOption.createProvider(viewController: viewController, selected: selectedRepeat ?? RepeatOption.never)
+        self.endRepeatProvider = EndRepeatProvider(viewController: viewController, minEndDate: minEndDate, endRepeatDate: endRepeatDate)
     }
 
     func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {

@@ -77,9 +77,10 @@ class SelectedLocationProvider: UniqueCustomTableViewProvider {
 
     let disposeBag = DisposeBag()
 
-    let location = Variable(nil as EventLocation?)
+    let location: Variable<EventLocation?>
 
-    init(viewController: UIViewController) {
+    init(viewController: UIViewController, selected: EventLocation?) {
+        self.location = Variable(selected)
         super.init()
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         addressLabel.font = UIFont.systemFont(ofSize: 11)
@@ -110,7 +111,7 @@ class SelectedLocationProvider: UniqueCustomTableViewProvider {
             .bind(to: self.location)
             .disposed(by: disposeBag)
 
-        location.asObservable().skip(1)
+        location.asObservable()
             .subscribe(onNext: { [weak self] (location) in
                 self?.titleLabel.text = nil
                 self?.addressLabel.text = nil

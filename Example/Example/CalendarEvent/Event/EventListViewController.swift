@@ -46,6 +46,7 @@ class EventListProvider: AnimatableTableViewProvider {
 
     func tap(_ tableView: UITableView, indexPath: IndexPath, value: CalendarEventObject) {
         self.tapObject.onNext(value)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

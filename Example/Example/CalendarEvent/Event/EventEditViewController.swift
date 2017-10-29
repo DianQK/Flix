@@ -44,23 +44,34 @@ class EventEditViewController: TableViewController {
 
         let titleProvider = TextFieldProvider()
         titleProvider.placeholder = "Title"
+        titleProvider.text = calendarEvent?.title
         if !isEdit {
             titleProvider.becomeFirstResponder()
         }
 
-        let selectedLocationProvider = SelectedLocationProvider(viewController: self)
+        let selectedLocationProvider = SelectedLocationProvider(viewController: self, selected: calendarEvent?.location)
 
         let baseInfoSectionProvider = SpacingSectionProvider(providers: [titleProvider, selectedLocationProvider], headerHeight: 18, footerHeight: 18)
 
-        let startAndEndDateGroupProvider = StartAndEndDateGroupProvider(viewController: self)
-        let repeatGroupProvider = RepeatGroupProvider(viewController: self, minEndDate: startAndEndDateGroupProvider.endDate)
+        let startAndEndDateGroupProvider = StartAndEndDateGroupProvider(
+            viewController: self,
+            isAllDay: calendarEvent?.isAllDay,
+            start: calendarEvent?.startsDate,
+            end: calendarEvent?.endRepeatDate
+        )
+        let repeatGroupProvider = RepeatGroupProvider(
+            viewController: self,
+            minEndDate: startAndEndDateGroupProvider.endDate,
+            selectedRepeat: calendarEvent?.eventRepeat,
+            endRepeatDate: calendarEvent?.endRepeatDate
+        )
         let dateSectionProvider = SpacingSectionProvider(providers: [startAndEndDateGroupProvider, repeatGroupProvider], headerHeight: 18, footerHeight: 18)
 
-        let calendarProvider = CalendarOption.createProvider(viewController: self, selected: CalendarOption(name: "Home"))
+        let calendarProvider = CalendarOption.createProvider(viewController: self, selected: calendarEvent?.calendar ?? CalendarOption(name: "Home"))
         let calendarSectionProvider = SpacingSectionProvider(providers: [calendarProvider], headerHeight: 18, footerHeight: 18)
 
-        let alertProvider = AlertGroupProvider(viewController: self)
-        let showAsProvider = ShowAsOption.createProvider(viewController: self, selected: ShowAsOption.busy)
+        let alertProvider = AlertGroupProvider(viewController: self, first: calendarEvent?.alert, second: calendarEvent?.secondAlert)
+        let showAsProvider = ShowAsOption.createProvider(viewController: self, selected: calendarEvent?.showAs ?? ShowAsOption.busy)
 
         let reminderSectionProvider = SpacingSectionProvider(
             providers: [alertProvider, showAsProvider],
@@ -70,9 +81,11 @@ class EventEditViewController: TableViewController {
         let urlProvider = TextFieldProvider()
         urlProvider.placeholder = "URL"
         urlProvider.keyboardType = .URL
+        urlProvider.text = calendarEvent?.url
 
         let notesProvider = TextViewProvider()
         notesProvider.placeholder = "Notes"
+        notesProvider.text = calendarEvent?.notes
 
         let commentSectionProvider = SpacingSectionProvider(providers: [urlProvider, notesProvider], headerHeight: 18, footerHeight: 18)
 
