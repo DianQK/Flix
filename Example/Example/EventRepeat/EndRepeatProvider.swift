@@ -13,10 +13,33 @@ import Flix
 
 class EndRepeatProvider: TitleDescProvider {
 
-    required init(viewController: UIViewController) {
+    let endRepeatDate: Variable<Date?> = Variable(nil)
+
+    required init(viewController: UIViewController, minEndDate: Observable<Date>) {
         super.init()
         self.titleLabel.text = "End Repeat"
-        self.descLabel.text = "=。="
+        self.descLabel.textColor = UIColor(named: "CommentText")
+
+        self.endRepeatDate.asObservable()
+            .map { date -> String in
+                if let date = date {
+                    let dateformatter = DateFormatter()
+                    dateformatter.dateFormat = "EEE, MMM d, y"
+                    return dateformatter.string(from: date)
+                } else {
+                    return "Never"
+                }
+            }
+            .bind(to: self.descLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        self.tap.asObservable()
+            .subscribe(onNext: { [weak viewController, weak self] in
+                guard let `self` = self else { return }
+                let endRepeatSelectViewController = EndRepeatSelectViewController(endRepeatDate: self.endRepeatDate, minEndDate: minEndDate)
+                viewController?.show(endRepeatSelectViewController, sender: nil)
+            })
+            .disposed(by: disposeBag)
     }
 
 }

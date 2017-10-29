@@ -57,8 +57,6 @@ class EventRadioProvider<T>: TitleDescProvider where T: EventRadioType {
 
     let selectedOption: Variable<T>
 
-    let disposeBag = DisposeBag()
-
     required init(viewController: UIViewController, selectedOption: T, customTitle: String? = nil) {
         self.selectedOption = Variable(selectedOption)
 

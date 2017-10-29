@@ -53,7 +53,7 @@ class RepeatGroupProvider: AnimatableTableViewGroupProvider {
 
     init(viewController: UIViewController, minEndDate: Observable<Date>) {
         self.repeatProvider = RepeatOption.createProvider(viewController: viewController, selected: RepeatOption.never)
-        self.endRepeatProvider = EndRepeatProvider(viewController: viewController)
+        self.endRepeatProvider = EndRepeatProvider(viewController: viewController, minEndDate: minEndDate)
     }
 
     func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {

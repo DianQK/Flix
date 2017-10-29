@@ -58,6 +58,8 @@ class TitleDescProvider: UniqueCustomTableViewProvider {
     let titleLabel = UILabel()
     let descLabel = UILabel()
 
+    let disposeBag = DisposeBag()
+
     override init() {
         super.init()
 
@@ -134,7 +136,7 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
             return dateformatter
         }
 
-        let date: Observable<String> = Observable.combineLatest(pickerProvider.datePicker.rx.date, dateformatter) { $1.string(from: $0) }.debug()
+        let date: Observable<String> = Observable.combineLatest(pickerProvider.datePicker.rx.date, dateformatter) { $1.string(from: $0) }
 
         Observable.combineLatest(
             date,
