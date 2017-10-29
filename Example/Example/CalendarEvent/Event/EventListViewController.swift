@@ -73,6 +73,19 @@ class EventListViewController: TableViewController {
             .bind(to: provider.addObject)
             .disposed(by: disposeBag)
 
+        provider.objects.asObservable().map { $0.isEmpty }
+            .subscribe(onNext: { [weak self] (isEmpty) in
+                if isEmpty {
+                    let backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "Flix Icon"))
+                    backgroundImageView.contentMode = .center
+                    backgroundImageView.backgroundColor = UIColor.white
+                    self?.tableView.backgroundView = backgroundImageView
+                } else {
+                    self?.tableView.backgroundView = nil
+                }
+            })
+            .disposed(by: disposeBag)
+
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
 
         self.tableView.flix.animatable.build([provider])
