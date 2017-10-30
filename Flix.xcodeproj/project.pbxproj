@@ -96,6 +96,8 @@
 		591E7B8807895C0686775378 /* Pods_Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B73648F745916751FEA7795 /* Pods_Flix.framework */; };
 		8A3AFB5DAB028934DC47B3D5 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A16CA2C5A84708DA185909 /* Pods_Example.framework */; };
 		9179C9641FA6D60F00B4C21E /* TableViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */; };
+		917E2C301FA6E34800765F95 /* CollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */; };
+		917E2C321FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */; };
 		91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */; };
 		91F3F3EE1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */; };
 /* End PBXBuildFile section */
@@ -218,6 +220,8 @@
 		57A16CA2C5A84708DA185909 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B73648F745916751FEA7795 /* Pods_Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewGroupProvider.swift; sourceTree = "<group>"; };
+		917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewGroupProvider.swift; sourceTree = "<group>"; };
+		917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewGroupProvider.swift; sourceTree = "<group>"; };
 		91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewMoveable.swift; sourceTree = "<group>"; };
 		91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterCustomizeViewController.swift; sourceTree = "<group>"; };
 		BA63D7D73F2D9CEB8F63F458 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -517,6 +521,8 @@
 			children = (
 				9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */,
 				5622648D1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift */,
+				917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */,
+				917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -757,8 +763,10 @@
 				56E06EF41F9C5CD50074032A /* _TableViewBuilder.swift in Sources */,
 				5694616F1F9C73D9009F7971 /* BuilderProxy.swift in Sources */,
 				262874641F9F9EB600F66907 /* NeverHitSelfView.swift in Sources */,
+				917E2C321FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift in Sources */,
 				5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */,
 				5622648E1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift in Sources */,
+				917E2C301FA6E34800765F95 /* CollectionViewGroupProvider.swift in Sources */,
 				264F27961F9C33B000884FF2 /* TableViewDeleteable.swift in Sources */,
 				56E06EF21F9C46710074032A /* CollectionViewDelegateProxy.swift in Sources */,
 				91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */,

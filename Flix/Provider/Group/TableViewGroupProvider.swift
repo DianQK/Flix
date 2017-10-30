@@ -10,18 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public struct AbstractNode: StringIdentifiableType, Equatable {
-
-    public static func ==(lhs: AbstractNode, rhs: AbstractNode) -> Bool {
-        return true
-    }
-
-    public var identity: String {
-        return ""
-    }
-
-}
-
 public protocol _TableViewGroupProvider {
 
     var _providers: [_TableViewMultiNodeProvider] { get }
