@@ -20,24 +20,6 @@ public protocol AnimatableCollectionViewGroupProvider: _AnimatableCollectionView
 
 extension AnimatableCollectionViewGroupProvider {
 
-    public func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell {
-        fatalError("group provider is abstract provider, you should never call this methods.")
-    }
-
-    public func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
-        fatalError("group provider is abstract provider, you should never call this methods.")
-    }
-
-    public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize? {
-        fatalError("group provider is abstract provider, you should never call this methods.")
-    }
-
-    public func register(_ collectionView: UICollectionView) {
-        for provider in __providers {
-            provider.register(collectionView)
-        }
-    }
-
     public var _providers: [_CollectionViewMultiNodeProvider] {
         return self.providers.flatMap { (provider) -> [_CollectionViewMultiNodeProvider] in
             if let provider = provider as? _CollectionViewGroupProvider {
@@ -46,11 +28,6 @@ extension AnimatableCollectionViewGroupProvider {
                 return [provider]
             }
         }
-    }
-
-    public func _genteralNodes() -> Observable<[Node]> {
-        return genteralProviders().map { $0.map { $0._genteralNodes() } }
-            .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
     }
 
     public func genteralProviders() -> Observable<[_CollectionViewMultiNodeProvider]> {

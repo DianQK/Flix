@@ -18,13 +18,7 @@ public protocol _TableViewGroupProvider {
 
 }
 
-public protocol TableViewGroupProvider: _TableViewMultiNodeProvider, _TableViewGroupProvider {
-
-    var providers: [_TableViewMultiNodeProvider] { get }
-
-}
-
-extension TableViewGroupProvider {
+extension _TableViewGroupProvider where Self: _TableViewMultiNodeProvider {
 
     public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
         fatalError("group provider is abstract provider, you should never call this methods.")
@@ -44,6 +38,21 @@ extension TableViewGroupProvider {
         }
     }
 
+    public func _genteralNodes() -> Observable<[Node]> {
+        return genteralProviders().map { $0.map { $0._genteralNodes() } }
+            .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
+    }
+
+}
+
+public protocol TableViewGroupProvider: _TableViewMultiNodeProvider, _TableViewGroupProvider {
+
+    var providers: [_TableViewMultiNodeProvider] { get }
+
+}
+
+extension TableViewGroupProvider {
+
     public var _providers: [_TableViewMultiNodeProvider] {
         return self.providers.flatMap { (provider) -> [_TableViewMultiNodeProvider] in
             if let provider = provider as? _TableViewGroupProvider {
@@ -54,9 +63,5 @@ extension TableViewGroupProvider {
         }
     }
 
-    public func _genteralNodes() -> Observable<[Node]> {
-        return genteralProviders().map { $0.map { $0._genteralNodes() } }
-            .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
-    }
-
 }
+

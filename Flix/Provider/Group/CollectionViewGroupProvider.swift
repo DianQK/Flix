@@ -18,13 +18,7 @@ public protocol _CollectionViewGroupProvider {
 
 }
 
-public protocol CollectionViewGroupProvider: _CollectionViewMultiNodeProvider, _CollectionViewGroupProvider {
-
-    var providers: [_CollectionViewMultiNodeProvider] { get }
-
-}
-
-extension CollectionViewGroupProvider {
+extension _CollectionViewGroupProvider where Self: _CollectionViewMultiNodeProvider {
 
     public func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell {
         fatalError("group provider is abstract provider, you should never call this methods.")
@@ -44,6 +38,21 @@ extension CollectionViewGroupProvider {
         }
     }
 
+    public func _genteralNodes() -> Observable<[Node]> {
+        return genteralProviders().map { $0.map { $0._genteralNodes() } }
+            .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
+    }
+
+}
+
+public protocol CollectionViewGroupProvider: _CollectionViewMultiNodeProvider, _CollectionViewGroupProvider {
+
+    var providers: [_CollectionViewMultiNodeProvider] { get }
+
+}
+
+extension CollectionViewGroupProvider {
+
     public var _providers: [_CollectionViewMultiNodeProvider] {
         return self.providers.flatMap { (provider) -> [_CollectionViewMultiNodeProvider] in
             if let provider = provider as? _CollectionViewGroupProvider {
@@ -52,11 +61,6 @@ extension CollectionViewGroupProvider {
                 return [provider]
             }
         }
-    }
-
-    public func _genteralNodes() -> Observable<[Node]> {
-        return genteralProviders().map { $0.map { $0._genteralNodes() } }
-            .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
     }
 
 }
