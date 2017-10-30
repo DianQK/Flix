@@ -22,15 +22,17 @@ public protocol _TableViewMultiNodeProvider: FlixCustomStringConvertible {
     func register(_ tableView: UITableView)
     
     func _genteralNodes() -> Observable<[Node]>
-
-    var _providers: [_TableViewMultiNodeProvider] { get } // for Group Provider
     
 }
 
 extension _TableViewMultiNodeProvider {
 
-    public var _providers: [_TableViewMultiNodeProvider] {
-        return [self]
+    var __providers: [_TableViewMultiNodeProvider] {
+        if let groupProvider = self as? _TableViewGroupProvider {
+            return groupProvider._providers
+        } else {
+            return [self]
+        }
     }
 
 }

@@ -40,7 +40,7 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
     let endProvider: DateSelectGroupProvider
 
     var providers: [_AnimatableTableViewMultiNodeProvider] {
-        return [allDaySwitchProvider] + [startProvider, endProvider].flatMap { $0.providers }
+        return [allDaySwitchProvider, startProvider, endProvider]
     }
 
     var endDate: Observable<Date> {

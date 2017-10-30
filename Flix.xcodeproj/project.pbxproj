@@ -95,6 +95,9 @@
 		56FFB7CB1F89FBEA0066B903 /* TableViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */; };
 		591E7B8807895C0686775378 /* Pods_Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B73648F745916751FEA7795 /* Pods_Flix.framework */; };
 		8A3AFB5DAB028934DC47B3D5 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A16CA2C5A84708DA185909 /* Pods_Example.framework */; };
+		9179C9641FA6D60F00B4C21E /* TableViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */; };
+		917E2C301FA6E34800765F95 /* CollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */; };
+		917E2C321FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */; };
 		91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */; };
 		91F3F3EE1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */; };
 /* End PBXBuildFile section */
@@ -216,6 +219,9 @@
 		56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionProvider.swift; sourceTree = "<group>"; };
 		57A16CA2C5A84708DA185909 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B73648F745916751FEA7795 /* Pods_Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewGroupProvider.swift; sourceTree = "<group>"; };
+		917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewGroupProvider.swift; sourceTree = "<group>"; };
+		917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewGroupProvider.swift; sourceTree = "<group>"; };
 		91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewMoveable.swift; sourceTree = "<group>"; };
 		91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterCustomizeViewController.swift; sourceTree = "<group>"; };
 		BA63D7D73F2D9CEB8F63F458 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -335,6 +341,7 @@
 		2670E6721F83E2CE003A5BA7 /* Provider */ = {
 			isa = PBXGroup;
 			children = (
+				9179C9621FA6D60400B4C21E /* Group */,
 				2670E6751F83E31F003A5BA7 /* CollectionViewProvider.swift */,
 				2670E6771F83E343003A5BA7 /* TableViewProvider.swift */,
 				2670E67F1F83EAA3003A5BA7 /* CollectionViewSectionPartionProvider.swift */,
@@ -343,7 +350,6 @@
 				56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */,
 				2628745F1F9F8DD000F66907 /* ProviderDescription.swift */,
 				262874611F9F8F0F00F66907 /* CustomIdentityType.swift */,
-				5622648D1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -508,6 +514,17 @@
 				57A16CA2C5A84708DA185909 /* Pods_Example.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9179C9621FA6D60400B4C21E /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */,
+				5622648D1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift */,
+				917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */,
+				917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */,
+			);
+			path = Group;
 			sourceTree = "<group>";
 		};
 		DEA53283DE1AFF3A56A6F7A9 /* Pods */ = {
@@ -746,8 +763,10 @@
 				56E06EF41F9C5CD50074032A /* _TableViewBuilder.swift in Sources */,
 				5694616F1F9C73D9009F7971 /* BuilderProxy.swift in Sources */,
 				262874641F9F9EB600F66907 /* NeverHitSelfView.swift in Sources */,
+				917E2C321FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift in Sources */,
 				5677E7A11F9AF3A7004D002B /* TableViewInsertable.swift in Sources */,
 				5622648E1FA5FF76005D7C5F /* AnimatableTableViewGroupProvider.swift in Sources */,
+				917E2C301FA6E34800765F95 /* CollectionViewGroupProvider.swift in Sources */,
 				264F27961F9C33B000884FF2 /* TableViewDeleteable.swift in Sources */,
 				56E06EF21F9C46710074032A /* CollectionViewDelegateProxy.swift in Sources */,
 				91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */,
@@ -760,6 +779,7 @@
 				5694616D1F9C710A009F7971 /* IdentifiableNode.swift in Sources */,
 				262874601F9F8DD000F66907 /* ProviderDescription.swift in Sources */,
 				26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */,
+				9179C9641FA6D60F00B4C21E /* TableViewGroupProvider.swift in Sources */,
 				564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */,
 				56FFB7C91F89F7110066B903 /* TableViewBuilder.swift in Sources */,
 				56FFB7CB1F89FBEA0066B903 /* TableViewSectionProvider.swift in Sources */,

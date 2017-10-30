@@ -25,6 +25,18 @@ public protocol _CollectionViewMultiNodeProvider: FlixCustomStringConvertible {
 
 }
 
+extension _CollectionViewMultiNodeProvider {
+
+    var __providers: [_CollectionViewMultiNodeProvider] {
+        if let groupProvider = self as? _CollectionViewGroupProvider {
+            return groupProvider._providers
+        } else {
+            return [self]
+        }
+    }
+
+}
+
 public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvider {
 
     associatedtype Value
