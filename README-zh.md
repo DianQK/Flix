@@ -22,7 +22,7 @@ Flx 关注构建 `UICollectionView` / `UITableView` 的 Cell，它不限制视�
 
 ## 预览
 
-![](screenshots/example_list.png)
+![](screenshots/example.png)
 
 ## 使用要求
 

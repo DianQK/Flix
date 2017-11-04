@@ -21,7 +21,7 @@ Flix focus on combining cells of `UICollectionView` or `UITableView`, it don't c
 
 ## Preview
 
-![](screenshots/example_list.png)
+![](screenshots/example.png)
 
 ## Requirements
 
