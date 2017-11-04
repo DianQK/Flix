@@ -42,7 +42,6 @@
 		2670E6941F83EDF7003A5BA7 /* Flix.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2670E64F1F83E15C003A5BA7 /* Flix.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2670E69B1F83EE40003A5BA7 /* ExampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */; };
 		2670E69C1F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */; };
-		2670E69D1F83EE40003A5BA7 /* PhotoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */; };
 		2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6881F83EDB7003A5BA7 /* UniqueCommentTextProvider.swift */; };
 		2670E6A01F83EE5E003A5BA7 /* TextListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E6891F83EDB7003A5BA7 /* TextListProvider.swift */; };
 		2670E6A11F83EE5E003A5BA7 /* UniqueTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */; };
@@ -66,6 +65,10 @@
 		562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */; };
 		5626992D1FA51EE600290A70 /* EventOptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992C1FA51EE600290A70 /* EventOptionProvider.swift */; };
 		5626992F1FA5215900290A70 /* EventOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992E1FA5215900290A70 /* EventOptionsViewController.swift */; };
+		563316361FAB6AF300627F5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563316351FAB6AF300627F5A /* SettingsViewController.swift */; };
+		563434481FAD64D200727CA1 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563434471FAD64D200727CA1 /* ProfileProvider.swift */; };
+		5634344A1FAD64FC00727CA1 /* TableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563434491FAD64FC00727CA1 /* TableViewProvider.swift */; };
+		564217881FAE0CED00BCF993 /* AppsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564217871FAE0CED00BCF993 /* AppsProvider.swift */; };
 		564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */; };
 		564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */; };
 		565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */; };
@@ -171,7 +174,6 @@
 		2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSwitchProvider.swift; sourceTree = "<group>"; };
 		2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleListViewController.swift; sourceTree = "<group>"; };
 		2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoNotDisturbSettingsViewController.swift; sourceTree = "<group>"; };
-		2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSettingsViewController.swift; sourceTree = "<group>"; };
 		26BAF0321F8499B8009A4401 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		26BAF0341F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewSectionProvider.swift; sourceTree = "<group>"; };
 		26C847041F84891500EEFEAA /* AnimatableTableViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableTableViewBuilder.swift; sourceTree = "<group>"; };
@@ -190,6 +192,10 @@
 		562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		5626992C1FA51EE600290A70 /* EventOptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOptionProvider.swift; sourceTree = "<group>"; };
 		5626992E1FA5215900290A70 /* EventOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOptionsViewController.swift; sourceTree = "<group>"; };
+		563316351FAB6AF300627F5A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		563434471FAD64D200727CA1 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
+		563434491FAD64FC00727CA1 /* TableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProvider.swift; sourceTree = "<group>"; };
+		564217871FAE0CED00BCF993 /* AppsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsProvider.swift; sourceTree = "<group>"; };
 		564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackView.swift; sourceTree = "<group>"; };
 		564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackItemProvider.swift; sourceTree = "<group>"; };
 		565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +258,8 @@
 		2617C2611F84D0FD007F8228 /* GitHubSigup */ = {
 			isa = PBXGroup;
 			children = (
+				2666E4031F874112006F1918 /* Operators.swift */,
+				2617C2621F84D0FD007F8228 /* GitHubSignupViewController.swift */,
 				2617C2751F84D1BF007F8228 /* ActivityIndicator.swift */,
 				2617C2721F84D18B007F8228 /* String+URL.swift */,
 				2617C26F1F84D15C007F8228 /* Wireframe.swift */,
@@ -315,8 +323,6 @@
 			isa = PBXGroup;
 			children = (
 				569848F01F89F2DD00DA1D64 /* Example */,
-				2666E4031F874112006F1918 /* Operators.swift */,
-				2617C2611F84D0FD007F8228 /* GitHubSigup */,
 				2670E6871F83EDB7003A5BA7 /* Providers */,
 				2670E6601F83E1A0003A5BA7 /* AppDelegate.swift */,
 				2670E6621F83E1A0003A5BA7 /* ViewController.swift */,
@@ -427,6 +433,17 @@
 			path = Options;
 			sourceTree = "<group>";
 		};
+		563316341FAB6A5E00627F5A /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				563316351FAB6AF300627F5A /* SettingsViewController.swift */,
+				563434471FAD64D200727CA1 /* ProfileProvider.swift */,
+				563434491FAD64FC00727CA1 /* TableViewProvider.swift */,
+				564217871FAE0CED00BCF993 /* AppsProvider.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
 		564639F91F9E4D7B00EE1498 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,13 +502,13 @@
 		569848F01F89F2DD00DA1D64 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				2617C2611F84D0FD007F8228 /* GitHubSigup */,
+				563316341FAB6A5E00627F5A /* Tutorial */,
 				5665F1F21FA5B636009225F7 /* CalendarEvent */,
 				569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */,
 				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
 				2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */,
 				2666E4001F869656006F1918 /* NestFormViewController.swift */,
-				2670E69A1F83EE40003A5BA7 /* PhotoSettingsViewController.swift */,
-				2617C2621F84D0FD007F8228 /* GitHubSignupViewController.swift */,
 				91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */,
 				565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */,
 			);
@@ -796,6 +813,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				564217881FAE0CED00BCF993 /* AppsProvider.swift in Sources */,
 				562594521FA0CC9800BF5756 /* GeolocationService.swift in Sources */,
 				26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */,
 				2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */,
@@ -812,6 +830,7 @@
 				562594561FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				5687446D1FA3745200B5193C /* EventListViewController.swift in Sources */,
 				566300C11FA4F7B000A35CFA /* SelectTimeZoneViewController.swift in Sources */,
+				563434481FAD64D200727CA1 /* ProfileProvider.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
 				2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */,
 				568744711FA3766700B5193C /* TextFieldProvider.swift in Sources */,
@@ -825,6 +844,7 @@
 				2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */,
 				568744751FA381DA00B5193C /* SelectedLocationProvider.swift in Sources */,
 				5626992D1FA51EE600290A70 /* EventOptionProvider.swift in Sources */,
+				563316361FAB6AF300627F5A /* SettingsViewController.swift in Sources */,
 				5665F1EF1FA5AAA8009225F7 /* RepeatGroupProvider.swift in Sources */,
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,
 				5665F1F61FA5CF73009225F7 /* CalendarEventObject.swift in Sources */,
@@ -837,12 +857,12 @@
 				5687446F1FA374E800B5193C /* EventEditViewController.swift in Sources */,
 				2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */,
 				2617C2731F84D18B007F8228 /* String+URL.swift in Sources */,
+				5634344A1FAD64FC00727CA1 /* TableViewProvider.swift in Sources */,
 				568744731FA3792F00B5193C /* SpacingSectionProvider.swift in Sources */,
 				5665F1F41FA5CB5F009225F7 /* TextViewProvider.swift in Sources */,
 				2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */,
 				562594551FA0CCA800BF5756 /* CLLocationManager+Rx.swift in Sources */,
 				562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */,
-				2670E69D1F83EE40003A5BA7 /* PhotoSettingsViewController.swift in Sources */,
 				5622F6E31FA0DCFC00326201 /* MKLocalSearch+Rx.swift in Sources */,
 				2670E6A11F83EE5E003A5BA7 /* UniqueTextProvider.swift in Sources */,
 				2617C2691F84D0FD007F8228 /* GithubSignupViewModel1.swift in Sources */,

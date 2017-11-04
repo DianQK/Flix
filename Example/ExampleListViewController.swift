@@ -42,14 +42,14 @@ class ExampleListViewController: CollectionViewController {
         
         let textListProvider = TextListProvider(
             items: [
+                Model(title: "Settings", desc: "", value: { return SettingsViewController() }),
                 Model(title: "All Events", desc: "", value: { return EventListViewController() }),
-                Model(title: "Photos", desc: "", value: { return PhotoSettingsViewController() }),
-                Model(title: "勿扰模式", desc: "", value: { return DoNotDisturbSettingsViewController() }),
-                Model(title: "登录示例", desc: "", value: { return LoginViewController() }),
+                Model(title: "Do Not Disturb", desc: "", value: { return DoNotDisturbSettingsViewController() }),
+                Model(title: "Login", desc: "", value: { return LoginViewController() }),
                 Model(title: "GitHub Signup", desc: "", value: { return GitHubSignupViewController() }),
-                Model(title: "嵌套表单", desc: "", value: { return NestFormViewController() }),
-                Model(title: "删除示例", desc: "", value: { return DeleteItemViewController() }),
-                Model(title: "控制中心", desc: "", value: { return ControlCenterCustomizeViewController() }),
+                Model(title: "Nest Form", desc: "", value: { return NestFormViewController() }),
+                Model(title: "Delete", desc: "", value: { return DeleteItemViewController() }),
+                Model(title: "Control Center", desc: "", value: { return ControlCenterCustomizeViewController() }),
                 Model(title: "Storyboard", desc: "", value: { return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StoryboardViewController") })
             ]
         )

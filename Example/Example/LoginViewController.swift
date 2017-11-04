@@ -21,15 +21,15 @@ class LoginViewController: TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "登录"
+        title = "Login"
         
-        usernameTextField.placeholder = "用户名"
+        usernameTextField.placeholder = "Username"
         usernameTextField.keyboardType = .asciiCapable
         
-        passwordTextField.placeholder = "密码"
+        passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
         
-        loginTextLabel.text = "登录"
+        loginTextLabel.text = "Login"
         loginTextLabel.textAlignment = .center
         
         var section: [AnimatableTableViewSectionProvider] = []
@@ -84,8 +84,8 @@ class LoginViewController: TableViewController {
         loginProvider.tap
             .withLatestFrom(isVerified).filter { $0 }
             .subscribe(onNext: { [weak self] _ in
-                let alert = UIAlertController(title: "登录成功", message: nil, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "好", style: .default, handler: { (_) in
+                let alert = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
                     self?.navigationController?.popViewController(animated: true)
                 }))
                 self?.present(alert, animated: true, completion: nil)

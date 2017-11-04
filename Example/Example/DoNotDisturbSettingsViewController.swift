@@ -17,25 +17,25 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "勿扰模式"
+        title = "Do Not Disturb"
         
         var providers: [_AnimatableCollectionViewMultiNodeProvider] = []
         
         let doNotDisturbProvider = UniqueSwitchProvider()
-        doNotDisturbProvider.titleLabel.text = "勿扰模式"
+        doNotDisturbProvider.titleLabel.text = "Do Not Disturb"
         providers.append(doNotDisturbProvider)
         
         let doNotDisturbCommnetProvider = UniqueCommentTextProvider(
-            text: "“勿扰模式启用后，屏幕锁定时的来电和提醒将被设为静音，而状态栏中将出现月亮图标。”"
+            text: "When Do Not Disturb is enabled, calls and alerts that arrive while locked will be silenced, and a moon icon will appear in the status bar."
         )
         providers.append(doNotDisturbCommnetProvider)
         
         let scheduledProvider = UniqueSwitchProvider()
-        scheduledProvider.titleLabel.text = "设定时间"
+        scheduledProvider.titleLabel.text = "Scheduled"
         providers.append(scheduledProvider)
         
         let slienceTitleProvider = UniqueCommentTextProvider(
-            text: "静音模式："
+            text: "SLIENCE"
         )
         providers.append(slienceTitleProvider)
         
@@ -50,18 +50,18 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
             var description: String {
                 switch self {
                 case .always:
-                    return "始终"
+                    return "Always"
                 case .whileLocked:
-                    return "当 iPhone 已锁定时"
+                    return "While iPhone is locked"
                 }
             }
             
             var comment: String {
                 switch self {
                 case .always:
-                    return "无论 iPhone 是否已锁定，来电和通知都将静音。"
+                    return "Incoming calls and notifications will be silenced while iPhone is either locked or unlocked."
                 case .whileLocked:
-                    return "iPhone 被锁定时，来电和通知都将静音。"
+                    return "Incoming calls and notifications will be silenced while iPhone is locked."
                 }
             }
         }
@@ -82,16 +82,16 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
         providers.append(slienceCommentProvider)
         
         let allowCallsFromTitleProvider = UniqueCommentTextProvider(
-            text: "电话"
+            text: "PHONE"
         )
         providers.append(allowCallsFromTitleProvider)
         let allowCallsFromProvider = UniqueTextProvider(
-            title: "允许以下来电",
-            desc: "所有联系人"
+            title: "Allow Calls From",
+            desc: "Everyone"
         )
         providers.append(allowCallsFromProvider)
         let allowCallsFromCommentProvider = UniqueCommentTextProvider(
-            text: "处于”勿扰模式”时，允许联系人来电。"
+            text: "When in Do Not Disturb, allow incoming calls from everyone."
         )
         providers.append(allowCallsFromCommentProvider)
         

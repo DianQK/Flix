@@ -24,7 +24,7 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
     typealias Cell = UITableViewCell
     typealias Value = String
     
-    let values = Variable(["手电筒", "计时器", "计算器", "低电量模式", "屏幕录制", "备忘录", "闹钟", "相机"])
+    let values = Variable(["Flashlight", "Timer", "Calculator", "Low Power Mode", "Screen Recording", "Notes", "Alarm", "Camera"])
     
     let itemDeleted = PublishSubject<String>()
 
@@ -47,7 +47,7 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
     }
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, value: String) -> String? {
-        return "移除"
+        return "Remove"
     }
     
     func insertNew(_ value: String) {
@@ -65,7 +65,7 @@ class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
     typealias Cell = UITableViewCell
     typealias Value = String
     
-    let values = Variable(["放大器", "辅助功能快捷键", "驾驶勿扰", "秒表", "文字大小", "引导式访问", "语音备忘录", "Apple TV Remote 遥控器", "Wallet"])
+    let values = Variable(["Magnifier", "Accessibility Shortcuts", "Do Not Disturb While Driving", "Stopwatch", "Text Size", "Guided Access", "Voice Memos", "Apple TV Remote", "Wallet"])
     
     let itemInserted = PublishSubject<String>()
     
@@ -126,12 +126,12 @@ class ControlCenterCustomizeViewController: TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "自定"
+        title = "Customize"
         
         let tipHeaderSectionProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
         tipHeaderSectionProvider.sectionHeight = { return 110 }
         let tipLabel = UILabel()
-        tipLabel.text = "添加和整理显示在“控制中心”中的附加控制。"
+        tipLabel.text = "Add and organize additional controls to appeat in Control Center"
         tipLabel.numberOfLines = 0
         tipLabel.font = UIFont.systemFont(ofSize: 17)
         tipLabel.textAlignment = .center
@@ -148,7 +148,7 @@ class ControlCenterCustomizeViewController: TableViewController {
         let includeControlProvider = IncludeControlProvider()
         
         let includeControlTitleHeaderSectionProvider = TitleTableViewSectionProvider(tableElementKindSection: .header)
-        includeControlTitleHeaderSectionProvider.titleLabel.text = "包括"
+        includeControlTitleHeaderSectionProvider.titleLabel.text = "INCLUDE"
         
         let includeControlFooterSectionProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
         includeControlFooterSectionProvider.sectionHeight = { return 30 }
@@ -162,7 +162,7 @@ class ControlCenterCustomizeViewController: TableViewController {
         let moreControlProvider = MoreControlProvider()
         
         let moreControlTitleHeaderSectionProvider = TitleTableViewSectionProvider(tableElementKindSection: .header)
-        moreControlTitleHeaderSectionProvider.titleLabel.text = "更多控制"
+        moreControlTitleHeaderSectionProvider.titleLabel.text = "MORE CONTROLS"
 
         let moreControlSectionProvider = AnimatableTableViewSectionProvider(
             providers: [moreControlProvider],

@@ -28,7 +28,7 @@ class CollectionViewController: UIViewController {
         collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
         collectionView.backgroundColor = UIColor(named: "Background")
         
@@ -41,7 +41,6 @@ class CollectionViewController: UIViewController {
     }
 }
 
-
 class TableViewController: UIViewController {
     
     let tableView = UITableView(frame: .zero, style: .grouped)
@@ -53,10 +52,10 @@ class TableViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         tableView.backgroundColor = UIColor(named: "Background")
         tableView.separatorColor = UIColor(named: "Background")
         tableView.rowHeight = 44
