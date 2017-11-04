@@ -78,7 +78,7 @@ class ItemInputTableViewCell: UITableViewCell {
         stackView.spacing = 5
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        titleLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
         self.contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -131,19 +131,19 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
         switch value.item {
         case let .name(name):
             let cell = tableView.dequeueReusableCell(withIdentifier: _flix_identity + "NameUITableViewCell", for: indexPath) as! ItemInputTableViewCell
-            cell.titleLabel.text = "品名"
+            cell.titleLabel.text = "Name"
             cell.textField.keyboardType = .default
             (cell.textField.rx.textInput <-> name).disposed(by: cell.reuseBag)
             return cell
         case let .count(count):
             let cell = tableView.dequeueReusableCell(withIdentifier: _flix_identity + "CountUITableViewCell", for: indexPath) as! ItemInputTableViewCell
-            cell.titleLabel.text = "数量"
+            cell.titleLabel.text = "Count"
             cell.textField.keyboardType = .numberPad
             (cell.textField.rx.textInput <-> count).disposed(by: cell.reuseBag)
             return cell
         case let .unitPrice(unitPrice):
             let cell = tableView.dequeueReusableCell(withIdentifier: _flix_identity + "UnitPriceUITableViewCell", for: indexPath) as! ItemInputTableViewCell
-            cell.titleLabel.text = "单价"
+            cell.titleLabel.text = "Unit Price"
             cell.textField.keyboardType = .numberPad
             (cell.textField.rx.textInput <-> unitPrice).disposed(by: cell.reuseBag)
             return cell
@@ -152,7 +152,7 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
             cell.contentLabel.textColor = UIColor.white
             cell.backgroundColor = UIColor.red
             cell.selectionStyle = .none
-            cell.contentLabel.text = "删除"
+            cell.contentLabel.text = "Delete"
             return cell
         }
     }
@@ -209,7 +209,7 @@ class UniqueTitleTableViewProvider: UniqueCustomTableViewProvider {
         self.itemHeight = { return 60 }
         self.selectionStyle.value = .none
         titleLabel.font = UIFont.boldSystemFont(ofSize: 23)
-        titleLabel.text = "基本信息"
+        titleLabel.text = "Basic Info"
         self.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
@@ -250,26 +250,26 @@ class NestFormViewController: TableViewController {
     
     let titleProvider: UniqueTitleTableViewProvider = {
         let provider = UniqueTitleTableViewProvider()
-        provider.titleLabel.text = "基本信息"
+        provider.titleLabel.text = "Basic Info"
         return provider
     }()
     
     let titleInputProvider: UniqueItemInputTableViewProvider = {
         let provider = UniqueItemInputTableViewProvider()
-        provider.titleLabel.text = "标题"
+        provider.titleLabel.text = "Title"
         return provider
     }()
     
     let configurationTitleProvider: UniqueTitleTableViewProvider = {
         let provider = UniqueTitleTableViewProvider()
-        provider.titleLabel.text = "配置"
+        provider.titleLabel.text = "Configuration"
         return provider
     }()
     
     let addProvider: UniqueButtonTableViewProvider = {
         let provider = UniqueButtonTableViewProvider()
         provider.textLabel.textColor = UIColor.white
-        provider.textLabel.text = "添加"
+        provider.textLabel.text = "Add"
         provider.backgroundView?.backgroundColor = UIColor(named: "Ufo Green")!
         provider.selectedBackgroundView?.backgroundColor = UIColor(named: "Eucalyptus")!
         return provider
@@ -280,7 +280,7 @@ class NestFormViewController: TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "嵌套表单"
+        title = "Nest Form"
 
         hardwareFormProvider.hardwareForms.value = [HardwareForm(id: 1)]
         

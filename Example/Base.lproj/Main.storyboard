@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZMa-yV-1UJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZMa-yV-1UJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -113,10 +113,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ngx-7L-RME" firstAttribute="bottom" secondItem="Dl8-Fu-HT0" secondAttribute="bottom" id="0eJ-vS-jIV"/>
+                            <constraint firstAttribute="bottom" secondItem="Dl8-Fu-HT0" secondAttribute="bottom" id="0eJ-vS-jIV"/>
                             <constraint firstItem="Dl8-Fu-HT0" firstAttribute="top" secondItem="Ngx-7L-RME" secondAttribute="top" id="P17-1F-h1k"/>
-                            <constraint firstItem="Ngx-7L-RME" firstAttribute="trailing" secondItem="Dl8-Fu-HT0" secondAttribute="trailing" id="WPr-b9-tS9"/>
-                            <constraint firstItem="Dl8-Fu-HT0" firstAttribute="leading" secondItem="Ngx-7L-RME" secondAttribute="leading" id="bct-VK-AsO"/>
+                            <constraint firstAttribute="trailing" secondItem="Dl8-Fu-HT0" secondAttribute="trailing" id="WPr-b9-tS9"/>
+                            <constraint firstItem="Dl8-Fu-HT0" firstAttribute="leading" secondItem="DGG-I5-GtT" secondAttribute="leading" id="bct-VK-AsO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ngx-7L-RME"/>
                     </view>
@@ -128,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbF-jH-aAa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="802" y="122"/>
+            <point key="canvasLocation" x="800.79999999999995" y="121.88905547226388"/>
         </scene>
     </scenes>
     <resources>

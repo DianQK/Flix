@@ -95,6 +95,8 @@ class DeleteItemViewController: TableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = "Delete"
         
         let inputTagsProvider = InputTagsProvider()
         inputTagsProvider.tags.value = [Tag(id: 1)]
