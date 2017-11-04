@@ -66,6 +66,9 @@
 		562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */; };
 		5626992D1FA51EE600290A70 /* EventOptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992C1FA51EE600290A70 /* EventOptionProvider.swift */; };
 		5626992F1FA5215900290A70 /* EventOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626992E1FA5215900290A70 /* EventOptionsViewController.swift */; };
+		563316361FAB6AF300627F5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563316351FAB6AF300627F5A /* SettingsViewController.swift */; };
+		563434481FAD64D200727CA1 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563434471FAD64D200727CA1 /* ProfileProvider.swift */; };
+		5634344A1FAD64FC00727CA1 /* TableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563434491FAD64FC00727CA1 /* TableViewProvider.swift */; };
 		564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */; };
 		564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */; };
 		565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */; };
@@ -190,6 +193,9 @@
 		562594571FA0CCC300BF5756 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		5626992C1FA51EE600290A70 /* EventOptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOptionProvider.swift; sourceTree = "<group>"; };
 		5626992E1FA5215900290A70 /* EventOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOptionsViewController.swift; sourceTree = "<group>"; };
+		563316351FAB6AF300627F5A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		563434471FAD64D200727CA1 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
+		563434491FAD64FC00727CA1 /* TableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProvider.swift; sourceTree = "<group>"; };
 		564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackView.swift; sourceTree = "<group>"; };
 		564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackItemProvider.swift; sourceTree = "<group>"; };
 		565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardViewController.swift; sourceTree = "<group>"; };
@@ -427,6 +433,16 @@
 			path = Options;
 			sourceTree = "<group>";
 		};
+		563316341FAB6A5E00627F5A /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				563316351FAB6AF300627F5A /* SettingsViewController.swift */,
+				563434471FAD64D200727CA1 /* ProfileProvider.swift */,
+				563434491FAD64FC00727CA1 /* TableViewProvider.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
 		564639F91F9E4D7B00EE1498 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +501,7 @@
 		569848F01F89F2DD00DA1D64 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				563316341FAB6A5E00627F5A /* Tutorial */,
 				5665F1F21FA5B636009225F7 /* CalendarEvent */,
 				569294F81F88E37E00FA1493 /* DeleteItemViewController.swift */,
 				26BAF0321F8499B8009A4401 /* LoginViewController.swift */,
@@ -812,6 +829,7 @@
 				562594561FA0CCA800BF5756 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				5687446D1FA3745200B5193C /* EventListViewController.swift in Sources */,
 				566300C11FA4F7B000A35CFA /* SelectTimeZoneViewController.swift in Sources */,
+				563434481FAD64D200727CA1 /* ProfileProvider.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
 				2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */,
 				568744711FA3766700B5193C /* TextFieldProvider.swift in Sources */,
@@ -825,6 +843,7 @@
 				2670E6631F83E1A0003A5BA7 /* ViewController.swift in Sources */,
 				568744751FA381DA00B5193C /* SelectedLocationProvider.swift in Sources */,
 				5626992D1FA51EE600290A70 /* EventOptionProvider.swift in Sources */,
+				563316361FAB6AF300627F5A /* SettingsViewController.swift in Sources */,
 				5665F1EF1FA5AAA8009225F7 /* RepeatGroupProvider.swift in Sources */,
 				2670E6611F83E1A0003A5BA7 /* AppDelegate.swift in Sources */,
 				5665F1F61FA5CF73009225F7 /* CalendarEventObject.swift in Sources */,
@@ -837,6 +856,7 @@
 				5687446F1FA374E800B5193C /* EventEditViewController.swift in Sources */,
 				2666E4011F869656006F1918 /* NestFormViewController.swift in Sources */,
 				2617C2731F84D18B007F8228 /* String+URL.swift in Sources */,
+				5634344A1FAD64FC00727CA1 /* TableViewProvider.swift in Sources */,
 				568744731FA3792F00B5193C /* SpacingSectionProvider.swift in Sources */,
 				5665F1F41FA5CB5F009225F7 /* TextViewProvider.swift in Sources */,
 				2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */,

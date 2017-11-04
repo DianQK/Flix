@@ -49,79 +49,128 @@ github "DianQK/Flix" ~> 0.7
 
 Each provider will generate a number of nodes (cells), then combine those providers according to the sequence.
 
-## Tutorial
-
-### A Simple Settings Pages
+## Tutorial - A Simple Settings Pages
 
 创建一个设置页时，我们希望每一个 Cell 都不会被复用，就好像在使用 Static `UITableView`。
 
-我们可以非常轻松地使用 Flix 构建一个登录页面：
-
-只需要四个步骤：
-
-- 创建一个登录框
-- 创建一个输入密码框
-- 创建一个登录按钮
-- 组合三个视图组件的布局
-
-创建一个登录框：
+比如在 iOS 11 上 Settings 中的个人信息 Cell，创建一个 `UniqueCustomTableViewProvider`，配置好样式并添加好相应的视图即可：
 
 ```swift
-let usernameTextField = UITextField()
-usernameTextField.placeholder = "用户名"
-usernameTextField.keyboardType = .asciiCapable
+let profileProvider = UniqueCustomTableViewProvider()
+profileProvider.itemHeight = { return 80 }
+profileProvider.accessoryType = .disclosureIndicator
+let avatarImageView = UIImageView(image: #imageLiteral(resourceName: "Flix Icon"))
+profileProvider.contentView.addSubview(avatarImageView)
 
-let usernameProvider = UniqueCustomTableViewProvider()
-usernameProvider.contentView.addSubview(usernameTextField)
-// 添加你的布局方案
-// usernameTextField.translatesAutoresizingMaskIntoConstraints = false
-// usernameTextField.leadingAnchor.constraint(equalTo: usernameProvider.contentView.leadingAnchor, constant: 15).isActive = true
-// usernameTextField.topAnchor.constraint(equalTo: usernameProvider.contentView.topAnchor).isActive = true
-// usernameTextField.trailingAnchor.constraint(equalTo: usernameProvider.contentView.trailingAnchor, constant: -15).isActive = true
-// usernameTextField.bottomAnchor.constraint(equalTo: usernameProvider.contentView.bottomAnchor).isActive = true
+let nameLabel = UILabel()
+nameLabel.text = "Flix"
+profileProvider.contentView.addSubview(nameLabel)
+
+let subTitleLabel = UILabel()
+subTitleLabel.text = "Apple ID, iCloud, iTunes & App Store"
+profileProvider.contentView.addSubview(subTitleLabel)
+
+self.tableView.flix.build([profileProvider])
 ```
 
-创建一个密码输入框：
+(效果图)
+
+考虑到 `profileProvider` 有可能被复用，为 `profileProvider` 创建一个类管理所有的视图是更好的方案。
+
+你可以直接继承 `UniqueCustomTableViewProvider`：
 
 ```swift
-let passwordTextField = UITextField()
-passwordTextField.placeholder = "密码"
-passwordTextField.isSecureTextEntry = true
-let passwordProvider = UniqueCustomTableViewProvider()
-passwordProvider.contentView.addSubview(passwordTextField)
-// 添加你的布局方案
-// passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-// passwordTextField.leadingAnchor.constraint(equalTo: passwordProvider.contentView.leadingAnchor, constant: 15).isActive = true
-// passwordTextField.topAnchor.constraint(equalTo: passwordProvider.contentView.topAnchor).isActive = true
-// passwordTextField.trailingAnchor.constraint(equalTo: passwordProvider.contentView.trailingAnchor, constant: -15).isActive = true
-// passwordTextField.bottomAnchor.constraint(equalTo: passwordProvider.contentView.bottomAnchor).isActive = true
+class ProfileProvider: UniqueCustomTableViewProvider {
+
+    let avatarImageView = UIImageView()
+    let nameLabel = UILabel()
+    let subTitleLabel = UILabel()
+
+    init(avatar: UIImage, name: String) {
+        super.init()
+
+        self.itemHeight = { return 80 }
+        self.accessoryType = .disclosureIndicator
+
+        avatarImageView.image = avatar
+        self.contentView.addSubview(avatarImageView)
+
+        nameLabel.text = name
+        self.contentView.addSubview(nameLabel)
+
+        subTitleLabel.text = "Apple ID, iCloud, iTunes & App Store"
+        self.contentView.addSubview(subTitleLabel)
+    }
+
+}
 ```
 
-创建一个登录按钮：
+或者直接实现协议 `UniqueAnimatableTableViewProvider`：
 
 ```swift
-let loginTextLabel = UILabel()
-loginTextLabel.text = "登录"
-loginTextLabel.textAlignment = .center
-let loginProvider = UniqueCustomTableViewProvider()
-loginProvider.contentView.addSubview(loginTextLabel)
-// 添加你的布局方案
-// loginTextLabel.translatesAutoresizingMaskIntoConstraints = false
-// loginTextLabel.leadingAnchor.constraint(equalTo: loginProvider.contentView.leadingAnchor).isActive = true
-// loginTextLabel.topAnchor.constraint(equalTo: loginProvider.contentView.topAnchor).isActive = true
-// loginTextLabel.trailingAnchor.constraint(equalTo: loginProvider.contentView.trailingAnchor).isActive = true
-// loginTextLabel.bottomAnchor.constraint(equalTo: loginProvider.contentView.bottomAnchor).isActive = true
-// 添加你的点击事件
-// loginProvider.tap...
+class ProfileProvider: UniqueAnimatableTableViewProvider {
+
+    let avatarImageView = UIImageView()
+    let nameLabel = UILabel()
+    let subTitleLabel = UILabel()
+
+    init(avatar: UIImage, name: String) {
+        avatarImageView.image = avatar
+        nameLabel.text = name
+        subTitleLabel.text = "Apple ID, iCloud, iTunes & App Store"
+    }
+
+    func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+        cell.accessoryType = .disclosureIndicator
+        cell.contentView.addSubview(avatarImageView)
+        cell.contentView.addSubview(nameLabel)
+        cell.contentView.addSubview(subTitleLabel)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: ProfileProvider) -> CGFloat? {
+        return 80
+    }
+
+}
 ```
 
-最后将以上三个 Provider 按顺序组装起来：
+看起来还不够，实际的 Settings 中用户信息是被放在一个单独的 Section 中的。我们可以为这个 `profileProvider` 包一层 `SectionProvider`：
 
 ```swift
-self.tableView.flix.build([usernameProvider, passwordProvider, loginProvider])
+let profileSectionProvider = SpacingSectionProvider(providers: [profileProvider], headerHeight: 35, footerHeight: 0)
+self.tableView.flix.build([profileSectionProvider])
 ```
 
-一个使用 `UITableView` 的登录页面就完成了。
+最后我们还可以创建更多的 Provider 构建一个更完整的 Settings 列表：
+
+```swift
+let profileProvider = ProfileProvider(avatar: #imageLiteral(resourceName: "Flix Icon"), name: "Flix")
+let profileSectionProvider = SpacingSectionProvider(providers: [profileProvider], headerHeight: 35, footerHeight: 0)
+
+let airplaneModeProvider = SwitchTableViewCellProvider(title: "Airplane Mode", icon: #imageLiteral(resourceName: "Airplane Icon"), isOn: false)
+let wifiProvider = DescriptionTableViewCellProvider(title: "Wi-Fi", icon: #imageLiteral(resourceName: "Wifi Icon"), description: "Flix_5G")
+let bluetoothProvider = DescriptionTableViewCellProvider(title: "Bluetooth", icon: #imageLiteral(resourceName: "Bluetooth Icon"), description: "On")
+let cellularProvider = DescriptionTableViewCellProvider(title: "Cellular", icon: #imageLiteral(resourceName: "Cellular Icon"))
+let personalHotspotProvider = DescriptionTableViewCellProvider(title: "Personal Hotspot", icon: #imageLiteral(resourceName: "Personal Hotspot Icon"), description: "Off")
+let carrierProvider = DescriptionTableViewCellProvider(title: "Carrier", icon: #imageLiteral(resourceName: "Carrier Icon"), description: "AT&T")
+
+let networkSectionProvider = SpacingSectionProvider(
+    providers: [
+        airplaneModeProvider,
+        wifiProvider,
+        bluetoothProvider,
+        cellularProvider,
+        personalHotspotProvider,
+        carrierProvider
+    ],
+    headerHeight: 35,
+    footerHeight: 0
+)
+
+self.tableView.flix.build([profileSectionProvider, networkSectionProvider])
+```
+
+以上内容仅仅是构建一个简单的设置页面，实际上 Flix 支持更多构建列表视图的方案，比如可复用的列表项展示、动态添加删除 Cell。
 
 ## 使用
 
