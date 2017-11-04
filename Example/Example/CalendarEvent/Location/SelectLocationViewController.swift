@@ -89,7 +89,7 @@ class SelectLocationViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo:  self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
         let customLocalProvider = UniqueCustomTableViewProvider()
         customLocalProvider.separatorInset = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)
