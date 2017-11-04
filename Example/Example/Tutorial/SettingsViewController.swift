@@ -41,7 +41,20 @@ class SettingsViewController: TableViewController {
             footerHeight: 0
         )
 
-        self.tableView.flix.build([profileSectionProvider, networkSectionProvider])
+let appSectionProvider = SpacingSectionProvider(
+    providers: [AppsProvider(apps: [
+        App(icon: #imageLiteral(resourceName: "Wallet App Icon"), title: "Wallet"),
+        App(icon: #imageLiteral(resourceName: "Music App Icon"), title: "Music"),
+        App(icon: #imageLiteral(resourceName: "Safari App Icon"), title: "Safari"),
+        App(icon: #imageLiteral(resourceName: "News App Icon"), title: "News"),
+        App(icon: #imageLiteral(resourceName: "Camera App Icon"), title: "Camera"),
+        App(icon: #imageLiteral(resourceName: "Photos App Icon"), title: "Photo")
+        ])],
+    headerHeight: 35,
+    footerHeight: 35
+)
+
+self.tableView.flix.build([profileSectionProvider, networkSectionProvider, appSectionProvider])
 
     }
 

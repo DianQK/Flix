@@ -69,6 +69,7 @@
 		563316361FAB6AF300627F5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563316351FAB6AF300627F5A /* SettingsViewController.swift */; };
 		563434481FAD64D200727CA1 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563434471FAD64D200727CA1 /* ProfileProvider.swift */; };
 		5634344A1FAD64FC00727CA1 /* TableViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563434491FAD64FC00727CA1 /* TableViewProvider.swift */; };
+		564217881FAE0CED00BCF993 /* AppsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564217871FAE0CED00BCF993 /* AppsProvider.swift */; };
 		564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */; };
 		564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */; };
 		565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */; };
@@ -196,6 +197,7 @@
 		563316351FAB6AF300627F5A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		563434471FAD64D200727CA1 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
 		563434491FAD64FC00727CA1 /* TableViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProvider.swift; sourceTree = "<group>"; };
+		564217871FAE0CED00BCF993 /* AppsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsProvider.swift; sourceTree = "<group>"; };
 		564639FA1F9E4D8A00EE1498 /* FlixStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackView.swift; sourceTree = "<group>"; };
 		564639FC1F9E4DAC00EE1498 /* FlixStackItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixStackItemProvider.swift; sourceTree = "<group>"; };
 		565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardViewController.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				563316351FAB6AF300627F5A /* SettingsViewController.swift */,
 				563434471FAD64D200727CA1 /* ProfileProvider.swift */,
 				563434491FAD64FC00727CA1 /* TableViewProvider.swift */,
+				564217871FAE0CED00BCF993 /* AppsProvider.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -813,6 +816,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				564217881FAE0CED00BCF993 /* AppsProvider.swift in Sources */,
 				562594521FA0CC9800BF5756 /* GeolocationService.swift in Sources */,
 				26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */,
 				2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */,

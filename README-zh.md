@@ -3,34 +3,35 @@
 [![Travis CI](https://travis-ci.org/DianQK/Flix.svg?branch=master)](https://travis-ci.org/DianQK/Flix)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/Flix.svg)](https://cocoapods.org/pods/Flix)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![中文 README](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-README-blue.svg?style=flat)](./README-zh.md)
 
-Flix is flexible iOS framework to create dynamic forms with `UITableView` or `UICollectionView`.
+Flix 是一个使用 `UITableView` 或 `UICollectionView` 创建（类）表单的解决方案。
+使用 Flix 你可以非常轻松地构建出各种复杂的列表视图，并处理其中复杂的交互逻辑。
 
-## Features
+## 特性
 
-- [x] Support no reused when you need.
-- [x] Support reused for list when you need.
-- [x] Support nest form.
-- [x] Support add, delete and insert
-- [x] Support Storyboard
-- [x] Example app
-- [x] Works with `UITableView` and `UICollectionView`
+- [x] 支持使 Cell 不被复用
+- [x] 支持创建列表项时，使用 Cell 复用特性
+- [x] 支持创建嵌套表单
+- [x] 支持移动、添加、删除
+- [x] 支持使用 Storyboard 构建
+- [x] 完整的示例项目
+- [x] 兼容 `UITableView` 和 `UICollectionView`
 
-Flix focus on combining cells of `UICollectionView` or `UITableView`, it don't care about the view layout, business logic. So you can easily build custom form using Flix.
+Flx 关注构建 `UICollectionView` / `UITableView` 的 Cell，它不限制视图的布局和交互的逻辑。
+所以你可以很轻松的使用 Flix 创建定制的表单页面。
 
-## Preview
+## 预览
 
 ![](screenshots/example_list.png)
 
-## Requirements
+## 使用要求
 
 - Xcode 9.0+
 - Swift 4.0+
 - RxSwift 4.0+
 - RxDataSources 3.0+
 
-## Installation
+## 安装
 
 ### CocoaPods
 
@@ -44,18 +45,17 @@ pod 'Flix', '~> 0.7'
 github "DianQK/Flix" ~> 0.7
 ```
 
-## Principle
+## 原理
 
 ![](block_diagram.png)
 
-Each provider will generate a number of nodes (cells), then combine those providers according to the sequence.
+每一个 Provider 会生成若干个 Cell（Node），然后将这些 Cell 按照 Provider 的顺序组合成一个完整的列表。
 
-## Tutorial - A Simple Settings Page
+## 指导 - 一个简单的设置页面
 
-When creating a settings page, we don't want to some cells be reused, for example Profile Cell, Airplane Mode Cell.
-This looks like create a static tableView on Storyboard.
+创建一个设置页时，我们希望每一个 Cell 都不会被复用，就好像在使用 Static `UITableView`。
 
-To create one profile cell, we just need to create a `UniqueCustomTableViewProvider`, and configure the style and add some views:
+比如在 iOS 11 上 Settings 中的个人信息 Cell，创建一个 `UniqueCustomTableViewProvider`，配置好样式并添加好相应的视图：
 
 <table>
   <tr>
@@ -83,10 +83,9 @@ self.tableView.flix.build([profileProvider])
   </tr>
 </table>
 
-Now, we have a profile cell for settings page, considering we might use this provider on other `UITableView`.
-We should make a Class for `profileProvider`.
+考虑到 `profileProvider` 有可能被复用，为 `profileProvider` 创建一个类管理所有的视图是更好的方案。
 
-We can inherit from `UniqueCustomTableViewProvider`:
+你可以直接继承 `UniqueCustomTableViewProvider`：
 
 ```swift
 class ProfileProvider: UniqueCustomTableViewProvider {
@@ -114,7 +113,7 @@ class ProfileProvider: UniqueCustomTableViewProvider {
 }
 ```
 
-or just implement protocol `UniqueAnimatableTableViewProvider`:
+或者直接实现协议 `UniqueAnimatableTableViewProvider`：
 
 ```swift
 class ProfileProvider: UniqueAnimatableTableViewProvider {
@@ -143,8 +142,7 @@ class ProfileProvider: UniqueAnimatableTableViewProvider {
 }
 ```
 
-But in reality, the profile cell is placed in a section.
-We can use `SectionProfiler`:
+看起来还不够，实际的 Settings 中用户信息是被放在一个单独的 Section 中的。我们可以为这个 `profileProvider` 包一层 `SectionProvider`：
 
 <table>
   <tr>
@@ -159,7 +157,7 @@ self.tableView.flix.build([profileSectionProvider])</pre></div></td>
   </tr>
 </table>
 
-Then add more provider:
+最后我们还可以创建更多的 Provider 构建一个更完整的 Settings 列表：
 
 <table>
   <tr>
@@ -214,8 +212,7 @@ self.tableView.flix.build(
   </tr>
 </table>
 
-Until now, we just use one provider to generate one cell.
-We can create a provider for a group of cells.
+以上我们都使用 Provider 创建了单一的 Cell，Flix 还支持使用一个 Provider 创建多个 Cell：
 
 <table>
   <tr>
@@ -243,10 +240,8 @@ self.tableView.flix.build([
   </tr>
 </table>
 
-Look like good.
-
-Actually Flix support more build list view function, you can easily create a page with All kinds of linkage effects (such as Calendar Events, GitHub Signup).
-You can get more example from **Example Folder**.
+这样一来，我们就拥有了一个比较完整的设置页面。
+实际上 Flix 支持更多构建列表视图的功能，你也可以轻松创建出带有各种联动效果的页面（比如示例中的仿照创建日历事件的 All Events，再比如完整拷贝 RxSwift Example 的 Github Signup 页面）。
 
 ## Contributing
 
