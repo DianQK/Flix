@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
@@ -51,7 +52,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     public let selectionStyle = Variable(UITableViewCellSelectionStyle.default) // default is UITableViewCellSelectionStyleDefault.
     open var isEnabled = true
 
-    open var tap: Observable<()> { return _tap.asObservable() }
+    open var tap: ControlEvent<()> { return ControlEvent(events: _tap.asObservable()) }
     private let _tap = PublishSubject<()>()
     
     open var itemHeight: ((UITableView) -> CGFloat?)?

@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewProvider, CustomIdentityType {
     
@@ -27,13 +28,15 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
         }
     }
     
-    public var tap: Observable<()> { return _tap.asObservable() }
+    public var tap: ControlEvent<()> { return ControlEvent(events: _tap.asObservable()) }
 
     private let _tap = PublishSubject<()>()
     
     open var itemSize: (() -> CGSize?)?
     
     public let isHidden = Variable(false)
+
+    open var isEnabled = true
 
     private weak var _cell: UICollectionViewCell?
     
@@ -58,7 +61,9 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
     }
     
     open func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueCustomCollectionViewProvider) {
-        _tap.onNext(())
+        if self.isEnabled {
+            _tap.onNext(())
+        }
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 

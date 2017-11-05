@@ -82,7 +82,7 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
             .bind(to: endProvider.dateIsAvailable)
             .disposed(by: disposeBag)
 
-        Observable.merge([self.startProvider.timeZoneProvider.tap, self.endProvider.timeZoneProvider.tap])
+        Observable.merge([self.startProvider.timeZoneProvider.tap.asObservable(), self.endProvider.timeZoneProvider.tap.asObservable()])
             .withLatestFrom(timeZone.asObservable())
             .flatMapLatest({ [weak viewController] (timeZone) -> Observable<TimeZone> in
                 guard let `viewController` = viewController else { return Observable.empty() }
