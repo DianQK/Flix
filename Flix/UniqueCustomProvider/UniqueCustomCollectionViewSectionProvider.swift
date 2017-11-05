@@ -23,7 +23,7 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
 
     public let isHidden = Variable(false)
     
-    open var sectionSize: (() -> CGSize)?
+    open var sectionSize: ((UICollectionView) -> CGSize)?
     
     open let contentView: UIView = NeverHitSelfView()
     
@@ -58,7 +58,7 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: Value) -> CGSize? {
-        return sectionSize?()
+        return sectionSize?(collectionView)
     }
 
 }

@@ -25,7 +25,7 @@ class PlainTitleTableViewHeaderSectionProvider: UniqueCustomTableViewSectionProv
 
     init(text: String) {
         super.init(tableElementKindSection: .header)
-        self.sectionHeight = { return 32 }
+        self.sectionHeight = { _ in return 32 }
         textLabel.font = UIFont.boldSystemFont(ofSize: 15)
         textLabel.text = text
         self.contentView.addSubview(textLabel)

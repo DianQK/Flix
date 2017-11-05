@@ -12,16 +12,30 @@ import RxSwift
 open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewProvider, CustomIdentityType {
     
     open let customIdentity: String
+
     open let contentView: UIView = NeverHitSelfView()
-    open var selectedBackgroundView: UIView?
-    open var backgroundView: UIView?
+
+    open var selectedBackgroundView: UIView? {
+        didSet {
+            _cell?.selectedBackgroundView = selectedBackgroundView
+        }
+    }
+
+    open var backgroundView: UIView? {
+        didSet {
+            _cell?.backgroundView = backgroundView
+        }
+    }
     
     public var tap: Observable<()> { return _tap.asObservable() }
+
     private let _tap = PublishSubject<()>()
     
     open var itemSize: (() -> CGSize?)?
     
     public let isHidden = Variable(false)
+
+    private weak var _cell: UICollectionViewCell?
     
     public init(customIdentity: String) {
         self.customIdentity = customIdentity
@@ -32,6 +46,7 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
     }
 
     open func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
+        _cell = cell
         cell.selectedBackgroundView = self.selectedBackgroundView
         cell.backgroundView = self.backgroundView
         cell.contentView.addSubview(contentView)

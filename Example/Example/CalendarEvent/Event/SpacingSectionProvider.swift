@@ -15,9 +15,9 @@ class SpacingSectionProvider: AnimatableTableViewSectionProvider {
 
     convenience init(providers: [_AnimatableTableViewMultiNodeProvider], headerHeight: CGFloat, footerHeight: CGFloat) {
         let headerProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
-        headerProvider.sectionHeight = { return headerHeight }
+        headerProvider.sectionHeight = { _ in return headerHeight }
         let footerProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
-        footerProvider.sectionHeight = { return footerHeight }
+        footerProvider.sectionHeight = { _ in return footerHeight }
         self.init(
             providers: providers,
             headerProvider: headerProvider,

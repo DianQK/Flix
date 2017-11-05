@@ -27,10 +27,16 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     
     public let isHidden = Variable(false)
     
-    open var sectionHeight: (() -> CGFloat)?
+    open var sectionHeight: ((UITableView) -> CGFloat)?
     
     open let contentView: UIView = NeverHitSelfView()
-    open var backgroundView: UIView?
+    open var backgroundView: UIView? {
+        didSet {
+            _view?.backgroundView = backgroundView
+        }
+    }
+
+    private weak var _view: UITableViewHeaderFooterView?
     
     public init(customIdentity: String, tableElementKindSection: UITableElementKindSection) {
         self.customIdentity = customIdentity
@@ -43,11 +49,12 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     }
 
     open func tableView(_ tableView: UITableView, heightInSection section: Int, value: UniqueCustomTableViewSectionProvider) -> CGFloat? {
-        return self.sectionHeight?()
+        return self.sectionHeight?(tableView)
     }
 
     open func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, value: UniqueCustomTableViewSectionProvider) {
         if !view.hasConfigured {
+            _view = view
             view.hasConfigured = true
             view.backgroundView = self.backgroundView
             view.contentView.addSubview(contentView)

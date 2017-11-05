@@ -206,7 +206,7 @@ class UniqueTitleTableViewProvider: UniqueCustomTableViewProvider {
     
     override init() {
         super.init()
-        self.itemHeight = { return 60 }
+        self.itemHeight = { _ in return 60 }
         self.selectionStyle.value = .none
         titleLabel.font = UIFont.boldSystemFont(ofSize: 23)
         titleLabel.text = "Basic Info"
@@ -290,7 +290,7 @@ class NestFormViewController: TableViewController {
         
         let addHeaderProvider: UniqueCustomTableViewSectionProvider = {
             let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
-            provider.sectionHeight = { return 20 }
+            provider.sectionHeight = { _ in return 20 }
             return provider
         }()
         
