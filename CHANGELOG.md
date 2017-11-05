@@ -2,7 +2,7 @@
 
 ---
 
-## Master
+## [1.0.0](https://github.com/DianQK/Flix/releases/tag/1.0.0)
 
 - Add more examples
 - Add GroupProvider
