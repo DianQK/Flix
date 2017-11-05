@@ -35,13 +35,13 @@ Flix focus on combining cells of `UICollectionView` or `UITableView`, it don't c
 ### CocoaPods
 
 ```ruby
-pod 'Flix', '~> 0.7'
+pod 'Flix', '~> 1.0'
 ```
 
 ### Carthage
 
 ```
-github "DianQK/Flix" ~> 0.7
+github "DianQK/Flix" ~> 1.0
 ```
 
 ## Principle

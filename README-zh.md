@@ -36,13 +36,13 @@ Flx 关注构建 `UICollectionView` / `UITableView` 的 Cell，它不限制视�
 ### CocoaPods
 
 ```ruby
-pod 'Flix', '~> 0.7'
+pod 'Flix', '~> 1.0'
 ```
 
 ### Carthage
 
 ```
-github "DianQK/Flix" ~> 0.7
+github "DianQK/Flix" ~> 1.0
 ```
 
 ## 原理
