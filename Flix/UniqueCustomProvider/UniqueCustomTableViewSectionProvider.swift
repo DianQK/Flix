@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableViewProvider, StringIdentifiableType, Equatable {
     
@@ -24,8 +25,16 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
 
     open let customIdentity: String
     open let tableElementKindSection: UITableElementKindSection
-    
-    public let isHidden = Variable(false)
+
+    open var isHidden: Bool {
+        get {
+            return _isHidden.value
+        }
+        set {
+            _isHidden.value = newValue
+        }
+    }
+    private let _isHidden = Variable(false)
     
     open var sectionHeight: ((UITableView) -> CGFloat)?
     
@@ -67,10 +76,22 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     }
 
     open func genteralSection() -> Observable<UniqueCustomTableViewSectionProvider?> {
-        return self.isHidden.asObservable()
+        return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 return isHidden ? nil : self
         }
     }
     
+}
+
+extension UniqueCustomTableViewSectionProvider: ReactiveCompatible { }
+
+extension Reactive where Base: UniqueCustomTableViewSectionProvider {
+
+    public var isHidden: Binder<Bool> {
+        return Binder(self.base) { provider, hidden in
+            provider.isHidden = hidden
+        }
+    }
+
 }

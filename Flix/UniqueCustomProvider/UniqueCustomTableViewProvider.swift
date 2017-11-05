@@ -57,7 +57,15 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
     open var itemHeight: ((UITableView) -> CGFloat?)?
     
-    public let isHidden = Variable(false)
+    open var isHidden: Bool {
+        get {
+            return _isHidden.value
+        }
+        set {
+            _isHidden.value = newValue
+        }
+    }
+    private let _isHidden = Variable(false)
     
     private let disposeBag = DisposeBag()
 
@@ -109,11 +117,23 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     }
     
     open func genteralValues() -> Observable<[UniqueCustomTableViewProvider]> {
-        return self.isHidden.asObservable()
+        return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }
                 return [self]
         }
     }
     
+}
+
+extension UniqueCustomTableViewProvider: ReactiveCompatible { }
+
+extension Reactive where Base: UniqueCustomTableViewProvider {
+
+    public var isHidden: Binder<Bool> {
+        return Binder(self.base) { provider, hidden in
+            provider.isHidden = hidden
+        }
+    }
+
 }

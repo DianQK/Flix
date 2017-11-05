@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCollectionViewProvider, StringIdentifiableType, Equatable {
     
@@ -21,7 +22,15 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
     public typealias Cell = UICollectionReusableView
     public typealias Value = UniqueCustomCollectionViewSectionProvider
 
-    public let isHidden = Variable(false)
+    open var isHidden: Bool {
+        get {
+            return _isHidden.value
+        }
+        set {
+            _isHidden.value = newValue
+        }
+    }
+    private let _isHidden = Variable(false)
     
     open var sectionSize: ((UICollectionView) -> CGSize)?
     
@@ -51,7 +60,7 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
     }
     
     open func genteralSectionPartion() -> Observable<Value?> {
-        return self.isHidden.asObservable()
+        return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 return isHidden ? nil : self
         }
@@ -59,6 +68,18 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: Value) -> CGSize? {
         return sectionSize?(collectionView)
+    }
+
+}
+
+extension UniqueCustomCollectionViewSectionProvider: ReactiveCompatible { }
+
+extension Reactive where Base: UniqueCustomCollectionViewSectionProvider {
+
+    public var isHidden: Binder<Bool> {
+        return Binder(self.base) { provider, hidden in
+            provider.isHidden = hidden
+        }
     }
 
 }

@@ -63,7 +63,7 @@ class EndRepeatSelectViewController: TableViewController {
             })
             .disposed(by: disposeBag)
 
-        isNever.bind(to: self.datePickerProvider.isHidden).disposed(by: disposeBag)
+        isNever.bind(to: self.datePickerProvider.rx.isHidden).disposed(by: disposeBag)
 
         self.neverProvider.tap.map { nil as Date? }.bind(to: self.endRepeatDate).disposed(by: disposeBag)
 
