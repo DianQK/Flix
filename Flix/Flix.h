@@ -6,7 +6,7 @@
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 //! Project version number for Flix.
 FOUNDATION_EXPORT double FlixVersionNumber;
 
