@@ -129,7 +129,7 @@ class ControlCenterCustomizeViewController: TableViewController {
         title = "Customize"
         
         let tipHeaderSectionProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
-        tipHeaderSectionProvider.sectionHeight = { return 110 }
+        tipHeaderSectionProvider.sectionHeight = { _ in return 110 }
         let tipLabel = UILabel()
         tipLabel.text = "Add and organize additional controls to appeat in Control Center"
         tipLabel.numberOfLines = 0
@@ -151,7 +151,7 @@ class ControlCenterCustomizeViewController: TableViewController {
         includeControlTitleHeaderSectionProvider.titleLabel.text = "INCLUDE"
         
         let includeControlFooterSectionProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
-        includeControlFooterSectionProvider.sectionHeight = { return 30 }
+        includeControlFooterSectionProvider.sectionHeight = { _ in return 30 }
 
         let includeControlSectionProvider = AnimatableTableViewSectionProvider(
             providers: [includeControlProvider],

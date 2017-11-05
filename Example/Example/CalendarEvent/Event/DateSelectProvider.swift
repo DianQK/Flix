@@ -43,7 +43,7 @@ class DatePickerProvider: UniqueCustomTableViewProvider {
             self.datePicker.date = date
         }
 
-        self.itemHeight = { return 216 }
+        self.itemHeight = { _ in return 216 }
 
         self.contentView.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false

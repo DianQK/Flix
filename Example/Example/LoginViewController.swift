@@ -51,7 +51,7 @@ class LoginViewController: TableViewController {
         passwordTextField.bottomAnchor.constraint(equalTo: passwordProvider.contentView.bottomAnchor).isActive = true
         
         let inputDesSectionFooterProvider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
-        inputDesSectionFooterProvider.sectionHeight = { return 35 }
+        inputDesSectionFooterProvider.sectionHeight = { _ in return 35 }
         
         let inputSectionProvider = AnimatableTableViewSectionProvider(
             providers: [usernameProvider, passwordProvider],

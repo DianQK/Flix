@@ -17,7 +17,7 @@ class GitHubSignupViewController: TableViewController {
         let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: UITableElementKindSection.header)
         provider.backgroundView = UIView()
         provider.backgroundView?.backgroundColor = UIColor(named: "Cinder")
-        provider.sectionHeight = { return 180 }
+        provider.sectionHeight = { _ in return 180 }
         let logoImageView = UIImageView(image: #imageLiteral(resourceName: "GitHub Logo"))
         logoImageView.contentMode = .scaleAspectFit
         provider.contentView.addSubview(logoImageView)
@@ -55,7 +55,7 @@ class GitHubSignupViewController: TableViewController {
     
     let inputDesSectionProvider: UniqueCustomTableViewSectionProvider = {
         let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
-        provider.sectionHeight = { return 35 }
+        provider.sectionHeight = { _ in return 35 }
         return provider
     }()
 

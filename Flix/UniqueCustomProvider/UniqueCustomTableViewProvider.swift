@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
@@ -16,25 +17,55 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     open var selectedBackgroundView: UIView?
     open var backgroundView: UIView?
     
-    open var accessoryType: UITableViewCellAccessoryType = .none {// default is UITableViewCellAccessoryNone. use to set standard type
+    open var accessoryType: UITableViewCellAccessoryType = .none {
         didSet {
             _cell?.accessoryType = accessoryType
         }
     }
-    open var accessoryView: UIView? // if set, use custom view. ignore accessoryType. tracks if enabled can calls accessory action
-    open var editingAccessoryType: UITableViewCellAccessoryType = .none // default is UITableViewCellAccessoryNone. use to set standard type
-    open var editingAccessoryView: UIView? // if set, use custom view. ignore editingAccessoryType. tracks if enabled can calls accessory action
-    open var separatorInset: UIEdgeInsets? // allows customization of the separator frame
+
+    open var accessoryView: UIView? {
+        didSet {
+            _cell?.accessoryView = accessoryView
+        }
+    }
+
+    open var editingAccessoryType: UITableViewCellAccessoryType = .none {
+        didSet {
+            _cell?.editingAccessoryType = editingAccessoryType
+        }
+    }
+
+    open var editingAccessoryView: UIView? {
+        didSet {
+            _cell?.editingAccessoryView = editingAccessoryView
+        }
+    }
+
+    open var separatorInset: UIEdgeInsets? {
+        didSet {
+            if let separatorInset = separatorInset {
+                _cell?.separatorInset = separatorInset
+            }
+        }
+    }
     
     public let selectionStyle = Variable(UITableViewCellSelectionStyle.default) // default is UITableViewCellSelectionStyleDefault.
     open var isEnabled = true
 
-    open var tap: Observable<()> { return _tap.asObservable() }
+    open var tap: ControlEvent<()> { return ControlEvent(events: _tap.asObservable()) }
     private let _tap = PublishSubject<()>()
     
-    open var itemHeight: (() -> CGFloat?)?
+    open var itemHeight: ((UITableView) -> CGFloat?)?
     
-    public let isHidden = Variable(false)
+    open var isHidden: Bool {
+        get {
+            return _isHidden.value
+        }
+        set {
+            _isHidden.value = newValue
+        }
+    }
+    private let _isHidden = Variable(false)
     
     private let disposeBag = DisposeBag()
 
@@ -82,15 +113,27 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     }
     
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: UniqueCustomTableViewProvider) -> CGFloat? {
-        return self.itemHeight?()
+        return self.itemHeight?(tableView)
     }
     
     open func genteralValues() -> Observable<[UniqueCustomTableViewProvider]> {
-        return self.isHidden.asObservable()
+        return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }
                 return [self]
         }
     }
     
+}
+
+extension UniqueCustomTableViewProvider: ReactiveCompatible { }
+
+extension Reactive where Base: UniqueCustomTableViewProvider {
+
+    public var isHidden: Binder<Bool> {
+        return Binder(self.base) { provider, hidden in
+            provider.isHidden = hidden
+        }
+    }
+
 }

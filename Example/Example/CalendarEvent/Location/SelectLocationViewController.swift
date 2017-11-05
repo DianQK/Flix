@@ -25,7 +25,7 @@ class PlainTitleTableViewHeaderSectionProvider: UniqueCustomTableViewSectionProv
 
     init(text: String) {
         super.init(tableElementKindSection: .header)
-        self.sectionHeight = { return 32 }
+        self.sectionHeight = { _ in return 32 }
         textLabel.font = UIFont.boldSystemFont(ofSize: 15)
         textLabel.text = text
         self.contentView.addSubview(textLabel)
@@ -135,7 +135,7 @@ class SelectLocationViewController: UIViewController {
 
         GeolocationService.instance.authorized.asObservable()
             .map { !$0 }
-            .bind(to: currentLocationProvider.isHidden).disposed(by: disposeBag)
+            .bind(to: currentLocationProvider.rx.isHidden).disposed(by: disposeBag)
 
 //        currentPlacemark.startWith(nil).map { $0 == nil }.bind(to: currentLocationProvider.isHidden).disposed(by: disposeBag)
 
@@ -150,7 +150,7 @@ class SelectLocationViewController: UIViewController {
         currentlocationImageView.centerYAnchor.constraint(equalTo: currentLocationProvider.contentView.centerYAnchor).isActive = true
         searchBar.rx.text.orEmpty.map { $0.isEmpty }
             .distinctUntilChanged()
-            .bind(to: customLocalProvider.isHidden)
+            .bind(to: customLocalProvider.rx.isHidden)
             .disposed(by: disposeBag)
 
         let customLocalSectionProvider = AnimatableTableViewSectionProvider(providers: [customLocalProvider, currentLocationProvider])

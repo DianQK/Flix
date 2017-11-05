@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableViewProvider, StringIdentifiableType, Equatable {
     
@@ -24,13 +25,27 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
 
     open let customIdentity: String
     open let tableElementKindSection: UITableElementKindSection
+
+    open var isHidden: Bool {
+        get {
+            return _isHidden.value
+        }
+        set {
+            _isHidden.value = newValue
+        }
+    }
+    private let _isHidden = Variable(false)
     
-    public let isHidden = Variable(false)
-    
-    open var sectionHeight: (() -> CGFloat)?
+    open var sectionHeight: ((UITableView) -> CGFloat)?
     
     open let contentView: UIView = NeverHitSelfView()
-    open var backgroundView: UIView?
+    open var backgroundView: UIView? {
+        didSet {
+            _view?.backgroundView = backgroundView
+        }
+    }
+
+    private weak var _view: UITableViewHeaderFooterView?
     
     public init(customIdentity: String, tableElementKindSection: UITableElementKindSection) {
         self.customIdentity = customIdentity
@@ -43,11 +58,12 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     }
 
     open func tableView(_ tableView: UITableView, heightInSection section: Int, value: UniqueCustomTableViewSectionProvider) -> CGFloat? {
-        return self.sectionHeight?()
+        return self.sectionHeight?(tableView)
     }
 
     open func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, value: UniqueCustomTableViewSectionProvider) {
         if !view.hasConfigured {
+            _view = view
             view.hasConfigured = true
             view.backgroundView = self.backgroundView
             view.contentView.addSubview(contentView)
@@ -60,10 +76,22 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     }
 
     open func genteralSection() -> Observable<UniqueCustomTableViewSectionProvider?> {
-        return self.isHidden.asObservable()
+        return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 return isHidden ? nil : self
         }
     }
     
+}
+
+extension UniqueCustomTableViewSectionProvider: ReactiveCompatible { }
+
+extension Reactive where Base: UniqueCustomTableViewSectionProvider {
+
+    public var isHidden: Binder<Bool> {
+        return Binder(self.base) { provider, hidden in
+            provider.isHidden = hidden
+        }
+    }
+
 }
