@@ -50,7 +50,8 @@ class ExampleListViewController: CollectionViewController {
                 Model(title: "Nest Form", desc: "", value: { return NestFormViewController() }),
                 Model(title: "Delete", desc: "", value: { return DeleteItemViewController() }),
                 Model(title: "Control Center", desc: "", value: { return ControlCenterCustomizeViewController() }),
-                Model(title: "Storyboard", desc: "", value: { return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StoryboardViewController") })
+                Model(title: "Storyboard", desc: "", value: { return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StoryboardViewController") }),
+                Model(title: "Move", desc: "", value: { return MoveCollectionViewController() }),
             ]
         )
         textListProvider.tapped

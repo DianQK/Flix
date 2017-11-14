@@ -24,9 +24,14 @@ class CollectionViewDelegateProxy: NSObject, UICollectionViewDelegateFlowLayout 
         let collectionViewLayout = collectionViewLayout as! UICollectionViewFlowLayout
         return referenceSizeForHeaderInSection?(collectionView, collectionViewLayout, section) ?? collectionViewLayout.headerReferenceSize
     }
+
+    func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
+        return self.targetIndexPathForMoveFromItemAt?(collectionView, originalIndexPath, proposedIndexPath) ?? proposedIndexPath
+    }
     
     var sizeForItem: ((_ collectionView: UICollectionView, _ collectionViewLayout: UICollectionViewLayout, _ indexPath: IndexPath) -> CGSize?)?
     var referenceSizeForFooterInSection: ((_ collectionView: UICollectionView, _ collectionViewLayout: UICollectionViewLayout, _ section: Int) -> CGSize?)?
     var referenceSizeForHeaderInSection: ((_ collectionView: UICollectionView, _ collectionViewLayout: UICollectionViewLayout, _ section: Int) -> CGSize?)?
+    var targetIndexPathForMoveFromItemAt: ((_ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)?
     
 }

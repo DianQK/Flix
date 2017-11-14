@@ -88,7 +88,20 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
                 let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])>] = providers.map { $0.genteralSectionModel() }
-                return Observable.combineLatest(sections).map { $0.map { AnimatableSectionModel(model: $0.section, items: $0.nodes) } }
+                return Observable.combineLatest(sections)
+                    .ifEmpty(default: [])
+                    .map { value -> [AnimatableSectionModel] in
+                        return value.enumerated()
+                            .map { (offset, section) -> AnimatableSectionModel in
+                                let items = section.nodes.map { (node) -> IdentifiableNode in
+                                    var node = node
+                                    node.providerStartIndexPath.section = offset
+                                    node.providerEndIndexPath.section = offset
+                                    return node
+                                }
+                                return AnimatableSectionModel(model: section.section, items: items)
+                        }
+                }
             }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

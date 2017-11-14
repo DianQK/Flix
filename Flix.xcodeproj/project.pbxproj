@@ -98,6 +98,8 @@
 		56FFB7CB1F89FBEA0066B903 /* TableViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */; };
 		591E7B8807895C0686775378 /* Pods_Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B73648F745916751FEA7795 /* Pods_Flix.framework */; };
 		8A3AFB5DAB028934DC47B3D5 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A16CA2C5A84708DA185909 /* Pods_Example.framework */; };
+		913B1A721FBB400B0075E96B /* MoveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913B1A711FBB400B0075E96B /* MoveCollectionViewController.swift */; };
+		913B1A751FBB41CA0075E96B /* CollectionViewMoveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913B1A741FBB41CA0075E96B /* CollectionViewMoveable.swift */; };
 		9179C9641FA6D60F00B4C21E /* TableViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */; };
 		917E2C301FA6E34800765F95 /* CollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */; };
 		917E2C321FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */; };
@@ -225,6 +227,8 @@
 		56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionProvider.swift; sourceTree = "<group>"; };
 		57A16CA2C5A84708DA185909 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B73648F745916751FEA7795 /* Pods_Flix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		913B1A711FBB400B0075E96B /* MoveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCollectionViewController.swift; sourceTree = "<group>"; };
+		913B1A741FBB41CA0075E96B /* CollectionViewMoveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewMoveable.swift; sourceTree = "<group>"; };
 		9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewGroupProvider.swift; sourceTree = "<group>"; };
 		917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewGroupProvider.swift; sourceTree = "<group>"; };
 		917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewGroupProvider.swift; sourceTree = "<group>"; };
@@ -305,6 +309,7 @@
 		2670E6511F83E15C003A5BA7 /* Flix */ = {
 			isa = PBXGroup;
 			children = (
+				913B1A731FBB416F0075E96B /* CollectionEdit */,
 				564639F91F9E4D7B00EE1498 /* Storyboard */,
 				2670E6721F83E2CE003A5BA7 /* Provider */,
 				2670E6701F83E2C0003A5BA7 /* Node */,
@@ -511,6 +516,7 @@
 				2666E4001F869656006F1918 /* NestFormViewController.swift */,
 				91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */,
 				565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */,
+				913B1A711FBB400B0075E96B /* MoveCollectionViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -531,6 +537,14 @@
 				57A16CA2C5A84708DA185909 /* Pods_Example.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		913B1A731FBB416F0075E96B /* CollectionEdit */ = {
+			isa = PBXGroup;
+			children = (
+				913B1A741FBB41CA0075E96B /* CollectionViewMoveable.swift */,
+			);
+			path = CollectionEdit;
 			sourceTree = "<group>";
 		};
 		9179C9621FA6D60400B4C21E /* Group */ = {
@@ -792,6 +806,7 @@
 				2670E6781F83E343003A5BA7 /* TableViewProvider.swift in Sources */,
 				2670E6821F83EBE2003A5BA7 /* CollectionViewSectionProvider.swift in Sources */,
 				26BAF0351F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift in Sources */,
+				913B1A751FBB41CA0075E96B /* CollectionViewMoveable.swift in Sources */,
 				2670E67E1F83EA4A003A5BA7 /* AnimatableCollectionViewBuilder.swift in Sources */,
 				5694616D1F9C710A009F7971 /* IdentifiableNode.swift in Sources */,
 				262874601F9F8DD000F66907 /* ProviderDescription.swift in Sources */,
@@ -816,6 +831,7 @@
 				564217881FAE0CED00BCF993 /* AppsProvider.swift in Sources */,
 				562594521FA0CC9800BF5756 /* GeolocationService.swift in Sources */,
 				26424F701F8537EC00E2834D /* UniqueMessageTableViewProvider.swift in Sources */,
+				913B1A721FBB400B0075E96B /* MoveCollectionViewController.swift in Sources */,
 				2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */,
 				566300BE1FA4E41B00A35CFA /* StartAndEndDateGroupProvider.swift in Sources */,
 				2670E69C1F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift in Sources */,

@@ -27,6 +27,47 @@ protocol _CollectionViewBuilder: class {
 extension _CollectionViewBuilder {
     
     func build<S: FlixSectionModelType>(dataSource: CollectionViewSectionedDataSource<S>) where S.Item: _Node, S.Section: _SectionNode {
+
+        dataSource.canMoveItemAtIndexPath = { [weak collectionView, weak self] (dataSource, indexPath) in
+            guard let collectionView = collectionView else { return false }
+            let node = dataSource[indexPath]
+            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return false }
+            if let provider = provider as? _CollectionViewMoveable {
+                return provider._collectionView(collectionView, canMoveItemAt: indexPath, node: node)
+            } else {
+                return false
+            }
+        }
+
+        dataSource.moveItem = { [weak collectionView, weak self] (dataSource, sourceIndexPath, destinationIndexPath) in
+            guard let collectionView = collectionView else { return }
+            let node = dataSource[destinationIndexPath]
+            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) as? _CollectionViewMoveable else { return }
+            provider._collectionView(
+                collectionView,
+                moveItemAt: sourceIndexPath.row - node.providerStartIndexPath.row,
+                to: destinationIndexPath.row - node.providerStartIndexPath.row,
+                node: node
+            )
+        }
+
+        self.delegeteProxy.targetIndexPathForMoveFromItemAt = { (collectionView, originalIndexPath, proposedIndexPath) -> IndexPath in
+            let node = dataSource[originalIndexPath]
+            let providerIdentity = node.providerIdentity
+            let provider = self.nodeProviders.first(where: { $0._flix_identity == providerIdentity })!
+            if let _ = provider as? _CollectionViewMoveable {
+                if (proposedIndexPath <= node.providerStartIndexPath) {
+                    return node.providerStartIndexPath
+                } else if (proposedIndexPath >= node.providerEndIndexPath) {
+                    return node.providerEndIndexPath
+                } else {
+                    return proposedIndexPath
+                }
+            } else {
+                return proposedIndexPath
+            }
+        }
+
         collectionView.rx.itemSelected
             .subscribe(onNext: { [weak collectionView, unowned self] (indexPath) in
                 guard let `collectionView` = collectionView else { return }
