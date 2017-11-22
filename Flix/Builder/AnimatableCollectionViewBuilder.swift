@@ -82,7 +82,7 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
         
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
-                self?.nodeProviders = sectionProviders.flatMap { $0.animatableProviders }
+                self?.nodeProviders = sectionProviders.flatMap { $0.animatableProviders.flatMap { $0.__providers } }
                 self?.footerSectionProviders = sectionProviders.flatMap { $0.animatableFooterProvider }
                 self?.headerSectionProviders = sectionProviders.flatMap { $0.animatableHeaderProvider }
             })
