@@ -59,7 +59,7 @@ public class TableViewBuilder: _TableViewBuilder {
 
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
-                self?.nodeProviders = sectionProviders.flatMap { $0.providers }
+                self?.nodeProviders = sectionProviders.flatMap { $0.providers.flatMap { $0.__providers } }
                 self?.footerSectionProviders = sectionProviders.flatMap { $0.footerProvider }
                 self?.headerSectionProviders = sectionProviders.flatMap { $0.headerProvider }
             })
