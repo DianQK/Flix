@@ -1,6 +1,13 @@
 language: objective-c
+sudo: required
+osx_image: xcode9.1
 
-osx_image: xcode9
+env:
+  global:
+    - IOS_SDK="iphonesimulator11.1"
+    - FRAMEWORK="Flix"
+  matrix:
+    - SDK="$IOS_SDK"      TEST=0  DESTINATION="platform=iOS Simulator,name=iPhone 8,OS=11.1"
 
 notifications:
   email: false
@@ -12,6 +19,21 @@ env:
   - BUILD="pod repo update && pod lib lint Flix.podspec --verbose"
 
 script: eval "${BUILD}"
+
+before_deploy:
+  - pod install --repo-update
+  - carthage build --no-skip-current --verbose | xcpretty -c
+  - carthage archive Flix
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_ACCESS_TOKEN
+  file: $FRAMEWORK.framework.zip
+  skip_cleanup: true
+  on:
+    repo: DianQK/Flix
+    tags: true
+    condition: $SDK = $IOS_SDK
 
 after_success:
   - sleep 5 # workaround https://github.com/travis-ci/travis-ci/issues/4725
