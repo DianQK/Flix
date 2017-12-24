@@ -2,6 +2,10 @@
 
 ---
 
+## [1.1.0](https://github.com/DianQK/Flix/releases/tag/1.1.0)
+
+- Add CollectionViewMoveable
+
 ## [1.0.0](https://github.com/DianQK/Flix/releases/tag/1.0.0)
 
 - Add more examples
