@@ -61,7 +61,7 @@ github "DianQK/Flix" ~> 1.0
   <tr>
     <td width="70%"><div class="highlight highlight-source-swift"><pre>
 let profileProvider = UniqueCustomTableViewProvider()
-profileProvider.itemHeight = { return 80 }
+profileProvider.itemHeight = { _ in return 80 }
 profileProvider.accessoryType = .disclosureIndicator
 
 let avatarImageView = UIImageView(
@@ -97,7 +97,7 @@ class ProfileProvider: UniqueCustomTableViewProvider {
     init(avatar: UIImage, name: String) {
         super.init()
 
-        self.itemHeight = { return 80 }
+        self.itemHeight = { _ in return 80 }
         self.accessoryType = .disclosureIndicator
 
         avatarImageView.image = avatar
