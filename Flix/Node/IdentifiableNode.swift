@@ -6,6 +6,7 @@
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
+import UIKit
 import RxDataSources
 
 public protocol StringIdentifiableType {
