@@ -28,7 +28,7 @@ class SwitchProvider: UniqueCustomTableViewProvider {
         titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor, constant: 0).isActive = true
 
-        self.selectionStyle.value = .none
+        self.selectionStyle.accept(.none)
     }
 
 }
@@ -47,7 +47,7 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
         return self.endProvider.pickerProvider.datePicker.rx.date.asObservable()
     }
 
-    let timeZone = Variable(TimeZone.current)
+    let timeZone = BehaviorRelay(value: TimeZone.current)
     let disposeBag = DisposeBag()
 
     init(viewController: UIViewController, isAllDay: Bool?, start: Date?, end: Date?) {

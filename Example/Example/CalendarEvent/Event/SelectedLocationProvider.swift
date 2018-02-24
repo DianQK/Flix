@@ -77,10 +77,10 @@ class SelectedLocationProvider: UniqueCustomTableViewProvider {
 
     let disposeBag = DisposeBag()
 
-    let location: Variable<EventLocation?>
+    let location: BehaviorRelay<EventLocation?>
 
     init(viewController: UIViewController, selected: EventLocation?) {
-        self.location = Variable(selected)
+        self.location = BehaviorRelay(value: selected)
         super.init()
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         addressLabel.font = UIFont.systemFont(ofSize: 11)

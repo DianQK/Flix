@@ -67,7 +67,7 @@ class TextListProvider<Value>: AnimatableCollectionViewProvider {
     typealias Model = TextListProviderModel<Value>
 
     let items: [Model]
-    let isHidden = Variable(false)
+    let isHidden = BehaviorRelay(value: false)
     
     typealias Cell = TextCollectionViewCell
     typealias NodeType = Model

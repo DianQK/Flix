@@ -67,7 +67,7 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
         }
         
         let radioProvider = RadioProvider(options: [SlienceMode.always, SlienceMode.whileLocked])
-        radioProvider.checkedOption.value = SlienceMode.always
+        radioProvider.checkedOption.accept(SlienceMode.always)
         providers.append(radioProvider)
         
         let slienceCommentProvider = UniqueCommentTextProvider(

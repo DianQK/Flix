@@ -14,7 +14,7 @@ import Flix
 struct Tag: StringIdentifiableType, Equatable {
 
     let id: Int
-    let name = Variable("")
+    let name = BehaviorRelay(value: "")
 
     var identity: String {
         return "\(id)"
@@ -63,7 +63,7 @@ class InputTagsProvider: AnimatableTableViewProvider, TableViewDeleteable {
     typealias Cell = TagTableViewCell
     typealias Value = Tag
     
-    let tags = Variable<[Tag]>([])
+    let tags = BehaviorRelay<[Tag]>(value: [])
 
     func configureCell(_ tableView: UITableView, cell: TagTableViewCell, indexPath: IndexPath, value: Tag) {
         cell.textField.placeholder = "Tag Name"
@@ -80,13 +80,11 @@ class InputTagsProvider: AnimatableTableViewProvider, TableViewDeleteable {
     
     func addItem() {
         let maxId = self.tags.value.max { (lhs, rhs) -> Bool in return lhs.id < rhs.id }?.id ?? 0
-        self.tags.value.append(Tag(id: maxId + 1))
+        self.tags.accept(self.tags.value + [Tag(id: maxId + 1)])
     }
     
     func removeItem(id: Int) {
-        if let index = self.tags.value.index(where: { $0.id == id }) {
-            self.tags.value.remove(at: index)
-        }
+        self.tags.accept(self.tags.value.filter({ $0.id != id }))
     }
     
 }
@@ -99,7 +97,7 @@ class DeleteItemViewController: TableViewController {
         title = "Delete"
         
         let inputTagsProvider = InputTagsProvider()
-        inputTagsProvider.tags.value = [Tag(id: 1)]
+        inputTagsProvider.tags.accept([Tag(id: 1)])
         
         let addNewTagProvider = UniqueCustomTableViewProvider()
         let addNewTagImageView = UIImageView(image: #imageLiteral(resourceName: "Control Add"))

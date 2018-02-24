@@ -77,7 +77,7 @@ class LoginViewController: TableViewController {
         isVerified
             .subscribe(onNext: { [weak self] (isVerified) in
                 self?.loginTextLabel.textColor = isVerified ? UIColor.red : UIColor.lightGray
-                loginProvider.selectionStyle.value = isVerified ? .default : .none
+                loginProvider.selectionStyle.accept(isVerified ? .default : .none)
             })
             .disposed(by: disposeBag)
         

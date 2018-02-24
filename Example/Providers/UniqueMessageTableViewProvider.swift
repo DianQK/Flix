@@ -17,7 +17,7 @@ open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
     open let contentView = UIView()
     open let backgroundView = UIView()
     
-    open let isHidden = Variable(false)
+    open let isHidden = BehaviorRelay(value: false)
     
     let disposeBag = DisposeBag()
     

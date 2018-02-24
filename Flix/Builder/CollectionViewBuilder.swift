@@ -18,7 +18,7 @@ public class CollectionViewBuilder: _CollectionViewBuilder {
     let disposeBag = DisposeBag()
     let delegeteProxy = CollectionViewDelegateProxy()
     
-    public let sectionProviders: Variable<[CollectionViewSectionProvider]>
+    public let sectionProviders: BehaviorRelay<[CollectionViewSectionProvider]>
     
     var nodeProviders: [_CollectionViewMultiNodeProvider] = [] {
         didSet {
@@ -48,7 +48,7 @@ public class CollectionViewBuilder: _CollectionViewBuilder {
         
         self.collectionView = collectionView
         
-        self.sectionProviders = Variable(sectionProviders)
+        self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel>(configureCell: { [weak self] dataSource, collectionView, indexPath, node in
             guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UICollectionViewCell() }

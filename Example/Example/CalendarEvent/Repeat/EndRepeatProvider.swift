@@ -13,10 +13,10 @@ import Flix
 
 class EndRepeatProvider: TitleDescProvider {
 
-    let endRepeatDate: Variable<Date?>
+    let endRepeatDate: BehaviorRelay<Date?>
 
     required init(viewController: UIViewController, minEndDate: Observable<Date>, endRepeatDate: Date?) {
-        self.endRepeatDate = Variable(endRepeatDate)
+        self.endRepeatDate = BehaviorRelay(value: endRepeatDate)
         super.init()
         self.titleLabel.text = "End Repeat"
         self.descLabel.textColor = UIColor(named: "CommentText")

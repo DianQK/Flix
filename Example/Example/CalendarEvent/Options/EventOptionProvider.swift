@@ -55,10 +55,10 @@ enum ShowAsOption: String, EventOptionType {
 
 class EventOptionProvider<T>: TitleDescProvider where T: EventOptionType {
 
-    let selectedOption: Variable<T>
+    let selectedOption: BehaviorRelay<T>
 
     required init(viewController: UIViewController, selectedOption: T, customTitle: String? = nil) {
-        self.selectedOption = Variable(selectedOption)
+        self.selectedOption = BehaviorRelay(value: selectedOption)
 
         super.init()
 
@@ -191,8 +191,8 @@ class AlertGroupProvider: AnimatableTableViewGroupProvider {
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] (option) in
                 guard let `self` = self else { return }
-                self.firstAlertProvider.selectedOption.value = option
-                self.secondAlertProvider.selectedOption.value = .none
+                self.firstAlertProvider.selectedOption.accept(option)
+                self.secondAlertProvider.selectedOption.accept(.none)
             })
             .disposed(by: disposeBag)
     }

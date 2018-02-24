@@ -17,7 +17,7 @@ open class TableViewSectionProvider: FlixCustomStringConvertible {
     public var footerProvider: _SectionPartionTableViewProvider?
     public var providers: [_TableViewMultiNodeProvider]
     
-    public let isHidden = Variable(false)
+    public let isHidden = BehaviorRelay(value: false)
     
     public init(
         providers: [_TableViewMultiNodeProvider],

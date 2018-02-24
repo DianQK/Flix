@@ -49,7 +49,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
         }
     }
     
-    public let selectionStyle = Variable(UITableViewCellSelectionStyle.default) // default is UITableViewCellSelectionStyleDefault.
+    public let selectionStyle = BehaviorRelay(value: UITableViewCellSelectionStyle.default) // default is UITableViewCellSelectionStyleDefault.
     open var isEnabled = true
 
     open var tap: ControlEvent<()> { return ControlEvent(events: _tap.asObservable()) }
@@ -62,10 +62,10 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
             return _isHidden.value
         }
         set {
-            _isHidden.value = newValue
+            _isHidden.accept(newValue)
         }
     }
-    private let _isHidden = Variable(false)
+    private let _isHidden = BehaviorRelay(value: false)
     
     private let disposeBag = DisposeBag()
 

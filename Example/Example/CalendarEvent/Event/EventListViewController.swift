@@ -16,7 +16,7 @@ class EventListProvider: AnimatableTableViewProvider {
     typealias Cell = TitleTableViewCell
     typealias Value = CalendarEventObject
 
-    let objects = Variable<[CalendarEventObject]>([])
+    let objects = BehaviorRelay<[CalendarEventObject]>(value: [])
 
     func configureCell(_ tableView: UITableView, cell: TitleTableViewCell, indexPath: IndexPath, value: CalendarEventObject) {
         cell.titleLabel.text = value.title
@@ -33,11 +33,11 @@ class EventListProvider: AnimatableTableViewProvider {
                 var object = object
                 let id = provider.objects.value.map { $0.id }.max() ?? 1
                 object.id = id
-                provider.objects.value.append(object)
+                provider.objects.accept(provider.objects.value + [object])
             } else {
-                provider.objects.value = provider.objects.value.map { (old) -> CalendarEventObject in
+                provider.objects.accept(provider.objects.value.map { (old) -> CalendarEventObject in
                     return old.id == object.id ? object : old
-                }
+                })
             }
         })
     }

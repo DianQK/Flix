@@ -103,7 +103,7 @@ extension FlixProxy where Base: UITableView {
     
     public func build(_ sectionProviders: [TableViewSectionProvider]) {
         if let builder = base.builder {
-            builder.sectionProviders.value = sectionProviders
+            builder.sectionProviders.accept(sectionProviders)
         } else {
             self.base.builder = TableViewBuilder(tableView: self.base, sectionProviders: sectionProviders)
         }
@@ -111,7 +111,7 @@ extension FlixProxy where Base: UITableView {
     
     public func build(_ providers: [_TableViewMultiNodeProvider]) {
         if let builder = base.builder {
-            builder.sectionProviders.value = [TableViewSectionProvider(providers: providers)]
+            builder.sectionProviders.accept([TableViewSectionProvider(providers: providers)])
         } else {
             self.base.builder = TableViewBuilder(tableView: self.base, providers: providers)
         }
@@ -123,7 +123,7 @@ extension FlixAnimatableProxy where Base: UITableView {
     
     public func build(_ sectionProviders: [AnimatableTableViewSectionProvider]) {
         if let builder = base.animatableBuilder {
-            builder.sectionProviders.value = sectionProviders
+            builder.sectionProviders.accept(sectionProviders)
         } else {
             self.base.animatableBuilder = AnimatableTableViewBuilder(tableView: self.base, sectionProviders: sectionProviders)
         }
@@ -131,7 +131,7 @@ extension FlixAnimatableProxy where Base: UITableView {
     
     public func build(_ providers: [_AnimatableTableViewMultiNodeProvider]) {
         if let builder = base.animatableBuilder {
-            builder.sectionProviders.value = [AnimatableTableViewSectionProvider(providers: providers)]
+            builder.sectionProviders.accept([AnimatableTableViewSectionProvider(providers: providers)])
         } else {
             self.base.animatableBuilder = AnimatableTableViewBuilder(tableView: self.base, providers: providers)
         }
@@ -143,7 +143,7 @@ extension FlixProxy where Base: UICollectionView {
     
     public func build(_ sectionProviders: [CollectionViewSectionProvider]) {
         if let builder = base.builder {
-            builder.sectionProviders.value = sectionProviders
+            builder.sectionProviders.accept(sectionProviders)
         } else {
             self.base.builder = CollectionViewBuilder(collectionView: self.base, sectionProviders: sectionProviders)
         }
@@ -151,7 +151,7 @@ extension FlixProxy where Base: UICollectionView {
     
     public func build(_ providers: [_CollectionViewMultiNodeProvider]) {
         if let builder = base.builder {
-            builder.sectionProviders.value = [CollectionViewSectionProvider(providers: providers)]
+            builder.sectionProviders.accept([CollectionViewSectionProvider(providers: providers)])
         } else {
             self.base.builder = CollectionViewBuilder(collectionView: self.base, providers: providers)
         }
@@ -163,7 +163,7 @@ extension FlixAnimatableProxy where Base: UICollectionView {
     
     public func build(_ sectionProviders: [AnimatableCollectionViewSectionProvider]) {
         if let builder = base.animatableBuilder {
-            builder.sectionProviders.value = sectionProviders
+            builder.sectionProviders.accept(sectionProviders)
         } else {
             self.base.animatableBuilder = AnimatableCollectionViewBuilder(collectionView: self.base, sectionProviders: sectionProviders)
         }
@@ -171,7 +171,7 @@ extension FlixAnimatableProxy where Base: UICollectionView {
     
     public func build(_ providers: [_AnimatableCollectionViewMultiNodeProvider]) {
         if let builder = base.animatableBuilder {
-            builder.sectionProviders.value = [AnimatableCollectionViewSectionProvider(providers: providers)]
+            builder.sectionProviders.accept([AnimatableCollectionViewSectionProvider(providers: providers)])
         } else {
             self.base.animatableBuilder = AnimatableCollectionViewBuilder(collectionView: self.base, providers: providers)
         }

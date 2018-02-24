@@ -8,15 +8,16 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import Flix
 
 class UniqueCommentTextProvider: UniqueAnimatableCollectionViewProvider {
 
-    let text: Variable<String>
+    let text: BehaviorRelay<String>
     let disposeBag = DisposeBag()
     
     init(text: String) {
-        self.text = Variable(text)
+        self.text = BehaviorRelay(value: text)
         self.text.asObservable().bind(to: textLabel.rx.text).disposed(by: disposeBag)
     }
     

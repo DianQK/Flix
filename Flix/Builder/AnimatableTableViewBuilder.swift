@@ -20,7 +20,7 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
     
     let tableView: UITableView
     
-    public let sectionProviders: Variable<[AnimatableTableViewSectionProvider]>
+    public let sectionProviders: BehaviorRelay<[AnimatableTableViewSectionProvider]>
     
     var nodeProviders: [_TableViewMultiNodeProvider] = [] {
         didSet {
@@ -47,7 +47,7 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
     public init(tableView: UITableView, sectionProviders: [AnimatableTableViewSectionProvider]) {
         
         self.tableView = tableView
-        self.sectionProviders = Variable(sectionProviders)
+        self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel>(configureCell: { [weak self] dataSource, tableView, indexPath, node in
             guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UITableViewCell() }

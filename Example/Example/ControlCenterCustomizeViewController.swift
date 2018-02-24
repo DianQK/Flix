@@ -24,7 +24,7 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
     typealias Cell = UITableViewCell
     typealias Value = String
     
-    let values = Variable(["Flashlight", "Timer", "Calculator", "Low Power Mode", "Screen Recording", "Notes", "Alarm", "Camera"])
+    let values = BehaviorRelay(value: ["Flashlight", "Timer", "Calculator", "Low Power Mode", "Screen Recording", "Notes", "Alarm", "Camera"])
     
     let itemDeleted = PublishSubject<String>()
 
@@ -36,13 +36,11 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
         var result = values.value
         result.remove(at: sourceIndex)
         result.insert(value, at: destinationIndex)
-        values.value = result
+        values.accept(result)
     }
     
     func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: String) {
-        if let index = values.value.index(of: value) {
-            values.value.remove(at: index)
-        }
+        values.accept(values.value.filter({ $0 != value }))
         itemDeleted.onNext(value)
     }
     
@@ -51,7 +49,7 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
     }
     
     func insertNew(_ value: String) {
-        self.values.value.append(value)
+        self.values.accept(self.values.value + [value])
     }
     
     func genteralValues() -> Observable<[String]> {
@@ -65,7 +63,7 @@ class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
     typealias Cell = UITableViewCell
     typealias Value = String
     
-    let values = Variable(["Magnifier", "Accessibility Shortcuts", "Do Not Disturb While Driving", "Stopwatch", "Text Size", "Guided Access", "Voice Memos", "Apple TV Remote", "Wallet"])
+    let values = BehaviorRelay(value: ["Magnifier", "Accessibility Shortcuts", "Do Not Disturb While Driving", "Stopwatch", "Text Size", "Guided Access", "Voice Memos", "Apple TV Remote", "Wallet"])
     
     let itemInserted = PublishSubject<String>()
     
@@ -74,14 +72,12 @@ class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
     }
     
     func tableView(_ tableView: UITableView, itemInsertedForRowAt indexPath: IndexPath, value: String) {
-        if let index = values.value.index(of: value) {
-            values.value.remove(at: index)
-        }
+        values.accept(values.value.filter({ $0 != value }))
         itemInserted.onNext(value)
     }
     
     func insertNew(_ value: String) {
-        self.values.value.append(value)
+        self.values.accept(self.values.value + [value])
     }
 
     func genteralValues() -> Observable<[String]> {

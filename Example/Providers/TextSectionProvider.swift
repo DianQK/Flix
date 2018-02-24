@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import Flix
 
 class TextCollectionReusableView: UICollectionReusableView {
@@ -61,12 +62,12 @@ class TextSectionProvider: AnimatableSectionPartionCollectionViewProvider, Strin
     typealias NodeType = TextSectionProvider
 
     let collectionElementKindSection: UICollectionElementKindSection
-    let text: Variable<String>
+    let text: BehaviorRelay<String>
     let disposeBag = DisposeBag()
     
     init(collectionElementKindSection: UICollectionElementKindSection, text: String) {
         self.collectionElementKindSection = collectionElementKindSection
-        self.text = Variable(text)
+        self.text = BehaviorRelay(value: text)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: TextSectionProvider) -> CGSize? {

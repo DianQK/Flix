@@ -27,10 +27,10 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
             return _isHidden.value
         }
         set {
-            _isHidden.value = newValue
+            _isHidden.accept(newValue)
         }
     }
-    private let _isHidden = Variable(false)
+    private let _isHidden = BehaviorRelay(value: false)
     
     open var sectionSize: ((UICollectionView) -> CGSize)?
     
