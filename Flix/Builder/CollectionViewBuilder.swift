@@ -42,11 +42,15 @@ public class CollectionViewBuilder: _CollectionViewBuilder {
         }
     }
     
-    let collectionView: UICollectionView
+    weak var _collectionView: UICollectionView?
+
+    var collectionView: UICollectionView {
+        return self._collectionView!
+    }
 
     public init(collectionView: UICollectionView, sectionProviders: [CollectionViewSectionProvider]) {
         
-        self.collectionView = collectionView
+        self._collectionView = collectionView
         
         self.sectionProviders = BehaviorRelay(value: sectionProviders)
         

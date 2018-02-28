@@ -42,11 +42,15 @@ public class TableViewBuilder: _TableViewBuilder {
         }
     }
     
-    let tableView: UITableView
+    weak var _tableView: UITableView?
+
+    var tableView: UITableView {
+        return _tableView!
+    }
 
     public init(tableView: UITableView, sectionProviders: [TableViewSectionProvider]) {
         
-        self.tableView = tableView
+        self._tableView = tableView
         
         self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
