@@ -100,7 +100,7 @@ class GitHubSignupViewController: TableViewController {
         viewModel.signupEnabled
             .subscribe(onNext: { [unowned self] valid in
                 self.loginProvider.isEnabled = valid
-                self.loginProvider.selectionStyle.value = valid ? .default : .none
+                self.loginProvider.selectionStyle.accept(valid ? .default : .none)
                 self.loginProvider.backgroundView?.backgroundColor = valid ? UIColor(named: "Ufo Green")! : UIColor(named: "Ufo Green")?.withAlphaComponent(0.6)
                 self.loginProvider.selectedBackgroundView?.backgroundColor = UIColor(named: "Eucalyptus")!
             })

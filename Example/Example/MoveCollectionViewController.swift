@@ -25,7 +25,7 @@ class MoveCollectionViewProvider: AnimatableCollectionViewProvider, CollectionVi
         var result = colors.value
         result.remove(at: sourceIndex)
         result.insert(value, at: destinationIndex)
-        colors.value = result
+        colors.accept(result)
     }
 
     func configureCell(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath, value: UIColor) {
@@ -39,7 +39,7 @@ class MoveCollectionViewProvider: AnimatableCollectionViewProvider, CollectionVi
     typealias Value = UIColor
     typealias Cell = UICollectionViewCell
 
-    let colors = Variable([UIColor.black, UIColor.blue, UIColor.red, UIColor.green, UIColor.yellow, UIColor.purple])
+    let colors = BehaviorRelay(value: [UIColor.black, UIColor.blue, UIColor.red, UIColor.green, UIColor.yellow, UIColor.purple])
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: UIColor) -> CGSize? {
         return CGSize(width: 80, height: 80)

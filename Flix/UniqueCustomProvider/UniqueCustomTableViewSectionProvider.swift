@@ -31,10 +31,10 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
             return _isHidden.value
         }
         set {
-            _isHidden.value = newValue
+            _isHidden.accept(newValue)
         }
     }
-    private let _isHidden = Variable(false)
+    private let _isHidden = BehaviorRelay(value: false)
     
     open var sectionHeight: ((UITableView) -> CGFloat)?
     

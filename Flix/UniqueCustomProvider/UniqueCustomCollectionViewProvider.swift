@@ -39,10 +39,10 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
             return _isHidden.value
         }
         set {
-            _isHidden.value = newValue
+            _isHidden.accept(newValue)
         }
     }
-    private let _isHidden = Variable(false)
+    private let _isHidden = BehaviorRelay(value: false)
 
     open var isEnabled = true
 

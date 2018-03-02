@@ -18,7 +18,7 @@ public class TableViewBuilder: _TableViewBuilder {
     let disposeBag = DisposeBag()
     let delegeteProxy = TableViewDelegateProxy()
     
-    public let sectionProviders: Variable<[TableViewSectionProvider]>
+    public let sectionProviders: BehaviorRelay<[TableViewSectionProvider]>
     
     var nodeProviders: [_TableViewMultiNodeProvider] = [] {
         didSet {
@@ -42,13 +42,17 @@ public class TableViewBuilder: _TableViewBuilder {
         }
     }
     
-    let tableView: UITableView
+    weak var _tableView: UITableView?
+
+    var tableView: UITableView {
+        return _tableView!
+    }
 
     public init(tableView: UITableView, sectionProviders: [TableViewSectionProvider]) {
         
-        self.tableView = tableView
+        self._tableView = tableView
         
-        self.sectionProviders = Variable(sectionProviders)
+        self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(configureCell: { [weak self] dataSource, tableView, indexPath, node in
             guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UITableViewCell() }

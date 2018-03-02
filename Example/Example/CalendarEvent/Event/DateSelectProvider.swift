@@ -51,7 +51,7 @@ class DatePickerProvider: UniqueCustomTableViewProvider {
         datePicker.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
         datePicker.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
 
-        self.selectionStyle.value = .none
+        self.selectionStyle.accept(.none)
 
     }
 
@@ -101,11 +101,11 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
         return [dateProvider, pickerProvider, timeZoneProvider]
     }
 
-    let isActive = Variable(false)
+    let isActive = BehaviorRelay(value: false)
     let disposeBag = DisposeBag()
     let tapActiveChanged = PublishSubject<Bool>()
 
-    let dateIsAvailable = Variable(true)
+    let dateIsAvailable = BehaviorRelay(value: true)
 
     let isAllDay: ControlProperty<Bool>
 

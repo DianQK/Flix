@@ -18,7 +18,7 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
     let disposeBag = DisposeBag()
     let delegeteProxy = CollectionViewDelegateProxy()
     
-    public let sectionProviders: Variable<[AnimatableCollectionViewSectionProvider]>
+    public let sectionProviders: BehaviorRelay<[AnimatableCollectionViewSectionProvider]>
 
     var nodeProviders: [_CollectionViewMultiNodeProvider] = [] {
         didSet {
@@ -48,7 +48,7 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
         
         self.collectionView = collectionView
         
-        self.sectionProviders = Variable(sectionProviders)
+        self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
         let dataSource = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel>(
             configureCell: { [weak self] dataSource, collectionView, indexPath, node in

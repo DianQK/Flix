@@ -53,7 +53,7 @@ extension UniqueMessageTableViewProvider {
         return Binder(self) { provider, result in
             provider.backgroundView.backgroundColor = result.textColor
             provider.messageLabel.text = result.description
-            provider.isHidden.value = result.description.isEmpty
+            provider.isHidden.accept(result.description.isEmpty)
         }
     }
     

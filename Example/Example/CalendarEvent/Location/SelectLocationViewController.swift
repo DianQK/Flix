@@ -15,7 +15,7 @@ import MapKit
 
 class Storage {
 
-    static var recentSelectedPlacemarks = Variable([CLPlacemark]())
+    static var recentSelectedPlacemarks = BehaviorRelay(value: [CLPlacemark]())
 
 }
 
@@ -159,9 +159,7 @@ class SelectLocationViewController: UIViewController {
         recentSelectedPlacemarksProvider.canDelete = true
         recentSelectedPlacemarksProvider.placemarkDeleted.asObservable()
             .subscribe(onNext: { (placemark) in
-                if let index = Storage.recentSelectedPlacemarks.value.index(where: { $0.identity == placemark.identity }) {
-                    Storage.recentSelectedPlacemarks.value.remove(at: index)
-                }
+                Storage.recentSelectedPlacemarks.accept(Storage.recentSelectedPlacemarks.value.filter({ $0.identity != placemark.identity }))
             })
             .disposed(by: disposeBag)
         let recentSelectedPlacemarksSectionProvider = AnimatableTableViewSectionProvider(
@@ -185,7 +183,7 @@ class SelectLocationViewController: UIViewController {
                     recentSelectedPlacemarks.remove(at: index)
                 }
                 recentSelectedPlacemarks.append(placemark)
-                Storage.recentSelectedPlacemarks.value = recentSelectedPlacemarks
+                Storage.recentSelectedPlacemarks.accept(recentSelectedPlacemarks)
             })
             .disposed(by: disposeBag)
 

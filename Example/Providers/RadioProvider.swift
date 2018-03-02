@@ -56,7 +56,7 @@ class RadioCollectionViewCell: UICollectionViewCell {
 class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableCollectionViewProvider {
 
     let options: [Option]
-    let checkedOption = Variable<Option?>(nil)
+    let checkedOption = BehaviorRelay<Option?>(value: nil)
     let disposeBag = DisposeBag()
     
     typealias Cell = RadioCollectionViewCell
@@ -76,7 +76,7 @@ class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColle
     
     func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        checkedOption.value = value
+        checkedOption.accept(value)
     }
     
     func genteralValues() -> Observable<[Value]> {

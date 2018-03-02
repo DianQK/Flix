@@ -13,14 +13,14 @@ import Flix
 
 class EndRepeatSelectViewController: TableViewController {
 
-    let endRepeatDate: Variable<Date?>
+    let endRepeatDate: BehaviorRelay<Date?>
     let minEndDate: Observable<Date>
 
     let neverProvider = TitleDescProvider()
     let onDateProvider = TitleDescProvider()
     let datePickerProvider: DatePickerProvider
 
-    init(endRepeatDate: Variable<Date?>, minEndDate: Observable<Date>) {
+    init(endRepeatDate: BehaviorRelay<Date?>, minEndDate: Observable<Date>) {
         self.endRepeatDate = endRepeatDate
         self.minEndDate = minEndDate
         self.datePickerProvider = DatePickerProvider(date: endRepeatDate.value)

@@ -13,9 +13,9 @@ import Flix
 
 struct HardwareForm {
     
-    let name = Variable("")
-    let count = Variable("")
-    let unitPrice = Variable("")
+    let name = BehaviorRelay(value: "")
+    let count = BehaviorRelay(value: "")
+    let unitPrice = BehaviorRelay(value: "")
     let id: Int
     
 }
@@ -26,9 +26,9 @@ enum _HardwareFormItem: Equatable {
         return true
     }
 
-    case name(Variable<String>)
-    case count(Variable<String>)
-    case unitPrice(Variable<String>)
+    case name(BehaviorRelay<String>)
+    case count(BehaviorRelay<String>)
+    case unitPrice(BehaviorRelay<String>)
     case delete
     
 }
@@ -125,7 +125,7 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
 
     typealias Value = HardwareFormItem
     
-    let hardwareForms = Variable([HardwareForm]())
+    let hardwareForms = BehaviorRelay(value: [HardwareForm]())
     
     func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: HardwareFormItem) -> UITableViewCell {
         switch value.item {
@@ -159,13 +159,11 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
     
     func addItem() {
         let maxId = self.hardwareForms.value.max { (lhs, rhs) -> Bool in return lhs.id < rhs.id }?.id ?? 0
-        self.hardwareForms.value.append(HardwareForm(id: maxId + 1))
+        self.hardwareForms.accept(self.hardwareForms.value + [HardwareForm(id: maxId + 1)])
     }
     
     func removeItem(id: Int) {
-        if let index = self.hardwareForms.value.index(where: { $0.id == id }) {
-            self.hardwareForms.value.remove(at: index)
-        }
+        self.hardwareForms.accept(self.hardwareForms.value.filter({ $0.id != id }))
     }
 
     func tap(_ tableView: UITableView, indexPath: IndexPath, value: HardwareFormItem) {
@@ -207,7 +205,7 @@ class UniqueTitleTableViewProvider: UniqueCustomTableViewProvider {
     override init() {
         super.init()
         self.itemHeight = { _ in return 60 }
-        self.selectionStyle.value = .none
+        self.selectionStyle.accept(.none)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 23)
         titleLabel.text = "Basic Info"
         self.contentView.addSubview(titleLabel)
@@ -226,7 +224,7 @@ class UniqueItemInputTableViewProvider: UniqueCustomTableViewProvider {
     override init() {
         super.init()
         
-        selectionStyle.value = .none
+        selectionStyle.accept(.none)
         
         let stackView = UIStackView(arrangedSubviews: [titleLabel, textField])
         stackView.alignment = .fill
@@ -282,7 +280,7 @@ class NestFormViewController: TableViewController {
         
         title = "Nest Form"
 
-        hardwareFormProvider.hardwareForms.value = [HardwareForm(id: 1)]
+        hardwareFormProvider.hardwareForms.accept([HardwareForm(id: 1)])
         
         let fillFormSectionProvider = AnimatableTableViewSectionProvider(
             providers: [titleProvider, titleInputProvider, configurationTitleProvider, hardwareFormProvider]
