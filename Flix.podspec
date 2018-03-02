@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Flix'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'iOS form builder in Swift'
   s.homepage         = 'https://github.com/DianQK/Flix'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.frameworks       = 'UIKit', 'Foundation'
   s.requires_arc     = true
 
-  s.dependency 'RxSwift', '~> 4.0'
-  s.dependency 'RxCocoa', '~> 4.0'
+  s.dependency 'RxSwift', '~> 4.1'
+  s.dependency 'RxCocoa', '~> 4.1'
   s.dependency 'RxDataSources', '~> 3.0'
 
   s.ios.deployment_target = '9.0'
