@@ -100,80 +100,112 @@ extension UICollectionView: FlixProxyable {
 }
 
 extension FlixProxy where Base: UITableView {
-    
-    public func build(_ sectionProviders: [TableViewSectionProvider]) {
+
+    @discardableResult
+    public func build(_ sectionProviders: [TableViewSectionProvider]) -> TableViewBuilder {
         if let builder = base.builder {
             builder.sectionProviders.accept(sectionProviders)
+            return builder
         } else {
-            self.base.builder = TableViewBuilder(tableView: self.base, sectionProviders: sectionProviders)
+            let builder = TableViewBuilder(tableView: self.base, sectionProviders: sectionProviders)
+            self.base.builder = builder
+            return builder
         }
     }
-    
-    public func build(_ providers: [_TableViewMultiNodeProvider]) {
+
+    @discardableResult
+    public func build(_ providers: [_TableViewMultiNodeProvider]) -> TableViewBuilder {
         if let builder = base.builder {
             builder.sectionProviders.accept([TableViewSectionProvider(providers: providers)])
+            return builder
         } else {
-            self.base.builder = TableViewBuilder(tableView: self.base, providers: providers)
+            let builder = TableViewBuilder(tableView: self.base, providers: providers)
+            self.base.builder = builder
+            return builder
         }
     }
     
 }
 
 extension FlixAnimatableProxy where Base: UITableView {
-    
-    public func build(_ sectionProviders: [AnimatableTableViewSectionProvider]) {
+
+    @discardableResult
+    public func build(_ sectionProviders: [AnimatableTableViewSectionProvider]) -> AnimatableTableViewBuilder {
         if let builder = base.animatableBuilder {
             builder.sectionProviders.accept(sectionProviders)
+            return builder
         } else {
-            self.base.animatableBuilder = AnimatableTableViewBuilder(tableView: self.base, sectionProviders: sectionProviders)
+            let animatableBuilder = AnimatableTableViewBuilder(tableView: self.base, sectionProviders: sectionProviders)
+            self.base.animatableBuilder = animatableBuilder
+            return animatableBuilder
         }
     }
-    
-    public func build(_ providers: [_AnimatableTableViewMultiNodeProvider]) {
+
+    @discardableResult
+    public func build(_ providers: [_AnimatableTableViewMultiNodeProvider]) -> AnimatableTableViewBuilder {
         if let builder = base.animatableBuilder {
             builder.sectionProviders.accept([AnimatableTableViewSectionProvider(providers: providers)])
+            return builder
         } else {
-            self.base.animatableBuilder = AnimatableTableViewBuilder(tableView: self.base, providers: providers)
+            let animatableBuilder = AnimatableTableViewBuilder(tableView: self.base, providers: providers)
+            self.base.animatableBuilder = animatableBuilder
+            return animatableBuilder
         }
     }
     
 }
 
 extension FlixProxy where Base: UICollectionView {
-    
-    public func build(_ sectionProviders: [CollectionViewSectionProvider]) {
+
+    @discardableResult
+    public func build(_ sectionProviders: [CollectionViewSectionProvider]) -> CollectionViewBuilder {
         if let builder = base.builder {
             builder.sectionProviders.accept(sectionProviders)
+            return builder
         } else {
-            self.base.builder = CollectionViewBuilder(collectionView: self.base, sectionProviders: sectionProviders)
+            let builder = CollectionViewBuilder(collectionView: self.base, sectionProviders: sectionProviders)
+            self.base.builder = builder
+            return builder
         }
     }
-    
-    public func build(_ providers: [_CollectionViewMultiNodeProvider]) {
+
+    @discardableResult
+    public func build(_ providers: [_CollectionViewMultiNodeProvider]) -> CollectionViewBuilder {
         if let builder = base.builder {
             builder.sectionProviders.accept([CollectionViewSectionProvider(providers: providers)])
+            return builder
         } else {
-            self.base.builder = CollectionViewBuilder(collectionView: self.base, providers: providers)
+            let builder = CollectionViewBuilder(collectionView: self.base, providers: providers)
+            self.base.builder = builder
+            return builder
         }
     }
     
 }
 
 extension FlixAnimatableProxy where Base: UICollectionView {
-    
-    public func build(_ sectionProviders: [AnimatableCollectionViewSectionProvider]) {
+
+    @discardableResult
+    public func build(_ sectionProviders: [AnimatableCollectionViewSectionProvider]) -> AnimatableCollectionViewBuilder {
         if let builder = base.animatableBuilder {
             builder.sectionProviders.accept(sectionProviders)
+            return builder
         } else {
-            self.base.animatableBuilder = AnimatableCollectionViewBuilder(collectionView: self.base, sectionProviders: sectionProviders)
+            let animatableBuilder = AnimatableCollectionViewBuilder(collectionView: self.base, sectionProviders: sectionProviders)
+            self.base.animatableBuilder = animatableBuilder
+            return animatableBuilder
         }
     }
-    
-    public func build(_ providers: [_AnimatableCollectionViewMultiNodeProvider]) {
+
+    @discardableResult
+    public func build(_ providers: [_AnimatableCollectionViewMultiNodeProvider]) -> AnimatableCollectionViewBuilder {
         if let builder = base.animatableBuilder {
             builder.sectionProviders.accept([AnimatableCollectionViewSectionProvider(providers: providers)])
+            return builder
         } else {
-            self.base.animatableBuilder = AnimatableCollectionViewBuilder(collectionView: self.base, providers: providers)
+            let animatableBuilder = AnimatableCollectionViewBuilder(collectionView: self.base, providers: providers)
+            self.base.animatableBuilder = animatableBuilder
+            return animatableBuilder
         }
     }
     
