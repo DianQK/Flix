@@ -44,6 +44,8 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
         }
     }
 
+    public var decideViewTransition: (([ChangesetInfo]) -> ViewTransition)?
+
     public init(tableView: UITableView, sectionProviders: [AnimatableTableViewSectionProvider]) {
         
         self.tableView = tableView
@@ -53,7 +55,11 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
             guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UITableViewCell() }
             return provider._configureCell(tableView, indexPath: indexPath, node: node)
         })
-        
+
+        dataSource.decideViewTransition = { [weak self] (_, _, changesets) -> ViewTransition in
+            return self?.decideViewTransition?(changesets) ?? ViewTransition.animated
+        }
+
         dataSource.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
             reloadAnimation: .none,

@@ -41,6 +41,8 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
             }
         }
     }
+
+    public var decideViewTransition: (([ChangesetInfo]) -> ViewTransition)?
     
     let collectionView: UICollectionView
     
@@ -71,6 +73,10 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
                 return reusableView
             }
         })
+
+        dataSource.decideViewTransition = { [weak self] (_, _, changesets) -> ViewTransition in
+            return self?.decideViewTransition?(changesets) ?? ViewTransition.animated
+        }
         
         dataSource.animationConfiguration = AnimationConfiguration(
             insertAnimation: .fade,
