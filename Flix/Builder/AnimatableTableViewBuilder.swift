@@ -18,8 +18,6 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
     let disposeBag = DisposeBag()
     let delegeteProxy = TableViewDelegateProxy()
     
-    let tableView: UITableView
-    
     public let sectionProviders: BehaviorRelay<[AnimatableTableViewSectionProvider]>
     
     var nodeProviders: [_TableViewMultiNodeProvider] = [] {
@@ -44,11 +42,17 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
         }
     }
 
+    weak var _tableView: UITableView?
+
+    var tableView: UITableView {
+        return _tableView!
+    }
+
     public var decideViewTransition: (([ChangesetInfo]) -> ViewTransition)?
 
     public init(tableView: UITableView, sectionProviders: [AnimatableTableViewSectionProvider]) {
         
-        self.tableView = tableView
+        self._tableView = tableView
         self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel>(configureCell: { [weak self] dataSource, tableView, indexPath, node in

@@ -43,12 +43,16 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
     }
 
     public var decideViewTransition: (([ChangesetInfo]) -> ViewTransition)?
-    
-    let collectionView: UICollectionView
+
+    weak var _collectionView: UICollectionView?
+
+    var collectionView: UICollectionView {
+        return self._collectionView!
+    }
     
     public init(collectionView: UICollectionView, sectionProviders: [AnimatableCollectionViewSectionProvider]) {
         
-        self.collectionView = collectionView
+        self._collectionView = collectionView
         
         self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
