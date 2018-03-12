@@ -56,7 +56,9 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     private let _tap = PublishSubject<()>()
     
     open var itemHeight: ((UITableView) -> CGFloat?)?
-    
+
+    open var didMoveToTableView: ((UITableView) -> ())?
+
     open var isHidden: Bool {
         get {
             return _isHidden.value
@@ -103,6 +105,14 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
         self.contentView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor).isActive = true
         self.contentView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor).isActive = true
         self.contentView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
+
+        cell.rx.sentMessage(#selector(UITableViewCell.didMoveToSuperview))
+            .take(1)
+            .subscribe(onNext: { [weak self, weak tableView] _ in
+                guard let `self` = self, let tableView = tableView else { return }
+                self.didMoveToTableView?(tableView)
+            })
+            .disposed(by: disposeBag)
     }
 
     open func tap(_ tableView: UITableView, indexPath: IndexPath, value: UniqueCustomTableViewProvider) {
