@@ -106,13 +106,9 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
         self.contentView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor).isActive = true
         self.contentView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
 
-        cell.rx.sentMessage(#selector(UITableViewCell.didMoveToSuperview))
-            .take(1)
-            .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
-                guard let `self` = self, let tableView = tableView, let cell = cell else { return }
-                self.didMoveToTableView?(tableView, cell)
-            })
-            .disposed(by: disposeBag)
+        if let superview = cell.superview as? UITableView {
+            self.didMoveToTableView?(superview, cell)
+        }
     }
 
     open func tap(_ tableView: UITableView, indexPath: IndexPath, value: UniqueCustomTableViewProvider) {
