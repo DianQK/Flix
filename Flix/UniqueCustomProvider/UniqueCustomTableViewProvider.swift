@@ -57,7 +57,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
     open var itemHeight: ((UITableView) -> CGFloat?)?
 
-    open var didMoveToTableView: ((UITableView) -> ())?
+    open var didMoveToTableView: ((UITableView, UITableViewCell) -> ())?
 
     open var isHidden: Bool {
         get {
@@ -108,9 +108,9 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
 
         cell.rx.sentMessage(#selector(UITableViewCell.didMoveToSuperview))
             .take(1)
-            .subscribe(onNext: { [weak self, weak tableView] _ in
-                guard let `self` = self, let tableView = tableView else { return }
-                self.didMoveToTableView?(tableView)
+            .subscribe(onNext: { [weak self, weak tableView, weak cell] _ in
+                guard let `self` = self, let tableView = tableView, let cell = cell else { return }
+                self.didMoveToTableView?(tableView, cell)
             })
             .disposed(by: disposeBag)
     }
