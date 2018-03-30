@@ -64,15 +64,15 @@ public class TableViewBuilder: _TableViewBuilder {
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
                 self?.nodeProviders = sectionProviders.flatMap { $0.providers.flatMap { $0.__providers } }
-                self?.footerSectionProviders = sectionProviders.flatMap { $0.footerProvider }
-                self?.headerSectionProviders = sectionProviders.flatMap { $0.headerProvider }
+                self?.footerSectionProviders = sectionProviders.compactMap { $0.footerProvider }
+                self?.headerSectionProviders = sectionProviders.compactMap { $0.headerProvider }
             })
             .flatMapLatest { (providers) -> Observable<[SectionModel]> in
                 let sections = providers.map { $0.genteralSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [SectionModel] in
-                        return value.flatMap { $0 }.enumerated()
+                        return value.compactMap { $0 }.enumerated()
                             .map { (offset, section) -> SectionModel in
                                 let items = section.nodes.map { (node) -> Node in
                                     var node = node

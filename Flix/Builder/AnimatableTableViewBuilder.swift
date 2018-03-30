@@ -75,15 +75,15 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
                 self?.nodeProviders = sectionProviders.flatMap { $0.animatableProviders.flatMap { $0.__providers } }
-                self?.footerSectionProviders = sectionProviders.flatMap { $0.animatableFooterProvider }
-                self?.headerSectionProviders = sectionProviders.flatMap { $0.animatableHeaderProvider }
+                self?.footerSectionProviders = sectionProviders.compactMap { $0.animatableFooterProvider }
+                self?.headerSectionProviders = sectionProviders.compactMap { $0.animatableHeaderProvider }
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
                 let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.genteralAnimatableSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [AnimatableSectionModel] in
-                        return value.flatMap { $0 }.enumerated()
+                        return value.compactMap { $0 }.enumerated()
                             .map { (offset, section) -> AnimatableSectionModel in
                                 let items = section.nodes.map { (node) -> IdentifiableNode in
                                     var node = node
