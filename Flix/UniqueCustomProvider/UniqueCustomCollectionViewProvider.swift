@@ -68,7 +68,7 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
         contentView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
     }
     
-    open func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueCustomCollectionViewProvider) {
+    open func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueCustomCollectionViewProvider) {
         if self.isEnabled {
             _tap.onNext(())
         }

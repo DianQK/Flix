@@ -73,7 +73,7 @@ extension _CollectionViewBuilder {
                 guard let `collectionView` = collectionView else { return }
                 let node = dataSource[indexPath]
                 let provider = self.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity })!
-                provider._tap(collectionView, indexPath: indexPath, node: node)
+                provider._itemSelected(collectionView, indexPath: indexPath, node: node)
             })
             .disposed(by: disposeBag)
         

@@ -87,7 +87,7 @@ class TextListProvider<Value>: AnimatableCollectionViewProvider {
         cell.descLabel.text = value.desc
     }
     
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: NodeType) {
+    func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: NodeType) {
         _tap.onNext(value)
         collectionView.deselectItem(at: indexPath, animated: true)
     }

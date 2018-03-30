@@ -74,7 +74,7 @@ class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColle
             .disposed(by: cell.reuseBag)
     }
     
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
+    func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
         collectionView.deselectItem(at: indexPath, animated: true)
         checkedOption.accept(value)
     }
