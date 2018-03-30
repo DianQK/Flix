@@ -15,7 +15,9 @@ public protocol _CollectionViewMultiNodeProvider: FlixCustomStringConvertible {
 
     func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell
     
-    func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
+    func _itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
+
+    func _itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
     
     func _genteralNodes() -> Observable<[Node]>
     
@@ -43,7 +45,9 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
     
     func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) -> UICollectionViewCell
 
-    func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value)
+    func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value)
+
+    func itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value)
     
     func genteralValues() -> Observable<[Value]>
 
@@ -52,16 +56,20 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
 
 extension CollectionViewMultiNodeProvider {
     
-    public func tap(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
-        
-    }
+    public func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) { }
+
+    public func itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) { }
     
     public func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell {
         return self.configureCell(collectionView, indexPath: indexPath, value: node._unwarp())
     }
     
-    public func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
-        self.tap(collectionView, indexPath: indexPath, value: node._unwarp())
+    public func _itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
+        self.itemSelected(collectionView, indexPath: indexPath, value: node._unwarp())
+    }
+
+    public func _itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
+        self.itemDeselected(collectionView, indexPath: indexPath, value: node._unwarp())
     }
     
     public func _genteralNodes() -> Observable<[Node]> {
