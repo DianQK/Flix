@@ -76,6 +76,15 @@ extension _CollectionViewBuilder {
                 provider._itemSelected(collectionView, indexPath: indexPath, node: node)
             })
             .disposed(by: disposeBag)
+
+        collectionView.rx.itemDeselected
+            .subscribe(onNext: { [weak collectionView, unowned self] (indexPath) in
+                guard let `collectionView` = collectionView else { return }
+                let node = dataSource[indexPath]
+                let provider = self.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity })!
+                provider._itemDeselected(collectionView, indexPath: indexPath, node: node)
+            })
+            .disposed(by: disposeBag)
         
         self.delegeteProxy.sizeForItem = { [unowned self] collectionView, flowLayout, indexPath in
             let node = dataSource[indexPath]
