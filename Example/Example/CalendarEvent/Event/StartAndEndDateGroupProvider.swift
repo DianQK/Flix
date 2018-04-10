@@ -28,7 +28,7 @@ class SwitchProvider: UniqueCustomTableViewProvider {
         titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor, constant: 0).isActive = true
 
-        self.selectionStyle.accept(.none)
+        self.selectionStyle = .none
     }
 
 }

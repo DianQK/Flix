@@ -205,7 +205,7 @@ class UniqueTitleTableViewProvider: UniqueCustomTableViewProvider {
     override init() {
         super.init()
         self.itemHeight = { _ in return 60 }
-        self.selectionStyle.accept(.none)
+        self.selectionStyle = .none
         titleLabel.font = UIFont.boldSystemFont(ofSize: 23)
         titleLabel.text = "Basic Info"
         self.contentView.addSubview(titleLabel)
@@ -224,7 +224,7 @@ class UniqueItemInputTableViewProvider: UniqueCustomTableViewProvider {
     override init() {
         super.init()
         
-        selectionStyle.accept(.none)
+        selectionStyle = .none
         
         let stackView = UIStackView(arrangedSubviews: [titleLabel, textField])
         stackView.alignment = .fill

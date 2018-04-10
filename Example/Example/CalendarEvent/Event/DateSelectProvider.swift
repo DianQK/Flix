@@ -51,7 +51,7 @@ class DatePickerProvider: UniqueCustomTableViewProvider {
         datePicker.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
         datePicker.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
 
-        self.selectionStyle.accept(.none)
+        self.selectionStyle = .none
 
     }
 
