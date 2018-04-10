@@ -9,6 +9,10 @@
 import UIKit
 
 class CollectionViewDelegateProxy: NSObject, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return self.shouldSelectItemAt?(collectionView, indexPath) ?? true
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewLayout = collectionViewLayout as! UICollectionViewFlowLayout
@@ -33,5 +37,6 @@ class CollectionViewDelegateProxy: NSObject, UICollectionViewDelegateFlowLayout 
     var referenceSizeForFooterInSection: ((_ collectionView: UICollectionView, _ collectionViewLayout: UICollectionViewLayout, _ section: Int) -> CGSize?)?
     var referenceSizeForHeaderInSection: ((_ collectionView: UICollectionView, _ collectionViewLayout: UICollectionViewLayout, _ section: Int) -> CGSize?)?
     var targetIndexPathForMoveFromItemAt: ((_ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)?
+    var shouldSelectItemAt: ((_ collectionView: UICollectionView, _ indexPath: IndexPath) -> Bool)?
     
 }

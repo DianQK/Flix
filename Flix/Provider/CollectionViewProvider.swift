@@ -17,6 +17,8 @@ public protocol _CollectionViewMultiNodeProvider: FlixCustomStringConvertible {
     
     func _itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
 
+    func _collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath, node: _Node) -> Bool
+
     func _itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
     
     func _genteralNodes() -> Observable<[Node]>
@@ -45,6 +47,8 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
     
     func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) -> UICollectionViewCell
 
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath, value: Value) -> Bool
+
     func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value)
 
     func itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value)
@@ -55,6 +59,14 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
 }
 
 extension CollectionViewMultiNodeProvider {
+
+    public func _collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath, node: _Node) -> Bool {
+        return self.collectionView(collectionView, shouldSelectItemAt: indexPath, value: node._unwarp())
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath, value: Value) -> Bool {
+        return true
+    }
     
     public func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) { }
 
