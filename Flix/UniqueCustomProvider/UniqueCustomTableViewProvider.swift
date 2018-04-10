@@ -14,42 +14,71 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
     open let customIdentity: String
     open let contentView: UIView = NeverHitSelfView()
-    open var selectedBackgroundView: UIView?
-    open var backgroundView: UIView?
+    open var selectedBackgroundView: UIView? {
+        didSet {
+            whenGetCell { (cell) in
+                cell.selectedBackgroundView = self.selectedBackgroundView
+            }
+        }
+    }
+    open var backgroundView: UIView? {
+        didSet {
+            whenGetCell { (cell) in
+                cell.backgroundView = self.backgroundView
+            }
+        }
+    }
     
     open var accessoryType: UITableViewCellAccessoryType = .none {
         didSet {
-            _cell?.accessoryType = accessoryType
+            whenGetCell { (cell) in
+                cell.accessoryType = self.accessoryType
+            }
         }
     }
 
     open var accessoryView: UIView? {
         didSet {
-            _cell?.accessoryView = accessoryView
+            whenGetCell { (cell) in
+                cell.accessoryView = self.accessoryView
+            }
         }
     }
 
     open var editingAccessoryType: UITableViewCellAccessoryType = .none {
         didSet {
-            _cell?.editingAccessoryType = editingAccessoryType
+            whenGetCell { (cell) in
+                cell.editingAccessoryType = self.editingAccessoryType
+            }
         }
     }
 
     open var editingAccessoryView: UIView? {
         didSet {
-            _cell?.editingAccessoryView = editingAccessoryView
+            whenGetCell { (cell) in
+                cell.editingAccessoryView = self.editingAccessoryView
+            }
         }
     }
 
     open var separatorInset: UIEdgeInsets? {
         didSet {
-            if let separatorInset = separatorInset {
-                _cell?.separatorInset = separatorInset
+            whenGetCell { (cell) in
+                if let separatorInset = self.separatorInset {
+                    cell.separatorInset = separatorInset
+                }
             }
         }
     }
-    
-    public let selectionStyle = BehaviorRelay(value: UITableViewCellSelectionStyle.default) // default is UITableViewCellSelectionStyleDefault.
+
+    open var selectionStyle: UITableViewCellSelectionStyle = .default {
+        didSet {
+            whenGetCell { (cell) in
+                cell.selectionStyle = self.selectionStyle
+            }
+        }
+    }
+
     open var isEnabled = true
 
     open var tap: ControlEvent<()> { return ControlEvent(events: _tap.asObservable()) }
@@ -69,9 +98,11 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     }
     private let _isHidden = BehaviorRelay(value: false)
     
-    private let disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
 
     private weak var _cell: UITableViewCell?
+
+    private var _cellConfigQueues = [(UITableViewCell) -> ()]()
     
     public init(customIdentity: String) {
         self.customIdentity = customIdentity
@@ -83,22 +114,11 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
     open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         _cell = cell
-        cell.selectedBackgroundView = self.selectedBackgroundView
-        cell.backgroundView = backgroundView
-        cell.accessoryType = self.accessoryType
-        cell.accessoryView = self.accessoryView
-        cell.editingAccessoryType = self.editingAccessoryType
-        cell.editingAccessoryView = self.editingAccessoryView
-        if let separatorInset = self.separatorInset {
-            cell.separatorInset = separatorInset
+        for config in _cellConfigQueues {
+            config(cell)
         }
-        
-        self.selectionStyle.asObservable()
-            .subscribe(onNext: { [weak cell] (style) in
-                cell?.selectionStyle = style
-            })
-            .disposed(by: disposeBag)
-        
+        _cellConfigQueues.removeAll()
+
         cell.contentView.addSubview(contentView)
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
@@ -127,6 +147,14 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }
                 return [self]
+        }
+    }
+
+    public func whenGetCell(_ cellConfig: @escaping (UITableViewCell) -> ()) {
+        if let cell = self._cell {
+            cellConfig(cell)
+        } else {
+            self._cellConfigQueues.append(cellConfig)
         }
     }
     
