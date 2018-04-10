@@ -17,6 +17,14 @@ DEPENDENCIES:
   - RxKeyboard (~> 0.7)
   - RxSwift (~> 4.1)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Differentiator
+    - RxCocoa
+    - RxDataSources
+    - RxKeyboard
+    - RxSwift
+
 SPEC CHECKSUMS:
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
@@ -24,6 +32,6 @@ SPEC CHECKSUMS:
   RxKeyboard: 28d984440671becc75350b1dfae7ae08d31076df
   RxSwift: e49536837d9901277638493ea537394d4b55f570
 
-PODFILE CHECKSUM: a6731c26d83354abb7d50432830a23c1fd2840b0
+PODFILE CHECKSUM: 1d419e4f4cda8def839a7c4e1f6408a10abcf436
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
