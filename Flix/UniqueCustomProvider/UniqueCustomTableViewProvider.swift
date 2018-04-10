@@ -100,7 +100,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
     let disposeBag = DisposeBag()
 
-    private weak var _cell: UITableViewCell?
+    public weak var cell: UITableViewCell?
 
     private var _cellConfigQueues = [(UITableViewCell) -> ()]()
     
@@ -113,7 +113,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     }
     
     open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
-        _cell = cell
+        self.cell = cell
         for config in _cellConfigQueues {
             config(cell)
         }
@@ -151,7 +151,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     }
 
     public func whenGetCell(_ cellConfig: @escaping (UITableViewCell) -> ()) {
-        if let cell = self._cell {
+        if let cell = self.cell {
             cellConfig(cell)
         } else {
             self._cellConfigQueues.append(cellConfig)
