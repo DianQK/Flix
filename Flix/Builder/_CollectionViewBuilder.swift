@@ -92,6 +92,13 @@ extension _CollectionViewBuilder {
             let provider = self.nodeProviders.first(where: { $0._flix_identity == providerIdentity })!
             return provider._collectionView(collectionView, layout: flowLayout, sizeForItemAt: indexPath, node: node)
         }
+
+        self.delegeteProxy.shouldSelectItemAt = { [unowned self] collectionView, indexPath in
+            let node = dataSource[indexPath]
+            let providerIdentity = node.providerIdentity
+            let provider = self.nodeProviders.first(where: { $0._flix_identity == providerIdentity })!
+            return provider._collectionView(collectionView, shouldSelectItemAt: indexPath, node: node)
+        }
         
         self.delegeteProxy.referenceSizeForFooterInSection = { [unowned self] collectionView, collectionViewLayout, section in
             guard let footerNode = dataSource[section].model.footerNode else { return CGSize.zero }
