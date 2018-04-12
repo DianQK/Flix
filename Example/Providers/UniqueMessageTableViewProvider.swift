@@ -11,6 +11,64 @@ import RxSwift
 import RxCocoa
 import Flix
 
+struct ValidationColors {
+    static let okColor = UIColor(red: 138.0 / 255.0, green: 221.0 / 255.0, blue: 109.0 / 255.0, alpha: 1.0)
+    static let errorColor = UIColor.red
+}
+
+extension ValidationResult {
+    var textColor: UIColor {
+        switch self {
+        case .ok:
+            return ValidationColors.okColor
+        case .empty:
+            return UIColor.black
+        case .validating:
+            return UIColor.black
+        case .failed:
+            return ValidationColors.errorColor
+        }
+    }
+}
+
+extension ValidationResult: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case let .ok(message):
+            return message
+        case .empty:
+            return ""
+        case .validating:
+            return "validating ..."
+        case let .failed(message):
+            return message
+        }
+    }
+}
+
+open class ValidationTableViewProvider<ValueProvider: _AnimatableTableViewMultiNodeProvider>: AnimatableTableViewGroupProvider {
+
+    public var providers: [_AnimatableTableViewMultiNodeProvider] {
+        return [self.valueProvider, self.uniqueMessageTableViewProvider]
+    }
+
+    public func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
+        return Observable.just([self.valueProvider, self.uniqueMessageTableViewProvider])
+    }
+
+    open let valueProvider: ValueProvider
+    open let uniqueMessageTableViewProvider = UniqueMessageTableViewProvider()
+
+    public init(valueProvider: ValueProvider) {
+        self.valueProvider = valueProvider
+    }
+
+    var validationResult: Binder<ValidationResult> {
+        return self.uniqueMessageTableViewProvider.validationResult
+    }
+
+}
+
 open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
 
     open let messageLabel = UILabel()
@@ -47,6 +105,14 @@ open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }
                 return [self]
+        }
+    }
+
+    var validationResult: Binder<ValidationResult> {
+        return Binder(self) { provider, result in
+            provider.backgroundView.backgroundColor = result.textColor
+            provider.messageLabel.text = result.description
+            provider.isHidden.accept(result.description.isEmpty)
         }
     }
     
