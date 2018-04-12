@@ -23,7 +23,7 @@ public class TableViewBuilder: _TableViewBuilder {
     var nodeProviders: [_TableViewMultiNodeProvider] = [] {
         didSet {
             for provider in nodeProviders {
-                provider.register(tableView)
+                provider._register(tableView)
             }
         }
     }

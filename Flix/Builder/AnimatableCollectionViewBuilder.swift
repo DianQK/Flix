@@ -23,7 +23,7 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
     var nodeProviders: [_CollectionViewMultiNodeProvider] = [] {
         didSet {
             for provider in nodeProviders {
-                provider.register(collectionView)
+                provider._register(collectionView)
             }
         }
     }

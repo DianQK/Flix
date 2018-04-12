@@ -34,7 +34,7 @@ extension _TableViewGroupProvider where Self: _TableViewMultiNodeProvider {
 
     public func register(_ tableView: UITableView) {
         for provider in __providers {
-            provider.register(tableView)
+            provider._register(tableView)
         }
     }
 
