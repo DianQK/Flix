@@ -38,5 +38,5 @@ public struct Node: _Node {
     public func _unwarp<Value>() -> Value {
         return self.value as! Value
     }
-    
+
 }

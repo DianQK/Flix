@@ -19,7 +19,7 @@ extension FlixCustomStringConvertible {
     var _flix_description: String {
         return "<\(type(of: self)): \(Unmanaged.passUnretained(self).toOpaque())>"
     }
-    
+
     public var _flix_identity: String {
         if let customIdentity = (self as? CustomIdentityType)?.customIdentity {
             return "\(self._flix_description)-\(customIdentity)"

@@ -19,11 +19,13 @@ public protocol _TableViewMultiNodeProvider: FlixCustomStringConvertible {
     
     func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell
 
-    func register(_ tableView: UITableView)
+    func _register(_ tableView: UITableView)
     
     func _genteralNodes() -> Observable<[Node]>
-    
+
 }
+
+private var _tableViewKey: Void?
 
 extension _TableViewMultiNodeProvider {
 
@@ -34,6 +36,17 @@ extension _TableViewMultiNodeProvider {
             return [self]
         }
     }
+
+    public fileprivate(set) var tableView: UITableView? {
+        get {
+            return objc_getAssociatedObject(self, &_tableViewKey) as? UITableView
+        }
+        set {
+            objc_setAssociatedObject(self, &_tableViewKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+
+    public func _register(_ tableView: UITableView) { }
 
 }
 
@@ -48,10 +61,17 @@ public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider {
     func genteralValues() -> Observable<[Value]>
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: Value) -> CGFloat?
+
+    func register(_ tableView: UITableView)
     
 }
 
 extension TableViewMultiNodeProvider {
+
+    public func _register(_ tableView: UITableView) {
+        self.register(tableView)
+        self.tableView = tableView
+    }
     
     public func tap(_ tableView: UITableView, indexPath: IndexPath, value: Value) {
         
@@ -109,7 +129,7 @@ public typealias _AnimatableTableViewMultiNodeProvider = _AnimatableProviderable
 public protocol AnimatableTableViewMultiNodeProvider: TableViewMultiNodeProvider, _AnimatableProviderable where Value: Equatable, Value: StringIdentifiableType {
     
     func genteralAnimatableNodes() -> Observable<[IdentifiableNode]>
-    
+
 }
 
 public typealias AnimatableTableViewProvider = AnimatableTableViewMultiNodeProvider & TableViewProvider

@@ -208,5 +208,5 @@ extension FlixAnimatableProxy where Base: UICollectionView {
             return animatableBuilder
         }
     }
-    
+
 }

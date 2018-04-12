@@ -25,9 +25,11 @@ public protocol _CollectionViewMultiNodeProvider: FlixCustomStringConvertible {
     
     func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize?
     
-    func register(_ collectionView: UICollectionView)
+    func _register(_ collectionView: UICollectionView)
 
 }
+
+private var _collectionViewKey: Void?
 
 extension _CollectionViewMultiNodeProvider {
 
@@ -38,6 +40,17 @@ extension _CollectionViewMultiNodeProvider {
             return [self]
         }
     }
+
+    public fileprivate(set) var collectionView: UICollectionView? {
+        get {
+            return objc_getAssociatedObject(self, &_collectionViewKey) as? UICollectionView
+        }
+        set {
+            objc_setAssociatedObject(self, &_collectionViewKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+
+    public func _register(_ collectionView: UICollectionView) { }
 
 }
 
@@ -56,9 +69,17 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
     func genteralValues() -> Observable<[Value]>
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: Value) -> CGSize?
+
+    func register(_ collectionView: UICollectionView)
+
 }
 
 extension CollectionViewMultiNodeProvider {
+
+    public func _register(_ collectionView: UICollectionView) {
+        self.register(collectionView)
+        self.collectionView = collectionView
+    }
 
     public func _collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath, node: _Node) -> Bool {
         return self.collectionView(collectionView, shouldSelectItemAt: indexPath, value: node._unwarp())

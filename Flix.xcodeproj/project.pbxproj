@@ -46,7 +46,6 @@
 		2670E6A11F83EE5E003A5BA7 /* UniqueTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */; };
 		2670E6A21F83EE5E003A5BA7 /* RadioProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68B1F83EDB7003A5BA7 /* RadioProvider.swift */; };
 		2670E6A31F83EE5E003A5BA7 /* TextSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68C1F83EDB7003A5BA7 /* TextSectionProvider.swift */; };
-		2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68E1F83EDB7003A5BA7 /* UniqueTextInputProvider.swift */; };
 		2670E6A61F83EE5E003A5BA7 /* UniqueSwitchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */; };
 		26BAF0331F8499B8009A4401 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BAF0321F8499B8009A4401 /* LoginViewController.swift */; };
 		26BAF0351F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BAF0341F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift */; };
@@ -172,7 +171,6 @@
 		2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextProvider.swift; sourceTree = "<group>"; };
 		2670E68B1F83EDB7003A5BA7 /* RadioProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioProvider.swift; sourceTree = "<group>"; };
 		2670E68C1F83EDB7003A5BA7 /* TextSectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSectionProvider.swift; sourceTree = "<group>"; };
-		2670E68E1F83EDB7003A5BA7 /* UniqueTextInputProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueTextInputProvider.swift; sourceTree = "<group>"; };
 		2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueSwitchProvider.swift; sourceTree = "<group>"; };
 		2670E6981F83EE3F003A5BA7 /* ExampleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleListViewController.swift; sourceTree = "<group>"; };
 		2670E6991F83EE40003A5BA7 /* DoNotDisturbSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoNotDisturbSettingsViewController.swift; sourceTree = "<group>"; };
@@ -395,7 +393,6 @@
 				2670E68A1F83EDB7003A5BA7 /* UniqueTextProvider.swift */,
 				2670E68B1F83EDB7003A5BA7 /* RadioProvider.swift */,
 				2670E68C1F83EDB7003A5BA7 /* TextSectionProvider.swift */,
-				2670E68E1F83EDB7003A5BA7 /* UniqueTextInputProvider.swift */,
 				2670E68F1F83EDB7003A5BA7 /* UniqueSwitchProvider.swift */,
 				26424F6F1F8537EC00E2834D /* UniqueMessageTableViewProvider.swift */,
 				26424F711F853AEC00E2834D /* UniqueTextFieldTableViewProvider.swift */,
@@ -844,7 +841,6 @@
 				5634344A1FAD64FC00727CA1 /* TableViewProvider.swift in Sources */,
 				568744731FA3792F00B5193C /* SpacingSectionProvider.swift in Sources */,
 				5665F1F41FA5CB5F009225F7 /* TextViewProvider.swift in Sources */,
-				2670E6A51F83EE5E003A5BA7 /* UniqueTextInputProvider.swift in Sources */,
 				562594551FA0CCA800BF5756 /* CLLocationManager+Rx.swift in Sources */,
 				562594581FA0CCC300BF5756 /* SelectLocationViewController.swift in Sources */,
 				5622F6E31FA0DCFC00326201 /* MKLocalSearch+Rx.swift in Sources */,

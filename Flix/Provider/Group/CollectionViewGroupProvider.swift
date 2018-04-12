@@ -34,7 +34,7 @@ extension _CollectionViewGroupProvider where Self: _CollectionViewMultiNodeProvi
 
     public func register(_ collectionView: UICollectionView) {
         for provider in __providers {
-            provider.register(collectionView)
+            provider._register(collectionView)
         }
     }
 
