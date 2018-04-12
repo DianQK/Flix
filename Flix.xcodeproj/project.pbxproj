@@ -11,7 +11,6 @@
 		2617C2691F84D0FD007F8228 /* GithubSignupViewModel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2631F84D0FD007F8228 /* GithubSignupViewModel1.swift */; };
 		2617C26A1F84D0FD007F8228 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2641F84D0FD007F8228 /* Protocols.swift */; };
 		2617C26B1F84D0FD007F8228 /* DefaultImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2651F84D0FD007F8228 /* DefaultImplementations.swift */; };
-		2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2661F84D0FD007F8228 /* BindingExtensions.swift */; };
 		2617C2701F84D15C007F8228 /* Wireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C26F1F84D15C007F8228 /* Wireframe.swift */; };
 		2617C2731F84D18B007F8228 /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2721F84D18B007F8228 /* String+URL.swift */; };
 		2617C2761F84D1BF007F8228 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617C2751F84D1BF007F8228 /* ActivityIndicator.swift */; };
@@ -138,7 +137,6 @@
 		2617C2631F84D0FD007F8228 /* GithubSignupViewModel1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubSignupViewModel1.swift; sourceTree = "<group>"; };
 		2617C2641F84D0FD007F8228 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		2617C2651F84D0FD007F8228 /* DefaultImplementations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultImplementations.swift; sourceTree = "<group>"; };
-		2617C2661F84D0FD007F8228 /* BindingExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
 		2617C26F1F84D15C007F8228 /* Wireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wireframe.swift; sourceTree = "<group>"; };
 		2617C2721F84D18B007F8228 /* String+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
 		2617C2751F84D1BF007F8228 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 				2617C2631F84D0FD007F8228 /* GithubSignupViewModel1.swift */,
 				2617C2641F84D0FD007F8228 /* Protocols.swift */,
 				2617C2651F84D0FD007F8228 /* DefaultImplementations.swift */,
-				2617C2661F84D0FD007F8228 /* BindingExtensions.swift */,
 			);
 			path = GitHubSigup;
 			sourceTree = "<group>";
@@ -820,7 +817,6 @@
 				566300C11FA4F7B000A35CFA /* SelectTimeZoneViewController.swift in Sources */,
 				563434481FAD64D200727CA1 /* ProfileProvider.swift in Sources */,
 				2670E69F1F83EE5E003A5BA7 /* UniqueCommentTextProvider.swift in Sources */,
-				2617C26C1F84D0FD007F8228 /* BindingExtensions.swift in Sources */,
 				568744711FA3766700B5193C /* TextFieldProvider.swift in Sources */,
 				569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */,
 				26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */,

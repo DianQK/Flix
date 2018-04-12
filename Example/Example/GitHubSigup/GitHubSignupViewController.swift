@@ -28,30 +28,30 @@ class GitHubSignupViewController: TableViewController {
         logoImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         return provider
     }()
-    
-    let usernameProvider: UniqueTextFieldTableViewProvider = {
+
+
+    typealias UniqueTextFieldVerifiableTableViewProvider = ValidationTableViewProvider<UniqueTextFieldTableViewProvider>
+
+    let usernameProvider: UniqueTextFieldVerifiableTableViewProvider = {
         let provider = UniqueTextFieldTableViewProvider()
         provider.textField.placeholder = "Username"
         provider.textField.keyboardType = .asciiCapable
-        return provider
+        return UniqueTextFieldVerifiableTableViewProvider(valueProvider: provider)
     }()
-    let usernameValidationTableViewProvider = UniqueMessageTableViewProvider()
     
-    let passwordProvider: UniqueTextFieldTableViewProvider = {
+    let passwordProvider: UniqueTextFieldVerifiableTableViewProvider = {
         let provider = UniqueTextFieldTableViewProvider()
         provider.textField.placeholder = "Password"
         provider.textField.isSecureTextEntry = true
-        return provider
+        return UniqueTextFieldVerifiableTableViewProvider(valueProvider: provider)
     }()
-    let passwordValidationTableViewProvider = UniqueMessageTableViewProvider()
     
-    let repeatedPasswordProvider: UniqueTextFieldTableViewProvider = {
+    let repeatedPasswordProvider: UniqueTextFieldVerifiableTableViewProvider = {
         let provider = UniqueTextFieldTableViewProvider()
         provider.textField.placeholder = "Password Repeat"
         provider.textField.isSecureTextEntry = true
-        return provider
+        return UniqueTextFieldVerifiableTableViewProvider(valueProvider: provider)
     }()
-    let repeatedPasswordValidationTableViewProvider = UniqueMessageTableViewProvider()
     
     let inputDesSectionProvider: UniqueCustomTableViewSectionProvider = {
         let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .footer)
@@ -73,9 +73,9 @@ class GitHubSignupViewController: TableViewController {
         
         let viewModel = GithubSignupViewModel1(
             input: (
-                username: usernameProvider.textField.rx.text.orEmpty.asObservable(),
-                password: passwordProvider.textField.rx.text.orEmpty.asObservable(),
-                repeatedPassword: repeatedPasswordProvider.textField.rx.text.orEmpty.asObservable(),
+                username: usernameProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
+                password: passwordProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
+                repeatedPassword: repeatedPasswordProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
                 loginTaps: loginProvider.tap.asObservable()
             ),
             dependency: (
@@ -86,15 +86,15 @@ class GitHubSignupViewController: TableViewController {
         )
         
         viewModel.validatedUsername
-            .bind(to: usernameValidationTableViewProvider.validationResult)
+            .bind(to: usernameProvider.validationResult)
             .disposed(by: disposeBag)
         
         viewModel.validatedPassword
-            .bind(to: passwordValidationTableViewProvider.validationResult)
+            .bind(to: passwordProvider.validationResult)
             .disposed(by: disposeBag)
 
         viewModel.validatedPasswordRepeated
-            .bind(to: repeatedPasswordValidationTableViewProvider.validationResult)
+            .bind(to: repeatedPasswordProvider.validationResult)
             .disposed(by: disposeBag)
         
         viewModel.signupEnabled
@@ -117,11 +117,7 @@ class GitHubSignupViewController: TableViewController {
             .disposed(by: disposeBag)
 
         let inputSectionProviderBuilder = AnimatableTableViewSectionProvider(
-            providers: [
-                usernameProvider, usernameValidationTableViewProvider,
-                passwordProvider, passwordValidationTableViewProvider,
-                repeatedPasswordProvider, repeatedPasswordValidationTableViewProvider
-            ],
+            providers: [usernameProvider, passwordProvider, repeatedPasswordProvider],
             headerProvider: logoProvider,
             footerProvider: inputDesSectionProvider
         )
