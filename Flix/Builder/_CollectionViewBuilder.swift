@@ -27,7 +27,6 @@ protocol _CollectionViewBuilder: class {
 extension _CollectionViewBuilder {
     
     func build<S: FlixSectionModelType>(dataSource: CollectionViewSectionedDataSource<S>) where S.Item: _Node, S.Section: _SectionNode {
-
         dataSource.canMoveItemAtIndexPath = { [weak collectionView, weak self] (dataSource, indexPath) in
             guard let collectionView = collectionView else { return false }
             let node = dataSource[indexPath]
@@ -51,10 +50,10 @@ extension _CollectionViewBuilder {
             )
         }
 
-        self.delegeteProxy.targetIndexPathForMoveFromItemAt = { (collectionView, originalIndexPath, proposedIndexPath) -> IndexPath in
+        self.delegeteProxy.targetIndexPathForMoveFromItemAt = { [weak self] (collectionView, originalIndexPath, proposedIndexPath) -> IndexPath in
             let node = dataSource[originalIndexPath]
             let providerIdentity = node.providerIdentity
-            let provider = self.nodeProviders.first(where: { $0._flix_identity == providerIdentity })!
+            let provider = self?.nodeProviders.first(where: { $0._flix_identity == providerIdentity })!
             if let _ = provider as? _CollectionViewMoveable {
                 if (proposedIndexPath <= node.providerStartIndexPath) {
                     return node.providerStartIndexPath
