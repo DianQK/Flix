@@ -21,7 +21,7 @@ public protocol _CollectionViewMultiNodeProvider: FlixCustomStringConvertible {
 
     func _itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
     
-    func _genteralNodes() -> Observable<[Node]>
+    func _createNodes() -> Observable<[Node]>
     
     func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, node: _Node) -> CGSize?
     
@@ -66,7 +66,7 @@ public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvide
 
     func itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value)
     
-    func genteralValues() -> Observable<[Value]>
+    func createValues() -> Observable<[Value]>
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: Value) -> CGSize?
 
@@ -105,9 +105,9 @@ extension CollectionViewMultiNodeProvider {
         self.itemDeselected(collectionView, indexPath: indexPath, value: node._unwarp())
     }
     
-    public func _genteralNodes() -> Observable<[Node]> {
+    public func _createNodes() -> Observable<[Node]> {
         let providerIdentity = self._flix_identity
-        return genteralValues()
+        return createValues()
             .map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
     
@@ -145,7 +145,7 @@ extension CollectionViewProvider {
 
 public protocol _AnimatableProviderable {
     
-    func _genteralAnimatableNodes() -> Observable<[IdentifiableNode]>
+    func _createAnimatableNodes() -> Observable<[IdentifiableNode]>
     
 }
 
@@ -153,7 +153,7 @@ public typealias _AnimatableCollectionViewMultiNodeProvider = _AnimatableProvide
 
 public protocol AnimatableCollectionViewMultiNodeProvider: CollectionViewMultiNodeProvider, _AnimatableProviderable where Value: Equatable, Value: StringIdentifiableType {
     
-    func genteralAnimatableNodes() -> Observable<[IdentifiableNode]>
+    func createAnimatableNodes() -> Observable<[IdentifiableNode]>
     
 }
 
@@ -161,17 +161,17 @@ public typealias AnimatableCollectionViewProvider = AnimatableCollectionViewMult
 
 extension AnimatableCollectionViewMultiNodeProvider {
     
-    public func _genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
-        return genteralAnimatableNodes()
+    public func _createAnimatableNodes() -> Observable<[IdentifiableNode]> {
+        return createAnimatableNodes()
     }
     
 }
 
 extension AnimatableCollectionViewMultiNodeProvider {
     
-    public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
+    public func createAnimatableNodes() -> Observable<[IdentifiableNode]> {
         let providerIdentity = self._flix_identity
-        return genteralValues().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
+        return createValues().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
 }
@@ -209,7 +209,7 @@ extension UniqueAnimatableCollectionViewProvider {
         return self._flix_identity
     }
     
-    public func genteralValues() -> Observable<[Self]> {
+    public func createValues() -> Observable<[Self]> {
         return Observable.just([self])
     }
 

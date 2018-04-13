@@ -14,7 +14,7 @@ public protocol _CollectionViewGroupProvider {
 
     var _providers: [_CollectionViewMultiNodeProvider] { get }
 
-    func genteralProviders() -> Observable<[_CollectionViewMultiNodeProvider]>
+    func createProviders() -> Observable<[_CollectionViewMultiNodeProvider]>
 
 }
 
@@ -38,8 +38,8 @@ extension _CollectionViewGroupProvider where Self: _CollectionViewMultiNodeProvi
         }
     }
 
-    public func _genteralNodes() -> Observable<[Node]> {
-        return genteralProviders().map { $0.map { $0._genteralNodes() } }
+    public func _createNodes() -> Observable<[Node]> {
+        return createProviders().map { $0.map { $0._createNodes() } }
             .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
     }
 

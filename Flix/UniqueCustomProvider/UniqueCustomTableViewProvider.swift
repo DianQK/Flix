@@ -141,7 +141,7 @@ open class UniqueCustomTableViewProvider: CustomProvider, UniqueAnimatableTableV
         return self.itemHeight?(tableView)
     }
     
-    open func genteralValues() -> Observable<[UniqueCustomTableViewProvider]> {
+    open func createValues() -> Observable<[UniqueCustomTableViewProvider]> {
         return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }

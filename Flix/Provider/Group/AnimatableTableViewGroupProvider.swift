@@ -14,7 +14,7 @@ public protocol AnimatableTableViewGroupProvider: _AnimatableTableViewMultiNodeP
 
     var providers: [_AnimatableTableViewMultiNodeProvider] { get }
 
-    func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]>
+    func createAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]>
 
 }
 
@@ -30,12 +30,12 @@ extension AnimatableTableViewGroupProvider {
         }
     }
 
-    public func genteralProviders() -> Observable<[_TableViewMultiNodeProvider]> {
-        return self.genteralAnimatableProviders().map { $0 as [_TableViewMultiNodeProvider] }
+    public func createProviders() -> Observable<[_TableViewMultiNodeProvider]> {
+        return self.createAnimatableProviders().map { $0 as [_TableViewMultiNodeProvider] }
     }
 
-    public func _genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
-        return genteralAnimatableProviders().map { $0.map { $0._genteralAnimatableNodes() } }
+    public func _createAnimatableNodes() -> Observable<[IdentifiableNode]> {
+        return createAnimatableProviders().map { $0.map { $0._createAnimatableNodes() } }
             .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
     }
 

@@ -79,7 +79,7 @@ class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColle
         checkedOption.accept(value)
     }
     
-    func genteralValues() -> Observable<[Value]> {
+    func createValues() -> Observable<[Value]> {
         return Observable.just(options)
     }
     

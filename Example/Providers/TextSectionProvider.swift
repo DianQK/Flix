@@ -54,7 +54,7 @@ class TextSectionProvider: AnimatableSectionPartionCollectionViewProvider, Strin
             .disposed(by: disposeBag)
     }
     
-    func genteralSectionPartion() -> Observable<TextSectionProvider?> {
+    func createSectionPartion() -> Observable<TextSectionProvider?> {
         return Observable.just(self)
     }
 

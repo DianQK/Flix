@@ -25,7 +25,7 @@ public protocol _SectionPartionCollectionViewProvider: FlixCustomStringConvertib
 
     func _configureSupplementaryView(_ collectionView: UICollectionView, sectionView: UICollectionReusableView, indexPath: IndexPath, node: _Node)
 
-    func _genteralSectionPartion() -> Observable<_Node?>
+    func _createSectionPartion() -> Observable<_Node?>
     
     func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: _Node) -> CGSize?
     
@@ -46,7 +46,7 @@ public protocol SectionPartionCollectionViewProvider: _SectionPartionCollectionV
     
     func configureSupplementaryView(_ collectionView: UICollectionView, sectionView: Cell, indexPath: IndexPath, value: Value)
     
-    func genteralSectionPartion() -> Observable<Value?>
+    func createSectionPartion() -> Observable<Value?>
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: Value) -> CGSize?
     
@@ -60,9 +60,9 @@ extension SectionPartionCollectionViewProvider {
         return configureSupplementaryView(collectionView, sectionView: sectionView as! Cell, indexPath: indexPath, value: node._unwarp())
     }
     
-    public func _genteralSectionPartion() -> Observable<_Node?> {
+    public func _createSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self._flix_identity
-        return genteralSectionPartion().map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
+        return createSectionPartion().map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
     
     public func _collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, node: _Node) -> CGSize? {
@@ -79,14 +79,14 @@ public typealias _AnimatableSectionPartionCollectionViewProvider = _AnimatableSe
 
 public protocol AnimatableSectionPartionCollectionViewProvider: SectionPartionCollectionViewProvider, _AnimatableSectionPartionProviderable where Value: Equatable, Value: StringIdentifiableType {
     
-    func genteralAnimatableSection() -> Observable<IdentifiableNode?>
+    func createAnimatableSection() -> Observable<IdentifiableNode?>
     
 }
 
 extension AnimatableSectionPartionCollectionViewProvider {
     
-    public func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
-        return genteralAnimatableSection()
+    public func _createAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
+        return createAnimatableSection()
     }
 
     public var identity: String {
@@ -97,9 +97,9 @@ extension AnimatableSectionPartionCollectionViewProvider {
 
 extension AnimatableSectionPartionCollectionViewProvider {
     
-    public func genteralAnimatableSection() -> Observable<IdentifiableNode?> {
+    public func createAnimatableSection() -> Observable<IdentifiableNode?> {
         let providerIdentity = self._flix_identity
-        return genteralSectionPartion().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
+        return createSectionPartion().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
 }

@@ -74,7 +74,7 @@ class InputTagsProvider: AnimatableTableViewProvider, TableViewDeleteable {
         self.removeItem(id: value.id)
     }
     
-    func genteralValues() -> Observable<[Tag]> {
+    func createValues() -> Observable<[Tag]> {
         return tags.asObservable()
     }
     

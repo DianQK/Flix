@@ -32,7 +32,7 @@ class EventOptionsProvider<T: EventOptionType>: AnimatableTableViewProvider {
         self.optionSelected.onNext(value)
     }
 
-    func genteralValues() -> Observable<[T]> {
+    func createValues() -> Observable<[T]> {
         return Observable.just(options)
     }
 

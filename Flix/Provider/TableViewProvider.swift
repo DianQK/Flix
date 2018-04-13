@@ -21,7 +21,7 @@ public protocol _TableViewMultiNodeProvider: FlixCustomStringConvertible {
 
     func _register(_ tableView: UITableView)
     
-    func _genteralNodes() -> Observable<[Node]>
+    func _createNodes() -> Observable<[Node]>
 
 }
 
@@ -58,7 +58,7 @@ public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider, Reactiv
 
     func tap(_ tableView: UITableView, indexPath: IndexPath, value: Value)
     
-    func genteralValues() -> Observable<[Value]>
+    func createValues() -> Observable<[Value]>
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: Value) -> CGFloat?
 
@@ -77,9 +77,9 @@ extension TableViewMultiNodeProvider {
         
     }
     
-    public func _genteralNodes() -> Observable<[Node]> {
+    public func _createNodes() -> Observable<[Node]> {
         let providerIdentity = self._flix_identity
-        return genteralValues()
+        return createValues()
             .map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
 
@@ -128,7 +128,7 @@ public typealias _AnimatableTableViewMultiNodeProvider = _AnimatableProviderable
 
 public protocol AnimatableTableViewMultiNodeProvider: TableViewMultiNodeProvider, _AnimatableProviderable where Value: Equatable, Value: StringIdentifiableType {
     
-    func genteralAnimatableNodes() -> Observable<[IdentifiableNode]>
+    func createAnimatableNodes() -> Observable<[IdentifiableNode]>
 
 }
 
@@ -136,17 +136,17 @@ public typealias AnimatableTableViewProvider = AnimatableTableViewMultiNodeProvi
 
 extension AnimatableTableViewMultiNodeProvider {
     
-    public func _genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
-        return genteralAnimatableNodes()
+    public func _createAnimatableNodes() -> Observable<[IdentifiableNode]> {
+        return createAnimatableNodes()
     }
     
 }
 
 extension AnimatableTableViewMultiNodeProvider {
     
-    public func genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
+    public func createAnimatableNodes() -> Observable<[IdentifiableNode]> {
         let providerIdentity = self._flix_identity
-        return genteralValues()
+        return createValues()
             .map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
@@ -187,7 +187,7 @@ extension UniqueAnimatableTableViewProvider {
         return self.identity
     }
     
-    public func genteralValues() -> Observable<[Self]> {
+    public func createValues() -> Observable<[Self]> {
         return Observable.just([self])
     }
     

@@ -75,7 +75,7 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
         }
     }
 
-    open func genteralSection() -> Observable<UniqueCustomTableViewSectionProvider?> {
+    open func createSection() -> Observable<UniqueCustomTableViewSectionProvider?> {
         return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 return isHidden ? nil : self

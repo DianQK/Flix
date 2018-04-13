@@ -32,7 +32,7 @@ class MoveCollectionViewProvider: AnimatableCollectionViewProvider, CollectionVi
         cell.backgroundColor = value
     }
 
-    func genteralValues() -> Observable<[UIColor]> {
+    func createValues() -> Observable<[UIColor]> {
         return colors.asObservable()
     }
 

@@ -95,7 +95,7 @@ class StartAndEndDateGroupProvider: AnimatableTableViewGroupProvider {
 
     }
 
-    func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
+    func createAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
         return Observable.just([allDaySwitchProvider, startProvider, endProvider])
     }
 

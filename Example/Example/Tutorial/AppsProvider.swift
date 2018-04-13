@@ -79,7 +79,7 @@ class AppsProvider: AnimatableTableViewProvider {
         cell.titleLabel.text = value.title
     }
 
-    func genteralValues() -> Observable<[App]> {
+    func createValues() -> Observable<[App]> {
         return Observable.just(apps)
     }
 

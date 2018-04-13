@@ -37,7 +37,7 @@ private class TimeZonesProvider: AnimatableTableViewProvider {
         cell.titleLabel.text = value
     }
 
-    func genteralValues() -> Observable<[String]> {
+    func createValues() -> Observable<[String]> {
         let knownTimeZoneNames = TimeZone.knownTimeZoneIdentifiers
         return self.query.map { query in knownTimeZoneNames.filter { $0.contains(query) } }
     }

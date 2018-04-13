@@ -56,7 +56,7 @@ class RepeatGroupProvider: AnimatableTableViewGroupProvider {
         self.endRepeatProvider = EndRepeatProvider(viewController: viewController, minEndDate: minEndDate, endRepeatDate: endRepeatDate)
     }
 
-    func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
+    func createAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
         return self.repeatProvider.selectedOption.asObservable().map { $0 == .never }.distinctUntilChanged()
             .map { [weak self] isNever in
                 guard let `self` = self else { return [] }

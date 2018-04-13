@@ -83,7 +83,7 @@ open class UniqueCustomCollectionViewProvider: CustomProvider, UniqueAnimatableC
         return self.itemSize?()
     }
     
-    open func genteralValues() -> Observable<[UniqueCustomCollectionViewProvider]> {
+    open func createValues() -> Observable<[UniqueCustomCollectionViewProvider]> {
         return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }

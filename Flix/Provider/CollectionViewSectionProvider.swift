@@ -59,10 +59,10 @@ public class CollectionViewSectionProvider: FlixCustomStringConvertible {
         self.footerProvider = footerProvider
     }
     
-    func genteralSectionModel() -> Observable<(section: SectionNode, nodes: [Node])> {
-        let headerSection = headerProvider?._genteralSectionPartion() ?? Observable.just(nil)
-        let footerSection = footerProvider?._genteralSectionPartion() ?? Observable.just(nil)
-        let nodes = Observable.combineLatest(providers.map { $0._genteralNodes() })
+    func createSectionModel() -> Observable<(section: SectionNode, nodes: [Node])> {
+        let headerSection = headerProvider?._createSectionPartion() ?? Observable.just(nil)
+        let footerSection = footerProvider?._createSectionPartion() ?? Observable.just(nil)
+        let nodes = Observable.combineLatest(providers.map { $0._createNodes() })
             .map { $0.flatMap { $0 } }
             .ifEmpty(default: [])
         
@@ -91,11 +91,11 @@ public class AnimatableCollectionViewSectionProvider: CollectionViewSectionProvi
         super.init(providers: providers, headerProvider: headerProvider, footerProvider: footerProvider)
     }
     
-    func genteralSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])> {
-        let headerSection = animatableHeaderProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
-        let footerSection = animatableFooterProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
+    func createSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])> {
+        let headerSection = animatableHeaderProvider?._createAnimatableSectionPartion() ?? Observable.just(nil)
+        let footerSection = animatableFooterProvider?._createAnimatableSectionPartion() ?? Observable.just(nil)
 
-        let nodes = Observable.combineLatest(animatableProviders.map { $0._genteralAnimatableNodes() })
+        let nodes = Observable.combineLatest(animatableProviders.map { $0._createAnimatableNodes() })
             .ifEmpty(default: [])
             .map { (value) -> [IdentifiableNode] in
                 return value.reduce([IdentifiableNode]()) { acc, x in

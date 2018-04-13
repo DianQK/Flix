@@ -97,7 +97,7 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
                 self?.headerSectionProviders = sectionProviders.compactMap { $0.animatableHeaderProvider }
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
-                let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])>] = providers.map { $0.genteralSectionModel() }
+                let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])>] = providers.map { $0.createSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [AnimatableSectionModel] in

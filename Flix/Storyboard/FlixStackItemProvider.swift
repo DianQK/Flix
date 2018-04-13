@@ -125,7 +125,7 @@ open class FlixStackItemProvider: UIControl, UniqueAnimatableTableViewProvider {
         return self.itemHeight?()
     }
     
-    open func genteralValues() -> Observable<[FlixStackItemProvider]> {
+    open func createValues() -> Observable<[FlixStackItemProvider]> {
         return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }

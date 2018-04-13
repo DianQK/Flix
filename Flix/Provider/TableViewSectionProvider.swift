@@ -28,10 +28,10 @@ open class TableViewSectionProvider: FlixCustomStringConvertible {
         self.footerProvider = footerProvider
     }
     
-    func genteralSectionModel() -> Observable<(section: SectionNode, nodes: [Node])?> {
-        let headerSection = headerProvider?._genteralSectionPartion() ?? Observable.just(nil)
-        let footerSection = footerProvider?._genteralSectionPartion() ?? Observable.just(nil)
-        let nodes = Observable.combineLatest(providers.map { $0._genteralNodes() })
+    func createSectionModel() -> Observable<(section: SectionNode, nodes: [Node])?> {
+        let headerSection = headerProvider?._createSectionPartion() ?? Observable.just(nil)
+        let footerSection = footerProvider?._createSectionPartion() ?? Observable.just(nil)
+        let nodes = Observable.combineLatest(providers.map { $0._createNodes() })
             .ifEmpty(default: [])
             .map { (value) -> [Node] in
                 return value.reduce([Node]()) { acc, x in
@@ -80,10 +80,10 @@ open class AnimatableTableViewSectionProvider: TableViewSectionProvider {
         super.init(providers: providers, headerProvider: headerProvider, footerProvider: footerProvider)
     }
     
-    func genteralAnimatableSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?> {
-        let headerSection = animatableHeaderProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
-        let footerSection = animatableFooterProvider?._genteralAnimatableSectionPartion() ?? Observable.just(nil)
-        let nodes = Observable.combineLatest(animatableProviders.map { $0._genteralAnimatableNodes() })
+    func createAnimatableSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?> {
+        let headerSection = animatableHeaderProvider?._createAnimatableSectionPartion() ?? Observable.just(nil)
+        let footerSection = animatableFooterProvider?._createAnimatableSectionPartion() ?? Observable.just(nil)
+        let nodes = Observable.combineLatest(animatableProviders.map { $0._createAnimatableNodes() })
             .ifEmpty(default: [])
             .map { (value) -> [IdentifiableNode] in
                 return value.reduce([IdentifiableNode]()) { acc, x in

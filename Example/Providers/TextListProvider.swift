@@ -92,7 +92,7 @@ class TextListProvider<Value>: AnimatableCollectionViewProvider {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
-    func genteralValues() -> Observable<[Model]> {
+    func createValues() -> Observable<[Model]> {
         let items = self.items
         return isHidden.asObservable().distinctUntilChanged().map { isHidden in isHidden ? [] : items }
     }

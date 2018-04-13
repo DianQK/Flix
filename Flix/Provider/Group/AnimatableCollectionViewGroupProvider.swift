@@ -14,7 +14,7 @@ public protocol AnimatableCollectionViewGroupProvider: _AnimatableCollectionView
 
     var providers: [_AnimatableCollectionViewMultiNodeProvider] { get }
 
-    func genteralAnimatableProviders() -> Observable<[_AnimatableCollectionViewMultiNodeProvider]>
+    func createAnimatableProviders() -> Observable<[_AnimatableCollectionViewMultiNodeProvider]>
 
 }
 
@@ -30,12 +30,12 @@ extension AnimatableCollectionViewGroupProvider {
         }
     }
 
-    public func genteralProviders() -> Observable<[_CollectionViewMultiNodeProvider]> {
-        return self.genteralAnimatableProviders().map { $0 as [_CollectionViewMultiNodeProvider] }
+    public func createProviders() -> Observable<[_CollectionViewMultiNodeProvider]> {
+        return self.createAnimatableProviders().map { $0 as [_CollectionViewMultiNodeProvider] }
     }
 
-    public func _genteralAnimatableNodes() -> Observable<[IdentifiableNode]> {
-        return genteralAnimatableProviders().map { $0.map { $0._genteralAnimatableNodes() } }
+    public func _createAnimatableNodes() -> Observable<[IdentifiableNode]> {
+        return createAnimatableProviders().map { $0.map { $0._createAnimatableNodes() } }
             .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
     }
 
