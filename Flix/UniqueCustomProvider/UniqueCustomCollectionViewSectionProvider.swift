@@ -59,7 +59,7 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
         contentView.trailingAnchor.constraint(equalTo: sectionView.trailingAnchor).isActive = true
     }
     
-    open func genteralSectionPartion() -> Observable<Value?> {
+    open func createSectionPartion() -> Observable<Value?> {
         return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 return isHidden ? nil : self

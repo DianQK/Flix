@@ -87,7 +87,7 @@ class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
         cell.addressLabel.text = value.addressDetail
     }
 
-    func genteralValues() -> Observable<[CLPlacemark]> {
+    func createValues() -> Observable<[CLPlacemark]> {
         return self.result
     }
 

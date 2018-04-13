@@ -52,7 +52,7 @@ open class ValidationTableViewProvider<ValueProvider: _AnimatableTableViewMultiN
         return [self.valueProvider, self.uniqueMessageTableViewProvider]
     }
 
-    public func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
+    public func createAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
         return Observable.just([self.valueProvider, self.uniqueMessageTableViewProvider])
     }
 
@@ -99,7 +99,7 @@ open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
         return 30
     }
     
-    open func genteralValues() -> Observable<[UniqueMessageTableViewProvider]> {
+    open func createValues() -> Observable<[UniqueMessageTableViewProvider]> {
         return self.isHidden.asObservable()
             .distinctUntilChanged()
             .map { [weak self] isHidden in

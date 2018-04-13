@@ -197,7 +197,7 @@ class AlertGroupProvider: AnimatableTableViewGroupProvider {
             .disposed(by: disposeBag)
     }
 
-    func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
+    func createAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
         return Observable.combineLatest(
         self.firstAlertProvider.selectedOption.asObservable().map { $0 == .none },
         self.secondAlertProvider.selectedOption.asObservable().map { $0 == .none }) { $0 && $1 }.distinctUntilChanged()

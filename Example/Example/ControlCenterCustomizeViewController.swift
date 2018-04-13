@@ -52,7 +52,7 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
         self.values.accept(self.values.value + [value])
     }
     
-    func genteralValues() -> Observable<[String]> {
+    func createValues() -> Observable<[String]> {
         return values.asObservable()
     }
     
@@ -80,7 +80,7 @@ class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
         self.values.accept(self.values.value + [value])
     }
 
-    func genteralValues() -> Observable<[String]> {
+    func createValues() -> Observable<[String]> {
         return values.asObservable().map { $0.sorted() }
     }
 

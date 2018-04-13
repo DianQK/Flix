@@ -79,7 +79,7 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
                 self?.headerSectionProviders = sectionProviders.compactMap { $0.animatableHeaderProvider }
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
-                let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.genteralAnimatableSectionModel() }
+                let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.createAnimatableSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [AnimatableSectionModel] in

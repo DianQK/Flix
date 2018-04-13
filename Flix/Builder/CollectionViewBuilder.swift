@@ -83,7 +83,7 @@ public class CollectionViewBuilder: _CollectionViewBuilder {
                 self?.headerSectionProviders = sectionProviders.compactMap { $0.headerProvider }
             })
             .flatMapLatest { (providers) -> Observable<[SectionModel]> in
-                let sections = providers.map { $0.genteralSectionModel() }
+                let sections = providers.map { $0.createSectionModel() }
                 return Observable.combineLatest(sections).map { $0.map { SectionModel(model: $0.section, items: $0.nodes) } }
             }
             .bind(to: collectionView.rx.items(dataSource: dataSource))

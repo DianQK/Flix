@@ -175,7 +175,7 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
         }
     }
     
-    func genteralValues() -> Observable<[HardwareFormItem]> {
+    func createValues() -> Observable<[HardwareFormItem]> {
         return self.hardwareForms.asObservable()
             .map { (forms: [HardwareForm]) -> [HardwareFormItem] in
                 forms.flatMap({ (form: HardwareForm) -> [HardwareFormItem] in

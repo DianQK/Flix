@@ -163,7 +163,7 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
             .disposed(by: disposeBag)
     }
 
-    func genteralAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
+    func createAnimatableProviders() -> Observable<[_AnimatableTableViewMultiNodeProvider]> {
         return Observable
             .combineLatest(self.isActive.asObservable(), self.isAllDay.asObservable()) { [weak self] (isActive, isAllDay) -> [_AnimatableTableViewMultiNodeProvider] in
                 guard let `self` = self else { return [] }

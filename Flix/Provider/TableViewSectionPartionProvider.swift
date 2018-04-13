@@ -24,7 +24,7 @@ public protocol _SectionPartionTableViewProvider: FlixCustomStringConvertible {
     func _tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat?
     func _configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, node: _Node)
     
-    func _genteralSectionPartion() -> Observable<_Node?>
+    func _createSectionPartion() -> Observable<_Node?>
     
 }
 
@@ -44,7 +44,7 @@ public protocol SectionPartionTableViewProvider: _SectionPartionTableViewProvide
     func tableView(_ tableView: UITableView, heightInSection section: Int, value: Value) -> CGFloat?
     func configureSection(_ tableView: UITableView, view: UITableViewHeaderFooterView, viewInSection section: Int, value: Value)
     
-    func genteralSection() -> Observable<Value?>
+    func createSection() -> Observable<Value?>
     
 }
 
@@ -56,9 +56,9 @@ extension SectionPartionTableViewProvider {
         self.configureSection(tableView, view: view as! Cell, viewInSection: section, value: node._unwarp())
     }
     
-    public func _genteralSectionPartion() -> Observable<_Node?> {
+    public func _createSectionPartion() -> Observable<_Node?> {
         let providerIdentity = self._flix_identity
-        return genteralSection().map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
+        return createSection().map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
     
     public func _tableView(_ tableView: UITableView, heightInSection section: Int, node: _Node) -> CGFloat? {
@@ -73,7 +73,7 @@ extension SectionPartionTableViewProvider {
 
 public protocol _AnimatableSectionPartionProviderable {
     
-    func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?>
+    func _createAnimatableSectionPartion() -> Observable<IdentifiableNode?>
     
 }
 
@@ -81,14 +81,14 @@ public typealias _AnimatableSectionPartionTableViewProvider = _AnimatableSection
 
 public protocol AnimatablePartionSectionTableViewProvider: SectionPartionTableViewProvider, _AnimatableSectionPartionProviderable where Value: Equatable, Value: StringIdentifiableType {
 
-    func genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?>
+    func createAnimatableSectionPartion() -> Observable<IdentifiableNode?>
     
 }
 
 extension AnimatablePartionSectionTableViewProvider {
     
-    public func _genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
-        return genteralAnimatableSectionPartion()
+    public func _createAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
+        return createAnimatableSectionPartion()
     }
 
     public var identity: String {
@@ -99,9 +99,9 @@ extension AnimatablePartionSectionTableViewProvider {
 
 extension AnimatablePartionSectionTableViewProvider {
     
-    public func genteralAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
+    public func createAnimatableSectionPartion() -> Observable<IdentifiableNode?> {
         let providerIdentity = self._flix_identity
-        return genteralSection().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
+        return createSection().map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
     }
     
 }

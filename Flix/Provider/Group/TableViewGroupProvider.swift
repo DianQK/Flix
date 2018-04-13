@@ -14,7 +14,7 @@ public protocol _TableViewGroupProvider {
 
     var _providers: [_TableViewMultiNodeProvider] { get }
 
-    func genteralProviders() -> Observable<[_TableViewMultiNodeProvider]>
+    func createProviders() -> Observable<[_TableViewMultiNodeProvider]>
 
 }
 
@@ -38,8 +38,8 @@ extension _TableViewGroupProvider where Self: _TableViewMultiNodeProvider {
         }
     }
 
-    public func _genteralNodes() -> Observable<[Node]> {
-        return genteralProviders().map { $0.map { $0._genteralNodes() } }
+    public func _createNodes() -> Observable<[Node]> {
+        return createProviders().map { $0.map { $0._createNodes() } }
             .flatMapLatest { Observable.combineLatest($0) { $0.flatMap { $0 } } }
     }
 

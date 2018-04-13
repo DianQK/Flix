@@ -68,7 +68,7 @@ public class TableViewBuilder: _TableViewBuilder {
                 self?.headerSectionProviders = sectionProviders.compactMap { $0.headerProvider }
             })
             .flatMapLatest { (providers) -> Observable<[SectionModel]> in
-                let sections = providers.map { $0.genteralSectionModel() }
+                let sections = providers.map { $0.createSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [SectionModel] in

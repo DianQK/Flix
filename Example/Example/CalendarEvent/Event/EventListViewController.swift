@@ -23,7 +23,7 @@ class EventListProvider: AnimatableTableViewProvider {
         cell.accessoryType = .disclosureIndicator
     }
 
-    func genteralValues() -> Observable<[CalendarEventObject]> {
+    func createValues() -> Observable<[CalendarEventObject]> {
         return self.objects.asObservable()
     }
 
