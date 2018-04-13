@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
+open class UniqueCustomTableViewProvider: CustomProvider, UniqueAnimatableTableViewProvider, CustomIdentityType {
     
     open let customIdentity: String
     open let contentView: UIView = NeverHitSelfView()
@@ -107,10 +107,6 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     private let _isHidden = BehaviorRelay(value: false)
     
     let disposeBag = DisposeBag()
-
-    public weak var cell: UITableViewCell?
-
-    private var _cellConfigQueues = [(UITableViewCell) -> ()]()
     
     public init(customIdentity: String) {
         self.customIdentity = customIdentity
@@ -121,12 +117,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     }
     
     open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
-        self.cell = cell
-        for config in _cellConfigQueues {
-            config(cell)
-        }
-        _cellConfigQueues.removeAll()
-
+        self.onGetCell(cell)
         cell.contentView.addSubview(contentView)
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
@@ -155,14 +146,6 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }
                 return [self]
-        }
-    }
-
-    public func whenGetCell(_ cellConfig: @escaping (UITableViewCell) -> ()) {
-        if let cell = self.cell {
-            cellConfig(cell)
-        } else {
-            self._cellConfigQueues.append(cellConfig)
         }
     }
 

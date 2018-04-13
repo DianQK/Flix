@@ -104,6 +104,7 @@
 		9157D7EA2080575E008E22D8 /* CollectionViewBuilderMemoryLeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7E92080575E008E22D8 /* CollectionViewBuilderMemoryLeakTests.swift */; };
 		9157D7EC2080576D008E22D8 /* TableViewBuilderMemoryLeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7EB2080576D008E22D8 /* TableViewBuilderMemoryLeakTests.swift */; };
 		9157D7EE20805D95008E22D8 /* UniqueCustomTableViewProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7ED20805D95008E22D8 /* UniqueCustomTableViewProviderTests.swift */; };
+		9157D7F020808337008E22D8 /* CustomProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7EF20808337008E22D8 /* CustomProvider.swift */; };
 		9179C9641FA6D60F00B4C21E /* TableViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */; };
 		917E2C301FA6E34800765F95 /* CollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */; };
 		917E2C321FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */; };
@@ -247,6 +248,7 @@
 		9157D7E92080575E008E22D8 /* CollectionViewBuilderMemoryLeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewBuilderMemoryLeakTests.swift; sourceTree = "<group>"; };
 		9157D7EB2080576D008E22D8 /* TableViewBuilderMemoryLeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewBuilderMemoryLeakTests.swift; sourceTree = "<group>"; };
 		9157D7ED20805D95008E22D8 /* UniqueCustomTableViewProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueCustomTableViewProviderTests.swift; sourceTree = "<group>"; };
+		9157D7EF20808337008E22D8 /* CustomProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProvider.swift; sourceTree = "<group>"; };
 		9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewGroupProvider.swift; sourceTree = "<group>"; };
 		917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewGroupProvider.swift; sourceTree = "<group>"; };
 		917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewGroupProvider.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				26C8470B1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift */,
 				26BAF0341F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift */,
 				2666E4071F879B3B006F1918 /* UniqueCustomCollectionViewSectionProvider.swift */,
+				9157D7EF20808337008E22D8 /* CustomProvider.swift */,
 			);
 			path = UniqueCustomProvider;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */,
 				9179C9641FA6D60F00B4C21E /* TableViewGroupProvider.swift in Sources */,
 				564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */,
+				9157D7F020808337008E22D8 /* CustomProvider.swift in Sources */,
 				56FFB7C91F89F7110066B903 /* TableViewBuilder.swift in Sources */,
 				56FFB7CB1F89FBEA0066B903 /* TableViewSectionProvider.swift in Sources */,
 				26C8470A1F84928D00EEFEAA /* UniqueCustomCollectionViewProvider.swift in Sources */,
