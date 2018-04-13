@@ -90,10 +90,8 @@ open class UniqueCustomCollectionViewProvider: CustomProvider, UniqueAnimatableC
                 return [self]
         }
     }
-    
-}
 
-extension UniqueCustomCollectionViewProvider: ReactiveCompatible { }
+}
 
 extension Reactive where Base: UniqueCustomCollectionViewProvider {
 

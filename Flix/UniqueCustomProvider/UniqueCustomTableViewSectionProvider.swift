@@ -84,8 +84,6 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     
 }
 
-extension UniqueCustomTableViewSectionProvider: ReactiveCompatible { }
-
 extension Reactive where Base: UniqueCustomTableViewSectionProvider {
 
     public var isHidden: Binder<Bool> {

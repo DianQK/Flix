@@ -39,7 +39,7 @@ extension _SectionPartionCollectionViewProvider {
     
 }
 
-public protocol SectionPartionCollectionViewProvider: _SectionPartionCollectionViewProvider {
+public protocol SectionPartionCollectionViewProvider: _SectionPartionCollectionViewProvider, ReactiveCompatible {
     
     associatedtype Cell: UICollectionReusableView
     associatedtype Value

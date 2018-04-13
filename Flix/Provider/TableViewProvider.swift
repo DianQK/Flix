@@ -50,7 +50,7 @@ extension _TableViewMultiNodeProvider {
 
 }
 
-public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider {
+public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider, ReactiveCompatible {
 
     associatedtype Value
     
