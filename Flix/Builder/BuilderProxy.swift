@@ -49,11 +49,8 @@ extension UITableView: FlixProxyable {
         get {
             return objc_getAssociatedObject(self, &tableViewBuilderKey) as? TableViewBuilder
         }
-        
         set {
-            objc_setAssociatedObject(self,
-                                     &tableViewBuilderKey, newValue,
-                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &tableViewBuilderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -61,11 +58,8 @@ extension UITableView: FlixProxyable {
         get {
             return objc_getAssociatedObject(self, &tableViewAnimatableBuilderKey) as? AnimatableTableViewBuilder
         }
-        
         set {
-            objc_setAssociatedObject(self,
-                                     &tableViewAnimatableBuilderKey, newValue,
-                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &tableViewAnimatableBuilderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     

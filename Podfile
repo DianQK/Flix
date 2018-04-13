@@ -11,6 +11,10 @@ end
 
 target 'Flix' do
   source
+
+    target 'FlixTests' do
+        inherit! :search_paths
+    end
 end
 
 target 'Example' do
