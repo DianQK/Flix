@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewProvider, CustomIdentityType {
+open class UniqueCustomCollectionViewProvider: CustomProvider, UniqueAnimatableCollectionViewProvider, CustomIdentityType {
     
     open let customIdentity: String
 
@@ -18,13 +18,19 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
 
     open var selectedBackgroundView: UIView? {
         didSet {
-            _cell?.selectedBackgroundView = selectedBackgroundView
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
+                cell.selectedBackgroundView = self.selectedBackgroundView
+            }
         }
     }
 
     open var backgroundView: UIView? {
         didSet {
-            _cell?.backgroundView = backgroundView
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
+                cell.backgroundView = self.backgroundView
+            }
         }
     }
     
@@ -45,8 +51,6 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
     private let _isHidden = BehaviorRelay(value: false)
 
     open var isEnabled = true
-
-    private weak var _cell: UICollectionViewCell?
     
     public init(customIdentity: String) {
         self.customIdentity = customIdentity
@@ -57,7 +61,7 @@ open class UniqueCustomCollectionViewProvider: UniqueAnimatableCollectionViewPro
     }
 
     open func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
-        _cell = cell
+        self.onGetCell(cell)
         cell.selectedBackgroundView = self.selectedBackgroundView
         cell.backgroundView = self.backgroundView
         cell.contentView.addSubview(contentView)
