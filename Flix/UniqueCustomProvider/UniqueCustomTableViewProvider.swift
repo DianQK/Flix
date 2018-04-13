@@ -16,14 +16,16 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     open let contentView: UIView = NeverHitSelfView()
     open var selectedBackgroundView: UIView? {
         didSet {
-            whenGetCell { (cell) in
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
                 cell.selectedBackgroundView = self.selectedBackgroundView
             }
         }
     }
     open var backgroundView: UIView? {
         didSet {
-            whenGetCell { (cell) in
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
                 cell.backgroundView = self.backgroundView
             }
         }
@@ -31,7 +33,8 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
     
     open var accessoryType: UITableViewCellAccessoryType = .none {
         didSet {
-            whenGetCell { (cell) in
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
                 cell.accessoryType = self.accessoryType
             }
         }
@@ -39,7 +42,8 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
 
     open var accessoryView: UIView? {
         didSet {
-            whenGetCell { (cell) in
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
                 cell.accessoryView = self.accessoryView
             }
         }
@@ -47,7 +51,8 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
 
     open var editingAccessoryType: UITableViewCellAccessoryType = .none {
         didSet {
-            whenGetCell { (cell) in
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
                 cell.editingAccessoryType = self.editingAccessoryType
             }
         }
@@ -55,7 +60,8 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
 
     open var editingAccessoryView: UIView? {
         didSet {
-            whenGetCell { (cell) in
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
                 cell.editingAccessoryView = self.editingAccessoryView
             }
         }
@@ -63,7 +69,8 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
 
     open var separatorInset: UIEdgeInsets? {
         didSet {
-            whenGetCell { (cell) in
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
                 if let separatorInset = self.separatorInset {
                     cell.separatorInset = separatorInset
                 }
@@ -73,7 +80,8 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
 
     open var selectionStyle: UITableViewCellSelectionStyle = .default {
         didSet {
-            whenGetCell { (cell) in
+            whenGetCell { [weak self] (cell) in
+                guard let `self` = self else { return }
                 cell.selectionStyle = self.selectionStyle
             }
         }
@@ -157,7 +165,7 @@ open class UniqueCustomTableViewProvider: UniqueAnimatableTableViewProvider {
             self._cellConfigQueues.append(cellConfig)
         }
     }
-    
+
 }
 
 extension UniqueCustomTableViewProvider: ReactiveCompatible { }
