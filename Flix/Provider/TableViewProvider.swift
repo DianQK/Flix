@@ -152,9 +152,7 @@ extension AnimatableTableViewMultiNodeProvider {
     
 }
 
-public typealias _UniqueAnimatableTableViewProvider = AnimatableTableViewProvider & Equatable & StringIdentifiableType
-
-public protocol UniqueAnimatableTableViewProvider: _UniqueAnimatableTableViewProvider /* where Value == Self, Cell == UITableViewCell */ {
+public protocol UniqueAnimatableTableViewProvider: AnimatableTableViewProvider, Equatable, StringIdentifiableType {
 
     func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
     func onUpdate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
