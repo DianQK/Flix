@@ -72,8 +72,6 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
 
 }
 
-extension UniqueCustomCollectionViewSectionProvider: ReactiveCompatible { }
-
 extension Reactive where Base: UniqueCustomCollectionViewSectionProvider {
 
     public var isHidden: Binder<Bool> {

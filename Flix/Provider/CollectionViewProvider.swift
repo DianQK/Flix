@@ -54,7 +54,7 @@ extension _CollectionViewMultiNodeProvider {
 
 }
 
-public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvider {
+public protocol CollectionViewMultiNodeProvider: _CollectionViewMultiNodeProvider, ReactiveCompatible {
 
     associatedtype Value
     
@@ -176,9 +176,7 @@ extension AnimatableCollectionViewMultiNodeProvider {
     
 }
 
-public typealias _UniqueAnimatableCollectionViewProvider = AnimatableCollectionViewProvider & Equatable & StringIdentifiableType
-
-public protocol UniqueAnimatableCollectionViewProvider: _UniqueAnimatableCollectionViewProvider /* where ValueType == Self,  Cell == UICollectionViewCell */ {
+public protocol UniqueAnimatableCollectionViewProvider: AnimatableCollectionViewProvider, Equatable, StringIdentifiableType {
     
     func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
     func onUpdate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
@@ -200,7 +198,7 @@ extension UniqueAnimatableCollectionViewProvider {
     }
     
     public static func ==(lhs: Self, rhs: Self) -> Bool {
-        return true
+        return lhs === rhs
     }
     
     public var providerIdentity: String {

@@ -36,7 +36,7 @@ extension _SectionPartionTableViewProvider {
 
 }
 
-public protocol SectionPartionTableViewProvider: _SectionPartionTableViewProvider {
+public protocol SectionPartionTableViewProvider: _SectionPartionTableViewProvider, ReactiveCompatible {
     
     associatedtype Cell: UITableViewHeaderFooterView
     associatedtype Value
