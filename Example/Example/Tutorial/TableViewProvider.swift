@@ -9,7 +9,7 @@
 import UIKit
 import Flix
 
-class BaseTableViewCellProvider: UniqueAnimatableTableViewProvider {
+class BaseTableViewCellProvider: SingleUITableViewCellProvider {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -43,6 +43,7 @@ class BaseTableViewCellProvider: UniqueAnimatableTableViewProvider {
     }()
 
     init(title: String, subTitle: String?, icon: UIImage?) {
+        super.init()
         if let icon = icon {
             iconImageView.image = icon
             leftStackView.addArrangedSubview(iconImageView)
@@ -54,14 +55,12 @@ class BaseTableViewCellProvider: UniqueAnimatableTableViewProvider {
             subTitleLabel.text = subTitle
             titleStackView.addArrangedSubview(subTitleLabel)
         }
-    }
 
-    func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
-        cell.separatorInset = UIEdgeInsets(top: 0, left: iconImageView.image == nil ? 16 : 59, bottom: 0, right: 0)
-        cell.contentView.addSubview(leftStackView)
+        self.separatorInset = UIEdgeInsets(top: 0, left: iconImageView.image == nil ? 16 : 59, bottom: 0, right: 0)
+        self.contentView.addSubview(leftStackView)
         leftStackView.translatesAutoresizingMaskIntoConstraints = false
-        leftStackView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16).isActive = true
-        leftStackView.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
+        leftStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16).isActive = true
+        leftStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
     }
 
     func tap(_ tableView: UITableView, indexPath: IndexPath, value: BaseTableViewCellProvider) {

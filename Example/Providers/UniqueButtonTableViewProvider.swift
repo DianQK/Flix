@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Flix
 
-open class UniqueButtonTableViewProvider: UniqueCustomTableViewProvider {
+open class UniqueButtonTableViewProvider: SingleUITableViewCellProvider {
     
     let textLabel = UILabel()
     let activityIndicatorView = UIActivityIndicatorView()

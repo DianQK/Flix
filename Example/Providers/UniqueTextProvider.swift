@@ -12,6 +12,8 @@ import Flix
 
 class UniqueTextProvider: UniqueAnimatableCollectionViewProvider {
 
+    typealias Cell = UICollectionViewCell
+
     let title: String
     let desc: String
     
@@ -24,7 +26,7 @@ class UniqueTextProvider: UniqueAnimatableCollectionViewProvider {
     let descLabel = UILabel()
     let disclosureIndicatorImageView = UIImageView(image: #imageLiteral(resourceName: "Disclosure Indicator"))
 
-    func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
+    func onCreate(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath) {
         cell.contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 20).isActive = true

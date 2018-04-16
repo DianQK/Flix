@@ -69,50 +69,35 @@ open class ValidationTableViewProvider<ValueProvider: _AnimatableTableViewMultiN
 
 }
 
-open class UniqueMessageTableViewProvider: UniqueAnimatableTableViewProvider {
+open class UniqueMessageTableViewProvider: SingleUITableViewCellProvider {
 
     open let messageLabel = UILabel()
-    open let contentView = UIView()
-    open let backgroundView = UIView()
-    
-    open let isHidden = BehaviorRelay(value: false)
     
     let disposeBag = DisposeBag()
     
-    public init() {
+    public override init() {
+        super.init()
         self.messageLabel.font = UIFont.systemFont(ofSize: 12)
         self.messageLabel.textColor = UIColor.white
-    }
-    
-    open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
-        cell.selectionStyle = .none
-        cell.backgroundView = self.backgroundView
-        cell.contentView.addSubview(messageLabel)
+
+        self.selectionStyle = .none
+        self.contentView.addSubview(messageLabel)
         self.messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.messageLabel.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
-        self.messageLabel.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 15).isActive = true
-        self.messageLabel.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -15).isActive = true
-        self.messageLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
-    }
-    
-    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: UniqueMessageTableViewProvider) -> CGFloat? {
-        return 30
-    }
-    
-    open func createValues() -> Observable<[UniqueMessageTableViewProvider]> {
-        return self.isHidden.asObservable()
-            .distinctUntilChanged()
-            .map { [weak self] isHidden in
-                guard let `self` = self, !isHidden else { return [] }
-                return [self]
-        }
+        self.messageLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        self.messageLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
+        self.messageLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
+        self.messageLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
+
+        self.backgroundView = UIView()
+
+        itemHeight = { _ in 30 }
     }
 
     var validationResult: Binder<ValidationResult> {
         return Binder(self) { provider, result in
-            provider.backgroundView.backgroundColor = result.textColor
+            provider.backgroundView?.backgroundColor = result.textColor
             provider.messageLabel.text = result.description
-            provider.isHidden.accept(result.description.isEmpty)
+            provider.isHidden = result.description.isEmpty
         }
     }
     

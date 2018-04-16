@@ -68,7 +68,7 @@ private class TextFieldDelegateProxy: NSObject, UITextFieldDelegate {
 
 }
 
-class SelectedLocationProvider: UniqueCustomTableViewProvider {
+class SelectedLocationProvider: SingleUITableViewCellProvider {
 
     private let titleLabel = UILabel()
     private let addressLabel = UILabel()

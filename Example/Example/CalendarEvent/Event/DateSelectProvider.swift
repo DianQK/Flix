@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Flix
 
-class SelectedDateDisplayProvider: UniqueCustomTableViewProvider {
+class SelectedDateDisplayProvider: SingleUITableViewCellProvider {
 
     let titleLabel = UILabel()
     let dateLabel = UILabel()
@@ -32,7 +32,7 @@ class SelectedDateDisplayProvider: UniqueCustomTableViewProvider {
 
 }
 
-class DatePickerProvider: UniqueCustomTableViewProvider {
+class DatePickerProvider: SingleUITableViewCellProvider {
 
     let datePicker = UIDatePicker()
 
@@ -57,7 +57,7 @@ class DatePickerProvider: UniqueCustomTableViewProvider {
 
 }
 
-class TitleDescProvider: UniqueCustomTableViewProvider {
+class TitleDescProvider: SingleUITableViewCellProvider {
 
     let titleLabel = UILabel()
     let descLabel = UILabel()

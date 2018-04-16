@@ -20,7 +20,7 @@ class ExampleListViewController: CollectionViewController {
         typealias UIViewControllerCreater = () -> UIViewController
         typealias Model = TextListProviderModel<UIViewControllerCreater>
         
-        let iconProvider = UniqueCustomCollectionViewProvider()
+        let iconProvider = SingleUICollectionViewCellProvider()
         let iconImageView = UIImageView(image: #imageLiteral(resourceName: "Flix Icon"))
         iconProvider.backgroundView = UIView()
         iconProvider.backgroundView?.backgroundColor = UIColor.white

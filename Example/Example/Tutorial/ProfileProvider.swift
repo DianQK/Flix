@@ -9,13 +9,14 @@
 import UIKit
 import Flix
 
-class ProfileProvider: UniqueAnimatableTableViewProvider {
+class ProfileProvider: SingleUITableViewCellProvider {
 
     let avatarImageView = UIImageView()
     let nameLabel = UILabel()
     let subTitleLabel = UILabel()
 
     init(avatar: UIImage, name: String) {
+        super.init()
         avatarImageView.image = avatar
         nameLabel.text = name
 
@@ -23,34 +24,26 @@ class ProfileProvider: UniqueAnimatableTableViewProvider {
 
         subTitleLabel.font = UIFont.systemFont(ofSize: 13)
         subTitleLabel.text = "Apple ID, iCloud, iTunes & App Store"
-    }
 
-    func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
-        cell.accessoryType = .disclosureIndicator
-        cell.contentView.addSubview(avatarImageView)
+        self.accessoryType = .disclosureIndicator
+        self.contentView.addSubview(avatarImageView)
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        avatarImageView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 15).isActive = true
-        avatarImageView.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
+        avatarImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
+        avatarImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         avatarImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
 
-        cell.contentView.addSubview(nameLabel)
+        self.contentView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 15).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 14).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 14).isActive = true
 
-        cell.contentView.addSubview(subTitleLabel)
+        self.contentView.addSubview(subTitleLabel)
         subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subTitleLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
-        subTitleLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -17).isActive = true
-    }
+        subTitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -17).isActive = true
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: ProfileProvider) -> CGFloat? {
-        return 80
-    }
-
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: ProfileProvider) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        itemHeight = { _ in 80 }
     }
 
 }

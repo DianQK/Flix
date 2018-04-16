@@ -11,18 +11,19 @@ import RxSwift
 import RxCocoa
 import Flix
 
-open class UniqueTextFieldTableViewProvider: UniqueAnimatableTableViewProvider {
+open class UniqueTextFieldTableViewProvider: SingleUITableViewCellProvider {
 
     open let textField = UITextField()
-    
-    open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
-        cell.selectionStyle = .none
-        cell.contentView.addSubview(textField)
+
+    public override init() {
+        super.init()
+        self.selectionStyle = .none
+        self.contentView.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 15).isActive = true
-        textField.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
-        textField.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -15).isActive = true
-        textField.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
+        textField.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
+        textField.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        textField.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
+        textField.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
     }
     
 }

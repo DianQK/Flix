@@ -10,7 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-open class UniqueCustomCollectionViewProvider: CustomProvider, UniqueAnimatableCollectionViewProvider, CustomIdentityType {
+public typealias SingleUICollectionViewCellProvider = SingleCollectionViewProvider<UICollectionViewCell>
+@available(*, deprecated, renamed: "SingleUICollectionViewCellProvider")
+public typealias UniqueCustomCollectionViewProvider = SingleUICollectionViewCellProvider
+
+open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvider, UniqueAnimatableCollectionViewProvider, CustomIdentityType {
+
+    public typealias Cell = UICollectionViewCell
     
     open let customIdentity: String
 
@@ -60,7 +66,7 @@ open class UniqueCustomCollectionViewProvider: CustomProvider, UniqueAnimatableC
         self.customIdentity = ""
     }
 
-    open func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
+    open func onCreate(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath) {
         self.onGetCell(cell)
         cell.selectedBackgroundView = self.selectedBackgroundView
         cell.backgroundView = self.backgroundView
@@ -72,18 +78,18 @@ open class UniqueCustomCollectionViewProvider: CustomProvider, UniqueAnimatableC
         contentView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
     }
     
-    open func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: UniqueCustomCollectionViewProvider) {
+    open func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: SingleCollectionViewProvider) {
         if self.isEnabled {
             _tap.onNext(())
         }
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: UniqueCustomCollectionViewProvider) -> CGSize? {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: SingleCollectionViewProvider) -> CGSize? {
         return self.itemSize?()
     }
     
-    open func createValues() -> Observable<[UniqueCustomCollectionViewProvider]> {
+    open func createValues() -> Observable<[SingleCollectionViewProvider]> {
         return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }
@@ -93,7 +99,7 @@ open class UniqueCustomCollectionViewProvider: CustomProvider, UniqueAnimatableC
 
 }
 
-extension Reactive where Base: UniqueCustomCollectionViewProvider {
+extension Reactive where Base: SingleUICollectionViewCellProvider { // TODO
 
     public var isHidden: Binder<Bool> {
         return Binder(self.base) { provider, hidden in

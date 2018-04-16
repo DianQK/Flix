@@ -178,18 +178,18 @@ extension AnimatableCollectionViewMultiNodeProvider {
 
 public protocol UniqueAnimatableCollectionViewProvider: AnimatableCollectionViewProvider, Equatable, StringIdentifiableType {
     
-    func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
-    func onUpdate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
+    func onCreate(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath)
+    func onUpdate(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath)
 
 }
 
 extension UniqueAnimatableCollectionViewProvider {
     
-    public func onUpdate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
+    public func onUpdate(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath) {
         
     }
     
-    public func configureCell(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath, value: Self) {
+    public func configureCell(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath, value: Self) {
         if !cell.hasConfigured {
             cell.hasConfigured = true
             onCreate(collectionView, cell: cell, indexPath: indexPath)

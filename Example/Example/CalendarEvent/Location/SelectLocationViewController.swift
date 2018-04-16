@@ -91,7 +91,7 @@ class SelectLocationViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo:  self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
-        let customLocalProvider = UniqueCustomTableViewProvider()
+        let customLocalProvider = SingleUITableViewCellProvider()
         customLocalProvider.separatorInset = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)
         let customLocalLabel = UILabel()
         customLocalProvider.contentView.addSubview(customLocalLabel)
@@ -107,7 +107,7 @@ class SelectLocationViewController: UIViewController {
 
         searchBar.rx.text.orEmpty.bind(to: customLocalLabel.rx.text).disposed(by: disposeBag)
 
-        let currentLocationProvider = UniqueCustomTableViewProvider()
+        let currentLocationProvider = SingleUITableViewCellProvider()
         currentLocationProvider.separatorInset = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)
 
         let currentPlacemark = GeolocationService.instance.location.asObservable()

@@ -87,7 +87,6 @@ public class CollectionViewBuilder: _CollectionViewBuilder, PerformGroupUpdatesa
                 return Observable.combineLatest(sections).map { $0.map { SectionModel(model: $0.section, items: $0.nodes) } }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)
-            .debug("更新数据 TableView")
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

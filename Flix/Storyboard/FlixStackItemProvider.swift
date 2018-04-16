@@ -12,6 +12,8 @@ import RxCocoa
 
 open class FlixStackItemProvider: UIControl, UniqueAnimatableTableViewProvider {
 
+    public typealias Cell = UITableViewCell
+
     // Default is nil for cells in UITableViewStylePlain, and non-nil for UITableViewStyleGrouped. The 'backgroundView' will be added as a subview behind all other views.
     open var backgroundView: UIView? {
         didSet {
