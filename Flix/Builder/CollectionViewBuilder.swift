@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class CollectionViewBuilder: _CollectionViewBuilder {
+public class CollectionViewBuilder: _CollectionViewBuilder, PerformGroupUpdatesable {
     
     typealias SectionModel = RxDataSources.SectionModel<SectionNode, Node>
 
@@ -86,6 +86,8 @@ public class CollectionViewBuilder: _CollectionViewBuilder {
                 let sections = providers.map { $0.createSectionModel() }
                 return Observable.combineLatest(sections).map { $0.map { SectionModel(model: $0.section, items: $0.nodes) } }
             }
+            .sendLatest(when: performGroupUpdatesBehaviorRelay)
+            .debug("更新数据 TableView")
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

@@ -43,8 +43,26 @@ extension FlixProxy {
     
 }
 
-extension UITableView: FlixProxyable {
-    
+private protocol _PerformGroupUpdatesable {
+
+    associatedtype Builder: PerformGroupUpdatesable
+    associatedtype AnimatableBuilder: PerformGroupUpdatesable
+
+    var builder: Builder? { get }
+    var animatableBuilder: AnimatableBuilder? { get }
+
+}
+
+extension _PerformGroupUpdatesable {
+
+    fileprivate var performGroupUpdatesable: PerformGroupUpdatesable? {
+        return self.builder ?? self.animatableBuilder
+    }
+
+}
+
+extension UITableView: _PerformGroupUpdatesable {
+
     fileprivate var builder: TableViewBuilder? {
         get {
             return objc_getAssociatedObject(self, &tableViewBuilderKey) as? TableViewBuilder
@@ -53,7 +71,7 @@ extension UITableView: FlixProxyable {
             objc_setAssociatedObject(self, &tableViewBuilderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     fileprivate var animatableBuilder: AnimatableTableViewBuilder? {
         get {
             return objc_getAssociatedObject(self, &tableViewAnimatableBuilderKey) as? AnimatableTableViewBuilder
@@ -62,20 +80,17 @@ extension UITableView: FlixProxyable {
             objc_setAssociatedObject(self, &tableViewAnimatableBuilderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
 }
 
-extension UICollectionView: FlixProxyable {
+extension UICollectionView: _PerformGroupUpdatesable {
     
     fileprivate var builder: CollectionViewBuilder? {
         get {
             return objc_getAssociatedObject(self, &collectionViewBuilderKey) as? CollectionViewBuilder
         }
-        
         set {
-            objc_setAssociatedObject(self,
-                                     &collectionViewBuilderKey, newValue,
-                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &collectionViewBuilderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -83,14 +98,48 @@ extension UICollectionView: FlixProxyable {
         get {
             return objc_getAssociatedObject(self, &collectionViewAnimatableBuilderKey) as? AnimatableCollectionViewBuilder
         }
-        
         set {
-            objc_setAssociatedObject(self,
-                                     &collectionViewAnimatableBuilderKey, newValue,
-                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &collectionViewAnimatableBuilderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
+}
+
+extension UITableView: FlixProxyable { }
+extension UICollectionView: FlixProxyable { }
+
+extension FlixProxy where Base: UICollectionView { // ugly
+
+    public func beginGroupUpdates() {
+        self.base.performGroupUpdatesable?.beginGroupUpdates()
+    }
+
+    public func endGroupUpdates() {
+        self.base.performGroupUpdatesable?.endGroupUpdates()
+    }
+
+    public func performGroupUpdates(_ updates: (() -> Void)) {
+        self.beginGroupUpdates(); defer { self.endGroupUpdates() }
+        updates()
+    }
+
+}
+
+extension FlixProxy where Base: UITableView {
+
+    public func beginGroupUpdates() {
+        self.base.performGroupUpdatesable?.beginGroupUpdates()
+    }
+
+    public func endGroupUpdates() {
+        self.base.performGroupUpdatesable?.endGroupUpdates()
+    }
+
+    public func performGroupUpdates(_ updates: (() -> Void)) {
+        self.beginGroupUpdates(); defer { self.endGroupUpdates() }
+        updates()
+    }
+
 }
 
 extension FlixProxy where Base: UITableView {

@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class TableViewBuilder: _TableViewBuilder {
+public class TableViewBuilder: _TableViewBuilder, PerformGroupUpdatesable {
     
     typealias SectionModel = RxDataSources.SectionModel<SectionNode, Node>
     
@@ -84,6 +84,7 @@ public class TableViewBuilder: _TableViewBuilder {
                         }
                 }
             }
+            .sendLatest(when: performGroupUpdatesBehaviorRelay)
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 

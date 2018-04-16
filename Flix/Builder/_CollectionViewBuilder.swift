@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-protocol _CollectionViewBuilder: class {
+protocol _CollectionViewBuilder: Builder {
     
     var disposeBag: DisposeBag { get }
     var delegeteProxy: CollectionViewDelegateProxy { get }

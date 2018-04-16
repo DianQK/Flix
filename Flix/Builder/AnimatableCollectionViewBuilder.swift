@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
+public class AnimatableCollectionViewBuilder: _CollectionViewBuilder, PerformGroupUpdatesable {
     
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
 
@@ -113,6 +113,7 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder {
                         }
                 }
             }
+            .sendLatest(when: performGroupUpdatesBehaviorRelay)
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

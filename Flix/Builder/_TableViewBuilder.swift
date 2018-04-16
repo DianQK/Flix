@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-protocol _TableViewBuilder: class {
+protocol _TableViewBuilder: Builder {
     
     var disposeBag: DisposeBag { get }
     var delegeteProxy: TableViewDelegateProxy { get }
