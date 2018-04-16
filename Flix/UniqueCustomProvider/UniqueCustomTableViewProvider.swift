@@ -10,7 +10,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-open class UniqueCustomTableViewProvider: CustomProvider, UniqueAnimatableTableViewProvider, CustomIdentityType {
+public typealias SingleUITableViewCellProvider = SingleTableViewCellProvider<UITableViewCell>
+@available(*, deprecated, renamed: "SingleUITableViewCellProvider")
+public typealias UniqueCustomTableViewProvider = SingleUITableViewCellProvider
+
+open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, UniqueAnimatableTableViewProvider, CustomIdentityType {
     
     open let customIdentity: String
     open let contentView: UIView = NeverHitSelfView()
@@ -116,7 +120,7 @@ open class UniqueCustomTableViewProvider: CustomProvider, UniqueAnimatableTableV
         self.customIdentity = ""
     }
     
-    open func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+    open func onCreate(_ tableView: UITableView, cell: Cell, indexPath: IndexPath) {
         self.onGetCell(cell)
         cell.contentView.addSubview(contentView)
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -130,18 +134,18 @@ open class UniqueCustomTableViewProvider: CustomProvider, UniqueAnimatableTableV
         }
     }
 
-    open func tap(_ tableView: UITableView, indexPath: IndexPath, value: UniqueCustomTableViewProvider) {
+    open func tap(_ tableView: UITableView, indexPath: IndexPath, value: SingleTableViewCellProvider) {
         if self.isEnabled {
             _tap.onNext(())
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: UniqueCustomTableViewProvider) -> CGFloat? {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: SingleTableViewCellProvider) -> CGFloat? {
         return self.itemHeight?(tableView)
     }
     
-    open func createValues() -> Observable<[UniqueCustomTableViewProvider]> {
+    open func createValues() -> Observable<[SingleTableViewCellProvider]> {
         return self._isHidden.asObservable()
             .map { [weak self] isHidden in
                 guard let `self` = self, !isHidden else { return [] }
@@ -151,9 +155,9 @@ open class UniqueCustomTableViewProvider: CustomProvider, UniqueAnimatableTableV
 
 }
 
-extension UniqueCustomTableViewProvider: ReactiveCompatible { }
+extension SingleTableViewCellProvider: ReactiveCompatible { }
 
-extension Reactive where Base: UniqueCustomTableViewProvider {
+extension Reactive where Base: SingleTableViewCellProvider<UITableViewCell> { // TODO: extension for SingleTableViewCellProvider
 
     public var isHidden: Binder<Bool> {
         return Binder(self.base) { provider, hidden in

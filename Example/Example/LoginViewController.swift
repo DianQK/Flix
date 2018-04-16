@@ -34,7 +34,7 @@ class LoginViewController: TableViewController {
         
         var section: [AnimatableTableViewSectionProvider] = []
 
-        let usernameProvider = UniqueCustomTableViewProvider()
+        let usernameProvider = SingleUITableViewCellProvider()
         usernameProvider.contentView.addSubview(usernameTextField)
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         usernameTextField.leadingAnchor.constraint(equalTo: usernameProvider.contentView.leadingAnchor, constant: 15).isActive = true
@@ -42,7 +42,7 @@ class LoginViewController: TableViewController {
         usernameTextField.trailingAnchor.constraint(equalTo: usernameProvider.contentView.trailingAnchor, constant: -15).isActive = true
         usernameTextField.bottomAnchor.constraint(equalTo: usernameProvider.contentView.bottomAnchor).isActive = true
         
-        let passwordProvider = UniqueCustomTableViewProvider()
+        let passwordProvider = SingleUITableViewCellProvider()
         passwordProvider.contentView.addSubview(passwordTextField)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.leadingAnchor.constraint(equalTo: passwordProvider.contentView.leadingAnchor, constant: 15).isActive = true
@@ -59,7 +59,7 @@ class LoginViewController: TableViewController {
         )
         section.append(inputSectionProvider)
         
-        let loginProvider = UniqueCustomTableViewProvider()
+        let loginProvider = SingleUITableViewCellProvider()
         loginProvider.contentView.addSubview(loginTextLabel)
         loginTextLabel.translatesAutoresizingMaskIntoConstraints = false
         loginTextLabel.leadingAnchor.constraint(equalTo: loginProvider.contentView.leadingAnchor).isActive = true

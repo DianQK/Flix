@@ -99,7 +99,7 @@ class DeleteItemViewController: TableViewController {
         let inputTagsProvider = InputTagsProvider()
         inputTagsProvider.tags.accept([Tag(id: 1)])
         
-        let addNewTagProvider = UniqueCustomTableViewProvider()
+        let addNewTagProvider = SingleUITableViewCellProvider()
         let addNewTagImageView = UIImageView(image: #imageLiteral(resourceName: "Control Add"))
         addNewTagProvider.contentView.addSubview(addNewTagImageView)
         addNewTagImageView.translatesAutoresizingMaskIntoConstraints = false

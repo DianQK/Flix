@@ -96,7 +96,6 @@ public class AnimatableTableViewBuilder: _TableViewBuilder, PerformGroupUpdatesa
                     }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)
-            .debug("更新数据 TableView")
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 

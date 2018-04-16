@@ -154,18 +154,18 @@ extension AnimatableTableViewMultiNodeProvider {
 
 public protocol UniqueAnimatableTableViewProvider: AnimatableTableViewProvider, Equatable, StringIdentifiableType {
 
-    func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
-    func onUpdate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath)
+    func onCreate(_ tableView: UITableView, cell: Cell, indexPath: IndexPath)
+    func onUpdate(_ tableView: UITableView, cell: Cell, indexPath: IndexPath)
 
 }
 
 extension UniqueAnimatableTableViewProvider {
     
-    public func onUpdate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
+    public func onUpdate(_ tableView: UITableView, cell: Cell, indexPath: IndexPath) {
 
     }
 
-    public func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: Self) {
+    public func configureCell(_ tableView: UITableView, cell: Cell, indexPath: IndexPath, value: Self) {
         if !cell.hasConfigured {
             cell.hasConfigured = true
             onCreate(tableView, cell: cell, indexPath: indexPath)

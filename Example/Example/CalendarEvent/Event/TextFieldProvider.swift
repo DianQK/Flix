@@ -13,6 +13,8 @@ import Flix
 
 class TextFieldProvider: UITextField, UniqueAnimatableTableViewProvider {
 
+    typealias Cell = UITableViewCell
+
     func onCreate(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath) {
         cell.contentView.addSubview(self)
         self.clearButtonMode = .whileEditing

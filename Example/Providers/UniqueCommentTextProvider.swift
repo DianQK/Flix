@@ -11,8 +11,7 @@ import RxSwift
 import RxCocoa
 import Flix
 
-class UniqueCommentTextProvider: UniqueCustomCollectionViewProvider {
-
+class UniqueCommentTextProvider: SingleUICollectionViewCellProvider {
 
     let textLabel = UILabel()
 
@@ -39,7 +38,7 @@ class UniqueCommentTextProvider: UniqueCustomCollectionViewProvider {
             .disposed(by: disposeBag)
     }
 
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: UniqueCustomCollectionViewProvider) -> CGSize? {
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: SingleUICollectionViewCellProvider) -> CGSize? {
         let height = NSAttributedString(string: self.text.value, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
             .boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).height
         return CGSize(width: collectionView.bounds.width, height: height + 20)

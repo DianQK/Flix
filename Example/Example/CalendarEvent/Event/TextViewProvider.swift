@@ -12,6 +12,8 @@ import Flix
 
 class TextViewProvider: UITextView, UniqueAnimatableTableViewProvider {
 
+    typealias Cell = UITableViewCell
+
     let disposeBag = DisposeBag()
     private let placeholderTextField = UITextField()
 

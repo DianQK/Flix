@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Flix
 
-class SwitchProvider: UniqueCustomTableViewProvider {
+class SwitchProvider: SingleUITableViewCellProvider {
 
     let uiSwitch = UISwitch()
     let titleLabel = UILabel()

@@ -12,6 +12,8 @@ import Flix
 
 class UniqueSwitchProvider: UniqueAnimatableCollectionViewProvider {
 
+    typealias Cell = UICollectionViewCell
+
     let uiSwitch = UISwitch()
     let titleLabel = UILabel()
 

@@ -198,7 +198,7 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
 
 }
 
-class UniqueTitleTableViewProvider: UniqueCustomTableViewProvider {
+class UniqueTitleTableViewProvider: SingleUITableViewCellProvider {
     
     let titleLabel = UILabel()
     
@@ -216,7 +216,7 @@ class UniqueTitleTableViewProvider: UniqueCustomTableViewProvider {
     
 }
 
-class UniqueItemInputTableViewProvider: UniqueCustomTableViewProvider {
+class UniqueItemInputTableViewProvider: SingleUITableViewCellProvider {
     
     let titleLabel = UILabel()
     let textField = UITextField()
