@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-public class AnimatableTableViewBuilder: _TableViewBuilder {
+public class AnimatableTableViewBuilder: _TableViewBuilder, PerformGroupUpdatesable {
     
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
     
@@ -95,6 +95,8 @@ public class AnimatableTableViewBuilder: _TableViewBuilder {
                         }
                     }
             }
+            .sendLatest(when: performGroupUpdatesBehaviorRelay)
+            .debug("更新数据 TableView")
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
