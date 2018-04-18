@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import RxDataSources
 
 public protocol _CollectionViewMoveable {
@@ -27,15 +29,13 @@ public protocol CollectionViewMoveable: _CollectionViewMoveable {
 
 }
 
-extension CollectionViewMoveable {
+extension CollectionViewMoveable where Self: CollectionViewMultiNodeProvider {
 
-    public func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath, value: Value) -> Bool {
+    public func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath, value: Self.Value) -> Bool {
         return true
     }
 
-}
-
-extension CollectionViewMoveable {
+    public func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndex: Int, to destinationIndex: Int, value: Self.Value) { }
 
     public func _collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath, node: _Node) -> Bool {
         return self.collectionView(collectionView, canMoveItemAt: indexPath, value: node._unwarp())
@@ -43,6 +43,20 @@ extension CollectionViewMoveable {
 
     public func _collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndex: Int, to destinationIndex: Int, node: _Node) {
         self.collectionView(collectionView, moveItemAt: sourceIndex, to: destinationIndex, value: node._unwarp())
+        self.event._moveItem.onNext((
+            collectionView: collectionView,
+            sourceIndex: sourceIndex,
+            destinationIndex: destinationIndex,
+            value: node._unwarp())
+        )
+    }
+
+}
+
+extension CollectionViewEvent where Provider: CollectionViewMoveable {
+
+    public var moveItem: ControlEvent<MoveEventValue> {
+        return ControlEvent(events: self._moveItem)
     }
 
 }

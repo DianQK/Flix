@@ -49,6 +49,8 @@ class MoveCollectionViewProvider: AnimatableCollectionViewProvider, CollectionVi
 
 class MoveCollectionViewController: CollectionViewController {
 
+    let moveCollectionViewProvider = MoveCollectionViewProvider()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Move"
@@ -75,7 +77,7 @@ class MoveCollectionViewController: CollectionViewController {
             .disposed(by: disposeBag)
         self.collectionView.addGestureRecognizer(long)
 
-        self.collectionView.flix.animatable.build([MoveCollectionViewProvider()])
+        self.collectionView.flix.animatable.build([moveCollectionViewProvider])
     }
 
 }
