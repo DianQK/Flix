@@ -166,7 +166,7 @@ class HardwareFormProvider: AnimatableTableViewMultiNodeProvider {
         self.hardwareForms.accept(self.hardwareForms.value.filter({ $0.id != id }))
     }
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: HardwareFormItem) {
+    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: HardwareFormItem) {
         switch value.item {
         case .delete:
             self.removeItem(id: value.id)

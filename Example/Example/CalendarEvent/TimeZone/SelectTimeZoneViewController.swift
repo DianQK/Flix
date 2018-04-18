@@ -52,7 +52,7 @@ private class TimeZonesProvider: AnimatableTableViewProvider {
     typealias Value = String
     typealias Cell = TitleTableViewCell
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: String) {
+    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: String) {
         timeZoneSelected.onNext(TimeZone(identifier: value)!)
     }
 

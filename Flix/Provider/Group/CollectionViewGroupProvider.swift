@@ -24,7 +24,11 @@ extension _CollectionViewGroupProvider where Self: _CollectionViewMultiNodeProvi
         fatalError("group provider is abstract provider, you should never call this methods.")
     }
 
-    public func _tap(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
+    public func _itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
+        fatalError("group provider is abstract provider, you should never call this methods.")
+    }
+
+    public func _itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
         fatalError("group provider is abstract provider, you should never call this methods.")
     }
 

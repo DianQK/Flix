@@ -63,7 +63,7 @@ class BaseTableViewCellProvider: SingleUITableViewCellProvider {
         leftStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
     }
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: BaseTableViewCellProvider) {
+    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: BaseTableViewCellProvider) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

@@ -20,7 +20,11 @@ public protocol _TableViewGroupProvider {
 
 extension _TableViewGroupProvider where Self: _TableViewMultiNodeProvider {
 
-    public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
+    public func _itemSelected(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
+        fatalError("group provider is abstract provider, you should never call this methods.")
+    }
+
+    public func _itemDeselected(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
         fatalError("group provider is abstract provider, you should never call this methods.")
     }
 

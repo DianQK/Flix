@@ -14,10 +14,10 @@ import RxDataSources
 public protocol _CollectionViewMultiNodeProvider: FlixCustomStringConvertible {
 
     func _configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) -> UICollectionViewCell
-    
-    func _itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
 
     func _collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath, node: _Node) -> Bool
+
+    func _itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
 
     func _itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node)
     

@@ -66,7 +66,16 @@ extension _TableViewBuilder {
                 guard let tableView = tableView else { return }
                 let node = dataSource[indexPath]
                 let provider = self.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity })!
-                provider._tap(tableView, indexPath: indexPath, node: node)
+                provider._itemSelected(tableView, indexPath: indexPath, node: node)
+            })
+            .disposed(by: disposeBag)
+
+        tableView.rx.itemDeselected
+            .subscribe(onNext: { [weak tableView, unowned self] (indexPath) in
+                guard let tableView = tableView else { return }
+                let node = dataSource[indexPath]
+                let provider = self.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity })!
+                provider._itemDeselected(tableView, indexPath: indexPath, node: node)
             })
             .disposed(by: disposeBag)
         
