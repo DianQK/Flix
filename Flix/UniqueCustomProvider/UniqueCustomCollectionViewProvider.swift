@@ -40,8 +40,8 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
         }
     }
 
-    @available(*, deprecated, renamed: "event.itemSelected")
-    public var tap: ControlEvent<CollectionViewEvent<Value>.EventValue> { return self.event.itemSelected }
+    @available(*, deprecated, renamed: "event.selectedEvent")
+    public var tap: ControlEvent<()> { return self.event.selectedEvent }
     
     open var itemSize: (() -> CGSize?)?
     

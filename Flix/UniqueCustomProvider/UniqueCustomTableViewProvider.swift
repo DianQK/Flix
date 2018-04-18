@@ -93,8 +93,8 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, U
 
     open var isEnabled = true
 
-    open var tap: ControlEvent<()> { return ControlEvent(events: _tap.asObservable()) }
-    private let _tap = PublishSubject<()>()
+    @available(*, deprecated, renamed: "event.selectedEvent")
+    open var tap: ControlEvent<()> { return self.event.selectedEvent }
     
     open var itemHeight: ((UITableView) -> CGFloat?)?
 
@@ -134,10 +134,7 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, U
         }
     }
 
-    open func tap(_ tableView: UITableView, indexPath: IndexPath, value: SingleTableViewCellProvider) {
-        if self.isEnabled {
-            _tap.onNext(())
-        }
+    open func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: SingleTableViewCellProvider) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

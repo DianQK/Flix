@@ -62,7 +62,7 @@ class EventOptionProvider<T>: TitleDescProvider where T: EventOptionType {
 
         super.init()
 
-        self.tap.asObservable()
+        self.event.selectedEvent.asObservable()
             .withLatestFrom(self.selectedOption.asObservable())
             .flatMapLatest { [weak viewController] (option) -> Observable<T> in
                 guard let viewController = viewController else { return Observable.empty() }

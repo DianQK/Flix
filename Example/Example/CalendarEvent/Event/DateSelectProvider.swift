@@ -115,7 +115,7 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
         let timeZone = timeZone.share(replay: 1, scope: .forever)
         self.isAllDay = isAllDay
 
-        self.dateProvider.tap.asObservable()
+        self.dateProvider.event.selectedEvent.asObservable()
             .withLatestFrom(self.isActive.asObservable()).map { !$0 }
             .do(onNext: { [weak self] (isActive) in
                 self?.tapActiveChanged.onNext(isActive)

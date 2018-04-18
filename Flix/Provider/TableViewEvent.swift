@@ -1,8 +1,8 @@
 //
-//  CollectionViewEvent.swift
+//  TableViewEvent.swift
 //  Flix
 //
-//  Created by DianQK on 2018/4/17.
+//  Created by DianQK on 2018/4/18.
 //  Copyright © 2018 DianQK. All rights reserved.
 //
 
@@ -10,9 +10,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public class CollectionViewEvent<Value> {
+public class TableViewEvent<Value> {
 
-    public typealias EventValue = (collectionView: UICollectionView, indexPath: IndexPath, value: Value)
+    public typealias EventValue = (tableView: UITableView, indexPath: IndexPath, value: Value)
 
     public var selectedEvent: ControlEvent<()> { return ControlEvent(events: self._itemSelected.map { _ in }) }
 

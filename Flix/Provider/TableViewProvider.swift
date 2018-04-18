@@ -97,16 +97,34 @@ extension TableViewMultiNodeProvider {
 
     public func _itemSelected(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
         self.itemSelected(tableView, indexPath: indexPath, value: node._unwarp())
+        self.event._itemSelected.onNext((tableView: tableView, indexPath: indexPath, value: node._unwarp()))
     }
 
     public func _itemDeselected(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
         self.itemDeselected(tableView, indexPath: indexPath, value: node._unwarp())
+        self.event._itemDeselected.onNext((tableView: tableView, indexPath: indexPath, value: node._unwarp()))
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: Value) -> CGFloat? {
         return nil
     }
     
+}
+
+private var providerEventKey: Void?
+
+extension TableViewMultiNodeProvider {
+
+    public var event: TableViewEvent<Value> {
+        if let event = objc_getAssociatedObject(self, &providerEventKey) as? TableViewEvent<Value> {
+            return event
+        } else {
+            let event = TableViewEvent<Value>()
+            objc_setAssociatedObject(self, &providerEventKey, event, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            return event
+        }
+    }
+
 }
 
 public protocol TableViewProvider: TableViewMultiNodeProvider {
