@@ -99,10 +99,12 @@ extension CollectionViewMultiNodeProvider {
     
     public func _itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
         self.itemSelected(collectionView, indexPath: indexPath, value: node._unwarp())
+        self.event._itemSelected.onNext((collectionView: collectionView, indexPath: indexPath, value: node._unwarp()))
     }
 
     public func _itemDeselected(_ collectionView: UICollectionView, indexPath: IndexPath, node: _Node) {
         self.itemDeselected(collectionView, indexPath: indexPath, value: node._unwarp())
+        self.event._itemDeselected.onNext((collectionView: collectionView, indexPath: indexPath, value: node._unwarp()))
     }
     
     public func _createNodes() -> Observable<[Node]> {
@@ -119,6 +121,22 @@ extension CollectionViewMultiNodeProvider {
         return nil
     }
     
+}
+
+private var providerEventKey: Void?
+
+extension CollectionViewMultiNodeProvider {
+
+    public var event: CollectionViewEvent<Value> {
+        if let event = objc_getAssociatedObject(self, &providerEventKey) as? CollectionViewEvent<Value> {
+            return event
+        } else {
+            let event = CollectionViewEvent<Value>()
+            objc_setAssociatedObject(self, &providerEventKey, event, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            return event
+        }
+    }
+
 }
 
 public protocol CollectionViewProvider: CollectionViewMultiNodeProvider {

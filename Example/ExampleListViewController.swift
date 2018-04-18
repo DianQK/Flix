@@ -34,8 +34,8 @@ class ExampleListViewController: CollectionViewController {
         iconImageView.centerXAnchor.constraint(equalTo: iconProvider.contentView.centerXAnchor).isActive = true
         iconImageView.centerYAnchor.constraint(equalTo: iconProvider.contentView.centerYAnchor).isActive = true
         
-        iconProvider.tap
-            .subscribe(onNext: {
+        iconProvider.event.itemSelected
+            .subscribe(onNext: { _ in
                 UIApplication.shared.open(URL(string: "https://github.com/DianQK/Flix")!, options: [:], completionHandler: nil)
             })
             .disposed(by: disposeBag)
@@ -54,8 +54,8 @@ class ExampleListViewController: CollectionViewController {
                 Model(title: "Move", desc: "", value: { return MoveCollectionViewController() }),
             ]
         )
-        textListProvider.tapped
-            .subscribe(onNext: { [unowned self] (model) in
+        textListProvider.event.itemSelected
+            .subscribe(onNext: { [unowned self] (_, _, model) in
                 self.show(model.value(), sender: nil)
             })
             .disposed(by: disposeBag)

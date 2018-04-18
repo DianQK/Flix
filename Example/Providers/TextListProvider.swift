@@ -72,12 +72,6 @@ class TextListProvider<Value>: AnimatableCollectionViewProvider {
     typealias Cell = TextCollectionViewCell
     typealias NodeType = Model
     
-    let _tap = PublishSubject<Model>()
-    
-    var tapped: Observable<Model> {
-        return _tap.asObservable()
-    }
-    
     init(items: [Model]) {
         self.items = items
     }
@@ -88,7 +82,6 @@ class TextListProvider<Value>: AnimatableCollectionViewProvider {
     }
     
     func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: NodeType) {
-        _tap.onNext(value)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     

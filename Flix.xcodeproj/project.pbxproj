@@ -110,6 +110,7 @@
 		917E2C301FA6E34800765F95 /* CollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */; };
 		917E2C321FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */; };
 		91DB959120835A6800020661 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB959020835A6800020661 /* Builder.swift */; };
+		91DB959320864C4A00020661 /* CollectionViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB959220864C4A00020661 /* CollectionViewEvent.swift */; };
 		91F3F3EC1F99EAA500E6BE8F /* TableViewMoveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */; };
 		91F3F3EE1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */; };
 		990D1B75FCEFE1AF488A3957 /* Pods_FlixTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F4D7875C0928461978EE48 /* Pods_FlixTests.framework */; };
@@ -256,6 +257,7 @@
 		917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewGroupProvider.swift; sourceTree = "<group>"; };
 		917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewGroupProvider.swift; sourceTree = "<group>"; };
 		91DB959020835A6800020661 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
+		91DB959220864C4A00020661 /* CollectionViewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewEvent.swift; sourceTree = "<group>"; };
 		91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewMoveable.swift; sourceTree = "<group>"; };
 		91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterCustomizeViewController.swift; sourceTree = "<group>"; };
 		BA63D7D73F2D9CEB8F63F458 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				56FFB7CA1F89FBEA0066B903 /* TableViewSectionProvider.swift */,
 				2628745F1F9F8DD000F66907 /* ProviderDescription.swift */,
 				262874611F9F8F0F00F66907 /* CustomIdentityType.swift */,
+				91DB959220864C4A00020661 /* CollectionViewEvent.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 				26C8470C1F84929900EEFEAA /* UniqueCustomTableViewProvider.swift in Sources */,
 				9179C9641FA6D60F00B4C21E /* TableViewGroupProvider.swift in Sources */,
 				564639FB1F9E4D8A00EE1498 /* FlixStackView.swift in Sources */,
+				91DB959320864C4A00020661 /* CollectionViewEvent.swift in Sources */,
 				9157D7F020808337008E22D8 /* CustomProvider.swift in Sources */,
 				56FFB7C91F89F7110066B903 /* TableViewBuilder.swift in Sources */,
 				56FFB7CB1F89FBEA0066B903 /* TableViewSectionProvider.swift in Sources */,

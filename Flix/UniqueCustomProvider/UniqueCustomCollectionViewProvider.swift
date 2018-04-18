@@ -39,10 +39,9 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
             }
         }
     }
-    
-    public var tap: ControlEvent<()> { return ControlEvent(events: _tap.asObservable()) }
 
-    private let _tap = PublishSubject<()>()
+    @available(*, deprecated, renamed: "event.itemSelected")
+    public var tap: ControlEvent<CollectionViewEvent<Value>.EventValue> { return self.event.itemSelected }
     
     open var itemSize: (() -> CGSize?)?
     
@@ -55,8 +54,6 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
         }
     }
     private let _isHidden = BehaviorRelay(value: false)
-
-    open var isEnabled = true
     
     public init(customIdentity: String) {
         self.customIdentity = customIdentity
@@ -79,9 +76,6 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
     }
     
     open func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: SingleCollectionViewProvider) {
-        if self.isEnabled {
-            _tap.onNext(())
-        }
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 
