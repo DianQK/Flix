@@ -113,7 +113,7 @@ class DeleteItemViewController: TableViewController {
         addNewTagTitleLabel.leadingAnchor.constraint(equalTo: addNewTagImageView.trailingAnchor, constant: 15).isActive = true
         addNewTagTitleLabel.centerYAnchor.constraint(equalTo: addNewTagProvider.contentView.centerYAnchor, constant: 0).isActive = true
         
-        addNewTagProvider.tap.asObservable()
+        addNewTagProvider.event.selectedEvent.asObservable()
             .subscribe(onNext: {
                 inputTagsProvider.addItem()
             })

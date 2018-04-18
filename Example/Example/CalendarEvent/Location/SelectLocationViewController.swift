@@ -195,8 +195,8 @@ class SelectLocationViewController: UIViewController {
         Observable<EventLocation>
             .merge(
                 [
-                    customLocalProvider.tap.withLatestFrom(searchBar.rx.text.orEmpty).map { EventLocation.custom($0) },
-                    currentLocationProvider.tap.withLatestFrom(currentPlacemark.filter { $0 != nil }.map { EventLocation.placemark($0!) }),
+                    customLocalProvider.event.selectedEvent.withLatestFrom(searchBar.rx.text.orEmpty).map { EventLocation.custom($0) },
+                    currentLocationProvider.event.selectedEvent.withLatestFrom(currentPlacemark.filter { $0 != nil }.map { EventLocation.placemark($0!) }),
                     recentSelectedPlacemarksProvider.placemarkSelected.asObservable().map { EventLocation.placemark($0) },
                     localSearchProvider.placemarkSelected.asObservable().map { EventLocation.placemark($0) }
                 ]

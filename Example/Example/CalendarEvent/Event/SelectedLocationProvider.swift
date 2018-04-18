@@ -130,7 +130,7 @@ class SelectedLocationProvider: SingleUITableViewCellProvider {
             })
             .disposed(by: disposeBag)
 
-        self.tap.asObservable()
+        self.event.selectedEvent.asObservable()
             .flatMapLatest { [weak viewController, weak self] () -> Observable<EventLocation> in
                 return SelectLocationViewController.rx.createWithParent(viewController) { (selectLocation) in
                     selectLocation.searchBar.text = self?.location.value?.searchText

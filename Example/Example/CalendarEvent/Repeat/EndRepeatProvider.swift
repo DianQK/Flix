@@ -34,7 +34,7 @@ class EndRepeatProvider: TitleDescProvider {
             .bind(to: self.descLabel.rx.text)
             .disposed(by: disposeBag)
 
-        self.tap.asObservable()
+        self.event.selectedEvent.asObservable()
             .subscribe(onNext: { [weak viewController, weak self] in
                 guard let `self` = self else { return }
                 let endRepeatSelectViewController = EndRepeatSelectViewController(endRepeatDate: self.endRepeatDate, minEndDate: minEndDate)

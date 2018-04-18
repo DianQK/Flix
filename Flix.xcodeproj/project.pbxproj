@@ -99,6 +99,7 @@
 		91035D44204E8EE70090DAFD /* ChangesetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91035D43204E8EE70090DAFD /* ChangesetInfo.swift */; };
 		913B1A721FBB400B0075E96B /* MoveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913B1A711FBB400B0075E96B /* MoveCollectionViewController.swift */; };
 		913B1A751FBB41CA0075E96B /* CollectionViewMoveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913B1A741FBB41CA0075E96B /* CollectionViewMoveable.swift */; };
+		914A97592086EEBD00C6F428 /* TableViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914A97582086EEBD00C6F428 /* TableViewEvent.swift */; };
 		9157D7BD2080536F008E22D8 /* FlixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7BC2080536F008E22D8 /* FlixTests.swift */; };
 		9157D7BF2080536F008E22D8 /* Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2670E64F1F83E15C003A5BA7 /* Flix.framework */; };
 		9157D7EA2080575E008E22D8 /* CollectionViewBuilderMemoryLeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7E92080575E008E22D8 /* CollectionViewBuilderMemoryLeakTests.swift */; };
@@ -245,6 +246,7 @@
 		91035D43204E8EE70090DAFD /* ChangesetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesetInfo.swift; sourceTree = "<group>"; };
 		913B1A711FBB400B0075E96B /* MoveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCollectionViewController.swift; sourceTree = "<group>"; };
 		913B1A741FBB41CA0075E96B /* CollectionViewMoveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewMoveable.swift; sourceTree = "<group>"; };
+		914A97582086EEBD00C6F428 /* TableViewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEvent.swift; sourceTree = "<group>"; };
 		9157D7BA2080536F008E22D8 /* FlixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9157D7BC2080536F008E22D8 /* FlixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixTests.swift; sourceTree = "<group>"; };
 		9157D7BE2080536F008E22D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				2628745F1F9F8DD000F66907 /* ProviderDescription.swift */,
 				262874611F9F8F0F00F66907 /* CustomIdentityType.swift */,
 				91DB959220864C4A00020661 /* CollectionViewEvent.swift */,
+				914A97582086EEBD00C6F428 /* TableViewEvent.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 				2670E67B1F83E559003A5BA7 /* UIView+Configure.swift in Sources */,
 				2670E6741F83E2EA003A5BA7 /* Node.swift in Sources */,
 				26C847071F84897000EEFEAA /* TableViewSectionPartionProvider.swift in Sources */,
+				914A97592086EEBD00C6F428 /* TableViewEvent.swift in Sources */,
 				5694616B1F9C67B4009F7971 /* _CollectionViewBuilder.swift in Sources */,
 				564639FD1F9E4DAC00EE1498 /* FlixStackItemProvider.swift in Sources */,
 				56E06EF41F9C5CD50074032A /* _TableViewBuilder.swift in Sources */,

@@ -76,7 +76,7 @@ class GitHubSignupViewController: TableViewController {
                 username: usernameProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
                 password: passwordProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
                 repeatedPassword: repeatedPasswordProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
-                loginTaps: loginProvider.tap.asObservable()
+                loginTaps: loginProvider.event.selectedEvent.asObservable()
             ),
             dependency: (
                 API: GitHubDefaultAPI.sharedAPI,

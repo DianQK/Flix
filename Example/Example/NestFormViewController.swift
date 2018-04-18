@@ -297,7 +297,7 @@ class NestFormViewController: TableViewController {
             headerProvider: addHeaderProvider
         )
         
-        addProvider.tap.asObservable()
+        addProvider.event.selectedEvent.asObservable()
             .subscribe(onNext: { [unowned self] in
                 self.hardwareFormProvider.addItem()
             })

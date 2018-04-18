@@ -81,7 +81,7 @@ class LoginViewController: TableViewController {
             })
             .disposed(by: disposeBag)
         
-        loginProvider.tap
+        loginProvider.event.selectedEvent
             .withLatestFrom(isVerified).filter { $0 }
             .subscribe(onNext: { [weak self] _ in
                 let alert = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)

@@ -115,8 +115,8 @@ open class FlixStackItemProvider: UIControl, UniqueAnimatableTableViewProvider {
 //        self.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
         self._cell = cell
     }
-    
-    open func tap(_ tableView: UITableView, indexPath: IndexPath, value: FlixStackItemProvider) {
+
+    open func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: FlixStackItemProvider) {
         if self.isEnabled {
             self.sendActions(for: UIControlEvents.touchUpInside)
         }
