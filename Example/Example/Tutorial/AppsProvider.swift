@@ -83,7 +83,7 @@ class AppsProvider: AnimatableTableViewProvider {
         return Observable.just(apps)
     }
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: App) {
+    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: App) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

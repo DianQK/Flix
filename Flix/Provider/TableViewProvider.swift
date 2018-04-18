@@ -12,8 +12,10 @@ import RxCocoa
 import RxDataSources
 
 public protocol _TableViewMultiNodeProvider: FlixCustomStringConvertible {
-    
-    func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node)
+
+    func _itemSelected(_ tableView: UITableView, indexPath: IndexPath, node: _Node)
+
+    func _itemDeselected(_ tableView: UITableView, indexPath: IndexPath, node: _Node)
     
     func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat?
     
@@ -56,7 +58,9 @@ public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider, Reactiv
     
     func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: Value) -> UITableViewCell
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: Value)
+    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: Value)
+
+    func itemDeselected(_ tableView: UITableView, indexPath: IndexPath, value: Value)
     
     func createValues() -> Observable<[Value]>
     
@@ -72,17 +76,16 @@ extension TableViewMultiNodeProvider {
         self.register(tableView)
         self.tableView = tableView
     }
-    
-    public func tap(_ tableView: UITableView, indexPath: IndexPath, value: Value) {
-        
-    }
+
+    public func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: Value) { }
+
+    public func itemDeselected(_ tableView: UITableView, indexPath: IndexPath, value: Value) { }
     
     public func _createNodes() -> Observable<[Node]> {
         let providerIdentity = self._flix_identity
         return createValues()
             .map { $0.map { Node(providerIdentity: providerIdentity, value: $0) } }
     }
-
     
     public func _configureCell(_ tableView: UITableView, indexPath: IndexPath, node: _Node) -> UITableViewCell {
         return self.configureCell(tableView, indexPath: indexPath, value: node._unwarp())
@@ -91,9 +94,13 @@ extension TableViewMultiNodeProvider {
     public func _tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, node: _Node) -> CGFloat? {
         return self.tableView(tableView, heightForRowAt: indexPath, value: node._unwarp())
     }
-    
-    public func _tap(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
-        self.tap(tableView, indexPath: indexPath, value: node._unwarp())
+
+    public func _itemSelected(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
+        self.itemSelected(tableView, indexPath: indexPath, value: node._unwarp())
+    }
+
+    public func _itemDeselected(_ tableView: UITableView, indexPath: IndexPath, node: _Node) {
+        self.itemDeselected(tableView, indexPath: indexPath, value: node._unwarp())
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: Value) -> CGFloat? {

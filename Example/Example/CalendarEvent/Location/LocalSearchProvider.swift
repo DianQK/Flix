@@ -95,7 +95,7 @@ class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
         return 56
     }
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: CLPlacemark) {
+    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: CLPlacemark) {
         placemarkSelected.onNext(value)
         tableView.deselectRow(at: indexPath, animated: true)
     }

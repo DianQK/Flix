@@ -28,7 +28,7 @@ class EventOptionsProvider<T: EventOptionType>: AnimatableTableViewProvider {
         }
     }
 
-    func tap(_ tableView: UITableView, indexPath: IndexPath, value: T) {
+    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: T) {
         self.optionSelected.onNext(value)
     }
 
