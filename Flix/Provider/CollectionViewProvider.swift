@@ -127,11 +127,11 @@ private var providerEventKey: Void?
 
 extension CollectionViewMultiNodeProvider {
 
-    public var event: CollectionViewEvent<Value> {
-        if let event = objc_getAssociatedObject(self, &providerEventKey) as? CollectionViewEvent<Value> {
+    public var event: CollectionViewEvent<Self> {
+        if let event = objc_getAssociatedObject(self, &providerEventKey) as? CollectionViewEvent<Self> {
             return event
         } else {
-            let event = CollectionViewEvent<Value>()
+            let event = CollectionViewEvent<Self>()
             objc_setAssociatedObject(self, &providerEventKey, event, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return event
         }

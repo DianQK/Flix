@@ -10,7 +10,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public class CollectionViewEvent<Value> {
+public class CollectionViewEvent<Provider: CollectionViewMultiNodeProvider> {
+
+    public typealias Value = Provider.Value
 
     public typealias EventValue = (collectionView: UICollectionView, indexPath: IndexPath, value: Value)
 
@@ -19,12 +21,15 @@ public class CollectionViewEvent<Value> {
     public var modelSelected: ControlEvent<Value> { return ControlEvent(events: self.itemSelected.map { $0.value }) }
 
     public var itemSelected: ControlEvent<EventValue> { return ControlEvent(events: self._itemSelected) }
-    var _itemSelected = PublishSubject<EventValue>()
+    let _itemSelected = PublishSubject<EventValue>()
 
     public var modelDeselected: ControlEvent<Value> { return ControlEvent(events: self.itemDeselected.map { $0.value }) }
 
     public var itemDeselected: ControlEvent<EventValue> { return ControlEvent(events: self._itemDeselected) }
-    var _itemDeselected = PublishSubject<EventValue>()
+    let _itemDeselected = PublishSubject<EventValue>()
+
+    public typealias MoveEventValue = (collectionView: UICollectionView, sourceIndex: Int, destinationIndex: Int, value: Value)
+    let _moveItem = PublishSubject<MoveEventValue>()
 
     init() { }
 
