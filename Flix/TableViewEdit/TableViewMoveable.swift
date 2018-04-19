@@ -31,14 +31,8 @@ extension TableViewMoveable where Self: TableViewMultiNodeProvider {
     public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath, value: Self.Value) -> Bool {
         return true
     }
-    
-    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, value: Self.Value) -> Bool {
-        return true
-    }
-    
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, value: Self.Value) -> [UITableViewRowAction]? {
-        return nil
-    }
+
+    public func tableView(_ tableView: UITableView, moveRowAt sourceIndex: Int, to destinationIndex: Int, value: Self.Value) { }
 
     public func _tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath, node: _Node) -> Bool {
         return self.tableView(tableView, canMoveRowAt: indexPath, value: node._unwarp())

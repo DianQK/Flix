@@ -25,6 +25,8 @@ public protocol TableViewDeleteable: _TableViewDeleteable, TableViewEditable {
 }
 
 extension TableViewDeleteable where Self: TableViewMultiNodeProvider {
+
+    public func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: Self.Value) { }
     
     public func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, value: Self.Value) -> String? {
         return nil
@@ -46,6 +48,10 @@ extension TableViewDeleteable where Self: TableViewMultiNodeProvider {
 }
 
 extension TableViewEvent where Provider: TableViewDeleteable {
+
+    public var modelDeleted: ControlEvent<Value> {
+        return ControlEvent(events: self._itemDeleted.map { $0.value })
+    }
 
     public var itemDeleted: ControlEvent<EventValue> {
         return ControlEvent(events: self._itemDeleted)

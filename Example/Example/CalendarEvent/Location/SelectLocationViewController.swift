@@ -157,7 +157,7 @@ class SelectLocationViewController: UIViewController {
 
         let recentSelectedPlacemarksProvider = LocalSearchProvider.createRecentSelectedPlacemarksProvider()
         recentSelectedPlacemarksProvider.canDelete = true
-        recentSelectedPlacemarksProvider.placemarkDeleted.asObservable()
+        recentSelectedPlacemarksProvider.event.modelDeleted
             .subscribe(onNext: { (placemark) in
                 Storage.recentSelectedPlacemarks.accept(Storage.recentSelectedPlacemarks.value.filter({ $0.identity != placemark.identity }))
             })
