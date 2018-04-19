@@ -115,11 +115,11 @@ private var providerEventKey: Void?
 
 extension TableViewMultiNodeProvider {
 
-    public var event: TableViewEvent<Value> {
-        if let event = objc_getAssociatedObject(self, &providerEventKey) as? TableViewEvent<Value> {
+    public var event: TableViewEvent<Self> {
+        if let event = objc_getAssociatedObject(self, &providerEventKey) as? TableViewEvent<Self> {
             return event
         } else {
-            let event = TableViewEvent<Value>()
+            let event = TableViewEvent<Self>()
             objc_setAssociatedObject(self, &providerEventKey, event, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return event
         }

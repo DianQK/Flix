@@ -26,19 +26,15 @@ public protocol TableViewEditable: _TableViewEditable {
 
 }
 
-extension TableViewEditable {
+extension TableViewEditable where Self: TableViewMultiNodeProvider {
     
-    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, value: Value) -> Bool {
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, value: Self.Value) -> Bool {
         return true
     }
     
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, value: Value) -> [UITableViewRowAction]? {
+    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, value: Self.Value) -> [UITableViewRowAction]? {
         return nil
     }
-
-}
-
-extension TableViewEditable {
     
     public func _tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, node: _Node) -> [UITableViewRowAction]? {
         return self.tableView(tableView, editActionsForRowAt: indexPath, value: node._unwarp())

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 public protocol _TableViewMoveable: _TableViewEditable {
 
@@ -24,30 +26,35 @@ public protocol TableViewMoveable: TableViewEditable, _TableViewMoveable {
    
 }
 
-extension TableViewMoveable {
+extension TableViewMoveable where Self: TableViewMultiNodeProvider {
 
-    public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath, value: Value) -> Bool {
+    public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath, value: Self.Value) -> Bool {
         return true
     }
     
-    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, value: Value) -> Bool {
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, value: Self.Value) -> Bool {
         return true
     }
     
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, value: Value) -> [UITableViewRowAction]? {
+    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, value: Self.Value) -> [UITableViewRowAction]? {
         return nil
     }
-
-}
-
-extension TableViewMoveable {
 
     public func _tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath, node: _Node) -> Bool {
         return self.tableView(tableView, canMoveRowAt: indexPath, value: node._unwarp())
     }
     
     public func _tableView(_ tableView: UITableView, moveRowAt sourceIndex: Int, to destinationIndex: Int, node: _Node) {
-        return self.tableView(tableView, moveRowAt: sourceIndex, to: destinationIndex, value: node._unwarp())
+        self.tableView(tableView, moveRowAt: sourceIndex, to: destinationIndex, value: node._unwarp())
+        self.event._moveItem.onNext((tableView: tableView, sourceIndex: sourceIndex, destinationIndex: destinationIndex, value: node._unwarp()))
+    }
+
+}
+
+extension TableViewEvent where Provider: TableViewMoveable {
+
+    public var moveItem: ControlEvent<MoveEventValue> {
+        return ControlEvent(events: self._moveItem)
     }
 
 }

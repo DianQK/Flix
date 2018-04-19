@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 public protocol _TableViewDeleteable {
     
@@ -22,26 +24,31 @@ public protocol TableViewDeleteable: _TableViewDeleteable, TableViewEditable {
     
 }
 
-extension TableViewDeleteable {
+extension TableViewDeleteable where Self: TableViewMultiNodeProvider {
     
-    public func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, value: Value) -> String? {
+    public func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, value: Self.Value) -> String? {
         return nil
     }
     
-    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Value) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.delete
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Self.Value) -> UITableViewCellEditingStyle {
+        return .delete
     }
-    
-}
-
-extension TableViewDeleteable {
     
     public func _tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, node: _Node) {
         self.tableView(tableView, itemDeletedForRowAt: indexPath, value: node._unwarp())
+        self.event._itemDeleted.onNext((tableView: tableView, indexPath: indexPath, value: node._unwarp()))
     }
     
     public func _tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, node: _Node) -> String? {
         return self.tableView(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath, value: node._unwarp())
     }
     
+}
+
+extension TableViewEvent where Provider: TableViewDeleteable {
+
+    public var itemDeleted: ControlEvent<EventValue> {
+        return ControlEvent(events: self._itemDeleted)
+    }
+
 }
