@@ -10,7 +10,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public class TableViewEvent<Value> {
+public class TableViewEvent<Provider: TableViewMultiNodeProvider> {
+
+    public typealias Value = Provider.Value
 
     public typealias EventValue = (tableView: UITableView, indexPath: IndexPath, value: Value)
 
@@ -19,12 +21,19 @@ public class TableViewEvent<Value> {
     public var modelSelected: ControlEvent<Value> { return ControlEvent(events: self.itemSelected.map { $0.value }) }
 
     public var itemSelected: ControlEvent<EventValue> { return ControlEvent(events: self._itemSelected) }
-    var _itemSelected = PublishSubject<EventValue>()
+    let _itemSelected = PublishSubject<EventValue>()
 
     public var modelDeselected: ControlEvent<Value> { return ControlEvent(events: self.itemDeselected.map { $0.value }) }
 
     public var itemDeselected: ControlEvent<EventValue> { return ControlEvent(events: self._itemDeselected) }
-    var _itemDeselected = PublishSubject<EventValue>()
+    let _itemDeselected = PublishSubject<EventValue>()
+
+    public typealias MoveEventValue = (tableView: UITableView, sourceIndex: Int, destinationIndex: Int, value: Value)
+    let _moveItem = PublishSubject<MoveEventValue>()
+
+    let _itemDeleted = PublishSubject<EventValue>()
+
+    let _itemInserted = PublishSubject<EventValue>()
 
     init() { }
 
