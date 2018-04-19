@@ -21,15 +21,15 @@ public class CollectionViewEvent<Provider: CollectionViewMultiNodeProvider> {
     public var modelSelected: ControlEvent<Value> { return ControlEvent(events: self.itemSelected.map { $0.value }) }
 
     public var itemSelected: ControlEvent<EventValue> { return ControlEvent(events: self._itemSelected) }
-    let _itemSelected = PublishSubject<EventValue>()
+    private(set) lazy var _itemSelected = PublishSubject<EventValue>()
 
     public var modelDeselected: ControlEvent<Value> { return ControlEvent(events: self.itemDeselected.map { $0.value }) }
 
     public var itemDeselected: ControlEvent<EventValue> { return ControlEvent(events: self._itemDeselected) }
-    let _itemDeselected = PublishSubject<EventValue>()
+    private(set) lazy var _itemDeselected = PublishSubject<EventValue>()
 
     public typealias MoveEventValue = (collectionView: UICollectionView, sourceIndex: Int, destinationIndex: Int, value: Value)
-    let _moveItem = PublishSubject<MoveEventValue>()
+    private(set) lazy var _moveItem = PublishSubject<MoveEventValue>()
 
     init() { }
 
