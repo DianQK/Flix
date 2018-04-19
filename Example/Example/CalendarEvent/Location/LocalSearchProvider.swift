@@ -74,10 +74,6 @@ extension CLPlacemark {
 
 class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
 
-    func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: CLPlacemark) {
-        placemarkDeleted.onNext(value)
-    }
-
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, value: CLPlacemark) -> Bool {
         return canDelete
     }
@@ -106,7 +102,6 @@ class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
     let naturalLanguageQuery: Observable<String>?
     let result: Observable<[CLPlacemark]>
     let placemarkSelected = PublishSubject<CLPlacemark>()
-    let placemarkDeleted = PublishSubject<CLPlacemark>()
     var canDelete: Bool = false
 
     init(naturalLanguageQuery: Observable<String>) {

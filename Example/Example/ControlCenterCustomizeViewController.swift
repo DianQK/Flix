@@ -25,8 +25,6 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
     typealias Value = String
     
     let values = BehaviorRelay(value: ["Flashlight", "Timer", "Calculator", "Low Power Mode", "Screen Recording", "Notes", "Alarm", "Camera"])
-    
-    let itemDeleted = PublishSubject<String>()
 
     func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: String) {
         cell.textLabel?.text = value
@@ -44,7 +42,6 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
     func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: String) {
         self.beforeDelete?()
         values.accept(values.value.filter({ $0 != value }))
-        itemDeleted.onNext(value)
     }
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, value: String) -> String? {
@@ -69,8 +66,6 @@ class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
     let values = BehaviorRelay(value: ["Magnifier", "Accessibility Shortcuts", "Do Not Disturb While Driving", "Stopwatch", "Text Size", "Guided Access", "Voice Memos", "Apple TV Remote", "Wallet"])
 
     var beforeInserted: (() -> ())?
-
-    let itemInserted = PublishSubject<String>()
     
     func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: String) {
         cell.textLabel?.text = value
@@ -79,7 +74,6 @@ class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
     func tableView(_ tableView: UITableView, itemInsertedForRowAt indexPath: IndexPath, value: String) {
         self.beforeInserted?()
         values.accept(values.value.filter({ $0 != value }))
-        itemInserted.onNext(value)
     }
     
     func insertNew(_ value: String) {
@@ -177,14 +171,14 @@ class ControlCenterCustomizeViewController: TableViewController {
         moreControlProvider.beforeInserted = { [weak self] in
             self?.tableView.flix.beginGroupUpdates()
         }
-        includeControlProvider.itemDeleted
+        includeControlProvider.event.modelDeleted
             .subscribe(onNext: { [weak self] (value) in
                 moreControlProvider.insertNew(value)
                 self?.tableView.flix.endGroupUpdates()
             })
             .disposed(by: disposeBag)
 
-        moreControlProvider.itemInserted
+        moreControlProvider.event.modelInserted
             .subscribe(onNext: { [weak self] (value) in
                 includeControlProvider.insertNew(value)
                 self?.tableView.flix.endGroupUpdates()
