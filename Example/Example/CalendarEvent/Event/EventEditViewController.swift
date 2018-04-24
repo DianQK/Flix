@@ -30,6 +30,7 @@ class EventEditViewController: TableViewController {
         super.init(nibName: nil, bundle: nil)
         let isEdit = calendarEvent != nil
         self.title = isEdit ? "Edit Event" : "New Event"
+        self.addBarButtonItem.title = isEdit ? "Done" : "Add"
 
         self.navigationItem.leftBarButtonItem = cancelBarButtonItem
         self.navigationItem.rightBarButtonItem = addBarButtonItem
