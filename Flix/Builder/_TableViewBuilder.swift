@@ -29,6 +29,8 @@ protocol FlixSectionModelType: SectionModelType {
     associatedtype Section
     
     var model: Section { get }
+
+    init(model: Section, items: [Item])
     
 }
 

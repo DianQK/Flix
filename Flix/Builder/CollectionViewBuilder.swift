@@ -83,8 +83,12 @@ public class CollectionViewBuilder: _CollectionViewBuilder, PerformGroupUpdatesa
                 self?.headerSectionProviders = sectionProviders.compactMap { $0.headerProvider }
             })
             .flatMapLatest { (providers) -> Observable<[SectionModel]> in
-                let sections = providers.map { $0.createSectionModel() }
-                return Observable.combineLatest(sections).map { $0.map { SectionModel(model: $0.section, items: $0.nodes) } }
+                let sections = providers.compactMap { $0.createSectionModel() }
+                return Observable.combineLatest(sections)
+                    .ifEmpty(default: [])
+                    .map { value -> [SectionModel] in
+                        return combineSections(value)
+                }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)
             .bind(to: collectionView.rx.items(dataSource: dataSource))
