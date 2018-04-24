@@ -47,11 +47,22 @@ struct SectionNode: _SectionNode {
     
 }
 
-public class CollectionViewSectionProvider: FlixCustomStringConvertible {
+public class CollectionViewSectionProvider: FlixCustomStringConvertible, ProviderHiddenable {
     
     public var headerProvider: _SectionPartionCollectionViewProvider?
     public var footerProvider: _SectionPartionCollectionViewProvider?
     public var providers: [_CollectionViewMultiNodeProvider]
+
+    public var isHidden: Bool {
+        get {
+            return _isHidden.value
+        }
+        set {
+            _isHidden.accept(newValue)
+        }
+    }
+
+    fileprivate let _isHidden = BehaviorRelay(value: false)
     
     public init(providers: [_CollectionViewMultiNodeProvider], headerProvider: _SectionPartionCollectionViewProvider? = nil, footerProvider: _SectionPartionCollectionViewProvider? = nil) {
         self.providers = providers
@@ -59,7 +70,7 @@ public class CollectionViewSectionProvider: FlixCustomStringConvertible {
         self.footerProvider = footerProvider
     }
     
-    func createSectionModel() -> Observable<(section: SectionNode, nodes: [Node])> {
+    func createSectionModel() -> Observable<(section: SectionNode, nodes: [Node])?> {
         let headerSection = headerProvider?._createSectionPartion() ?? Observable.just(nil)
         let footerSection = footerProvider?._createSectionPartion() ?? Observable.just(nil)
         let nodes = Observable.combineLatest(providers.map { $0._createNodes() })
@@ -67,9 +78,12 @@ public class CollectionViewSectionProvider: FlixCustomStringConvertible {
             .ifEmpty(default: [])
         
         let sectionProviderIdentity = self._flix_identity
+
+        let isHidden = self._isHidden.asObservable().distinctUntilChanged()
         
         return Observable
-            .combineLatest(headerSection, footerSection, nodes) { (headerSection, footerSection, nodes) -> (section: SectionNode, nodes: [Node]) in
+            .combineLatest(headerSection, footerSection, nodes, isHidden) { (headerSection, footerSection, nodes, isHidden) -> (section: SectionNode, nodes: [Node])? in
+                if isHidden { return nil }
                 let section = SectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)
                 return (section: section, nodes: nodes)
         }
@@ -91,7 +105,7 @@ public class AnimatableCollectionViewSectionProvider: CollectionViewSectionProvi
         super.init(providers: providers, headerProvider: headerProvider, footerProvider: footerProvider)
     }
     
-    func createSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])> {
+    func createSectionModel() -> Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?> {
         let headerSection = animatableHeaderProvider?._createAnimatableSectionPartion() ?? Observable.just(nil)
         let footerSection = animatableFooterProvider?._createAnimatableSectionPartion() ?? Observable.just(nil)
 
@@ -112,9 +126,12 @@ public class AnimatableCollectionViewSectionProvider: CollectionViewSectionProvi
         }
         
         let sectionProviderIdentity = self._flix_identity
+
+        let isHidden = self._isHidden.asObservable().distinctUntilChanged()
         
         return Observable
-            .combineLatest(headerSection, footerSection, nodes) { (headerSection, footerSection, nodes) -> (section: IdentifiableSectionNode, nodes: [IdentifiableNode]) in
+            .combineLatest(headerSection, footerSection, nodes, isHidden) { (headerSection, footerSection, nodes, isHidden) -> (section: IdentifiableSectionNode, nodes: [IdentifiableNode])? in
+                if isHidden { return nil }
                 let section = IdentifiableSectionNode(identity: sectionProviderIdentity, headerNode: headerSection, footerNode: footerSection)
                 return (section: section, nodes: nodes)
         }

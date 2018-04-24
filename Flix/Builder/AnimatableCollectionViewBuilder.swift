@@ -97,20 +97,11 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder, PerformGro
                 self?.headerSectionProviders = sectionProviders.compactMap { $0.animatableHeaderProvider }
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
-                let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])>] = providers.map { $0.createSectionModel() }
+                let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.createSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [AnimatableSectionModel] in
-                        return value.enumerated()
-                            .map { (offset, section) -> AnimatableSectionModel in
-                                let items = section.nodes.map { (node) -> IdentifiableNode in
-                                    var node = node
-                                    node.providerStartIndexPath.section = offset
-                                    node.providerEndIndexPath.section = offset
-                                    return node
-                                }
-                                return AnimatableSectionModel(model: section.section, items: items)
-                        }
+                        return combineSections(value)
                 }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)

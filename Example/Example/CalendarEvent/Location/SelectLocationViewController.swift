@@ -167,7 +167,7 @@ class SelectLocationViewController: UIViewController {
             headerProvider: PlainTitleTableViewHeaderSectionProvider(text: "Recents")
         )
         Storage.recentSelectedPlacemarks.asObservable().map { $0.isEmpty }
-            .bind(to: recentSelectedPlacemarksSectionProvider.isHidden)
+            .bind(to: recentSelectedPlacemarksSectionProvider.rx.isHidden)
             .disposed(by: disposeBag)
 
         let localSearchProvider = LocalSearchProvider(naturalLanguageQuery: searchBar.rx.text.orEmpty.asObservable())
@@ -189,7 +189,7 @@ class SelectLocationViewController: UIViewController {
 
         localSearchProvider.result.map { $0.isEmpty }
             .distinctUntilChanged()
-            .bind(to: localSearchSectionProvider.isHidden)
+            .bind(to: localSearchSectionProvider.rx.isHidden)
             .disposed(by: disposeBag)
 
         Observable<EventLocation>
