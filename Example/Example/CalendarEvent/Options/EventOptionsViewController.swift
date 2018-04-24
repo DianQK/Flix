@@ -28,17 +28,12 @@ class EventOptionsProvider<T: EventOptionType>: AnimatableTableViewProvider {
         }
     }
 
-    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: T) {
-        self.optionSelected.onNext(value)
-    }
-
     func createValues() -> Observable<[T]> {
         return Observable.just(options)
     }
 
     let options: [T]
     let selectedOption: T?
-    let optionSelected = PublishSubject<T>()
 
     init(options: [T], selectedOption: T?) {
         self.options = options
@@ -73,7 +68,7 @@ class EventOptionsViewController<T: EventOptionType>: TableViewController {
         let providers = T.allOptions.map { EventOptionsProvider(options: $0, selectedOption: selectedOption) }
 
         for provider in providers {
-            provider.optionSelected.asObservable()
+            provider.event.modelSelected.asObservable()
                 .subscribe(onNext: { [weak self] (option) in
                     guard let `self` = self else { return }
                     self.optionSelected.onNext(option)
