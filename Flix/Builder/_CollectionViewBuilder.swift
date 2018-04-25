@@ -18,9 +18,9 @@ protocol _CollectionViewBuilder: Builder {
     
     var collectionView: UICollectionView { get }
     
-    var nodeProviders: [_CollectionViewMultiNodeProvider] { get }
-    var footerSectionProviders: [_SectionPartionCollectionViewProvider] { get }
-    var headerSectionProviders: [_SectionPartionCollectionViewProvider] { get }
+    var nodeProviders: [String: _CollectionViewMultiNodeProvider] { get }
+    var footerSectionProviders: [String: _SectionPartionCollectionViewProvider] { get }
+    var headerSectionProviders: [String: _SectionPartionCollectionViewProvider] { get }
     
 }
 
@@ -30,7 +30,7 @@ extension _CollectionViewBuilder {
         dataSource.canMoveItemAtIndexPath = { [weak collectionView, weak self] (dataSource, indexPath) in
             guard let collectionView = collectionView else { return false }
             let node = dataSource[indexPath]
-            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return false }
+            guard let provider = self?.nodeProviders[node.providerIdentity] else { return false }
             if let provider = provider as? _CollectionViewMoveable {
                 return provider._collectionView(collectionView, canMoveItemAt: indexPath, node: node)
             } else {
@@ -41,7 +41,7 @@ extension _CollectionViewBuilder {
         dataSource.moveItem = { [weak collectionView, weak self] (dataSource, sourceIndexPath, destinationIndexPath) in
             guard let collectionView = collectionView else { return }
             let node = dataSource[destinationIndexPath]
-            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) as? _CollectionViewMoveable else { return }
+            guard let provider = self?.nodeProviders[node.providerIdentity] as? _CollectionViewMoveable else { return }
             provider._collectionView(
                 collectionView,
                 moveItemAt: sourceIndexPath.row - node.providerStartIndexPath.row,
@@ -53,7 +53,7 @@ extension _CollectionViewBuilder {
         self.delegeteProxy.targetIndexPathForMoveFromItemAt = { [weak self] (collectionView, originalIndexPath, proposedIndexPath) -> IndexPath in
             let node = dataSource[originalIndexPath]
             let providerIdentity = node.providerIdentity
-            let provider = self?.nodeProviders.first(where: { $0._flix_identity == providerIdentity })!
+            let provider = self?.nodeProviders[providerIdentity]!
             if let _ = provider as? _CollectionViewMoveable {
                 if (proposedIndexPath <= node.providerStartIndexPath) {
                     return node.providerStartIndexPath
@@ -71,7 +71,7 @@ extension _CollectionViewBuilder {
             .subscribe(onNext: { [weak collectionView, unowned self] (indexPath) in
                 guard let `collectionView` = collectionView else { return }
                 let node = dataSource[indexPath]
-                let provider = self.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity })!
+                let provider = self.nodeProviders[node.providerIdentity]!
                 provider._itemSelected(collectionView, indexPath: indexPath, node: node)
             })
             .disposed(by: disposeBag)
@@ -80,7 +80,7 @@ extension _CollectionViewBuilder {
             .subscribe(onNext: { [weak collectionView, unowned self] (indexPath) in
                 guard let `collectionView` = collectionView else { return }
                 let node = dataSource[indexPath]
-                let provider = self.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity })!
+                let provider = self.nodeProviders[node.providerIdentity]!
                 provider._itemDeselected(collectionView, indexPath: indexPath, node: node)
             })
             .disposed(by: disposeBag)
@@ -88,28 +88,28 @@ extension _CollectionViewBuilder {
         self.delegeteProxy.sizeForItem = { [unowned self] collectionView, flowLayout, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
-            let provider = self.nodeProviders.first(where: { $0._flix_identity == providerIdentity })!
+            let provider = self.nodeProviders[providerIdentity]!
             return provider._collectionView(collectionView, layout: flowLayout, sizeForItemAt: indexPath, node: node)
         }
 
         self.delegeteProxy.shouldSelectItemAt = { [unowned self] collectionView, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
-            let provider = self.nodeProviders.first(where: { $0._flix_identity == providerIdentity })!
+            let provider = self.nodeProviders[providerIdentity]!
             return provider._collectionView(collectionView, shouldSelectItemAt: indexPath, node: node)
         }
         
         self.delegeteProxy.referenceSizeForFooterInSection = { [unowned self] collectionView, collectionViewLayout, section in
             guard let footerNode = dataSource[section].model.footerNode else { return CGSize.zero }
             let providerIdentity = footerNode.providerIdentity
-            let provider = self.footerSectionProviders.first(where: { $0._flix_identity == providerIdentity })!
+            let provider = self.footerSectionProviders[providerIdentity]!
             return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
         }
         
         self.delegeteProxy.referenceSizeForHeaderInSection = { [unowned self] collectionView, collectionViewLayout, section in
             guard let footerNode = dataSource[section].model.headerNode else { return CGSize.zero }
             let providerIdentity = footerNode.providerIdentity
-            let provider = self.headerSectionProviders.first(where: { $0._flix_identity == providerIdentity })!
+            let provider = self.headerSectionProviders[providerIdentity]!
             return provider._collectionView(collectionView, layout: collectionViewLayout, referenceSizeInSection: section, node: footerNode)
         }
         
