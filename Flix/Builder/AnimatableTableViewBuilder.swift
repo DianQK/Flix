@@ -20,23 +20,23 @@ public class AnimatableTableViewBuilder: _TableViewBuilder, PerformGroupUpdatesa
     
     public let sectionProviders: BehaviorRelay<[AnimatableTableViewSectionProvider]>
     
-    var nodeProviders: [_TableViewMultiNodeProvider] = [] {
+    var nodeProviders: [String: _TableViewMultiNodeProvider] = [:] {
         didSet {
-            for provider in nodeProviders {
+            nodeProviders.forEach { (_, provider) in
                 provider._register(tableView)
             }
         }
     }
-    var footerSectionProviders: [_SectionPartionTableViewProvider] = [] {
+    var footerSectionProviders: [String: _SectionPartionTableViewProvider] = [:] {
         didSet {
-            for provider in footerSectionProviders {
+            footerSectionProviders.forEach { (_, provider) in
                 provider.register(tableView)
             }
         }
     }
-    var headerSectionProviders: [_SectionPartionTableViewProvider] = [] {
+    var headerSectionProviders: [String: _SectionPartionTableViewProvider] = [:] {
         didSet {
-            for provider in headerSectionProviders {
+            headerSectionProviders.forEach { (_, provider) in
                 provider.register(tableView)
             }
         }
@@ -56,7 +56,7 @@ public class AnimatableTableViewBuilder: _TableViewBuilder, PerformGroupUpdatesa
         self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel>(configureCell: { [weak self] dataSource, tableView, indexPath, node in
-            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UITableViewCell() }
+            guard let provider = self?.nodeProviders[node.providerIdentity] else { return UITableViewCell() }
             return provider._configureCell(tableView, indexPath: indexPath, node: node)
         })
 
@@ -74,16 +74,21 @@ public class AnimatableTableViewBuilder: _TableViewBuilder, PerformGroupUpdatesa
         
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
-                self?.nodeProviders = sectionProviders.flatMap { $0.animatableProviders.flatMap { $0.__providers } }
-                self?.footerSectionProviders = sectionProviders.compactMap { $0.animatableFooterProvider }
-                self?.headerSectionProviders = sectionProviders.compactMap { $0.animatableHeaderProvider }
+                self?.nodeProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders
+                        .flatMap { $0.animatableProviders.flatMap { $0.__providers.map { (key: $0._flix_identity, value: $0) } }
+                })
+                self?.footerSectionProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders.compactMap { $0.animatableFooterProvider.map { (key: $0._flix_identity, value: $0) } })
+                self?.headerSectionProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders.compactMap { $0.animatableHeaderProvider.map { (key: $0._flix_identity, value: $0) } })
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
                 let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.createSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [AnimatableSectionModel] in
-                        return combineSections(value)
+                        return BuilderTool.combineSections(value)
                 }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)

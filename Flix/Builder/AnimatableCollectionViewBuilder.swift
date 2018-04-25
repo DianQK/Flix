@@ -20,23 +20,23 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder, PerformGro
     
     public let sectionProviders: BehaviorRelay<[AnimatableCollectionViewSectionProvider]>
 
-    var nodeProviders: [_CollectionViewMultiNodeProvider] = [] {
+    var nodeProviders: [String: _CollectionViewMultiNodeProvider] = [:] {
         didSet {
-            for provider in nodeProviders {
+            nodeProviders.forEach { (_, provider) in
                 provider._register(collectionView)
             }
         }
     }
-    var footerSectionProviders: [_SectionPartionCollectionViewProvider] = [] {
+    var footerSectionProviders: [String: _SectionPartionCollectionViewProvider] = [:] {
         didSet {
-            for provider in footerSectionProviders {
+            footerSectionProviders.forEach { (_, provider) in
                 provider.register(collectionView)
             }
         }
     }
-    var headerSectionProviders: [_SectionPartionCollectionViewProvider] = [] {
+    var headerSectionProviders: [String: _SectionPartionCollectionViewProvider] = [:] {
         didSet {
-            for provider in headerSectionProviders {
+            headerSectionProviders.forEach { (_, provider) in
                 provider.register(collectionView)
             }
         }
@@ -58,20 +58,20 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder, PerformGro
         
         let dataSource = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel>(
             configureCell: { [weak self] dataSource, collectionView, indexPath, node in
-                guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UICollectionViewCell() }
+                guard let provider = self?.nodeProviders[node.providerIdentity] else { return UICollectionViewCell() }
                 return provider._configureCell(collectionView, indexPath: indexPath, node: node)
             },
             configureSupplementaryView: { [weak self] dataSource, collectionView, kind, indexPath in
             switch UICollectionElementKindSection(rawValue: kind)! {
             case .footer:
                 guard let node = dataSource[indexPath.section].model.footerNode else { fatalError() }
-                guard let provider = self?.footerSectionProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UICollectionReusableView() }
+                guard let provider = self?.footerSectionProviders[node.providerIdentity] else { return UICollectionReusableView() }
                 let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: provider._flix_identity, for: indexPath)
                 provider._configureSupplementaryView(collectionView, sectionView: reusableView, indexPath: indexPath, node: node)
                 return reusableView
             case .header:
                 guard let node = dataSource[indexPath.section].model.headerNode else { fatalError() }
-                guard let provider = self?.headerSectionProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UICollectionReusableView() }
+                guard let provider = self?.headerSectionProviders[node.providerIdentity] else { return UICollectionReusableView() }
                 let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: provider._flix_identity, for: indexPath)
                 provider._configureSupplementaryView(collectionView, sectionView: reusableView, indexPath: indexPath, node: node)
                 return reusableView
@@ -92,16 +92,21 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder, PerformGro
         
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
-                self?.nodeProviders = sectionProviders.flatMap { $0.animatableProviders.flatMap { $0.__providers } }
-                self?.footerSectionProviders = sectionProviders.compactMap { $0.animatableFooterProvider }
-                self?.headerSectionProviders = sectionProviders.compactMap { $0.animatableHeaderProvider }
+                self?.nodeProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders
+                        .flatMap { $0.animatableProviders.flatMap { $0.__providers.map { (key: $0._flix_identity, value: $0) } }
+                })
+                self?.footerSectionProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders.compactMap { $0.animatableFooterProvider.map { (key: $0._flix_identity, value: $0) } })
+                self?.headerSectionProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders.compactMap { $0.animatableHeaderProvider.map { (key: $0._flix_identity, value: $0) } })
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
                 let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.createSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [AnimatableSectionModel] in
-                        return combineSections(value)
+                        return BuilderTool.combineSections(value)
                 }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)

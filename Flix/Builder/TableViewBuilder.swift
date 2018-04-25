@@ -11,33 +11,6 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-protocol CombineSectionModelType {
-
-    associatedtype Section
-    associatedtype Item
-
-    init(model: Section, items: [Item])
-
-}
-
-func combineSections<S: _SectionNode, N: _Node, FlixSectionModel: CombineSectionModelType>(_ value: [(section: S, nodes: [N])?]) -> [FlixSectionModel]
-    where FlixSectionModel.Item == N, FlixSectionModel.Section == S {
-        return value.compactMap { $0 }.enumerated()
-            .map { (offset, section) -> FlixSectionModel in
-                let items = section.nodes.map { (node) -> N in
-                    var node = node
-                    node.providerStartIndexPath.section = offset
-                    node.providerEndIndexPath.section = offset
-                    return node
-                }
-                return FlixSectionModel.init(model: section.section, items: items)
-        }
-
-}
-
-extension SectionModel: CombineSectionModelType { }
-extension AnimatableSectionModel: CombineSectionModelType { }
-
 public class TableViewBuilder: _TableViewBuilder, PerformGroupUpdatesable {
     
     typealias SectionModel = RxDataSources.SectionModel<SectionNode, Node>
@@ -47,23 +20,23 @@ public class TableViewBuilder: _TableViewBuilder, PerformGroupUpdatesable {
     
     public let sectionProviders: BehaviorRelay<[TableViewSectionProvider]>
     
-    var nodeProviders: [_TableViewMultiNodeProvider] = [] {
+    var nodeProviders: [String: _TableViewMultiNodeProvider] = [:] {
         didSet {
-            for provider in nodeProviders {
+            nodeProviders.forEach { (_, provider) in
                 provider._register(tableView)
             }
         }
     }
-    var footerSectionProviders: [_SectionPartionTableViewProvider] = [] {
+    var footerSectionProviders: [String: _SectionPartionTableViewProvider] = [:] {
         didSet {
-            for provider in footerSectionProviders {
+            footerSectionProviders.forEach { (_, provider) in
                 provider.register(tableView)
             }
         }
     }
-    var headerSectionProviders: [_SectionPartionTableViewProvider] = [] {
+    var headerSectionProviders: [String: _SectionPartionTableViewProvider] = [:] {
         didSet {
-            for provider in headerSectionProviders {
+            headerSectionProviders.forEach { (_, provider) in
                 provider.register(tableView)
             }
         }
@@ -82,7 +55,7 @@ public class TableViewBuilder: _TableViewBuilder, PerformGroupUpdatesable {
         self.sectionProviders = BehaviorRelay(value: sectionProviders)
         
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel>(configureCell: { [weak self] dataSource, tableView, indexPath, node in
-            guard let provider = self?.nodeProviders.first(where: { $0._flix_identity == node.providerIdentity }) else { return UITableViewCell() }
+            guard let provider = self?.nodeProviders[node.providerIdentity] else { return UITableViewCell() }
             return provider._configureCell(tableView, indexPath: indexPath, node: node)
         })
 
@@ -90,16 +63,21 @@ public class TableViewBuilder: _TableViewBuilder, PerformGroupUpdatesable {
 
         self.sectionProviders.asObservable()
             .do(onNext: { [weak self] (sectionProviders) in
-                self?.nodeProviders = sectionProviders.flatMap { $0.providers.flatMap { $0.__providers } }
-                self?.footerSectionProviders = sectionProviders.compactMap { $0.footerProvider }
-                self?.headerSectionProviders = sectionProviders.compactMap { $0.headerProvider }
+                self?.nodeProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders
+                        .flatMap { $0.providers.flatMap { $0.__providers.map { (key: $0._flix_identity, value: $0) } }
+                })
+                self?.footerSectionProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders.compactMap { $0.footerProvider.map { (key: $0._flix_identity, value: $0) } })
+                self?.headerSectionProviders = Dictionary(
+                    uniqueKeysWithValues: sectionProviders.compactMap { $0.headerProvider.map { (key: $0._flix_identity, value: $0) } })
             })
             .flatMapLatest { (providers) -> Observable<[SectionModel]> in
                 let sections = providers.map { $0.createSectionModel() }
                 return Observable.combineLatest(sections)
                     .ifEmpty(default: [])
                     .map { value -> [SectionModel] in
-                        return combineSections(value)
+                        return BuilderTool.combineSections(value)
                 }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)
