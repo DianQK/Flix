@@ -13,7 +13,7 @@ class TableViewBuilderMemoryLeakTests: XCTestCase {
 
     func testTableBuilderMemoryLeak() {
         var tableView: UITableView? = UITableView(frame: .zero, style: .grouped)
-        weak var builder: TableViewBuilder? = TableViewBuilder(tableView: tableView!, providers: [UniqueCustomTableViewProvider()])
+        weak var builder: TableViewBuilder? = TableViewBuilder(tableView: tableView!, providers: [SingleUITableViewCellProvider()])
         tableView = nil
         XCTAssertNil(tableView)
         XCTAssertNil(builder)
@@ -21,7 +21,7 @@ class TableViewBuilderMemoryLeakTests: XCTestCase {
 
     func testAnimatableTableViewBuilderMemoryLeak() {
         var tableView: UITableView? = UITableView(frame: .zero, style: .grouped)
-        weak var builder: AnimatableTableViewBuilder? = AnimatableTableViewBuilder(tableView: tableView!, providers: [UniqueCustomTableViewProvider()])
+        weak var builder: AnimatableTableViewBuilder? = AnimatableTableViewBuilder(tableView: tableView!, providers: [SingleUITableViewCellProvider()])
         tableView = nil
         XCTAssertNil(tableView)
         XCTAssertNil(builder)

@@ -13,7 +13,7 @@ class CollectionViewBuilderMemoryLeakTests: XCTestCase {
 
     func testCollectionViewBuilderMemoryLeak() {
         var collectionView: UICollectionView? = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        weak var builder: CollectionViewBuilder? = CollectionViewBuilder(collectionView: collectionView!, providers: [UniqueCustomCollectionViewProvider()])
+        weak var builder: CollectionViewBuilder? = CollectionViewBuilder(collectionView: collectionView!, providers: [SingleUICollectionViewCellProvider()])
         collectionView = nil
         XCTAssertNil(collectionView)
         XCTAssertNil(builder)
@@ -21,7 +21,7 @@ class CollectionViewBuilderMemoryLeakTests: XCTestCase {
 
     func testAnimatableCollectionViewBuilderMemoryLeak() {
         var collectionView: UICollectionView? = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        weak var builder: AnimatableCollectionViewBuilder? = AnimatableCollectionViewBuilder(collectionView: collectionView!, providers: [UniqueCustomCollectionViewProvider()])
+        weak var builder: AnimatableCollectionViewBuilder? = AnimatableCollectionViewBuilder(collectionView: collectionView!, providers: [SingleUICollectionViewCellProvider()])
         collectionView = nil
         XCTAssertNil(collectionView)
         XCTAssertNil(builder)

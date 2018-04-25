@@ -13,7 +13,7 @@ class UniqueCustomTableViewProviderTests: XCTestCase {
 
     func testWhenGetCellMemoryLeak() {
         var tableView: UITableView? = UITableView(frame: .zero, style: .grouped)
-        var provider: UniqueCustomTableViewProvider? = UniqueCustomTableViewProvider()
+        var provider: SingleUITableViewCellProvider? = SingleUITableViewCellProvider()
         weak var weakProvider = provider
         provider!.selectionStyle = .none
         weak var builder: AnimatableTableViewBuilder? = AnimatableTableViewBuilder(tableView: tableView!, providers: [provider!])
