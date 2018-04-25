@@ -42,10 +42,7 @@ class EventListProvider: AnimatableTableViewProvider {
         })
     }
 
-    var tapObject = PublishSubject<CalendarEventObject>()
-
     func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: CalendarEventObject) {
-        self.tapObject.onNext(value)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -63,7 +60,7 @@ class EventListViewController: TableViewController {
         self.navigationItem.rightBarButtonItem = addBarButtonItem
         Observable.merge([
             addBarButtonItem.rx.tap.map { nil as CalendarEventObject? },
-            provider.tapObject.map { $0 as CalendarEventObject? }
+            provider.event.modelSelected.map { $0 as CalendarEventObject? }
             ])
             .flatMapLatest { [weak self] event in
                 return EventEditViewController.rx.createWithParent(self, calendarEvent: event)

@@ -175,7 +175,7 @@ class SelectLocationViewController: UIViewController {
             providers: [localSearchProvider],
             headerProvider: PlainTitleTableViewHeaderSectionProvider(text: "Locations")
         )
-        localSearchProvider.placemarkSelected.asObservable()
+        localSearchProvider.event.modelSelected
             .subscribe(onNext: { [weak self] (placemark) in
                 _ = self?.navigationController?.popViewController(animated: true)
                 var recentSelectedPlacemarks = Storage.recentSelectedPlacemarks.value
@@ -197,8 +197,8 @@ class SelectLocationViewController: UIViewController {
                 [
                     customLocalProvider.event.selectedEvent.withLatestFrom(searchBar.rx.text.orEmpty).map { EventLocation.custom($0) },
                     currentLocationProvider.event.selectedEvent.withLatestFrom(currentPlacemark.filter { $0 != nil }.map { EventLocation.placemark($0!) }),
-                    recentSelectedPlacemarksProvider.placemarkSelected.asObservable().map { EventLocation.placemark($0) },
-                    localSearchProvider.placemarkSelected.asObservable().map { EventLocation.placemark($0) }
+                    recentSelectedPlacemarksProvider.event.modelSelected.map { EventLocation.placemark($0) },
+                    localSearchProvider.event.modelSelected.asObservable().map { EventLocation.placemark($0) }
                 ]
             )
             .bind(to: didSelectLocation)
