@@ -43,7 +43,9 @@ private class TimeZonesProvider: AnimatableTableViewProvider {
     }
 
     let query: Observable<String>
-    let timeZoneSelected = PublishSubject<TimeZone>()
+    var timeZoneSelected: Observable<TimeZone> {
+        return self.event.modelSelected.map { TimeZone(identifier: $0)! }
+    }
 
     init(query: Observable<String>) {
         self.query = query
@@ -51,10 +53,6 @@ private class TimeZonesProvider: AnimatableTableViewProvider {
 
     typealias Value = String
     typealias Cell = TitleTableViewCell
-
-    func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: String) {
-        timeZoneSelected.onNext(TimeZone(identifier: value)!)
-    }
 
 }
 

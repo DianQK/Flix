@@ -92,7 +92,6 @@ class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
     }
 
     func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: CLPlacemark) {
-        placemarkSelected.onNext(value)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -101,7 +100,6 @@ class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
 
     let naturalLanguageQuery: Observable<String>?
     let result: Observable<[CLPlacemark]>
-    let placemarkSelected = PublishSubject<CLPlacemark>()
     var canDelete: Bool = false
 
     init(naturalLanguageQuery: Observable<String>) {
