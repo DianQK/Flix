@@ -52,6 +52,7 @@ class ExampleListViewController: CollectionViewController {
                 Model(title: "Control Center", desc: "", value: { return ControlCenterCustomizeViewController() }),
                 Model(title: "Storyboard", desc: "", value: { return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StoryboardViewController") }),
                 Model(title: "Move", desc: "", value: { return MoveCollectionViewController() }),
+                Model(title: "Empty", desc: "", value: { return EmptyViewController() })
             ]
         )
         textListProvider.event.itemSelected

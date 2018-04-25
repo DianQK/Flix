@@ -99,6 +99,7 @@
 		91035D44204E8EE70090DAFD /* ChangesetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91035D43204E8EE70090DAFD /* ChangesetInfo.swift */; };
 		913B1A721FBB400B0075E96B /* MoveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913B1A711FBB400B0075E96B /* MoveCollectionViewController.swift */; };
 		913B1A751FBB41CA0075E96B /* CollectionViewMoveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913B1A741FBB41CA0075E96B /* CollectionViewMoveable.swift */; };
+		9140963D20905E9A002C5ACE /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9140963C20905E9A002C5ACE /* EmptyViewController.swift */; };
 		914A97592086EEBD00C6F428 /* TableViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914A97582086EEBD00C6F428 /* TableViewEvent.swift */; };
 		9157D7BD2080536F008E22D8 /* FlixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7BC2080536F008E22D8 /* FlixTests.swift */; };
 		9157D7BF2080536F008E22D8 /* Flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2670E64F1F83E15C003A5BA7 /* Flix.framework */; };
@@ -247,6 +248,7 @@
 		91035D43204E8EE70090DAFD /* ChangesetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesetInfo.swift; sourceTree = "<group>"; };
 		913B1A711FBB400B0075E96B /* MoveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCollectionViewController.swift; sourceTree = "<group>"; };
 		913B1A741FBB41CA0075E96B /* CollectionViewMoveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewMoveable.swift; sourceTree = "<group>"; };
+		9140963C20905E9A002C5ACE /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		914A97582086EEBD00C6F428 /* TableViewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEvent.swift; sourceTree = "<group>"; };
 		9157D7BA2080536F008E22D8 /* FlixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9157D7BC2080536F008E22D8 /* FlixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlixTests.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				91F3F3ED1F99EFE500E6BE8F /* ControlCenterCustomizeViewController.swift */,
 				565726311F9E3AE800D9BEC4 /* StoryboardViewController.swift */,
 				913B1A711FBB400B0075E96B /* MoveCollectionViewController.swift */,
+				9140963C20905E9A002C5ACE /* EmptyViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -964,6 +967,7 @@
 				569294F91F88E37E00FA1493 /* DeleteItemViewController.swift in Sources */,
 				26424F741F853B0A00E2834D /* UniqueButtonTableViewProvider.swift in Sources */,
 				5665F1F11FA5AEF3009225F7 /* EndRepeatSelectViewController.swift in Sources */,
+				9140963D20905E9A002C5ACE /* EmptyViewController.swift in Sources */,
 				2617C26B1F84D0FD007F8228 /* DefaultImplementations.swift in Sources */,
 				565726321F9E3AE800D9BEC4 /* StoryboardViewController.swift in Sources */,
 				5665F1ED1FA5AA8F009225F7 /* EndRepeatProvider.swift in Sources */,
