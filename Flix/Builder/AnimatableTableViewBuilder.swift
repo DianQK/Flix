@@ -87,6 +87,7 @@ public class AnimatableTableViewBuilder: _TableViewBuilder, PerformGroupUpdatesa
                 }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)
+            .debounce(0, scheduler: MainScheduler.instance)
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
