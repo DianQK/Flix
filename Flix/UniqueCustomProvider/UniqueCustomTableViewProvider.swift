@@ -150,6 +150,10 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, U
         }
     }
 
+    open func register(_ tableView: UITableView) {
+        tableView.register(Cell.self, forCellReuseIdentifier: self._flix_identity)
+    }
+
 }
 
 extension SingleTableViewCellProvider: ReactiveCompatible { }
