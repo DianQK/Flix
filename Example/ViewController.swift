@@ -63,9 +63,9 @@ class TableViewController: UIViewController {
         tableView.backgroundColor = UIColor(named: "Background")
         tableView.separatorColor = UIColor(named: "Background")
         tableView.rowHeight = 44
-        tableView.sectionFooterHeight = 0.1
-        tableView.sectionHeaderHeight = 0.1
-        
+        tableView.sectionFooterHeight = CGFloat.leastNonzeroMagnitude
+        tableView.sectionHeaderHeight = CGFloat.leastNonzeroMagnitude
+
         tableView.estimatedRowHeight = 0
         tableView.estimatedSectionFooterHeight = 0
         tableView.estimatedSectionHeaderHeight = 0
