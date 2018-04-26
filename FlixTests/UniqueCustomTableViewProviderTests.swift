@@ -19,10 +19,15 @@ class UniqueCustomTableViewProviderTests: XCTestCase {
         weak var builder: AnimatableTableViewBuilder? = AnimatableTableViewBuilder(tableView: tableView!, providers: [provider!])
         tableView = nil
         provider = nil
-        XCTAssertNil(tableView)
-        XCTAssertNil(builder)
-        XCTAssertNil(provider)
-        XCTAssertNil(weakProvider)
+        let expectation = self.expectation(description: "wait for provider disposed")
+        DispatchQueue.main.async {
+            XCTAssertNil(tableView)
+            XCTAssertNil(builder)
+            XCTAssertNil(provider)
+            XCTAssertNil(weakProvider)
+            expectation.fulfill()
+        }
+        self.waitForExpectations(timeout: 1, handler: nil)
     }
 
 }
