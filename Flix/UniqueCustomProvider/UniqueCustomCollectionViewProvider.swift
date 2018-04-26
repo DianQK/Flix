@@ -91,6 +91,10 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
         }
     }
 
+    open func register(_ collectionView: UICollectionView) {
+        collectionView.register(Cell.self, forCellWithReuseIdentifier: self._flix_identity)
+    }
+
 }
 
 extension Reactive where Base: SingleUICollectionViewCellProvider { // TODO
