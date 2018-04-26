@@ -16,7 +16,7 @@ install: true
 
 env:
   - BUILD="pod update && set -o pipefail && xcodebuild -workspace Flix.xcworkspace -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 8' build | xcpretty"
-  - BUILD="pod repo update && pod lib lint Flix.podspec --verbose"
+  - BUILD="pod repo update && pod lib lint Flix.podspec --verbose --allow-warnings"
 
 script: eval "${BUILD}"
 
