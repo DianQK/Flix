@@ -16,6 +16,8 @@ class ExampleListViewController: CollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.largeTitleDisplayMode = .always
         
         typealias UIViewControllerCreater = () -> UIViewController
         typealias Model = TextListProviderModel<UIViewControllerCreater>

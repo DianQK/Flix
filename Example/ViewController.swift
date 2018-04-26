@@ -20,6 +20,8 @@ class CollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.largeTitleDisplayMode = .never
         
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(collectionView)
@@ -48,6 +50,8 @@ class TableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.largeTitleDisplayMode = .never
         
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(tableView)

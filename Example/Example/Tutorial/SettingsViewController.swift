@@ -16,6 +16,8 @@ class SettingsViewController: TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.largeTitleDisplayMode = .automatic
+
         title = "Settings"
 
         let profileProvider = ProfileProvider(avatar: #imageLiteral(resourceName: "Flix Icon"), name: "Flix")
