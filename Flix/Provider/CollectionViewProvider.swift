@@ -154,8 +154,8 @@ extension CollectionViewProvider {
     }
     
     public func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self._flix_identity, for: indexPath)
-        self.configureCell(collectionView, cell: cell as! Cell, indexPath: indexPath, value: value)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self._flix_identity, for: indexPath) as! Cell
+        self.configureCell(collectionView, cell: cell, indexPath: indexPath, value: value)
         return cell
     }
     
@@ -229,6 +229,16 @@ extension UniqueAnimatableCollectionViewProvider {
     
     public func createValues() -> Observable<[Self]> {
         return Observable.just([self])
+    }
+
+}
+
+extension UniqueAnimatableCollectionViewProvider where Self: CustomProvider {
+
+    public func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) -> UICollectionViewCell {
+        let cell: Cell = self.cell ?? (collectionView.dequeueReusableCell(withReuseIdentifier: self._flix_identity, for: indexPath) as! Cell)
+        self.configureCell(collectionView, cell: cell, indexPath: indexPath, value: value)
+        return cell
     }
 
 }

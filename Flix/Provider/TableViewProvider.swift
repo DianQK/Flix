@@ -138,8 +138,8 @@ public protocol TableViewProvider: TableViewMultiNodeProvider {
 extension TableViewProvider {
     
     public func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: Value) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self._flix_identity, for: indexPath)
-        self.configureCell(tableView, cell: cell as! Cell, indexPath: indexPath, value: value)
+        let cell = tableView.dequeueReusableCell(withIdentifier: self._flix_identity, for: indexPath) as! Cell
+        self.configureCell(tableView, cell: cell, indexPath: indexPath, value: value)
         return cell
     }
     
@@ -214,4 +214,14 @@ extension UniqueAnimatableTableViewProvider {
         return Observable.just([self])
     }
     
+}
+
+extension UniqueAnimatableTableViewProvider where Self: CustomProvider {
+
+    public func configureCell(_ tableView: UITableView, indexPath: IndexPath, value: Value) -> UITableViewCell {
+        let cell: Cell = self.cell ?? (tableView.dequeueReusableCell(withIdentifier: self._flix_identity, for: indexPath) as! Cell)
+        self.configureCell(tableView, cell: cell, indexPath: indexPath, value: value)
+        return cell
+    }
+
 }
