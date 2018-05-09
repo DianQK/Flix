@@ -36,11 +36,8 @@ class IncludeControlProvider: AnimatableTableViewProvider, TableViewMoveable, Ta
         result.insert(value, at: destinationIndex)
         values.accept(result)
     }
-
-    var beforeDelete: (() -> ())?
     
     func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: String) {
-        self.beforeDelete?()
         values.accept(values.value.filter({ $0 != value }))
     }
     
@@ -64,15 +61,12 @@ class MoreControlProvider: AnimatableTableViewProvider, TableViewInsertable {
     typealias Value = String
     
     let values = BehaviorRelay(value: ["Magnifier", "Accessibility Shortcuts", "Do Not Disturb While Driving", "Stopwatch", "Text Size", "Guided Access", "Voice Memos", "Apple TV Remote", "Wallet"])
-
-    var beforeInserted: (() -> ())?
     
     func configureCell(_ tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, value: String) {
         cell.textLabel?.text = value
     }
     
     func tableView(_ tableView: UITableView, itemInsertedForRowAt indexPath: IndexPath, value: String) {
-        self.beforeInserted?()
         values.accept(values.value.filter({ $0 != value }))
     }
     
@@ -165,24 +159,12 @@ class ControlCenterCustomizeViewController: TableViewController {
             headerProvider: moreControlTitleHeaderSectionProvider
         )
 
-        includeControlProvider.beforeDelete = { [weak self] in
-            self?.tableView.flix.beginGroupUpdates()
-        }
-        moreControlProvider.beforeInserted = { [weak self] in
-            self?.tableView.flix.beginGroupUpdates()
-        }
         includeControlProvider.event.modelDeleted
-            .subscribe(onNext: { [weak self] (value) in
-                moreControlProvider.insertNew(value)
-                self?.tableView.flix.endGroupUpdates()
-            })
+            .subscribe(onNext: moreControlProvider.insertNew)
             .disposed(by: disposeBag)
 
         moreControlProvider.event.modelInserted
-            .subscribe(onNext: { [weak self] (value) in
-                includeControlProvider.insertNew(value)
-                self?.tableView.flix.endGroupUpdates()
-            })
+            .subscribe(onNext: includeControlProvider.insertNew)
             .disposed(by: disposeBag)
         
         self.tableView.flix.animatable.build([tipSectionProvider, includeControlSectionProvider, moreControlSectionProvider])
