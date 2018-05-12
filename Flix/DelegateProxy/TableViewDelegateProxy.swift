@@ -45,7 +45,17 @@ class TableViewDelegateProxy: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         return self.targetIndexPathForMoveFromRowAt?(tableView, sourceIndexPath, proposedDestinationIndexPath) ?? proposedDestinationIndexPath
     }
-    
+
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return self.leadingSwipeActionsConfigurationForRowAt?(tableView, indexPath) as? UISwipeActionsConfiguration
+    }
+
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return self.trailingSwipeActionsConfigurationForRowAt?(tableView, indexPath) as? UISwipeActionsConfiguration
+    }
+
     var heightForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> CGFloat?)?
     var heightForFooterInSection: ((_ tableView: UITableView, _ section: Int) -> CGFloat?)?
     var heightForHeaderInSection: ((_ tableView: UITableView, _ section: Int) -> CGFloat?)?
@@ -55,6 +65,9 @@ class TableViewDelegateProxy: NSObject, UITableViewDelegate {
     var targetIndexPathForMoveFromRowAt: ((_ tableView: UITableView, _ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath)?
     var titleForDeleteConfirmationButtonForRowAt:  ((_ tableView: UITableView, _ indexPath: IndexPath) -> String?)?
     var editingStyleForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCellEditingStyle)?
-    
+
+    var leadingSwipeActionsConfigurationForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> NSObject?)?
+    var trailingSwipeActionsConfigurationForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> NSObject?)?
+
 }
 

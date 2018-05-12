@@ -17,7 +17,7 @@ public protocol _TableViewDeleteable {
     
 }
 
-public protocol TableViewDeleteable: _TableViewDeleteable, TableViewEditable {
+public protocol TableViewDeleteable: TableViewEditable, _TableViewDeleteable {
     
     func tableView(_ tableView: UITableView, itemDeletedForRowAt indexPath: IndexPath, value: Value)
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath, value: Value) -> String?

@@ -130,6 +130,30 @@ extension _TableViewBuilder {
                 return nil
             }
         }
+
+        if #available(iOS 11.0, *) {
+            self.delegeteProxy.leadingSwipeActionsConfigurationForRowAt = { [unowned self] tableView, indexPath in
+                let node = dataSource[indexPath]
+                let providerIdentity = node.providerIdentity
+                let provider = self.nodeProviders[providerIdentity]!
+                if let provider = provider as? _TableViewSwipeable {
+                    return provider._tableView(tableView, leadingSwipeActionsConfigurationForRowAt: indexPath, node: node)
+                } else {
+                    return nil
+                }
+            }
+
+            self.delegeteProxy.trailingSwipeActionsConfigurationForRowAt = { [unowned self] tableView, indexPath in
+                let node = dataSource[indexPath]
+                let providerIdentity = node.providerIdentity
+                let provider = self.nodeProviders[providerIdentity]!
+                if let provider = provider as? _TableViewSwipeable {
+                    return provider._tableView(tableView, trailingSwipeActionsConfigurationForRowAt: indexPath, node: node)
+                } else {
+                    return nil
+                }
+            }
+        }
         
         self.delegeteProxy.targetIndexPathForMoveFromRowAt = { [unowned self] tableView, sourceIndexPath, proposedDestinationIndexPath in
             let node = dataSource[sourceIndexPath]

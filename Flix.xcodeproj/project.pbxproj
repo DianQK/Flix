@@ -109,6 +109,7 @@
 		9157D7F020808337008E22D8 /* CustomProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7EF20808337008E22D8 /* CustomProvider.swift */; };
 		9157D7F420844C9C008E22D8 /* PerformGroupUpdatesable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9157D7F320844C9C008E22D8 /* PerformGroupUpdatesable.swift */; };
 		9179C9641FA6D60F00B4C21E /* TableViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */; };
+		917B1D8120A6896200216716 /* TableViewSwipeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917B1D8020A6896200216716 /* TableViewSwipeable.swift */; };
 		917E2C301FA6E34800765F95 /* CollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */; };
 		917E2C321FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */; };
 		9188E594208EE4D50032DEB4 /* ProviderHiddenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9188E593208EE4D50032DEB4 /* ProviderHiddenable.swift */; };
@@ -259,6 +260,7 @@
 		9157D7EF20808337008E22D8 /* CustomProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProvider.swift; sourceTree = "<group>"; };
 		9157D7F320844C9C008E22D8 /* PerformGroupUpdatesable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformGroupUpdatesable.swift; sourceTree = "<group>"; };
 		9179C9631FA6D60F00B4C21E /* TableViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewGroupProvider.swift; sourceTree = "<group>"; };
+		917B1D8020A6896200216716 /* TableViewSwipeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSwipeable.swift; sourceTree = "<group>"; };
 		917E2C2F1FA6E34800765F95 /* CollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewGroupProvider.swift; sourceTree = "<group>"; };
 		917E2C311FA6E35700765F95 /* AnimatableCollectionViewGroupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableCollectionViewGroupProvider.swift; sourceTree = "<group>"; };
 		9188E593208EE4D50032DEB4 /* ProviderHiddenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderHiddenable.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				569294F61F88DA6800FA1493 /* TableViewEditable.swift */,
 				91F3F3EB1F99EAA500E6BE8F /* TableViewMoveable.swift */,
 				264F27951F9C33B000884FF2 /* TableViewDeleteable.swift */,
+				917B1D8020A6896200216716 /* TableViewSwipeable.swift */,
 			);
 			path = TableViewEdit;
 			sourceTree = "<group>";
@@ -915,6 +918,7 @@
 				9157D7F420844C9C008E22D8 /* PerformGroupUpdatesable.swift in Sources */,
 				2670E6781F83E343003A5BA7 /* TableViewProvider.swift in Sources */,
 				2670E6821F83EBE2003A5BA7 /* CollectionViewSectionProvider.swift in Sources */,
+				917B1D8120A6896200216716 /* TableViewSwipeable.swift in Sources */,
 				26BAF0351F84A08E009A4401 /* UniqueCustomTableViewSectionProvider.swift in Sources */,
 				913B1A751FBB41CA0075E96B /* CollectionViewMoveable.swift in Sources */,
 				2670E67E1F83EA4A003A5BA7 /* AnimatableCollectionViewBuilder.swift in Sources */,
