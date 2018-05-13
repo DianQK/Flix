@@ -5,16 +5,16 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![中文 README](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-README-blue.svg?style=flat)](./README-zh.md)
 
-Flix is flexible iOS framework to create dynamic forms with `UITableView` or `UICollectionView`.
+Flix is a flexible iOS framework for creating dynamic forms with `UITableView` or `UICollectionView`.
 
 ## Features
 
-- [x] Support no reused when you need.
-- [x] Support reused for list when you need.
-- [x] Support nest form.
-- [x] Support add, delete and insert
-- [x] Support Storyboard
-- [x] Example app
+- [x] Supports no reused when you need.
+- [x] Supports reused for list when you need.
+- [x] Supports nested forms.
+- [x] Supports add, delete and insert
+- [x] Supports Storyboard design
+- [x] Example app available!
 - [x] Works with `UITableView` and `UICollectionView`
 
 Flix focus on combining cells of `UICollectionView` or `UITableView`, it don't care about the view layout, business logic. So you can easily build custom form using Flix.
@@ -48,14 +48,14 @@ github "DianQK/Flix" ~> 1.2
 
 ![](block_diagram.png)
 
-Each provider will generate a number of nodes (cells), then combine those providers according to the sequence.
+Each provider will generate a number of nodes (cells), then combines those providers according to the sequence.
 
 ## Tutorial - A Simple Settings Page
 
 When creating a settings page, we don't want to some cells be reused, for example Profile Cell, Airplane Mode Cell.
-This looks like create a static tableView on Storyboard.
+This looks like creating a static tableView on Storyboard.
 
-To create one profile cell, we just need to create a `UniqueCustomTableViewProvider`, and configure the style and add some views:
+To create one profile cell, we just need to create a `UniqueCustomTableViewProvider` and configure the style and add some views:
 
 <table>
   <tr>
@@ -83,7 +83,7 @@ self.tableView.flix.build([profileProvider])
   </tr>
 </table>
 
-Now, we have a profile cell for settings page, considering we might use this provider on other `UITableView`.
+Now, we have a profile cell for the settings page, considering we might use this provider on another `UITableView`.
 We should make a Class for `profileProvider`.
 
 We can inherit from `UniqueCustomTableViewProvider`:
@@ -114,7 +114,7 @@ class ProfileProvider: UniqueCustomTableViewProvider {
 }
 ```
 
-or just implement protocol `UniqueAnimatableTableViewProvider`:
+or just implement the protocol `UniqueAnimatableTableViewProvider`:
 
 ```swift
 class ProfileProvider: UniqueAnimatableTableViewProvider {
@@ -159,7 +159,7 @@ self.tableView.flix.build([profileSectionProvider])</pre></div></td>
   </tr>
 </table>
 
-Then add more provider:
+Then add more providers:
 
 <table>
   <tr>
@@ -215,7 +215,7 @@ self.tableView.flix.build(
 </table>
 
 Until now, we just use one provider to generate one cell.
-We can create a provider for a group of cells.
+We can also create a provider for a group of cells.
 
 <table>
   <tr>
@@ -245,8 +245,8 @@ self.tableView.flix.build([
 
 Look like good.
 
-Actually Flix support more build list view function, you can easily create a page with All kinds of linkage effects (such as Calendar Events, GitHub Signup).
-You can get more example from **Example Folder**.
+Actually Flix supports more build list view function, you can easily create a page with all kinds of linkage effects (such as Calendar Events, GitHub Signup).
+More example are available in the **Example Folder**.
 
 ## Contributing
 
@@ -259,7 +259,7 @@ You can get more example from **Example Folder**.
 
 Raise an [Issue](https://github.com/DianQK/Flix/issues) or hit me up on Twitter [@Songxut](https://twitter.com/Songxut).
 
-You can also join Telegram Group https://t.me/Flix_iOS.
+You can also join the Flix Telegram Group https://t.me/Flix_iOS.
 
 ## License
 
