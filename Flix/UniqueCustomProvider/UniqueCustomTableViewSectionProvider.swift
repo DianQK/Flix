@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableViewProvider, StringIdentifiableType, Equatable {
+open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableViewProvider, StringIdentifiableType, ProviderHiddenable, Equatable {
     
     public var identity: String {
         return self._flix_identity
@@ -82,14 +82,4 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
         }
     }
     
-}
-
-extension Reactive where Base: UniqueCustomTableViewSectionProvider {
-
-    public var isHidden: Binder<Bool> {
-        return Binder(self.base) { provider, hidden in
-            provider.isHidden = hidden
-        }
-    }
-
 }

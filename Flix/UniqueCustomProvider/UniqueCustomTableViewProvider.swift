@@ -14,8 +14,8 @@ public typealias SingleUITableViewCellProvider = SingleTableViewCellProvider<UIT
 @available(*, deprecated, renamed: "SingleUITableViewCellProvider")
 public typealias UniqueCustomTableViewProvider = SingleUITableViewCellProvider
 
-open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, UniqueAnimatableTableViewProvider, CustomIdentityType {
-    
+open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, ProviderHiddenable, UniqueAnimatableTableViewProvider, CustomIdentityType {
+
     open let customIdentity: String
     open let contentView: UIView = NeverHitSelfView()
     open var selectedBackgroundView: UIView? {
@@ -152,18 +152,6 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, U
 
     open func register(_ tableView: UITableView) {
         tableView.register(Cell.self, forCellReuseIdentifier: self._flix_identity)
-    }
-
-}
-
-extension SingleTableViewCellProvider: ReactiveCompatible { }
-
-extension Reactive where Base: SingleTableViewCellProvider<UITableViewCell> { // TODO: extension for SingleTableViewCellProvider
-
-    public var isHidden: Binder<Bool> {
-        return Binder(self.base) { provider, hidden in
-            provider.isHidden = hidden
-        }
     }
 
 }

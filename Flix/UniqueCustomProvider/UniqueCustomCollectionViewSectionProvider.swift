@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCollectionViewProvider, StringIdentifiableType, Equatable {
+open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCollectionViewProvider, StringIdentifiableType, ProviderHiddenable, Equatable {
     
     public var identity: String {
         return self._flix_identity

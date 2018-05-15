@@ -14,7 +14,7 @@ public typealias SingleUICollectionViewCellProvider = SingleCollectionViewProvid
 @available(*, deprecated, renamed: "SingleUICollectionViewCellProvider")
 public typealias UniqueCustomCollectionViewProvider = SingleUICollectionViewCellProvider
 
-open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvider, UniqueAnimatableCollectionViewProvider, CustomIdentityType {
+open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvider, UniqueAnimatableCollectionViewProvider, ProviderHiddenable, CustomIdentityType {
 
     public typealias Cell = UICollectionViewCell
     
@@ -93,16 +93,6 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
 
     open func register(_ collectionView: UICollectionView) {
         collectionView.register(Cell.self, forCellWithReuseIdentifier: self._flix_identity)
-    }
-
-}
-
-extension Reactive where Base: SingleUICollectionViewCellProvider { // TODO
-
-    public var isHidden: Binder<Bool> {
-        return Binder(self.base) { provider, hidden in
-            provider.isHidden = hidden
-        }
     }
 
 }
