@@ -10,7 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public class TableViewEvent<Provider: TableViewMultiNodeProvider> {
+public protocol TableViewEventType: class {
+
+    associatedtype Provider: TableViewMultiNodeProvider
+
+}
+
+public class TableViewEvent<Provider: TableViewMultiNodeProvider>: TableViewEventType {
 
     public typealias Value = Provider.Value
 
