@@ -9,7 +9,7 @@
 import UIKit
 import Flix
 
-struct CalendarEventObject {
+struct CalendarEventObject: Equatable {
 
     var id: Int
 
@@ -38,26 +38,6 @@ extension CalendarEventObject: StringIdentifiableType {
 
     var identity: String {
         return self.id.description
-    }
-
-}
-
-extension CalendarEventObject: Equatable {
-
-    static func ==(lhs: CalendarEventObject, rhs: CalendarEventObject) -> Bool {
-        return (lhs.id == rhs.id) &&
-        (lhs.location == rhs.location) &&
-        (lhs.isAllDay == rhs.isAllDay) &&
-        (lhs.startsDate == rhs.startsDate) &&
-        (lhs.endsDate == rhs.endsDate) &&
-        (lhs.eventRepeat == rhs.eventRepeat) &&
-        (lhs.endRepeatDate == rhs.endRepeatDate) &&
-        (lhs.calendar == rhs.calendar) &&
-        (lhs.alert == rhs.alert) &&
-        (lhs.secondAlert == rhs.secondAlert) &&
-        (lhs.showAs == rhs.showAs) &&
-        (lhs.url == rhs.url) &&
-        (lhs.notes == rhs.notes)
     }
 
 }
