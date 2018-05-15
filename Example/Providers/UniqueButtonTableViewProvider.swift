@@ -11,7 +11,17 @@ import RxSwift
 import RxCocoa
 import Flix
 
-open class UniqueButtonTableViewProvider: SingleUITableViewCellProvider {
+open class __UniqueButtonTableViewProvider: SingleUITableViewCellProvider {
+
+    public override init() {
+        super.init()
+        let event = self.event
+        debugPrint(self, event, Unmanaged.passUnretained(event).toOpaque())
+    }
+
+}
+
+open class UniqueButtonTableViewProvider: __UniqueButtonTableViewProvider {
     
     let textLabel = UILabel()
     let activityIndicatorView = UIActivityIndicatorView()
@@ -33,6 +43,9 @@ open class UniqueButtonTableViewProvider: SingleUITableViewCellProvider {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+
+        let event = self.event
+        debugPrint(self, event, Unmanaged.passUnretained(event).toOpaque())
     }
-    
+
 }

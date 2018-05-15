@@ -280,30 +280,34 @@ class NestFormViewController: TableViewController {
         
         title = "Nest Form"
 
-        hardwareFormProvider.hardwareForms.accept([HardwareForm(id: 1)])
-        
-        let fillFormSectionProvider = AnimatableTableViewSectionProvider(
-            providers: [titleProvider, titleInputProvider, configurationTitleProvider, hardwareFormProvider]
-        )
-        
-        let addHeaderProvider: UniqueCustomTableViewSectionProvider = {
-            let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
-            provider.sectionHeight = { _ in return 20 }
-            return provider
-        }()
-        
-        let addSectionProvider = AnimatableTableViewSectionProvider(
-            providers: [addProvider],
-            headerProvider: addHeaderProvider
-        )
-        
+//        hardwareFormProvider.hardwareForms.accept([HardwareForm(id: 1)])
+
+//        let fillFormSectionProvider = AnimatableTableViewSectionProvider(
+//            providers: [titleProvider, titleInputProvider, configurationTitleProvider, hardwareFormProvider]
+//        )
+//
+//        let addHeaderProvider: UniqueCustomTableViewSectionProvider = {
+//            let provider = UniqueCustomTableViewSectionProvider(tableElementKindSection: .header)
+//            provider.sectionHeight = { _ in return 20 }
+//            return provider
+//        }()
+
+//        let addSectionProvider = AnimatableTableViewSectionProvider(
+//            providers: [addProvider],
+//            headerProvider: addHeaderProvider
+//        )
+
+        let event = self.addProvider.event
+        debugPrint("viewDidi", event, Unmanaged.passUnretained(event).toOpaque())
+
         addProvider.event.selectedEvent.asObservable()
+            .debug()
             .subscribe(onNext: { [unowned self] in
-                self.hardwareFormProvider.addItem()
+//                self.hardwareFormProvider.addItem()
             })
             .disposed(by: disposeBag)
         
-        self.tableView.flix.animatable.build([fillFormSectionProvider, addSectionProvider])
+        self.tableView.flix.animatable.build([addProvider])
 
     }
     

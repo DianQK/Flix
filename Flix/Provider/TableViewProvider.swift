@@ -67,7 +67,9 @@ public protocol TableViewMultiNodeProvider: _TableViewMultiNodeProvider, Reactiv
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: Value) -> CGFloat?
 
     func register(_ tableView: UITableView)
-    
+
+//    var event: TableViewEvent<Self> { get }
+
 }
 
 extension TableViewMultiNodeProvider {

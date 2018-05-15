@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-open class FlixStackItemProvider: UIControl, UniqueAnimatableTableViewProvider {
+final public class FlixStackItemProvider: UIControl, UniqueAnimatableTableViewProvider {
 
     public typealias Cell = UITableViewCell
 

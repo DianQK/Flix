@@ -14,7 +14,7 @@ public typealias SingleUITableViewCellProvider = SingleTableViewCellProvider<UIT
 @available(*, deprecated, renamed: "SingleUITableViewCellProvider")
 public typealias UniqueCustomTableViewProvider = SingleUITableViewCellProvider
 
-open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, ProviderHiddenable, UniqueAnimatableTableViewProvider, MoveToTableViewEventProvider, CustomIdentityType {
+open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, ProviderHiddenable, UniqueAnimatableTableViewProvider, CustomIdentityType {
 
     open let customIdentity: String
     open let contentView: UIView = NeverHitSelfView()
@@ -109,7 +109,9 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, P
         }
     }
     private let _isHidden = BehaviorRelay(value: false)
-    
+
+//    public let event: TableViewEvent<SingleTableViewCellProvider<Cell>> = TableViewEvent()
+
     let disposeBag = DisposeBag()
     
     public init(customIdentity: String) {
@@ -118,6 +120,8 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, P
     
     public init() {
         self.customIdentity = ""
+        let event = self.event
+        debugPrint(self, event, Unmanaged.passUnretained(event).toOpaque())
     }
     
     open func onCreate(_ tableView: UITableView, cell: Cell, indexPath: IndexPath) {
@@ -131,8 +135,10 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, P
 
         if let superview = cell.superview as? UITableView {
             self.didMoveToTableView?(superview, cell)
-            self.event.didMoveToTableViewSubject?.onNext((superview, cell))
-            self.event.hasMoveToTableViewSubject.onNext((superview, cell))
+            let event = self.event
+            debugPrint(self, event, Unmanaged.passUnretained(event).toOpaque())
+//            self.event.didMoveToTableViewSubject?.onNext((superview, cell))
+//            self.event.hasMoveToTableViewSubject.onNext((superview, cell))
         }
     }
 
@@ -169,7 +175,7 @@ extension TableViewEventType where Provider: MoveToTableViewEventProvider {
 
     public typealias Cell = Provider.Cell
 
-    fileprivate var didMoveToTableViewSubject: PublishSubject<(UITableView, Cell)>? {
+    var didMoveToTableViewSubject: PublishSubject<(UITableView, Cell)>? {
         get {
             return objc_getAssociatedObject(self, &_didMoveToTableViewSubjectKey) as? PublishSubject<(UITableView, Cell)>
         }
@@ -187,7 +193,7 @@ extension TableViewEventType where Provider: MoveToTableViewEventProvider {
         return ControlEvent(events: subject)
     }
 
-    fileprivate var hasMoveToTableViewSubject: ReplaySubject<(UITableView, Cell)> {
+    var hasMoveToTableViewSubject: ReplaySubject<(UITableView, Cell)> {
         get {
             if let subject = objc_getAssociatedObject(self, &_hasMoveToTableViewSubjectKey) as? ReplaySubject<(UITableView, Cell)> {
                 return subject
