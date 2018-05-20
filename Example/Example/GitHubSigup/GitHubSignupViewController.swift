@@ -73,7 +73,7 @@ class GitHubSignupViewController: TableViewController {
         
         let viewModel = GithubSignupViewModel1(
             input: (
-                username: usernameProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
+                username: usernameProvider.valueProvider.textField.rx.text.orEmpty.asObservable().distinctUntilChanged(),
                 password: passwordProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
                 repeatedPassword: repeatedPasswordProvider.valueProvider.textField.rx.text.orEmpty.asObservable(),
                 loginTaps: loginProvider.event.selectedEvent.asObservable()
