@@ -72,8 +72,9 @@ class TableViewController: UIViewController {
         
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { [unowned self] keyboardVisibleHeight in
-                self.tableView.contentInset.bottom = keyboardVisibleHeight
-                self.tableView.scrollIndicatorInsets.bottom = keyboardVisibleHeight
+                let height: CGFloat = max(0, keyboardVisibleHeight - self.tableView.safeAreaInsets.bottom)
+                self.tableView.contentInset.bottom = height
+                self.tableView.scrollIndicatorInsets.bottom = height
             })
             .disposed(by: disposeBag)
 
