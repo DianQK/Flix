@@ -22,7 +22,7 @@ enum SignupState {
 
 protocol GitHubAPI {
     func usernameAvailable(_ username: String) -> Observable<Bool>
-    func signup(_ username: String, password: String) -> Observable<Bool>
+    func signUp(_ username: String, password: String) -> Observable<Bool>
 }
 
 protocol GitHubValidationService {

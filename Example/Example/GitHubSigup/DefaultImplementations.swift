@@ -107,11 +107,11 @@ class GitHubDefaultAPI : GitHubAPI {
             .catchErrorJustReturn(false)
     }
     
-    func signup(_ username: String, password: String) -> Observable<Bool> {
+    func signUp(_ username: String, password: String) -> Observable<Bool> {
         // this is also just a mock
-        let signupResult = arc4random() % 5 == 0 ? false : true
+        let signUpResult = arc4random() % 5 == 0 ? false : true
         
-        return Observable.just(signupResult)
+        return Observable.just(signUpResult)
             .delay(1.0, scheduler: MainScheduler.instance)
     }
 }

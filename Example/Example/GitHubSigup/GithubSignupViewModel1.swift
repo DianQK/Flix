@@ -30,8 +30,8 @@ class GithubSignupViewModel1 {
     let validatedPassword: Observable<ValidationResult>
     let validatedPasswordRepeated: Observable<ValidationResult>
 
-    // Is signup button enabled
-    let signupEnabled: Observable<Bool>
+    // Is signUp button enabled
+    let signUpEnabled: Observable<Bool>
 
     // Has user signed in
     let signedIn: Observable<Bool>
@@ -88,7 +88,7 @@ class GithubSignupViewModel1 {
 
         signedIn = input.loginTaps.withLatestFrom(usernameAndPassword)
             .flatMapLatest { pair in
-                return API.signup(pair.username, password: pair.password)
+                return API.signUp(pair.username, password: pair.password)
                     .observeOn(MainScheduler.instance)
                     .catchErrorJustReturn(false)
                     .trackActivity(signingIn)
@@ -103,7 +103,7 @@ class GithubSignupViewModel1 {
             }
             .share(replay: 1)
         
-        signupEnabled = Observable.combineLatest(
+        signUpEnabled = Observable.combineLatest(
             validatedUsername,
             validatedPassword,
             validatedPasswordRepeated,

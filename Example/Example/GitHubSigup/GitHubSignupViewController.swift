@@ -69,7 +69,7 @@ class GitHubSignupViewController: TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "GitHub Signup"
+        title = "Join GitHub"
         
         let viewModel = GithubSignupViewModel1(
             input: (
@@ -97,7 +97,7 @@ class GitHubSignupViewController: TableViewController {
             .bind(to: repeatedPasswordProvider.validationResult)
             .disposed(by: disposeBag)
         
-        viewModel.signupEnabled
+        viewModel.signUpEnabled
             .subscribe(onNext: { [unowned self] valid in
                 self.loginProvider.isEnabled = valid
                 self.loginProvider.selectionStyle = valid ? .default : .none
