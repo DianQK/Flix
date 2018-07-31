@@ -16,7 +16,7 @@ public class CollectionViewBuilder: _CollectionViewBuilder, PerformGroupUpdatesa
     typealias SectionModel = RxDataSources.SectionModel<SectionNode, Node>
 
     let disposeBag = DisposeBag()
-    let delegeteProxy = CollectionViewDelegateProxy()
+    let delegateProxy = CollectionViewDelegateProxy()
     
     public let sectionProviders: BehaviorRelay<[CollectionViewSectionProvider]>
     

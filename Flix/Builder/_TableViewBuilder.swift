@@ -14,7 +14,7 @@ import RxDataSources
 protocol _TableViewBuilder: Builder {
     
     var disposeBag: DisposeBag { get }
-    var delegeteProxy: TableViewDelegateProxy { get }
+    var delegateProxy: TableViewDelegateProxy { get }
     
     var tableView: UITableView { get }
     
@@ -113,14 +113,14 @@ extension _TableViewBuilder {
             })
             .disposed(by: disposeBag)
         
-        self.delegeteProxy.heightForRowAt = { [unowned self] tableView, indexPath in
+        self.delegateProxy.heightForRowAt = { [unowned self] tableView, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders[providerIdentity]!
             return provider._tableView(tableView, heightForRowAt: indexPath, node: node)
         }
         
-        self.delegeteProxy.editActionsForRowAt = { [unowned self] tableView, indexPath in
+        self.delegateProxy.editActionsForRowAt = { [unowned self] tableView, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders[providerIdentity]!
@@ -132,7 +132,7 @@ extension _TableViewBuilder {
         }
 
         if #available(iOS 11.0, *) {
-            self.delegeteProxy.leadingSwipeActionsConfigurationForRowAt = { [unowned self] tableView, indexPath in
+            self.delegateProxy.leadingSwipeActionsConfigurationForRowAt = { [unowned self] tableView, indexPath in
                 let node = dataSource[indexPath]
                 let providerIdentity = node.providerIdentity
                 let provider = self.nodeProviders[providerIdentity]!
@@ -143,7 +143,7 @@ extension _TableViewBuilder {
                 }
             }
 
-            self.delegeteProxy.trailingSwipeActionsConfigurationForRowAt = { [unowned self] tableView, indexPath in
+            self.delegateProxy.trailingSwipeActionsConfigurationForRowAt = { [unowned self] tableView, indexPath in
                 let node = dataSource[indexPath]
                 let providerIdentity = node.providerIdentity
                 let provider = self.nodeProviders[providerIdentity]!
@@ -155,7 +155,7 @@ extension _TableViewBuilder {
             }
         }
         
-        self.delegeteProxy.targetIndexPathForMoveFromRowAt = { [unowned self] tableView, sourceIndexPath, proposedDestinationIndexPath in
+        self.delegateProxy.targetIndexPathForMoveFromRowAt = { [unowned self] tableView, sourceIndexPath, proposedDestinationIndexPath in
             let node = dataSource[sourceIndexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders[providerIdentity]!
@@ -172,7 +172,7 @@ extension _TableViewBuilder {
             }
         }
         
-        self.delegeteProxy.titleForDeleteConfirmationButtonForRowAt = { [unowned self] tableView, indexPath in
+        self.delegateProxy.titleForDeleteConfirmationButtonForRowAt = { [unowned self] tableView, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders[providerIdentity]!
@@ -183,7 +183,7 @@ extension _TableViewBuilder {
             }
         }
         
-        self.delegeteProxy.editingStyleForRowAt = { [unowned self] tableView, indexPath in
+        self.delegateProxy.editingStyleForRowAt = { [unowned self] tableView, indexPath in
             let node = dataSource[indexPath]
             let providerIdentity = node.providerIdentity
             let provider = self.nodeProviders[providerIdentity]!
@@ -194,14 +194,14 @@ extension _TableViewBuilder {
             }
         }
 
-        self.delegeteProxy.heightForHeaderInSection = { [unowned self] tableView, section in
+        self.delegateProxy.heightForHeaderInSection = { [unowned self] tableView, section in
             guard let headerNode = dataSource[section].model.headerNode else { return nil }
             let providerIdentity = headerNode.providerIdentity
             let provider = self.headerSectionProviders[providerIdentity]!
             return provider._tableView(tableView, heightInSection: section, node: headerNode)
         }
         
-        self.delegeteProxy.viewForHeaderInSection = { [unowned self] tableView, section in
+        self.delegateProxy.viewForHeaderInSection = { [unowned self] tableView, section in
             guard let node = dataSource[section].model.headerNode else { return UIView() }
             let provider = self.headerSectionProviders[node.providerIdentity]!
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: provider._flix_identity)!
@@ -209,7 +209,7 @@ extension _TableViewBuilder {
             return view
         }
         
-        self.delegeteProxy.viewForFooterInSection = { [unowned self] tableView, section in
+        self.delegateProxy.viewForFooterInSection = { [unowned self] tableView, section in
             guard let node = dataSource[section].model.footerNode else { return UIView() }
             let provider = self.footerSectionProviders[node.providerIdentity]!
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: provider._flix_identity)!
@@ -217,14 +217,14 @@ extension _TableViewBuilder {
             return view
         }
         
-        self.delegeteProxy.heightForFooterInSection = { [unowned self] tableView, section in
+        self.delegateProxy.heightForFooterInSection = { [unowned self] tableView, section in
             guard let footerNode = dataSource[section].model.footerNode else { return nil }
             let providerIdentity = footerNode.providerIdentity
             let provider = self.footerSectionProviders[providerIdentity]!
             return provider._tableView(tableView, heightInSection: section, node: footerNode)
         }
         
-        tableView.rx.setDelegate(self.delegeteProxy).disposed(by: disposeBag)
+        tableView.rx.setDelegate(self.delegateProxy).disposed(by: disposeBag)
     }
     
 }

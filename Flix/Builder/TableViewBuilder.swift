@@ -16,7 +16,7 @@ public class TableViewBuilder: _TableViewBuilder, PerformGroupUpdatesable {
     typealias SectionModel = RxDataSources.SectionModel<SectionNode, Node>
     
     let disposeBag = DisposeBag()
-    let delegeteProxy = TableViewDelegateProxy()
+    let delegateProxy = TableViewDelegateProxy()
     
     public let sectionProviders: BehaviorRelay<[TableViewSectionProvider]>
     

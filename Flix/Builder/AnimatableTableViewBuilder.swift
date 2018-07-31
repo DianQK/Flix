@@ -16,7 +16,7 @@ public class AnimatableTableViewBuilder: _TableViewBuilder, PerformGroupUpdatesa
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
     
     let disposeBag = DisposeBag()
-    let delegeteProxy = TableViewDelegateProxy()
+    let delegateProxy = TableViewDelegateProxy()
     
     public let sectionProviders: BehaviorRelay<[AnimatableTableViewSectionProvider]>
     

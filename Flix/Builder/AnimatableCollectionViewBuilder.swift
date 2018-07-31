@@ -16,7 +16,7 @@ public class AnimatableCollectionViewBuilder: _CollectionViewBuilder, PerformGro
     typealias AnimatableSectionModel = RxDataSources.AnimatableSectionModel<IdentifiableSectionNode, IdentifiableNode>
 
     let disposeBag = DisposeBag()
-    let delegeteProxy = CollectionViewDelegateProxy()
+    let delegateProxy = CollectionViewDelegateProxy()
     
     public let sectionProviders: BehaviorRelay<[AnimatableCollectionViewSectionProvider]>
 
