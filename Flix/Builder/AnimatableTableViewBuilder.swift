@@ -79,9 +79,9 @@ public class AnimatableTableViewBuilder: _TableViewBuilder, PerformGroupUpdatesa
                         .flatMap { $0.animatableProviders.flatMap { $0.__providers.map { (key: $0._flix_identity, value: $0) } }
                 })
                 self?.footerSectionProviders = Dictionary(
-                    uniqueKeysWithValues: sectionProviders.compactMap { $0.animatableFooterProvider.map { (key: $0._flix_identity, value: $0) } })
+                    uniqueKeysWithValues: sectionProviders.lazy.compactMap { $0.animatableFooterProvider.map { (key: $0._flix_identity, value: $0) } })
                 self?.headerSectionProviders = Dictionary(
-                    uniqueKeysWithValues: sectionProviders.compactMap { $0.animatableHeaderProvider.map { (key: $0._flix_identity, value: $0) } })
+                    uniqueKeysWithValues: sectionProviders.lazy.compactMap { $0.animatableHeaderProvider.map { (key: $0._flix_identity, value: $0) } })
             })
             .flatMapLatest { (providers) -> Observable<[AnimatableSectionModel]> in
                 let sections: [Observable<(section: IdentifiableSectionNode, nodes: [IdentifiableNode])?>] = providers.map { $0.createSectionModel() }
