@@ -26,9 +26,9 @@ Flix focus on combining cells of `UICollectionView` or `UITableView`, it don't c
 ## Requirements
 
 - Xcode 9.0+
-- Swift 4.0+
-- RxSwift 4.0+
-- RxDataSources 3.0+
+- Swift 4.2+
+- RxSwift 4.3+
+- RxDataSources 3.1+
 
 ## Installation
 
