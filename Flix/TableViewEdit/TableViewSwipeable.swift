@@ -29,7 +29,7 @@ public protocol TableViewSwipeable: TableViewEditable, _TableViewSwipeable {
 @available(iOS 11.0, *)
 extension TableViewSwipeable where Self: TableViewMultiNodeProvider {
 
-    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Self.Value) -> UITableViewCellEditingStyle {
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Self.Value) -> UITableViewCell.EditingStyle {
         return .none
     }
 

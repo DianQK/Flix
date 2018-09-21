@@ -71,7 +71,7 @@ class TextSectionProvider: AnimatableSectionPartionCollectionViewProvider, Strin
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeInSection section: Int, value: TextSectionProvider) -> CGSize? {
-        let height = NSAttributedString(string: value.text.value, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let height = NSAttributedString(string: value.text.value, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
             .boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).height
         return CGSize(width: collectionView.bounds.width, height: height + 20)
     }

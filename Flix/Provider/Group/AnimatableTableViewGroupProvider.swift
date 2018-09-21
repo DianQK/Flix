@@ -2,7 +2,7 @@
 //  AnimatableTableViewGroupProvider.swift
 //  Flix
 //
-//  Created by wc on 29/10/2017.
+//  Created by DianQK on 29/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  TextViewProvider.swift
 //  Example
 //
-//  Created by wc on 29/10/2017.
+//  Created by DianQK on 29/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -55,7 +55,7 @@ class TextViewProvider: UITextView, UniqueAnimatableTableViewProvider {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath, value: TextViewProvider) -> CGFloat? {
-        let height = NSAttributedString(string: value.text, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17)]).boundingRect(with: CGSize(width: tableView.bounds.width - 40, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, .usesLineFragmentOrigin], context: nil).height + 12
+        let height = NSAttributedString(string: value.text, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).boundingRect(with: CGSize(width: tableView.bounds.width - 40, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, .usesLineFragmentOrigin], context: nil).height + 12
         return max(120, height)
     }
 

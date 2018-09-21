@@ -67,7 +67,7 @@ class ItemInputTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
     let textField = UITextField()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
@@ -106,7 +106,7 @@ class TextTableViewCell: UITableViewCell {
     
     let contentLabel = UILabel()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentLabel.textAlignment = .center
         self.contentView.addSubview(contentLabel)

@@ -13,7 +13,7 @@ import Flix
 
 open class UniqueTextFieldTableViewProvider: SingleUITableViewCellProvider {
 
-    open let textField = UITextField()
+    public let textField = UITextField()
 
     public override init() {
         super.init()

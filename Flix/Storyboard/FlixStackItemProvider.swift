@@ -2,7 +2,7 @@
 //  FlixStackItemProvider.swift
 //  Flix
 //
-//  Created by wc on 24/10/2017.
+//  Created by DianQK on 24/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -34,14 +34,14 @@ open class FlixStackItemProvider: UIControl, UniqueAnimatableTableViewProvider {
         }
     }
 
-    open var selectionStyle: UITableViewCellSelectionStyle = UITableViewCellSelectionStyle.default {
+    open var selectionStyle: UITableViewCell.SelectionStyle = UITableViewCell.SelectionStyle.default {
         didSet {
             _cell?.selectionStyle = selectionStyle
         }
     }
 
     // default is UITableViewCellAccessoryNone. use to set standard type
-    open var accessoryType: UITableViewCellAccessoryType = UITableViewCellAccessoryType.none {
+    open var accessoryType: UITableViewCell.AccessoryType = UITableViewCell.AccessoryType.none {
         didSet {
             _cell?.accessoryType = accessoryType
         }
@@ -55,7 +55,7 @@ open class FlixStackItemProvider: UIControl, UniqueAnimatableTableViewProvider {
     }
 
     // default is UITableViewCellAccessoryNone. use to set standard type
-    open var editingAccessoryType: UITableViewCellAccessoryType = .none {
+    open var editingAccessoryType: UITableViewCell.AccessoryType = .none {
         didSet {
             _cell?.editingAccessoryType = editingAccessoryType
         }
@@ -118,7 +118,7 @@ open class FlixStackItemProvider: UIControl, UniqueAnimatableTableViewProvider {
 
     open func itemSelected(_ tableView: UITableView, indexPath: IndexPath, value: FlixStackItemProvider) {
         if self.isEnabled {
-            self.sendActions(for: UIControlEvents.touchUpInside)
+            self.sendActions(for: UIControl.Event.touchUpInside)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

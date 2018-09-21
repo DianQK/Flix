@@ -2,7 +2,7 @@
 //  SelectLocationViewController.swift
 //  Example
 //
-//  Created by wc on 25/10/2017.
+//  Created by DianQK on 25/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -53,7 +53,7 @@ class SelectLocationViewController: UIViewController {
     
     let geocoder = CLGeocoder()
 
-    let cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: nil, action: nil)
+    let cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: nil, action: nil)
 
     let didSelectLocation = PublishSubject<EventLocation>()
     

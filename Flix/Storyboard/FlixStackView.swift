@@ -2,7 +2,7 @@
 //  FlixStackView.swift
 //  Flix
 //
-//  Created by wc on 24/10/2017.
+//  Created by DianQK on 24/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 

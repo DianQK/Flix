@@ -32,7 +32,7 @@ extension TableViewDeleteable where Self: TableViewMultiNodeProvider {
         return nil
     }
     
-    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Self.Value) -> UITableViewCellEditingStyle {
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Self.Value) -> UITableViewCell.EditingStyle {
         return .delete
     }
     

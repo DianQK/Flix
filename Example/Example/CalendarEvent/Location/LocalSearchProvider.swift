@@ -2,7 +2,7 @@
 //  LocalSearchProvider.swift
 //  Example
 //
-//  Created by wc on 25/10/2017.
+//  Created by DianQK on 25/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -20,7 +20,7 @@ class PlacemarkTableViewCell: UITableViewCell {
     let addressLabel = UILabel()
     let locationImageView = UIImageView(image: #imageLiteral(resourceName: "Icon Location Red"))
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.separatorInset = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)

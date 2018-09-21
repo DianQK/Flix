@@ -38,8 +38,8 @@ class TableViewDelegateProxy: NSObject, UITableViewDelegate {
         return self.titleForDeleteConfirmationButtonForRowAt?(tableView, indexPath) ?? "Delete"
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return self.editingStyleForRowAt?(tableView, indexPath) ?? UITableViewCellEditingStyle.delete
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return self.editingStyleForRowAt?(tableView, indexPath) ?? UITableViewCell.EditingStyle.delete
     }
     
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
@@ -64,7 +64,7 @@ class TableViewDelegateProxy: NSObject, UITableViewDelegate {
     var editActionsForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> [UITableViewRowAction]?)?
     var targetIndexPathForMoveFromRowAt: ((_ tableView: UITableView, _ sourceIndexPath: IndexPath, _ proposedDestinationIndexPath: IndexPath) -> IndexPath)?
     var titleForDeleteConfirmationButtonForRowAt:  ((_ tableView: UITableView, _ indexPath: IndexPath) -> String?)?
-    var editingStyleForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCellEditingStyle)?
+    var editingStyleForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell.EditingStyle)?
 
     var leadingSwipeActionsConfigurationForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> NSObject?)?
     var trailingSwipeActionsConfigurationForRowAt: ((_ tableView: UITableView, _ indexPath: IndexPath) -> NSObject?)?

@@ -2,7 +2,7 @@
 //  SwitchProvider.swift
 //  Example
 //
-//  Created by wc on 04/11/2017.
+//  Created by DianQK on 04/11/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -38,7 +38,7 @@ class BaseTableViewCellProvider: SingleUITableViewCellProvider {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 1
-        stackView.alignment = UIStackViewAlignment.leading
+        stackView.alignment = UIStackView.Alignment.leading
         return stackView
     }()
 

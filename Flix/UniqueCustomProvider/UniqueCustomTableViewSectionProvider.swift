@@ -23,8 +23,8 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     public typealias Cell = UITableViewHeaderFooterView
     public typealias Value = UniqueCustomTableViewSectionProvider
 
-    open let customIdentity: String
-    open let tableElementKindSection: UITableElementKindSection
+    public let customIdentity: String
+    public let tableElementKindSection: UITableElementKindSection
 
     open var isHidden: Bool {
         get {
@@ -38,7 +38,7 @@ open class UniqueCustomTableViewSectionProvider: AnimatablePartionSectionTableVi
     
     open var sectionHeight: ((UITableView) -> CGFloat)?
     
-    open let contentView: UIView = NeverHitSelfView()
+    public let contentView: UIView = NeverHitSelfView()
     open var backgroundView: UIView? {
         didSet {
             _view?.backgroundView = backgroundView

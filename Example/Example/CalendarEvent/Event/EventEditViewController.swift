@@ -2,7 +2,7 @@
 //  EventEditViewController.swift
 //  Example
 //
-//  Created by wc on 27/10/2017.
+//  Created by DianQK on 27/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -21,7 +21,7 @@ extension String {
 
 class EventEditViewController: TableViewController {
 
-    let cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: nil, action: nil)
+    let cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: nil, action: nil)
     let addBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: nil, action: nil)
 
     private(set) var saved: Observable<CalendarEventObject>! = nil

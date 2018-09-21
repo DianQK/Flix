@@ -56,8 +56,8 @@ open class ValidationTableViewProvider<ValueProvider: _AnimatableTableViewMultiN
         return Observable.just([self.valueProvider, self.uniqueMessageTableViewProvider])
     }
 
-    open let valueProvider: ValueProvider
-    open let uniqueMessageTableViewProvider = UniqueMessageTableViewProvider()
+    public let valueProvider: ValueProvider
+    public let uniqueMessageTableViewProvider = UniqueMessageTableViewProvider()
 
     public init(valueProvider: ValueProvider) {
         self.valueProvider = valueProvider
@@ -71,7 +71,7 @@ open class ValidationTableViewProvider<ValueProvider: _AnimatableTableViewMultiN
 
 open class UniqueMessageTableViewProvider: SingleUITableViewCellProvider {
 
-    open let messageLabel = UILabel()
+    public let messageLabel = UILabel()
     
     let disposeBag = DisposeBag()
     

@@ -16,8 +16,8 @@ public typealias UniqueCustomTableViewProvider = SingleUITableViewCellProvider
 
 open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, ProviderHiddenable, UniqueAnimatableTableViewProvider, CustomIdentityType {
 
-    open let customIdentity: String
-    open let contentView: UIView = NeverHitSelfView()
+    public let customIdentity: String
+    public let contentView: UIView = NeverHitSelfView()
     open var selectedBackgroundView: UIView? {
         didSet {
             whenGetCell { [weak self] (cell) in
@@ -35,7 +35,7 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, P
         }
     }
     
-    open var accessoryType: UITableViewCellAccessoryType = .none {
+    open var accessoryType: UITableViewCell.AccessoryType = .none {
         didSet {
             whenGetCell { [weak self] (cell) in
                 guard let `self` = self else { return }
@@ -53,7 +53,7 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, P
         }
     }
 
-    open var editingAccessoryType: UITableViewCellAccessoryType = .none {
+    open var editingAccessoryType: UITableViewCell.AccessoryType = .none {
         didSet {
             whenGetCell { [weak self] (cell) in
                 guard let `self` = self else { return }
@@ -82,7 +82,7 @@ open class SingleTableViewCellProvider<Cell: UITableViewCell>: CustomProvider, P
         }
     }
 
-    open var selectionStyle: UITableViewCellSelectionStyle = .default {
+    open var selectionStyle: UITableViewCell.SelectionStyle = .default {
         didSet {
             whenGetCell { [weak self] (cell) in
                 guard let `self` = self else { return }

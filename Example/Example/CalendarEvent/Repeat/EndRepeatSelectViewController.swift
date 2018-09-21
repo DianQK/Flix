@@ -2,7 +2,7 @@
 //  EndRepeatSelectViewController.swift
 //  Example
 //
-//  Created by wc on 29/10/2017.
+//  Created by DianQK on 29/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -50,7 +50,7 @@ class EndRepeatSelectViewController: TableViewController {
 
         let isNever = self.endRepeatDate.asObservable().map { $0 == nil }
 
-        isNever.map { $0 ? UITableViewCellAccessoryType.checkmark : UITableViewCellAccessoryType.none }
+        isNever.map { $0 ? UITableViewCell.AccessoryType.checkmark : UITableViewCell.AccessoryType.none }
             .subscribe(onNext: { [weak self] (accessoryType) in
                 self?.neverProvider.accessoryType = accessoryType
             })
@@ -58,7 +58,7 @@ class EndRepeatSelectViewController: TableViewController {
 
         isNever
             .subscribe(onNext: { [weak self] (isNever) in
-                self?.onDateProvider.accessoryType = isNever ? UITableViewCellAccessoryType.none : UITableViewCellAccessoryType.checkmark
+                self?.onDateProvider.accessoryType = isNever ? UITableViewCell.AccessoryType.none : UITableViewCell.AccessoryType.checkmark
                 self?.onDateProvider.titleLabel.textColor = isNever ? UIColor.darkText : UIColor(named: "Deep Carmine Pink")
             })
             .disposed(by: disposeBag)

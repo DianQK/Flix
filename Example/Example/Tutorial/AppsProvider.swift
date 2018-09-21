@@ -2,7 +2,7 @@
 //  AppsProvider.swift
 //  Example
 //
-//  Created by wc on 04/11/2017.
+//  Created by DianQK on 04/11/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -28,7 +28,7 @@ class AppTableViewCell: UITableViewCell {
         return stackView
     }()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         leftStackView.addArrangedSubview(iconImageView)
         leftStackView.addArrangedSubview(titleLabel)
