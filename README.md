@@ -259,8 +259,6 @@ More example are available in the **Example Folder**.
 
 Raise an [Issue](https://github.com/DianQK/Flix/issues) or hit me up on Twitter [@Songxut](https://twitter.com/Songxut).
 
-You can also join the Flix Telegram Group https://t.me/Flix_iOS.
-
 ## License
 
 Flix is released under an MIT license. See LICENSE for more information.
