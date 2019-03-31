@@ -72,6 +72,8 @@ class MoveCollectionViewController: CollectionViewController {
                     collectionView.endInteractiveMovement()
                 case .cancelled, .failed, .possible:
                     collectionView.cancelInteractiveMovement()
+                @unknown default:
+                    break;
                 }
             })
             .disposed(by: disposeBag)

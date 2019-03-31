@@ -1,13 +1,13 @@
 language: objective-c
 sudo: required
-osx_image: xcode9.3
+osx_image: xcode10.2
 
 env:
   global:
-    - IOS_SDK="iphonesimulator11.3"
+    - IOS_SDK="iphonesimulator12.2"
     - FRAMEWORK="Flix"
   matrix:
-    - SDK="$IOS_SDK"      TEST=0  DESTINATION="platform=iOS Simulator,name=iPhone 8,OS=11.3"
+    - SDK="$IOS_SDK"      TEST=0  DESTINATION="platform=iOS Simulator,name=iPhone 8,OS=12.2"
 
 notifications:
   email: false

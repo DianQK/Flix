@@ -63,7 +63,7 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
         self.customIdentity = ""
     }
 
-    open func onCreate(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath) {
+    open func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         self.onGetCell(cell)
         cell.selectedBackgroundView = self.selectedBackgroundView
         cell.backgroundView = self.backgroundView

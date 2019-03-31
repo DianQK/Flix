@@ -58,14 +58,14 @@ class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColle
     let options: [Option]
     let checkedOption = BehaviorRelay<Option?>(value: nil)
     let disposeBag = DisposeBag()
-    
+//
     typealias Cell = RadioCollectionViewCell
     typealias Value = Option
-    
+
     init(options: [Option]) {
         self.options = options
     }
-    
+
     func configureCell(_ collectionView: UICollectionView, cell: RadioCollectionViewCell, indexPath: IndexPath, value: Option) {
         cell.titleLabel.text = String(describing: value)
         checkedOption.asObservable()
@@ -73,17 +73,24 @@ class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColle
             .bind(to: cell.isChecked)
             .disposed(by: cell.reuseBag)
     }
-    
-    func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Value) {
+
+    func itemSelected(_ collectionView: UICollectionView, indexPath: IndexPath, value: Option) {
         collectionView.deselectItem(at: indexPath, animated: true)
         checkedOption.accept(value)
     }
-    
-    func createValues() -> Observable<[Value]> {
+
+    func createValues() -> Observable<[Option]> {
         return Observable.just(options)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: Value) -> CGSize? {
+
+    // workaround: Segmentation fault: 11 While emitting IR SIL function "@$s7Example13RadioProviderCyqd__G4Flix033AnimatableCollectionViewMultiNodeC0AaeFP06createE5Nodes7RxSwift10ObservableCySayAE012IdentifiableI0VGGyFTW". for 'createAnimatableNodes()' (in module 'Flix')
+    func createAnimatableNodes() -> Observable<[IdentifiableNode]> {
+        let providerIdentity = self._flix_identity
+        return createValues()
+            .map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: Option) -> CGSize? {
         return CGSize(width: collectionView.bounds.width, height: 44)
     }
     
