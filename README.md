@@ -25,9 +25,9 @@ Flix focus on combining cells of `UICollectionView` or `UITableView`, it don't c
 
 ## Requirements
 
-- Xcode 9.0+
-- Swift 4.2+
-- RxSwift 4.3+
+- Xcode 10.2+
+- Swift 5+
+- RxSwift 4.4+
 - RxDataSources 3.1+
 
 ## Installation
@@ -35,7 +35,7 @@ Flix focus on combining cells of `UICollectionView` or `UITableView`, it don't c
 ### CocoaPods
 
 ```ruby
-pod 'Flix', '~> 2.0'
+pod 'Flix', '~> 3.0'
 ```
 
 ### Carthage

@@ -179,7 +179,7 @@ class SelectLocationViewController: UIViewController {
             .subscribe(onNext: { [weak self] (placemark) in
                 _ = self?.navigationController?.popViewController(animated: true)
                 var recentSelectedPlacemarks = Storage.recentSelectedPlacemarks.value
-                if let index = recentSelectedPlacemarks.index(where: { $0.identity == placemark.identity }) {
+                if let index = recentSelectedPlacemarks.firstIndex(where: { $0.identity == placemark.identity }) {
                     recentSelectedPlacemarks.remove(at: index)
                 }
                 recentSelectedPlacemarks.append(placemark)

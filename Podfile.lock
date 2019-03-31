@@ -1,46 +1,41 @@
 PODS:
   - Differentiator (3.1.0)
-  - RxCocoa (4.3.0):
-    - RxSwift (~> 4.0)
+  - RxAtomic (4.4.2)
+  - RxCocoa (4.4.2):
+    - RxSwift (>= 4.4.2, ~> 4.4)
   - RxDataSources (3.1.0):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxKeyboard (0.8.3):
-    - RxCocoa (>= 4.1.0)
-    - RxSwift (>= 4.1.0)
-  - RxSwift (4.3.0)
+  - RxKeyboard (0.9.0):
+    - RxCocoa (>= 4.3.1)
+    - RxSwift (>= 4.3.1)
+  - RxSwift (4.4.2):
+    - RxAtomic (>= 4.4.2, ~> 4.4)
 
 DEPENDENCIES:
-  - RxCocoa (~> 4.3)
+  - RxCocoa (~> 4.4)
   - RxDataSources (~> 3.1)
-  - RxKeyboard (from `https://github.com/RxSwiftCommunity/RxKeyboard.git`, branch `swift-4.2`)
-  - RxSwift (~> 4.3)
+  - RxKeyboard (~> 0.9)
+  - RxSwift (~> 4.4)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Differentiator
+    - RxAtomic
     - RxCocoa
     - RxDataSources
+    - RxKeyboard
     - RxSwift
-
-EXTERNAL SOURCES:
-  RxKeyboard:
-    :branch: swift-4.2
-    :git: https://github.com/RxSwiftCommunity/RxKeyboard.git
-
-CHECKOUT OPTIONS:
-  RxKeyboard:
-    :commit: 99cc93531b2d7112e556c9da52d2d0d66a84f570
-    :git: https://github.com/RxSwiftCommunity/RxKeyboard.git
 
 SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  RxCocoa: 71b9cce833fbcb89a8eec11816dd225830c2bd3c
+  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
+  RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxKeyboard: 4ecf3fa3946dae3ae72424e72845c18d084d8e4b
-  RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
+  RxKeyboard: 4f782303f499f41577b41c96c6a9a5d7acd51a47
+  RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
 
-PODFILE CHECKSUM: 8e531a503fc59c8004d009772277c1bcac9de1cd
+PODFILE CHECKSUM: 313a138ceeac16f34edd194e0ec9a352cd090b96
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.0.beta.3

@@ -4,8 +4,8 @@ use_frameworks!
 inhibit_all_warnings!
 
 def source
-  pod 'RxSwift', '~> 4.3'
-  pod 'RxCocoa', '~> 4.3'
+  pod 'RxSwift', '~> 4.4'
+  pod 'RxCocoa', '~> 4.4'
   pod 'RxDataSources', '~> 3.1'
 end
 
@@ -19,13 +19,13 @@ end
 
 target 'Example' do
   source
-  pod 'RxKeyboard', :git => 'https://github.com/RxSwiftCommunity/RxKeyboard.git', :branch => 'swift-4.2'
+  pod 'RxKeyboard', '~> 0.9'
 end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '4.2'
+            config.build_settings['SWIFT_VERSION'] = '5.0'
         end
     end
 end
