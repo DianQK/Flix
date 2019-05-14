@@ -2,6 +2,10 @@
 
 ---
 
+## [4.0.0](https://github.com/DianQK/Flix/releases/tag/4.0.0)
+
+- Support RxSwift 5
+
 ## [3.0.0](https://github.com/DianQK/Flix/releases/tag/3.0.0)
 
 - Support Swift 5

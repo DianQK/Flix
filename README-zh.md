@@ -28,21 +28,15 @@ Flx 关注构建 `UICollectionView` / `UITableView` 的 Cell，它不限制视�
 
 - Xcode 10.2+
 - Swift 5+
-- RxSwift 4.4+
-- RxDataSources 3.1+
+- RxSwift 5.0+
+- RxDataSources 4.0+
 
 ## 安装
 
 ### CocoaPods
 
 ```ruby
-pod 'Flix', '~> 3.0'
-```
-
-### Carthage
-
-```
-github "DianQK/Flix" ~> 1.2
+pod 'Flix', '~> 4.0'
 ```
 
 ## 原理
