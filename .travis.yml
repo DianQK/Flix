@@ -1,6 +1,13 @@
+git:
+  depth: 3
+
 language: objective-c
 sudo: required
-osx_image: xcode10.2
+osx_image: xcode10.2.1
+
+before_install:
+  - bundle install
+  - pod install --repo-update
 
 env:
   global:
@@ -15,26 +22,11 @@ notifications:
 install: true
 
 env:
-  - BUILD="pod install --repo-update && set -o pipefail && xcodebuild -workspace Flix.xcworkspace -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 8' build | xcpretty"
-  - BUILD="pod install --repo-update && set -o pipefail && xcodebuild test -workspace Flix.xcworkspace -scheme Flix -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 8' build | xcpretty"
-  - BUILD="pod repo update && pod lib lint Flix.podspec --verbose --allow-warnings"
+  - BUILD="xcodebuild -workspace Flix.xcworkspace -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 8' build | xcpretty"
+  - BUILD="xcodebuild test -workspace Flix.xcworkspace -scheme Flix -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 8' build | xcpretty"
+  - BUILD="pod lib lint Flix.podspec --verbose --allow-warnings"
 
 script: eval "${BUILD}"
-
-before_deploy:
-  - pod install --repo-update
-  - carthage build --no-skip-current --verbose | xcpretty -c
-  - carthage archive Flix
-
-deploy:
-  provider: releases
-  api_key: $GITHUB_ACCESS_TOKEN
-  file: $FRAMEWORK.framework.zip
-  skip_cleanup: true
-  on:
-    repo: DianQK/Flix
-    tags: true
-    condition: $SDK = $IOS_SDK
 
 after_success:
   - sleep 5 # workaround https://github.com/travis-ci/travis-ci/issues/4725
