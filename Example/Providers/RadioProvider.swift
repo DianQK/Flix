@@ -79,6 +79,12 @@ class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColle
         checkedOption.accept(value)
     }
     
+    func createAnimatableNodes() -> Observable<[IdentifiableNode]> {
+        let providerIdentity = self._flix_identity
+        return createValues()
+            .map { $0.map { IdentifiableNode(providerIdentity: providerIdentity, valueNode: $0) } }
+    }
+    
     func createValues() -> Observable<[Value]> {
         return Observable.just(options)
     }

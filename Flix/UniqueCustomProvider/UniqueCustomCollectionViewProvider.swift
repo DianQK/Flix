@@ -12,7 +12,7 @@ import RxCocoa
 
 public typealias SingleUICollectionViewCellProvider = SingleCollectionViewProvider<UICollectionViewCell>
 @available(*, deprecated, renamed: "SingleUICollectionViewCellProvider")
-public typealias UniqueCustomCollectionViewProvider = SingleUICollectionViewCellProvider
+public typealias c = SingleUICollectionViewCellProvider
 
 open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvider, UniqueAnimatableCollectionViewProvider, ProviderHiddenable, CustomIdentityType {
 
@@ -62,8 +62,8 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
     public init() {
         self.customIdentity = ""
     }
-
-    open func onCreate(_ collectionView: UICollectionView, cell: Cell, indexPath: IndexPath) {
+    
+    public func onCreate(_ collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         self.onGetCell(cell)
         cell.selectedBackgroundView = self.selectedBackgroundView
         cell.backgroundView = self.backgroundView
