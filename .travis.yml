@@ -3,7 +3,7 @@ git:
 
 language: objective-c
 sudo: required
-osx_image: xcode10.2.1
+osx_image: xcode10.3
 
 before_install:
   - bundle install
@@ -11,10 +11,10 @@ before_install:
 
 env:
   global:
-    - IOS_SDK="iphonesimulator12.2"
+    - IOS_SDK="iphonesimulator12.4"
     - FRAMEWORK="Flix"
   matrix:
-    - SDK="$IOS_SDK"      TEST=0  DESTINATION="platform=iOS Simulator,name=iPhone 8,OS=12.2"
+    - SDK="$IOS_SDK"      TEST=0  DESTINATION="platform=iOS Simulator,name=iPhone 8,OS=12.4"
 
 notifications:
   email: false
