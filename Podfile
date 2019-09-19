@@ -4,8 +4,8 @@ use_frameworks!
 inhibit_all_warnings!
 
 def source
-  pod 'RxSwift', '~> 4.3'
-  pod 'RxCocoa', '~> 4.3'
+  pod 'RxSwift', '~> 4.5'
+  pod 'RxCocoa', '~> 4.5'
   pod 'RxDataSources', '~> 3.1'
 end
 
