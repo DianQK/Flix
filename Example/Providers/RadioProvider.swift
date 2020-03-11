@@ -58,7 +58,7 @@ class RadioProvider<Option: Equatable & StringIdentifiableType>: AnimatableColle
     let options: [Option]
     let checkedOption = BehaviorRelay<Option?>(value: nil)
     let disposeBag = DisposeBag()
-//
+
     typealias Cell = RadioCollectionViewCell
     typealias Value = Option
 
