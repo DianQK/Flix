@@ -10,21 +10,33 @@ import XCTest
 import Flix
 
 class CollectionViewBuilderMemoryLeakTests: XCTestCase {
+    
+    weak var collectionViewBuilder: CollectionViewBuilder?
+    weak var animatableCollectionViewBuilder: AnimatableCollectionViewBuilder?
+    
+    override func setUp() {
+        collectionViewBuilder = nil
+        animatableCollectionViewBuilder = nil
+    }
 
     func testCollectionViewBuilderMemoryLeak() {
         var collectionView: UICollectionView? = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        weak var builder: CollectionViewBuilder? = CollectionViewBuilder(collectionView: collectionView!, providers: [SingleUICollectionViewCellProvider()])
+        var builder: CollectionViewBuilder? = CollectionViewBuilder(collectionView: collectionView!, providers: [SingleUICollectionViewCellProvider()])
+        collectionViewBuilder = builder
+        builder = nil
         collectionView = nil
         XCTAssertNil(collectionView)
-        XCTAssertNil(builder)
+        XCTAssertNil(collectionViewBuilder)
     }
 
     func testAnimatableCollectionViewBuilderMemoryLeak() {
         var collectionView: UICollectionView? = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        weak var builder: AnimatableCollectionViewBuilder? = AnimatableCollectionViewBuilder(collectionView: collectionView!, providers: [SingleUICollectionViewCellProvider()])
+        var builder: AnimatableCollectionViewBuilder? = AnimatableCollectionViewBuilder(collectionView: collectionView!, providers: [SingleUICollectionViewCellProvider()])
+        animatableCollectionViewBuilder = builder
+        builder = nil
         collectionView = nil
         XCTAssertNil(collectionView)
-        XCTAssertNil(builder)
+        XCTAssertNil(animatableCollectionViewBuilder)
     }
 
 }
