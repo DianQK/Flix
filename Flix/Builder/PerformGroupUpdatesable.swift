@@ -53,9 +53,9 @@ extension PerformGroupUpdatesable where Self: Builder {
 
 extension ObservableConvertibleType {
 
-    func sendLatest<T: ObservableConvertibleType>(when: T) -> Observable<E> where T.E == Bool {
+    func sendLatest<T: ObservableConvertibleType>(when: T) -> Observable<Element> where T.Element == Bool {
         return Observable.combineLatest(self.asObservable(), when.asObservable())
-            .flatMap { (value, send) -> Observable<E> in
+            .flatMap { (value, send) -> Observable<Element> in
                 return send ? Observable.just(value) : Observable.empty()
             }
     }

@@ -96,7 +96,7 @@ public class CollectionViewBuilder: _CollectionViewBuilder, PerformGroupUpdatesa
                 }
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)
-            .debounce(0, scheduler: MainScheduler.instance)
+            .debounce(.seconds(0), scheduler: MainScheduler.instance)
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

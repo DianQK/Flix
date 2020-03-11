@@ -4,9 +4,9 @@ use_frameworks!
 inhibit_all_warnings!
 
 def source
-  pod 'RxSwift', '~> 4.4'
-  pod 'RxCocoa', '~> 4.4'
-  pod 'RxDataSources', '~> 3.1'
+  pod 'RxSwift', '~> 5.0'
+  pod 'RxCocoa', '~> 5.0'
+  pod 'RxDataSources', '~> 4.0'
 end
 
 target 'Flix' do

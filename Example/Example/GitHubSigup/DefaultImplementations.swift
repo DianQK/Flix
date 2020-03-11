@@ -112,6 +112,6 @@ class GitHubDefaultAPI : GitHubAPI {
         let signUpResult = arc4random() % 5 == 0 ? false : true
         
         return Observable.just(signUpResult)
-            .delay(1.0, scheduler: MainScheduler.instance)
+            .delay(.seconds(1), scheduler: MainScheduler.instance)
     }
 }
