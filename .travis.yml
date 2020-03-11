@@ -1,8 +1,9 @@
 git:
   depth: 3
 
-language: swift
-sudo: required
+os: osx
+language: objective-c
+sudo: true
 osx_image: xcode11.3
 
 before_install:
