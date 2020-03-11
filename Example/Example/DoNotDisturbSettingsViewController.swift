@@ -66,36 +66,36 @@ class DoNotDisturbSettingsViewController: CollectionViewController {
             }
         }
         
-//        let radioProvider = RadioProvider(options: [SlienceMode.always, SlienceMode.whileLocked])
-//        radioProvider.checkedOption.accept(SlienceMode.always)
-//        providers.append(radioProvider)
-//        
-//        let slienceCommentProvider = UniqueCommentTextProvider(
-//            text: ""
-//        )
-//        radioProvider.checkedOption.asObservable()
-//            .map { (option) -> String in
-//                return option?.comment ?? ""
-//            }
-//            .bind(to: slienceCommentProvider.text)
-//            .disposed(by: disposeBag)
-//        providers.append(slienceCommentProvider)
-//        
-//        let allowCallsFromTitleProvider = UniqueCommentTextProvider(
-//            text: "PHONE"
-//        )
-//        providers.append(allowCallsFromTitleProvider)
-//        let allowCallsFromProvider = UniqueTextProvider(
-//            title: "Allow Calls From",
-//            desc: "Everyone"
-//        )
-//        providers.append(allowCallsFromProvider)
-//        let allowCallsFromCommentProvider = UniqueCommentTextProvider(
-//            text: "When in Do Not Disturb, allow incoming calls from everyone."
-//        )
-//        providers.append(allowCallsFromCommentProvider)
-//        
-//        self.collectionView.flix.animatable.build(providers)
+        let radioProvider = RadioProvider(options: [SlienceMode.always, SlienceMode.whileLocked])
+        radioProvider.checkedOption.accept(SlienceMode.always)
+        providers.append(radioProvider)
+        
+        let slienceCommentProvider = UniqueCommentTextProvider(
+            text: ""
+        )
+        radioProvider.checkedOption.asObservable()
+            .map { (option) -> String in
+                return option?.comment ?? ""
+            }
+            .bind(to: slienceCommentProvider.text)
+            .disposed(by: disposeBag)
+        providers.append(slienceCommentProvider)
+        
+        let allowCallsFromTitleProvider = UniqueCommentTextProvider(
+            text: "PHONE"
+        )
+        providers.append(allowCallsFromTitleProvider)
+        let allowCallsFromProvider = UniqueTextProvider(
+            title: "Allow Calls From",
+            desc: "Everyone"
+        )
+        providers.append(allowCallsFromProvider)
+        let allowCallsFromCommentProvider = UniqueCommentTextProvider(
+            text: "When in Do Not Disturb, allow incoming calls from everyone."
+        )
+        providers.append(allowCallsFromCommentProvider)
+        
+        self.collectionView.flix.animatable.build(providers)
     }
     
 }
