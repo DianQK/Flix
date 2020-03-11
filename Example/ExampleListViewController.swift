@@ -38,7 +38,7 @@ class ExampleListViewController: CollectionViewController {
         
         iconProvider.event.itemSelected
             .subscribe(onNext: { _ in
-                UIApplication.shared.open(URL(string: "https://github.com/DianQK/Flix")!, options: [:], completionHandler: nil)
+                UIApplication.shared.open(URL(string: "https://github.com/DianQK/Flix")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             })
             .disposed(by: disposeBag)
         
@@ -67,4 +67,9 @@ class ExampleListViewController: CollectionViewController {
 
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

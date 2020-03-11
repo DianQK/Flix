@@ -2,7 +2,7 @@
 //  EventListViewController.swift
 //  Example
 //
-//  Created by wc on 27/10/2017.
+//  Created by DianQK on 27/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -56,7 +56,7 @@ class EventListViewController: TableViewController {
         super.viewDidLoad()
         title = "All Events"
 
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: nil, action: nil)
+        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem = addBarButtonItem
         Observable.merge([
             addBarButtonItem.rx.tap.map { nil as CalendarEventObject? },

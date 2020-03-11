@@ -2,7 +2,7 @@
 //  MKLocalSearch+Rx.swift
 //  Example
 //
-//  Created by wc on 25/10/2017.
+//  Created by DianQK on 25/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ import MapKit
 extension MKLocalSearch {
     
     convenience init(naturalLanguageQuery: String) {
-        let request = MKLocalSearchRequest()
+        let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = naturalLanguageQuery
         self.init(request: request)
     }
@@ -22,7 +22,7 @@ extension MKLocalSearch {
 
 extension Reactive where Base: MKLocalSearch {
 
-    var start: Observable<MKLocalSearchResponse?> {
+    var start: Observable<MKLocalSearch.Response?> {
         return Observable.create({ [weak search = self.base] (observer) -> Disposable in
             guard let search = search else {
                 observer.onCompleted()

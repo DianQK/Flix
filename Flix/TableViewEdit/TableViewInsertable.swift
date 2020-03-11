@@ -26,7 +26,7 @@ extension TableViewInsertable where Self: TableViewMultiNodeProvider {
 
     public func tableView(_ tableView: UITableView, itemInsertedForRowAt indexPath: IndexPath, value: Self.Value) { }
     
-    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Self.Value) -> UITableViewCellEditingStyle {
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Self.Value) -> UITableViewCell.EditingStyle {
         return .insert
     }
     

@@ -39,7 +39,7 @@ class UniqueCommentTextProvider: SingleUICollectionViewCellProvider {
     }
 
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath, value: SingleUICollectionViewCellProvider) -> CGSize? {
-        let height = NSAttributedString(string: self.text.value, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let height = NSAttributedString(string: self.text.value, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
             .boundingRect(with: CGSize(width: collectionView.bounds.width - 30, height: CGFloat.greatestFiniteMagnitude), options: [NSStringDrawingOptions.usesFontLeading, NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).height
         return CGSize(width: collectionView.bounds.width, height: height + 20)
     }

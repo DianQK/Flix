@@ -2,7 +2,7 @@
 //  DateSelectProvider.swift
 //  Example
 //
-//  Created by wc on 28/10/2017.
+//  Created by DianQK on 28/10/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 
@@ -141,8 +141,8 @@ class DateSelectGroupProvider: AnimatableTableViewGroupProvider {
                 return NSAttributedString(
                     string: date,
                     attributes: [
-                        NSAttributedStringKey.strikethroughStyle: (isAvailable ? NSUnderlineStyle.styleNone : NSUnderlineStyle.styleSingle).rawValue,
-                        NSAttributedStringKey.foregroundColor: textColor
+                        NSAttributedString.Key.strikethroughStyle: (isAvailable ? [] : NSUnderlineStyle.single).rawValue,
+                        NSAttributedString.Key.foregroundColor: textColor
                     ]
                 )
             }

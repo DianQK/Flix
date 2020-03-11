@@ -190,7 +190,7 @@ extension _TableViewBuilder {
             if let provider = provider as? _TableViewEditable {
                 return provider._tableView(tableView, editingStyleForRowAt: indexPath, node: node)
             } else {
-                return UITableViewCellEditingStyle.none
+                return UITableViewCell.EditingStyle.none
             }
         }
 

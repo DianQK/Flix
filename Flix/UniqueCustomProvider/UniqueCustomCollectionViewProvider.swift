@@ -18,9 +18,9 @@ open class SingleCollectionViewProvider<Cell: UICollectionViewCell>: CustomProvi
 
     public typealias Cell = UICollectionViewCell
     
-    open let customIdentity: String
+    public let customIdentity: String
 
-    open let contentView: UIView = NeverHitSelfView()
+    public let contentView: UIView = NeverHitSelfView()
 
     open var selectedBackgroundView: UIView? {
         didSet {

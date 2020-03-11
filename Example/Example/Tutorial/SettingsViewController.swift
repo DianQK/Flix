@@ -2,7 +2,7 @@
 //  SettingsViewController.swift
 //  Example
 //
-//  Created by wc on 02/11/2017.
+//  Created by DianQK on 02/11/2017.
 //  Copyright © 2017 DianQK. All rights reserved.
 //
 

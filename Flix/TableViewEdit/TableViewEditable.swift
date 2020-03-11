@@ -12,7 +12,7 @@ public protocol _TableViewEditable {
     
     func _tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, node: _Node) -> [UITableViewRowAction]?
     func _tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, node: _Node) -> Bool
-    func _tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, node: _Node) -> UITableViewCellEditingStyle
+    func _tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, node: _Node) -> UITableViewCell.EditingStyle
     
 }
 
@@ -22,7 +22,7 @@ public protocol TableViewEditable: _TableViewEditable {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, value: Value) -> [UITableViewRowAction]?
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath, value: Value) -> Bool
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Value) -> UITableViewCellEditingStyle
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, value: Value) -> UITableViewCell.EditingStyle
 
 }
 
@@ -44,7 +44,7 @@ extension TableViewEditable where Self: TableViewMultiNodeProvider {
         return self.tableView(tableView, canEditRowAt: indexPath, value: node._unwarp())
     }
     
-    public func _tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, node: _Node) -> UITableViewCellEditingStyle {
+    public func _tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath, node: _Node) -> UITableViewCell.EditingStyle {
         return self.tableView(tableView, editingStyleForRowAt: indexPath, value: node._unwarp())
     }
 

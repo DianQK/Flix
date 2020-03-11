@@ -16,8 +16,8 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
         return self._flix_identity
     }
 
-    open let customIdentity: String
-    open let collectionElementKindSection: UICollectionElementKindSection
+    public let customIdentity: String
+    public let collectionElementKindSection: UICollectionElementKindSection
     
     public typealias Cell = UICollectionReusableView
     public typealias Value = UniqueCustomCollectionViewSectionProvider
@@ -34,7 +34,7 @@ open class UniqueCustomCollectionViewSectionProvider: AnimatableSectionPartionCo
     
     open var sectionSize: ((UICollectionView) -> CGSize)?
     
-    open let contentView: UIView = NeverHitSelfView()
+    public let contentView: UIView = NeverHitSelfView()
     
     public init(customIdentity: String, collectionElementKindSection: UICollectionElementKindSection) {
         self.customIdentity = customIdentity
