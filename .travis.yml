@@ -1,20 +1,13 @@
 git:
   depth: 3
 
-language: objective-c
+language: swift
 sudo: required
-osx_image: xcode10.3
+osx_image: xcode11.3
 
 before_install:
   - bundle install
-  - pod install --repo-update
-
-env:
-  global:
-    - IOS_SDK="iphonesimulator12.4"
-    - FRAMEWORK="Flix"
-  matrix:
-    - SDK="$IOS_SDK"      TEST=0  DESTINATION="platform=iOS Simulator,name=iPhone 8,OS=12.4"
+  - bundle exec pod install
 
 notifications:
   email: false
@@ -22,9 +15,9 @@ notifications:
 install: true
 
 env:
-  - BUILD="xcodebuild -workspace Flix.xcworkspace -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 8' build | xcpretty"
-  - BUILD="xcodebuild test -workspace Flix.xcworkspace -scheme Flix -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 8' build | xcpretty"
-  - BUILD="pod lib lint Flix.podspec --verbose --allow-warnings"
+  - BUILD="xcodebuild -workspace Flix.xcworkspace -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty"
+  - BUILD="xcodebuild test -workspace Flix.xcworkspace -scheme Flix -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 11' build | xcpretty"
+  - BUILD="bundle exec pod lib lint Flix.podspec --verbose"
 
 script: eval "${BUILD}"
 
