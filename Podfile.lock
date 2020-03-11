@@ -1,27 +1,27 @@
 PODS:
   - Differentiator (4.0.1)
-  - RxCocoa (5.0.0):
+  - RxCocoa (5.1.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
   - RxDataSources (4.0.1):
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxKeyboard (0.9.0):
-    - RxCocoa (>= 4.3.1)
-    - RxSwift (>= 4.3.1)
-  - RxRelay (5.0.0):
+  - RxKeyboard (1.0.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.0):
     - RxSwift (~> 5)
-  - RxSwift (5.0.0)
+  - RxSwift (5.1.0)
 
 DEPENDENCIES:
   - RxCocoa (~> 5.0)
   - RxDataSources (~> 4.0)
-  - RxKeyboard (~> 0.9)
+  - RxKeyboard (~> 1.0)
   - RxSwift (~> 5.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Differentiator
     - RxCocoa
     - RxDataSources
@@ -31,12 +31,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
-  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxCocoa: 13d2a4d7546a34b8ececae8c281e4ea1dbb94f2b
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxKeyboard: 4f782303f499f41577b41c96c6a9a5d7acd51a47
-  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
-  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+  RxKeyboard: 6683c4344304a00f943c158bd8a43ce5469c82a7
+  RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
+  RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
 
-PODFILE CHECKSUM: a5e1b3bdc13cf8842cc669c6fe5048f50ebe9799
+PODFILE CHECKSUM: 71b7292a8da5c0da2831add144c6da27aa7b0558
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.1
