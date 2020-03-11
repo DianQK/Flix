@@ -82,11 +82,9 @@ public class TableViewBuilder: _TableViewBuilder, PerformGroupUpdatesable {
             }
             .sendLatest(when: performGroupUpdatesBehaviorRelay)
             .debounce(.seconds(0), scheduler: MainScheduler.instance)
+            // UITableViewAlertForLayoutOutsideViewHierarchy https://github.com/ReactiveX/RxSwift/pull/2076
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
-        
-
     }
     
     public convenience init(tableView: UITableView, providers: [_TableViewMultiNodeProvider]) {
