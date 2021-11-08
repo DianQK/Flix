@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol CustomProvider: class {
+public protocol CustomProvider: AnyObject {
 
     associatedtype Cell: NSObject
 

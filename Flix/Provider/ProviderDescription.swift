@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol FlixCustomStringConvertible: class, CustomStringConvertible { }
+public protocol FlixCustomStringConvertible: AnyObject, CustomStringConvertible { }
 
 extension FlixCustomStringConvertible {
 

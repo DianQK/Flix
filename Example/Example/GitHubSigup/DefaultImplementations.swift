@@ -104,7 +104,7 @@ class GitHubDefaultAPI : GitHubAPI {
             .map { pair in
                 return pair.response.statusCode == 404
             }
-            .catchErrorJustReturn(false)
+            .catchAndReturn(false)
     }
     
     func signUp(_ username: String, password: String) -> Observable<Bool> {

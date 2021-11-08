@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.0.0](https://github.com/DianQK/Flix/releases/tag/5.0.0)
+
+- Support RxSwift 6
+
 ---
 
 ## [4.0.0](https://github.com/DianQK/Flix/releases/tag/4.0.0)

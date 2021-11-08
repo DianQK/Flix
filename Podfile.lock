@@ -1,24 +1,24 @@
 PODS:
-  - Differentiator (4.0.1)
-  - RxCocoa (5.1.0):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxDataSources (4.0.1):
-    - Differentiator (~> 4.0)
-    - RxCocoa (~> 5.0)
-    - RxSwift (~> 5.0)
-  - RxKeyboard (1.0.0):
-    - RxCocoa (~> 5.0)
-    - RxSwift (~> 5.0)
-  - RxRelay (5.1.0):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.0)
+  - Differentiator (5.0.0)
+  - RxCocoa (6.2.0):
+    - RxRelay (= 6.2.0)
+    - RxSwift (= 6.2.0)
+  - RxDataSources (5.0.0):
+    - Differentiator (~> 5.0)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxKeyboard (2.0.0):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.2.0):
+    - RxSwift (= 6.2.0)
+  - RxSwift (6.2.0)
 
 DEPENDENCIES:
-  - RxCocoa (~> 5.0)
-  - RxDataSources (~> 4.0)
-  - RxKeyboard (~> 1.0)
-  - RxSwift (~> 5.0)
+  - RxCocoa (~> 6.0)
+  - RxDataSources (~> 5.0)
+  - RxKeyboard (~> 2.0)
+  - RxSwift (~> 6.0)
 
 SPEC REPOS:
   trunk:
@@ -30,13 +30,13 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
-  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
-  RxCocoa: 13d2a4d7546a34b8ececae8c281e4ea1dbb94f2b
-  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxKeyboard: 6683c4344304a00f943c158bd8a43ce5469c82a7
-  RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
-  RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
+  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
+  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
+  RxKeyboard: 4f5863f43b4ff0cbb2a20b94688d6b80c8a43c14
+  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
+  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
 
-PODFILE CHECKSUM: 070def0c901e4b5f7392309599ebea6374c10d00
+PODFILE CHECKSUM: a4b093b85cab833aa83f4852fcb8ae2e92e972b9
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1

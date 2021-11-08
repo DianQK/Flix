@@ -94,7 +94,6 @@ class LoginViewController: TableViewController {
         
         let loginSectionProvider = AnimatableTableViewSectionProvider(providers: [loginProvider])
         section.append(loginSectionProvider)
-        
         self.tableView.flix.animatable.build(section)
 
     }
