@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public protocol ProviderHiddenable: class, ReactiveCompatible {
+public protocol ProviderHiddenable: AnyObject, ReactiveCompatible {
 
     var isHidden: Bool { get set }
 

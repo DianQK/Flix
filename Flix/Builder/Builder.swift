@@ -8,7 +8,7 @@
 
 import RxDataSources
 
-public protocol Builder: class {
+public protocol Builder: AnyObject {
 
 }
 

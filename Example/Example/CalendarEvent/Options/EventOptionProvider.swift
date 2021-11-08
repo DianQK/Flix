@@ -188,7 +188,7 @@ class AlertGroupProvider: AnimatableTableViewGroupProvider {
 
         self.firstAlertProvider.selectedOption.asObservable().filter { $0 == .none }
             .flatMap { [unowned self] _ in self.secondAlertProvider.selectedOption.asObservable().take(1).filter { $0 != .none } }
-            .observeOn(MainScheduler.asyncInstance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] (option) in
                 guard let `self` = self else { return }
                 self.firstAlertProvider.selectedOption.accept(option)

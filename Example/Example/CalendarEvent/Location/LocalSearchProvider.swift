@@ -112,8 +112,8 @@ class LocalSearchProvider: AnimatableTableViewProvider, TableViewDeleteable {
                 if query.isEmpty {
                     return Observable.just([])
                 } else {
-                    return MKLocalSearch.rx.search(naturalLanguageQuery: query).catchErrorJustReturn([])
-                        .observeOn(MainScheduler.instance)
+                    return MKLocalSearch.rx.search(naturalLanguageQuery: query).catchAndReturn([])
+                        .observe(on: MainScheduler.instance)
                 }
             }
             .share(replay: 1, scope: .forever)
